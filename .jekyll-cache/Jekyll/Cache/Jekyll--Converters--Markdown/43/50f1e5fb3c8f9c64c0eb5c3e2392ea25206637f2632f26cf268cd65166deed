@@ -1,0 +1,23 @@
+I"<ul id="markdown-toc">
+  <li><a href="#前言" id="markdown-toc-前言">前言</a></li>
+  <li><a href="#综述" id="markdown-toc-综述">综述</a></li>
+  <li><a href="#经典论文参考列表" id="markdown-toc-经典论文参考列表">经典论文参考列表</a></li>
+</ul>
+
+<h2 id="前言">前言</h2>
+
+<p>这是一篇关于各经典论文对基本的 <code class="highlighter-rouge">RL</code> 过程的描述的综述(为了方便记忆理解，同一概念统一符号表示)。</p>
+
+<h2 id="综述">综述</h2>
+
+<p>标准的强化学习 <code class="highlighter-rouge">Reinfocement Learning</code> 是由智能体 <code class="highlighter-rouge">agent</code> 和环境 <code class="highlighter-rouge">enviroment</code> 组成的。智能体在离散的时间步下与环境进行
+交互；智能体与环境的一步交互过程可以被描述为：智能体首先观察环境的状态 <code class="highlighter-rouge">state</code> ，然后智能体做出相应的动作 <code class="highlighter-rouge">action</code> 并作用于环境，最后智能体会接受到环境关于智能体所做动作的反馈，它包括环境的新的状态以及标量的奖励 <code class="highlighter-rouge">reward</code> 。</p>
+
+<h2 id="经典论文参考列表">经典论文参考列表</h2>
+
+<p><code class="highlighter-rouge">DQN</code>原文链接：<a href="https://arxiv.org/abs/1312.5602">Playing Atari with Deep Reinforcement Learning</a> <br />
+<code class="highlighter-rouge">DDPG</code>原文链接：<a href="https://arxiv.org/abs/1509.02971">Continous Control with Deep Reinforcement Learning</a><br />
+<code class="highlighter-rouge">A3C</code>原文链接：<a href="https://arxiv.org/abs/1602.01783">Asynchronous Methods for Deep Reinforcement Learning</a><br />
+<code class="highlighter-rouge">HER</code>原文链接：<a href="https://arxiv.org/abs/1707.01495">Hindsight Experience Replay</a><br />
+<code class="highlighter-rouge">UVFA</code>原文链接：<a href="http://proceedings.mlr.press/v37/schaul15.pdf">Universal Value Function Approximator</a></p>
+:ET
