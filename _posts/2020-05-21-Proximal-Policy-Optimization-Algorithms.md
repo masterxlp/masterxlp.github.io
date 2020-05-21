@@ -53,3 +53,31 @@ $$
 
 ### Trust Region Methods
 
+TRPO是在约束策略更新大小的情况下最大化目标函数（“surrogate”目标）。
+$$
+\begin{align}
+\mathop{maximize}\limits_{\theta} \quad \hat{\mathbb{E}}_t [\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)} \hat{A}_t] \tag{3}
+\end{align}
+$$
+
+$$
+\begin{align}
+subject\ to\ \quad \hat{\mathbb{E}}_t[KL[\pi_{\theta_{old}}(\cdot|s_t), \pi_{\theta}(\cdot|s_t)]] \leq \delta \tag{4}
+\end{align}
+$$
+其中，$\theta_old$ 表示的是更新之前的策略参数向量。在对目标做线性近似以及对约束做二次约束之后，该优化问题可以通过 *共轭梯度算法* 被有效地近似解决。
+
+该理论证明TRPO实际上建议使用一个惩罚而不是约束，也就是，在一些系数 $\beta$ 优化下面这个无约束的优化问题：
+$$
+\begin{align}
+\mathop{maximize}\limits_{\theta} \quad \hat{\mathbb{E}}_t [\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_old}(a_t|s_t)} \hat{A}_t - \beta KL[\pi_{\theta_{old}}(\cdot|s_t), \pi_{\theta}(\cdot|s_t)]] \tag{5}
+\end{align}
+$$
+这遵循这样一个事实：一个确定的surrogate的目标（在状态上计算最大KL散度而不是求均值KL）在策略 $\pi$ 的性能上表现为一个下界（即pessimistic bound）。
+然而，TRPO使用的是一个“hard”约束而不是惩罚，这是因为很难选择一个在不同问题上都表现很好的单个 $\beta$ 值，甚至是在这样的单一问题上：在学习上造成的特征改变，都无法找到一个有效的固定值。
+因此，为了实现我们的目标，我们设计了一种模型TRPO单调提升的一阶算法，实验表明选择一个固定的惩罚系数 $\beta$ 以及使用SGD算法优化带惩罚的目标（方程5）是困难的。
+
+
+
+
+
