@@ -70,12 +70,76 @@ $$
 该理论证明TRPO实际上建议使用一个惩罚而不是约束，也就是，在一些系数 $\beta$ 优化下面这个无约束的优化问题：
 $$
 \begin{align}
-\mathop{maximize}\limits_{\theta} \quad \hat{\mathbb{E}}_t [\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_old}(a_t|s_t)} \hat{A}_t - \beta KL[\pi_{\theta_{old}}(\cdot|s_t), \pi_{\theta}(\cdot|s_t)]] \tag{5}
+\mathop{maximize}\limits_{\theta} \quad \hat{\mathbb{E}}_t [\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)} \hat{A}_t - \beta KL[\pi_{\theta_{old}}(\cdot|s_t), \pi_{\theta}(\cdot|s_t)]] \tag{5}
 \end{align}
 $$
 这遵循这样一个事实：一个确定的surrogate的目标（在状态上计算最大KL散度而不是求均值KL）在策略 $\pi$ 的性能上表现为一个下界（即pessimistic bound）。
 然而，TRPO使用的是一个“hard”约束而不是惩罚，这是因为很难选择一个在不同问题上都表现很好的单个 $\beta$ 值，甚至是在这样的单一问题上：在学习上造成的特征改变，都无法找到一个有效的固定值。
 因此，为了实现我们的目标，我们设计了一种模型TRPO单调提升的一阶算法，实验表明选择一个固定的惩罚系数 $\beta$ 以及使用SGD算法优化带惩罚的目标（方程5）是困难的。
+
+### Clipped Surrogate Objective
+
+特别地，让 $r_t(\theta)$ 表示 **probability ratio** $r_t(\theta) = \frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}$，则有 $r(\theta_{old}) = 1$。TRPO最大化 *surrogate objective* 表示为：
+$$
+\begin{align}
+L^{CPI}(\theta) = \hat{\mathbb{E}}_t [\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)} \hat{A}_t] = \hat{\mathbb{E}}_t [r_t(\theta) \hat{A}_t] \tag{6}
+\end{align}
+$$
+上标 *CPI* 指的是 **conservation policy iteration**（保守策略迭代）。
+在最大化 $L^{CPI}$ 目标函数时，如果不加以约束将会导致过大的策略更新；因此，我们现在考虑如何修改这个目标函数，以惩罚策略的改变，使得 $r_t(\theta)$ 远离1。
+
+我们提出的目标函数为：
+$$
+\begin{align}
+L^{CLIP}(\theta) = \hat{\mathbb{E}}_t [min(r_t(\theta) \hat{A}_t, clip(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t)] \tag{7}
+\end{align}
+$$
+其中，*epsilon* 是一个超参数（$\epsilon = 0.2$）。
+目标函数 $L^{CLIP}(\theta)$（方程7）的解释为：*min* 内部的第一项其实就是 $L^{CPI}$；第二项（$clip(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t$）通过截断 *probability ratio* 修改这个 *surrogate* 目标，这意味着移除区间 $[1 - \epsilon, 1 + \epsilon]$ 之外的 $r_t$ 的值对目标函数的影响。
+最后，我们对 “clipped” 和 “unclipped”的目标取最小值，所以这最后的目标是 “unclipped” 目标的一个下界（即 pessimistic bound）。
+因此，在这样的理论下，我们仅仅当 $r_t$ 可以提升目标时才会忽略 $r_t$ 的改变；当 $r_t$ 使得目标函数变差时，加入 $r_t$ 的改变。
+（**译者注：即只有当新旧策略的比值能够提升目标函数时，才会不进行clip的操作，否则进行clip的操作以使得目标函数不会变差，达到单调提升的效果**）。
+值得注意的是，当 $\theta = \theta_{old}$ 时（即 $r = 1$），$L^{CLIP}(\theta) = L^{CPI}(\theta)$。
+然而，它们随着 $\theta$ 逐渐远离 $\theta_{old}$ 而变得不同。
+图1画出了在时间t时 $L^{CLIP}$ 的变化；注意到当优势值为正或负时， *probability ratio* 在点 $1 - \epsilon$ 或点 $1 + \epsilon$ 处被相应的截断。
+![Figure 1](../image/ppo截断图.png "clipped objective value")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
