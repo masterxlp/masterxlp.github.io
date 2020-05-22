@@ -111,15 +111,99 @@ $$
 
 ### Adaptive KL Penalty Coefficient
 
+除此之外，另一种可以用作替代clipped surrogate目标的方法是对KL散度使用惩罚，为了对惩罚系数进行自适应，我们需要在每次策略更新时获取一些KL散度 $d_{targ}$ 的目标值。
+然而，在实验中，我们发现：KL惩罚比clipped surrogate目标表现的要差，但是我们仍然在实验中添加了这组实验，这是因为它将会是一个重要的baselines。
 
+在这个算法的最简单的实例中，我们依据下面的步骤来进行每次的策略更新：  
+-  执行几个epoches的小批量随机梯度下降（minibatch SGD），优化带KL惩罚的目标函数
+$$
+\begin{align}
+L^{KLPEN}(\theta) = \hat{\mathbb{E}}_t [\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)} \hat{A}_t - \beta KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]] \tag{8}
+\end{align}
+$$
+- 计算 $d = \hat{\mathbb{E}}_t [KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]]$   
+- * If $d < d_{targ} / 1.5$, $\beta \leftarrow \beta / 2$  
+- * If $d > d_{targ} \times 1.5$, $\beta \leftarrow \beta \times 2$  
+更新了的惩罚系数 $\beta$ 在下次策略更新时使用。
+然而，可以想像，按照这种方法更新策略的方法，我们只有在KL散度与 $d_{targ}$ 差别很大时才会看到策略更新，这种情况时很少的，而且系数 $\beta$ 也会很快适应这种情况（**译者注：也就是说，按照这种目标函数更新策略时，策略更新的次数会很少，且就算发生了这种情况，惩罚系数也会很快的适应，这又将导致策略不再更新，直到下一次出现该情况**）。
 
+### Algorithm
+*Surrogate loss* 根据前面的章节可以被计算出来，与经典的策略梯度实现有一些小的改变。
+为了使用自动微分实现，一个简单的结构是使用 $L^{CLIP}$ 或者 $L^{KLPEN}$ 代替 $L^{PG}$，并且在这个目标上来执行多步的随机梯度上升。
 
+很多计算低方差的优势函数估计技术都使用了一个学习到的状态值函数 $V(s)$；例如，一般优势估计（generalized advantage estimation）、finite-horizon estimators。
+如果使用一个在策略和值函数之间共享参数的神经网络结构，我们必须使用一个组合了 **policy surrogate** 和 ***value function error* 项的 **loss function**。
+这个目标可以通过增加一个熵项来进一步被强化以确保足够的探索。
+整合这些项，我们可以得到下面这样一个目标函数，它在每一次迭代中都被（近似）最大化：
+$$
+\begin{align}
+L_t^{CLIP + VF + S}(\theta) = \hat{\mathbb{E}}_t [L_t^{CLIP}(\theta) - c_1 L_t^{VF}(\theta) + c_2 S[\pi_\theta](s_t)] \tag{9}
+\end{align}
+$$
+其中，$c_1, c_2$ 是系数，$S$ 表示一个熵项，$L_t^{VF}$ 是一个平方差损失 $(V_\theta(s_t) - V_t^{targ})^2$。
 
+一种适合使用RNN（Recurrent Neural network）的策略梯度实现的方式是，在 $T$ 个时间步上执行这个策略（其中 $T$ 必须远小于episode的长度），然后用收集到的样本进行一次更新。
+这种形式的更新要求一个不能超过时间步 $T$ 的优势估计。这种估计形式为：
+$$
+\begin{align}
+\hat{A}_t = -V(s_t) + r_t + \gamma r_{t+1} + \cdots + \gamma^{T-t+1} r_{T-1} + \gamma^{T-t} V(s_T) \tag{10}
+\end{align}
+$$
+其中，$t \in [0,T]$ 为在一个给定的长度为 $T$ 的轨迹段的时间索引。
+我们在应用这个改变时，使用了一个 *generalized advantage estimation* 的截断版本，当 $\lambda = 1$ 时，变为方程(10)：
+$$
+\begin{align}
+\hat{A}_t = \delta_t + (\gamma \lambda)\delta_{t+1} + \cdots + (\gamma \lambda)^{T-t+1}\delta_{T-1} \tag{11}
+\end{align}
+$$
+$$
+\begin{align} 
+其中, \delta_t = r_t + \gamma V(s_{t+1}) - V(s_t) \tag{12}
+\end{align}
+$$
 
+一个使用固定长度的轨迹段的PPO算法在下面展示出来了。
 
+**------------------------------------------------------------------------------------------------------**     
+**Algorithm 1** PPO, Actor-Critic Style  
+**------------------------------------------------------------------------------------------------------**    
+&emsp; **for** iteration = 1, 2, ... do  
+&emsp;&emsp;&emsp; **for** actor = 1, 2, ..., $N$ do  
+&emsp;&emsp;&emsp;&emsp;&emsp; Run policy $\pi_{\theta_{old}}$ in environment for $T$ timesteps  
+&emsp;&emsp;&emsp;&emsp;&emsp; Compute advantage estimates $\hat{A}_1, ..., \hat{A}_T$  
+&emsp;&emsp;&emsp; **end for**  
+&emsp;&emsp;&emsp; Optimize surrogate $L$ wrt $\theta$, with $K$ epochs and minibatch size $M \leq NT$  
+&emsp;&emsp;&emsp; $\theta_{old} \leftarrow \theta$    
+&emsp; **end for**  
+**------------------------------------------------------------------------------------------------------**   
 
+每一次迭代，$N$（并行）个actors中的每一个都收集 $T$ 个时间步的数据。
+然后我们在 $NT$ 个时间步的数据上构建 *surrogate loss*，然后通过SGD（或者是Adam）算法来执行 $K$ 个epochs的优化。
 
+### Experiments
+#### Comparison of Surrogate Objective
 
+首先，我们在不同的超参数下比较几种不同的surrogate目标。
+这里，我们将surrogate目标 $L^{CLIP}$ 和几种 *natiral variations* 、*ablated version* 进行比较。
+$$
+\begin{align}
+No\ clipping\ or\ penalty:\ \qquad L_t(\theta) &= r_t(\theta)\hat{A}_t \tag{12}
+\end{align}
+$$
+$$
+\begin{align}
+Clipping:\ \qquad  L_t(\theta) &= min(r_t(\theta)\hat{A}_t, clip(r_t(\theta), 1 - \epsilon, 1 + \epsilon)\hat{A}_t) \tag{13}
+\end{align}
+$$
+$$
+\begin{align}
+KL\ penalty\ (fixed\ or\ adaptive): \qquad L_t(\theta) = r_t(\theta)\hat{A}_t - \beta KL[\pi_{\theta_{old}}, \pi_\theta] \tag{14}
+\end{align}
+$$
+对KL惩罚可以使用一个固定的惩罚系数 $\beta$ 或者一个自适应的系数（就如第四节描述的那样使用目标KL值）。
+值得注意的是，我们也尝试在log空间中clipping，但是发现其效果并不理想。
+
+为了表示策略，我们使用了一个全连接的MLP网络，其包含两个隐藏层，每个隐藏层包含64个神经元，每个神经元的激活函数为tanh非线性函数，输出高斯分布的均值和可变标准差。
 
 
 
