@@ -122,8 +122,9 @@ L^{KLPEN}(\theta) = \hat{\mathbb{E}}_t [\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{
 \end{align}
 $$
 - 计算 $d = \hat{\mathbb{E}}_t [KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]]$   
-- * If $d < d_{targ} / 1.5$, $\beta \leftarrow \beta / 2$  
-- * If $d > d_{targ} \times 1.5$, $\beta \leftarrow \beta \times 2$  
+    * If $d < d_{targ} / 1.5$, $\beta \leftarrow \beta / 2$  
+    * If $d > d_{targ} \times 1.5$, $\beta \leftarrow \beta \times 2$  
+
 更新了的惩罚系数 $\beta$ 在下次策略更新时使用。
 然而，可以想像，按照这种方法更新策略的方法，我们只有在KL散度与 $d_{targ}$ 差别很大时才会看到策略更新，这种情况时很少的，而且系数 $\beta$ 也会很快适应这种情况（**译者注：也就是说，按照这种目标函数更新策略时，策略更新的次数会很少，且就算发生了这种情况，惩罚系数也会很快的适应，这又将导致策略不再更新，直到下一次出现该情况**）。
 
