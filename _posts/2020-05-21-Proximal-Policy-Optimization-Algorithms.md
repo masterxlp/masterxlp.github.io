@@ -96,13 +96,6 @@ L^{CLIP}(\theta) = \hat{\mathbb{E}}_t [min(r_t(\theta) \hat{A}_t, clip(r_t(\thet
 $$
 其中，*epsilon* 是一个超参数（$\epsilon = 0.2$）。
 目标函数 $L^{CLIP}(\theta)$（方程7）的解释为：*min* 内部的第一项其实就是 $L^{CPI}$。
-第二项 $\mathop{clip} (r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t$ 通过截断 probability ratio 修改这个 surrogate 目标。
-这意味着移除区间 $[1 - \epsilon, 1 + \epsilon]$ 之外的 $r_t$ 的值对目标函数的影响。
-最后，我们对 “clipped” 和 “unclipped”的目标取最小值，所以这最后的目标是 “unclipped” 目标的一个下界（即 pessimistic bound）。
-因此，在这样的理论下，我们仅仅当 $r_t$ 可以提升目标时才会忽略 $r_t$ 的改变；当 $r_t$ 使得目标函数变差时，加入 $r_t$ 的改变。
-（**译者注：即只有当新旧策略的比值能够提升目标函数时，才会不进行clip的操作，否则进行clip的操作以使得目标函数不会变差，达到单调提升的效果**）。
-值得注意的是，当 $\theta = \theta_{old}$ 时（即 $r = 1$），$L^{CLIP}(\theta) = L^{CPI}(\theta)$。
-然而，它们随着 $\theta$ 逐渐远离 $\theta_{old}$ 而变得不同。
 图1画出了在时间t时 $L^{CLIP}$ 的变化；注意到当优势值为正或负时， *probability ratio* 在点 $1 - \epsilon$ 或点 $1 + \epsilon$ 处被相应的截断。
 ![Figure 1](../image/ppo截断图.png "clipped objective value")
 
