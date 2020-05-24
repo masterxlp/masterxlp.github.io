@@ -122,7 +122,8 @@ $$
 L^{KLPEN}(\theta) = \hat{\mathbb{E}}_t [\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)} \hat{A}_t - \beta KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]] \tag{8}
 \end{align}
 $$
-- 计算 $d = \hat{\mathbb{E}}_t [KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]]$   
+
+- 计算 $d = \hat{\mathbb{E}}_t [KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]]$
     * If $d < d_{targ} / 1.5$, $\beta \leftarrow \beta / 2$  
     * If $d > d_{targ} \times 1.5$, $\beta \leftarrow \beta \times 2$  
 
