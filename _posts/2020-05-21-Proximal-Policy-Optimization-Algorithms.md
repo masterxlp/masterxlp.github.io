@@ -95,7 +95,7 @@ L^{CLIP}(\theta) = \hat{\mathbb{E}}_t [min(r_t(\theta) \hat{A}_t, clip(r_t(\thet
 \end{align}
 $$
 其中，*epsilon* 是一个超参数（$\epsilon = 0.2$）。
-目标函数 $L^{CLIP}(\theta)$（方程7）的解释为：*min* 内部的第一项其实就是 $L^{CPI}$；
+目标函数 $L^{CLIP}(\theta)$（方程7）的解释为：*min* 内部的第一项其实就是 $L^{CPI}$。
 第二项 $clip(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t$ 通过截断 *probability ratio* 修改这个 *surrogate* 目标，
 这意味着移除区间 $[1 - \epsilon, 1 + \epsilon]$ 之外的 $r_t$ 的值对目标函数的影响。
 最后，我们对 “clipped” 和 “unclipped”的目标取最小值，所以这最后的目标是 “unclipped” 目标的一个下界（即 pessimistic bound）。
