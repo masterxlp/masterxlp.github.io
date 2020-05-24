@@ -65,7 +65,7 @@ $$
 subject\ to\ \quad \hat{\mathbb{E}}_t[KL[\pi_{\theta_{old}}(\cdot|s_t), \pi_{\theta}(\cdot|s_t)]] \leq \delta \tag{4}
 \end{align}
 $$
-其中，$\theta_old$ 表示的是更新之前的策略参数向量。在对目标做线性近似以及对约束做二次约束之后，该优化问题可以通过 *共轭梯度算法* 被有效地近似解决。
+其中，$\theta_{old}$ 表示的是更新之前的策略参数向量。在对目标做线性近似以及对约束做二次约束之后，该优化问题可以通过 *共轭梯度算法* 被有效地近似解决。
 
 该理论证明TRPO实际上建议使用一个惩罚而不是约束，也就是，在一些系数 $\beta$ 优化下面这个无约束的优化问题：
 $$
@@ -94,7 +94,7 @@ $$
 L^{CLIP}(\theta) = \hat{\mathbb{E}}_t [min(r_t(\theta) \hat{A}_t, clip(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t)] \tag{7}
 \end{align}
 $$
-其中，*epsilon* 是一个超参数（$\epsilon = 0.2$）。
+其中，$\epsilon$ 是一个超参数（$\epsilon = 0.2$）。
 目标函数 $L^{CLIP}(\theta)$（方程7）的解释为：*min* 内部的第一项其实就是 $L^{CPI}$， 第二项通过截断probability ratio修改这个surrogate目标。
 这意味着移除区间 $[1 - \epsilon, 1 + \epsilon]$ 之外的 $r_t$ 的值对目标函数的影响。
 最后，我们对 “clipped” 和 “unclipped”的目标取最小值，所以这最后的目标是 “unclipped” 目标的一个下界（即 pessimistic bound）。
