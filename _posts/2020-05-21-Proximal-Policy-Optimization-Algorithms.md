@@ -140,7 +140,7 @@ $$
 为了使用自动微分实现，一个简单的结构是使用 $L^{CLIP}$ 或者 $L^{KLPEN}$ 代替 $L^{PG}$，并且在这个目标上来执行多步的随机梯度上升。
 
 很多计算低方差的优势函数估计技术都使用了一个学习到的状态值函数 $V(s)$；例如，一般优势估计（generalized advantage estimation）、finite-horizon estimators。
-如果使用一个在策略和值函数之间共享参数的神经网络结构，我们必须使用一个组合了 **policy surrogate** 和 ***value function error* 项的 **loss function**。
+如果使用一个在策略和值函数之间共享参数的神经网络结构，我们必须使用一个组合了 **policy surrogate** 和 **value function error** 项的 **loss function**。
 这个目标可以通过增加一个熵项来进一步被强化以确保足够的探索。
 整合这些项，我们可以得到下面这样一个目标函数，它在每一次迭代中都被（近似）最大化：
 $$
