@@ -115,7 +115,7 @@ $$
 除此之外，另一种可以用作替代clipped surrogate目标的方法是对KL散度使用惩罚，为了对惩罚系数进行自适应，我们需要在每次策略更新时获取一些KL散度 $d_{targ}$ 的目标值。
 然而，在实验中，我们发现：KL惩罚比clipped surrogate目标表现的要差，但是我们仍然在实验中添加了这组实验，这是因为它将会是一个重要的baselines。
 
-在这个算法的最简单的实例中，我们依据下面的步骤来进行每次的策略更新：  
+在这个算法的最简单的实例中，我们依据下面的步骤来进行每次的策略更新：
 -  执行几个epoches的小批量随机梯度下降（minibatch SGD），优化带KL惩罚的目标函数
 $$
 \begin{align}
@@ -123,7 +123,12 @@ L^{KLPEN}(\theta) = \hat{\mathbb{E}}_t [\frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{
 \end{align}
 $$
 
-- 计算 $d = \hat{\mathbb{E}}_t [KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]]$
+- 计算 
+$$
+\begin{align}
+d = \hat{\mathbb{E}}_t [KL [\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]]
+\end{align}
+$$
     * If $d < d_{targ} / 1.5$, $\beta \leftarrow \beta / 2$  
     * If $d > d_{targ} \times 1.5$, $\beta \leftarrow \beta \times 2$  
 
