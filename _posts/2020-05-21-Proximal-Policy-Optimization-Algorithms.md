@@ -178,7 +178,7 @@ $$
 &emsp; **for** iteration = 1, 2, ... do  
 &emsp;&emsp;&emsp; **for** actor = 1, 2, ..., $N$ do  
 &emsp;&emsp;&emsp;&emsp;&emsp; Run policy $\pi_{\theta_{old}}$ in environment for $T$ timesteps  
-&emsp;&emsp;&emsp;&emsp;&emsp; Compute advantage estimates $\hat{A}_1, ..., \hat{A}_T$  
+&emsp;&emsp;&emsp;&emsp;&emsp; Compute advantage estimates $$\hat{A}_1, ..., \hat{A}_T$$  
 &emsp;&emsp;&emsp; **end for**  
 &emsp;&emsp;&emsp; Optimize surrogate $L$ wrt $\theta$, with $K$ epochs and minibatch size $M \leq NT$  
 &emsp;&emsp;&emsp; $\theta_{old} \leftarrow \theta$    
