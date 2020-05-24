@@ -8,7 +8,7 @@
 # Site settings
 title: 许立鹏的技术专栏
 brief-intro: Reinforcement Learning, Machine Learning, and Python
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "https://masterxlp.github.io" # the subpath of your site, e.g. /blog
 url: "https://masterxlp.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
