@@ -47,13 +47,13 @@ $$
 
 $$
 \begin{align}
-\quad \quad = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}z^2} dx}
+\quad \quad \quad \quad  = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}z^2} dx}
 \end{align}
 $$
 
 $$
 \begin{align}
-\quad\\ = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
+\quad \quad \quad\\ = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
 \end{align}
 $$
 
