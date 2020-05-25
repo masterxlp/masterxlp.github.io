@@ -47,13 +47,13 @@ $$
 
 $$
 \begin{align}
-= \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}z^2} dx}
+\quad \quad = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}z^2} dx}
 \end{align}
 $$
 
 $$
 \begin{align}
-= \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
+\quad\\ = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
 \end{align}
 $$
 
@@ -87,7 +87,13 @@ $$
 \end{align}
 $$
 
+$$
+\begin{align}
+1 = \int_{-\infty}^{\infty} \cdots \int_{-\infty}^{\infty} p(z_1, \cdots, z_n) dz_1 \cdots dz_n \tag{5}
+\end{align}
+$$
 
+我们称随机向量 $\overrightarrow{Z} \sim \mathcal{N}(\overrightarrow{0}, \boldsymbol{I})$
 
 
 
