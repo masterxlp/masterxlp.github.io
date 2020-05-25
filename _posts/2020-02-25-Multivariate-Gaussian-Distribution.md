@@ -53,7 +53,7 @@ $$
 
 $$
 \begin{align}
-\qquad \qquad  = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
+\qquad \quad\\\  = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
 \end{align}
 $$
 
@@ -83,7 +83,7 @@ $$
 
 $$
 \begin{align}
-\quad = \frac{1}{(2\pi)^{\frac{n}{2}}} e^{-\frac{1}{2}(Z^{T}Z)}
+\qquad \qquad = \frac{1}{(2\pi)^{\frac{n}{2}}} e^{-\frac{1}{2}(Z^{T}Z)}
 \end{align}
 $$
 
