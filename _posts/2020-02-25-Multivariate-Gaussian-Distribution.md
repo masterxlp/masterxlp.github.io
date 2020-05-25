@@ -41,19 +41,19 @@ $$
 
 $$
 \begin{align}
-\therefore\ 1 = \int_{-\infty}^{\infty}{p(x(z))dx}
+\therefore\ 1\ = \int_{-\infty}^{\infty}{p(x(z))dx}
 \end{align}
 $$
 
 $$
 \begin{align}
-\quad \quad \quad \quad  = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}z^2} dx}
+\qquad \qquad  = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}z^2} dx}
 \end{align}
 $$
 
 $$
 \begin{align}
-\quad \quad \quad\\ = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
+\qquad \qquad  = \int_{-\infty}^{\infty}{\frac{1}{\sqrt{2\pi}} e^{-\frac{1}{2}z^2} dz} \tag{3}
 \end{align}
 $$
 
@@ -93,7 +93,8 @@ $$
 \end{align}
 $$
 
-我们称随机向量 $\overrightarrow{Z} \sim \mathcal{N}(\overrightarrow{0}, \boldsymbol{I})$
+我们称随机向量 $\overrightarrow{Z} \sim \mathcal{N}(\overrightarrow{0}, \boldsymbol{I})$，即随机向量服从均值为零向量，协方差矩阵为单位矩阵的高斯分布。
+在这里，
 
 
 
