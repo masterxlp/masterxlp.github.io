@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Proximal Policy Optimization Algorithms [paper]"
+title:  "Proximal Policy Optimization Algorithms - paper"
 date:   2020-05-21 14:48:00 +0800
 categories: RL PPO paper
 ---
