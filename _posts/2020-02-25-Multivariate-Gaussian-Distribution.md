@@ -209,23 +209,44 @@ $$
 
 $$
 \begin{align}
-\qquad = \boldsymbol{Conv} (B\overrightarrow{Z}, B\overrightarrow{Z})
+&= \boldsymbol{Conv} (B\overrightarrow{Z}, B\overrightarrow{Z})\\
+&= B \boldsymbol{Conv} (\overrightarrow{Z}, \overrightarrow{Z}) B^T
 \end{align}
 $$
 
 $$
 \begin{align}
-\qquad = B \boldsymbol{Conv} (\overrightarrow{Z}, \overrightarrow{Z}) B^T
+= B \boldsymbol{Conv} (\overrightarrow{Z}, \overrightarrow{Z}) B^T
 \end{align}
 $$
 
 $$
 \begin{align}
-\qquad = BB^T
+= BB^T
 \end{align}
 $$
 
+我们发现式(12)中 $BB^T$ 就是线性变换前的随机向量 $\overrightarrow{X} \sim \mathcal{N}(\overrightarrow{\mu}, \sum)$ 的协方差矩阵 $\sum$，
+所以由(12)(13)可以得到联合概率密度函数的最终形式：
 
+$$
+\begin{align}
+p(x_1, \cdots, x_n) = \frac{1}{(2\pi)^{\frac{n}{2}} |\sum|^{\frac{1}{2}}} e^{-\frac{1}{2}[(\overrightarrow{X} - \overrightarrow{\mu})^T \sum^{-1} (\overrightarrow{X} - \overrightarrow{\mu})]} \tag{14}
+\end{align}
+$$
+
+**原本由定理1，我们还需要求线性变换矩阵** $B$ **，才能确定随机向量** $\overrightarrow{X}$ **的联合概率密度函数的表达式，现在由式(13)我们即可得最终形式(14)，随机向量**
+$\overrightarrow{X}$ **的联合概率密度函数由其均值向量** $\mu$ **和其协方差矩阵** $\sum$ **唯一确定，但我们需要明白的是，这是通过定理1的线性变换**
+$\overrightarrow{Z} = B^{-1}(\overrightarrow{X} - \overrightarrow{\mu})$ **得到的，即此线性变换隐含其中。**
+
+如果我们取常数 $c = p(x_1, \cdots, x_n)$，则可得函数 $p(x_1, \cdots, x_n)$ 的等高线为 $c' = (\overrightarrow{X} - \overrightarrow{\mu})^T \sum^{-1} (\overrightarrow{X} - \overrightarrow{\mu})$，
+当随机向量 $\overrightarrow{X}$ 为二维向量时，我们对协方差矩阵 $\sum$ 进行分解，因为其为实对称矩阵，可正交对角化
+
+$$
+\begin{align}
+
+\end{align}
+$$
 
 
 
