@@ -1,4 +1,4 @@
-I"B<p>转载自<a href="https://zhuanlan.zhihu.com/p/58987388" title="多元高斯分布详解">知乎</a></p>
+I"B<p>转载自<a href="https://zhuanlan.zhihu.com/p/58987388" title="多元高斯分布详解">知乎</a></p>
 
 <h2 id="multivariate-gaussian-distribution">Multivariate Gaussian Distribution</h2>
 <blockquote>
@@ -14,11 +14,12 @@ p(x) &amp;= \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2}
 1 &amp;= \int_{-\infty}^{\infty}{p(x)dx} \tag{2}
 \end{align}\)</p>
 
-<p>而如果我们对随机变量 $X$ 进行标准化，使用 $Z = \frac{x - \mu}{\sigma}$ 对 (1) 进行换元，继而有
-\(\begin{align}
+<p>而如果我们对随机变量 $X$ 进行标准化，使用 $Z = \frac{x - \mu}{\sigma}$ 对 (1) 进行换元，继而有</p>
+
+\[\begin{align}
 &amp;\because\ x(z) = z \cdot \sigma + \mu \\
 &amp;\therefore\ p(x(z)) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}z^2}
-\end{align}\)</p>
+\end{align}\]
 
 \[\begin{align}
 \quad\ \therefore\ 1\ &amp;= \int_{-\infty}^{\infty}{p(x(z))dx}\\

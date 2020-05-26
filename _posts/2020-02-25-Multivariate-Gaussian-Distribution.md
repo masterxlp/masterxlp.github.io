@@ -22,6 +22,7 @@ p(x) &= \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{1}{2}(\frac{x-\mu}{\sigma})^2} \ta
 $$
 
 而如果我们对随机变量 $X$ 进行标准化，使用 $Z = \frac{x - \mu}{\sigma}$ 对 (1) 进行换元，继而有
+
 $$
 \begin{align}
 &\because\ x(z) = z \cdot \sigma + \mu \\
