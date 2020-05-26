@@ -260,7 +260,7 @@ $$
 后的随机变量在新的正交基上彼此独立。
 值得注意的是，如果随机向量 $\overrightarrow{X}$ 本来就是独立随机变量组成的，此时其协方差矩阵是一个对角阵，则酉矩阵是一个单位矩阵，此线性变换中就只有拉伸没有旋转。
 
- <div align=center> ![Figure 4](../image/多元高斯分布随机变量去相关性图.png "delete correlation")</div>
+ <div align=center> <img src='../image/多元高斯分布随机变量去相关性图.png'></div>
 
 **而我们如果只保留** $(Q\Lambda^{-\frac{1}{2}})(\overrightarrow{X}-\overrightarrow{\mu})$ **这个投影后坐标轴长度较长的那个坐标，我们就可以达到
 将随机向量** $\overrightarrow{X}$ **进行降维的效果了，而这，就是所谓的PCA(Principal Component Analysis, 主成分分析)。**
