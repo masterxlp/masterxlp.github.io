@@ -95,7 +95,7 @@ $$
 
 ### 多元高斯分布
 我们知道，当随机变量 $\overrightarrow{Z} \sim \mathcal{N}(\overrightarrow{0}, \boldsymbol{I})$ 时，
-其每个随机变量 $Z_i \sim \mathcal{N}(0,1)\ (i = 1, \cdots, n)$ 彼此独立，我们可通过式(4)与独立随机变量概率密度函数之间的关系得出其联合概率密度函数（式5）。
+其每个随机变量 $Z_i \sim \mathcal{N}(0,1)\ (i = 1, \cdots, n)$ 彼此独立，我们可通过式(4)与独立随机变量概率密度函数之间的关系得出其联合概率密度函数(式5)。
 那么，对于一般的随机变量 $\overrightarrow{X} \sim \mathcal{N}(\overrightarrow{\mu}, \Sigma)$，
 即其每个随机变量 $X_i \sim \mathcal{N}(\mu_i, \sigma_i^2)\ (i = 1, \cdots, n)$ 且 $X_i, X_j\ (i, j = 1, \cdots, n)$ 彼此不独立的情况下，
 我们该如何求随机向量 $\overrightarrow{X}$ 的联合概率密度函数呢？
@@ -198,12 +198,12 @@ $\Lambda = \left[\begin{matrix}\lambda_1 & 0 \cr 0 & \lambda_2\end{matrix}\right
 
 $$
 \begin{align}
-c' = (\frac{X_{Q_1} - \mu_{Q_1}}{\sqrt{\lambda_1}})^2 + (\frac{X_{Q_2} - \mu_{Q_2}}{\sqrt{\lambda_2}})^2 \tag(16)
+c' = (\frac{X_{Q_1} - \mu_{Q_1}}{\sqrt{\lambda_1}})^2 + (\frac{X_{Q_2} - \mu_{Q_2}}{\sqrt{\lambda_2}})^2 \tag{16}
 \end{align}
 $$
 
 由式(16)可知，此时函数 $p(x_1, \cdots, x_n)$ 的等高线是在矩 $Q$ 的列向量所组成的单位正交基上的一个椭圆，椭圆的中心是 $\overrightarrow{\mu}_{Q} = [\mu_{Q_1}, \mu_{Q_2}]^T$,
-长半轴为 $\sqrt{\lambda_1}$，短半轴为 $\sqrt{\lambda_2}$。
+长半轴为 $$\sqrt{\lambda_1}$$，短半轴为 $$\sqrt{\lambda_2}$$。
 
 如果协方差矩阵 $\Sigma$ 不是对角矩阵，则正交对角化得到的酉矩阵 $Q$ 不是标准正交基，其代表一个旋转，此时的椭圆应该是一个倾斜的椭圆，
 随机向量 $\overrightarrow{X}$ 中的随机变量不是彼此独立的。
