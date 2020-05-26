@@ -218,7 +218,7 @@ $$
 <div align=center> 协方差矩阵为对角阵时的二元高斯图 </div>
 
 补充：  
-<div align=center> ![Figure 4](../image/协方差对模型的影响.png "Conv matrix")</div>
+![Figure 4](../image/协方差对模型的影响.png "Conv matrix")
 <div align=center> 协方差对模型的影响 </div>
 
 ### 多元高斯分布的几何意义
