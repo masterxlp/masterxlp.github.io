@@ -1,0 +1,26 @@
+---
+layout: post
+title:  "General Value Function"
+date:   2020-05-26 17:56:00 +0800
+categories: RL Multi-Task
+---
+
+## Horde: A Scalable Real-time Architecture for Learning Knowledge from Unsupervised Sensorimotor Interaction
+### ABSTRACT
+对于机器人和其他人工智能系统来说，在复杂多变的环境中保持精确的 "world knowledge" 是一个一直以来就存在的问题。
+我们的被称为 `Horde` 的结构就是用来处理这个问题的，它是由大量的相互独立的子强化学习智能体（或者称为 `demons`）组成的。
+每一个 “demon” 负责回答一个预测(predictive)或以目标为导向(goal-oriented)的“world”的问题，从而以一种分解的、模块化的方式对系统的整体知识做出贡献。
+这里的问题是以值函数(value function)的形式体现出来的，但是每个 "demon" 有它们自己的策略、奖励函数、终止函数以及终止奖励函数，这些函数与那些基本问题是无关的。
+所有的 “demon” 同时并行的进行学习，以便从系统作为一个整体所采取的任何“actions”中提取最大化的训练信息。
+基于梯度的时序差分学习方法在这个离策略设置下被用于去学习一个高效的、可靠的函数逼近器。
+Horde在固定的时间和内存中运行，因此，它适合在像机器人等实时应用程序中进行在线学习。
+我们在一个多传感器的移动机器人上展示了使用“Horde”成功从离策略经验中学习以目标为导向的行为和远期预测的结果。
+Horde是迈向实时架构的重要一步，可以有效地从无监督的 sensorimotor interaction 中学习一般化的知识。
+
+### THE PROBLEM OF EXPRESSIVE AND LEARNABLE KNOWLEDGE
+如何学习、表示以及使用一般意义上的world knowledge，仍是人工智能(AI)中的一个关键的开放性的问题。
+有一些基于一阶谓词逻辑和贝叶斯网络的高级表示语言具有非常强大的表达能力，但在这些语言中，学习知识是很困难的而且使用计算成本也很昂贵。
+还有一些低级语言，像微分方程和状态转化矩阵，可以在无监督的情况下从数据中学习出来，但是这些语言的表达能力要差的多。
+而且即使是稍微有点超前的知识，像“If I keep moving, I will bump into something within a few seconds”，也不能用微分方程直接表达出来，且从微分方程中计算的代价也会很昂贵。
+我们对于其他可以从无监督的sensorimotor数据中学习的具有强表达能力的形式的知识还有很大的探索空间。
+
