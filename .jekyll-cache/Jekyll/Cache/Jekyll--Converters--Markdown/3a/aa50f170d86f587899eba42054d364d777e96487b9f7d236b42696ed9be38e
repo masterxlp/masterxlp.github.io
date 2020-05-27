@@ -1,0 +1,76 @@
+I"&<h2 id="horde-a-scalable-real-time-architecture-for-learning-knowledge-from-unsupervised-sensorimotor-interaction">Horde: A Scalable Real-time Architecture for Learning Knowledge from Unsupervised Sensorimotor Interaction</h2>
+<h3 id="abstract">ABSTRACT</h3>
+<p>对于机器人和其他人工智能系统来说，在复杂多变的环境中保持精确的 “world knowledge” 是一个一直以来就存在的问题。
+我们的被称为 <code class="highlighter-rouge">Horde</code> 的结构就是用来处理这个问题的，它是由大量的相互独立的子强化学习智能体（或者称为 <code class="highlighter-rouge">demons</code>）组成的。
+每一个 “demon” 负责回答一个预测(predictive)或以目标为导向(goal-oriented)的“world”的问题，从而以一种分解的、模块化的方式对系统的整体知识做出贡献。
+这里的问题是以值函数(value function)的形式体现出来的，但是每个 “demon” 有它们自己的策略、奖励函数、终止函数以及终止奖励函数，这些函数与那些基本问题是无关的。
+所有的 “demon” 同时并行的进行学习，以便从系统作为一个整体所采取的任何“actions”中提取最大化的训练信息。
+基于梯度的时序差分学习方法在这个离策略设置下被用于去学习一个高效的、可靠的函数逼近器。
+Horde在固定的时间和内存中运行，因此，它适合在像机器人等实时应用程序中进行在线学习。
+我们在一个多传感器的移动机器人上展示了使用“Horde”成功从离策略经验中学习以目标为导向的行为和远期预测的结果。
+Horde是迈向实时架构的重要一步，可以有效地从无监督的 sensorimotor interaction 中学习一般化的知识。</p>
+
+<h3 id="the-problem-of-expressive-and-learnable-knowledge">THE PROBLEM OF EXPRESSIVE AND LEARNABLE KNOWLEDGE</h3>
+<p>如何学习、表示以及使用一般意义上的world knowledge，仍是人工智能(AI)中的一个关键的开放性的问题。
+有一些基于一阶谓词逻辑和贝叶斯网络的高级表示语言具有非常强大的表达能力，但在这些语言中，学习知识是很困难的而且使用计算成本也很昂贵。
+还有一些低级语言，像微分方程和状态转化矩阵，可以在无监督的情况下从数据中学习出来，但是这些语言的表达能力要差的多。
+而且即使是稍微有点超前的知识，像“If I keep moving, I will bump into something within a few seconds”，也不能用微分方程直接表达出来，且从微分方程中计算的代价也会很昂贵。
+我们对于其他可以从无监督的sensorimotor数据中学习的具有强表达能力的形式的知识还有很大的探索空间。</p>
+
+<p>本文从价值函数的概念出发，结合强化学习的思想和算法，提出了一种新的知识表示方法。
+在我们的方法中，知识被表示成大量并行学习的值函数的近似，每个值函数都有它们自己的策略、伪奖励函数、伪终止函数以及伪终止奖励函数。
+使用这种多个近似值函数形式的学习系统以前被探索为带有”options”的TD(temporal-difference)网络。
+我们的架构被称为 <code class="highlighter-rouge">Horde</code> ，它在处理状态和函数近似（不预测状态表示）方面更加直接，并且在”off-policy”学习方面使用了更加有效的算法，这一点与时间差分网络不同。
+本文还扩展了先前的工作，在物理机器人上演示了实时学习。</p>
+
+<p>先前在关于在以”sensorimotor data”为基础并能从这些数据中学习的情况下表示一般意义上的知识的工作至少可以追溯到Cunningham (1972) and Becker (1973)。
+Drescher(1991)考虑了一个模拟的机器人婴儿学习布尔事件的条件概率表。Ring(1997)探索了序列的层次表示的连续学习。Cohen等人(1997)从模拟的经验中探索了象征性音调的形成。
+Kaelbling et al.(2001)和Pasula et al.(2007)探索了随机域中关系规则表示的学习。
+所有这些系统都涉及到重要知识的学习，但距离从”sensorimotor data”中学习还很遥远。
+以前从”sensorimotor data”中学习的researchers包括：
+Pierce和Kuipers(1997)，他们学习了空间模型和控制律，Oates等人(2000)，他们学习了机器人的集群轨迹，Yu和Ballard(2004)，他们学习了单词的含义，Natale(2005)，他们学习了目标导向的物理动作。
+所有这些作品都学到了重要的知识，但都是专门针对某一特定类型的知识;他们使用的知识表示不像多个近似值函数的知识表示那样普遍。</p>
+
+<h3 id="value-functions-as-semantics">VALUE FUNCTIONS AS SEMANTICS</h3>
+<p>近似值函数作为一个知识表示语言的一个独特的、吸引人的特点是，它们在”sensorimotor”交互中有明确的语义，有清晰的真理概念。
+只要近似值函数的值与它所近似的数学定义上的值函数的值相匹配，那么我们就认为表示为近似值函数的一些知识是正确的，或者更精确的说，是准确的。
+一个值函数提问一个问题 – 未来的累积回报是多少？ – 近似值函数提供关于这个问题的答案。
+近似值函数就是知识，它与定义了知识的准确含义（对未来的实际奖励）的值函数相匹配。
+目前工作的思想是，对于基础语义的值函数方法可以被扩展到奖励以外的所有”world knowledge”的理论。
+在本节，我们为奖励和传统的价值函数正式定义了这种思想，并且在下节我们会扩展它们到知识和一般的值函数。</p>
+
+<p>在标准的强化学习框架中，AI智能体与它所在的world的交互被分解为一系列离散的时间步，$t = 1, 2, \cdots$，每个时间步或许与毫秒相对应(a fraction of a second)。
+在每一个时间步中的world的状态被表示为，$S_t \in \mathcal{S}$，被智能体所观测到，或许还会被用来选择一个动作，$A_t \in \mathcal{A}$，以作为回应。
+一个时间步后，智能体接收一个实值奖励，$R_{t+1} \in \mathbb{R}$，以及下一个状态，$S_{t+1} \in \mathcal{S}$，如此循环。
+在不损失一般性的前提下，我们考虑用一个确定性的 <strong>奖励函数</strong> $r$ ，$\mathcal{S} \rightarrow \mathbb{R}$，来生成奖励，有：$R_t = r(S_t)$。</p>
+
+<p>传统强化学习关注的是学习一个随机行为选择 <strong>策略</strong> $\pi$：$\mathcal{S} \times \mathcal{A} \rightarrow [0,1]$，它给出了在每一个状态下选择每一个动作的概率，$\pi(s,a) = \mathbb{P}(A_t=a|S_t=s)$。
+非正式地，一个好的策略是：随着时间的推移，智能体接收到大量累积奖励。
+例如，在游戏中，奖励可能对应每回合输赢的点数；在比赛中，每个时间步的奖励或许是 $-1$。
+在情景性的问题中，智能体与world的交互是由多个有限轨迹（情景）组成，这些轨迹可以在better or worse的方式中结束。
+例如，在游戏中，或许会生成一个移动序列，然后以赢、输或者平局结束，每种结果都会对应不同的数值，这些数值可能是 $+1, -1 或者 0$。
+一场比赛可能会圆满结束，也可能会被罚下场，这是两种完全不同的结果，即使使用的时间是相同的。
+另一个例子是最优控制：在最优控制中，每一步的成本（例如，与能量消耗有关的成本）加上最终的成本（例如，与最终状态到目标状态的距离有关的成本）是常见的。
+一般来说，一个问题可能既有确定的奖励函数又有终止奖励函数，$z:\ \mathcal{S} \rightarrow \mathbb{R}$，其中 $z(s)$ 是如果到达状态$s$发生终止时，接收到的终止奖励。</p>
+
+<p>现在，我们把终止的过程正式化。
+在很多强化学习问题中，特别是非情景问题中，通常会给延迟奖励(delayed rewards)一个小的权重，一般地，对于每一步的延迟通过系数 $\gamma \in [0,1)$ 来折扣它。
+关于折扣的一种理解是，把它看作一个终止的固定概率，$1 - \gamma$，以及一个永远为0的终止奖励。
+更一般的，我们可以把它们看作是一个任意的奖励函数，$\gamma:\ \mathcal{S} \rightarrow [0,1]$，$1 - \gamma(s)$ 表示到达状态 $s$ 时终止的概率，这时，将会记录相对应的终止奖励 $z(s)$。
+总回报(<code class="highlighter-rouge">return</code>)是一个随机变量，被表示为从时间 $t$ 开始的轨迹 $G_t$，它是直到 $T$ 时刻终止发生时这一段时间内的每个时间步所接受的奖励的和，再加上再 $S_T$ 状态下接收到的最终的终止奖励:</p>
+
+\[\begin{align}
+G_t = \sum_{k =t+1}^{T} r(S_k) + z(S_T) \tag{1}
+\end{align}\]
+
+<p>传统的动作值函数 $Q^{\pi}:\ \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$ 被定为轨迹的回报的期望，轨迹是从给定的状态和动作开始，依据策略 $\pi$ 选择动作直至根据 $\gamma$ 到达终止（从而确定了终止的时间$T$）:</p>
+
+\[\begin{align}
+Q^{\pi}(s,a) = \mathbb{E}[G_t|S_t = s, A_t = a, A_{t+1:T-1} \sim \pi, T \sim \gamma]
+\end{align}\]
+
+<p>这种“期望”在给定一个特定的world的状态转换结构（例如，马尔可夫决策过程）时得到了很好的定义。
+如果一个AI智能体拥有一个近似值函数，$\hat{Q}:\ \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$，那么它可以根据 $\hat{Q}$ 与 $Q^\pi$ 的接近程度来评估该近似值函数的准确性，
+例如，在一些状态-动作对的分布上计算它的平方误差的期望，$(Q^{\pi}(s,a) - \hat{Q}(s,a))^2$。</p>
+
+:ET
