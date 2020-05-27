@@ -83,6 +83,136 @@ $$
 这种“期望”在给定一个特定的world的状态转换结构（例如，马尔可夫决策过程）时得到了很好的定义。
 如果一个AI智能体拥有一个近似值函数，$\hat{Q}:\ \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$，那么它可以根据 $\hat{Q}$ 与 $Q^\pi$ 的接近程度来评估该近似值函数的准确性，
 例如，在一些状态-动作对的分布上计算它的平方误差的期望，$(Q^{\pi}(s,a) - \hat{Q}(s,a))^2$。
+在实践中，准确度量这种误差是不可能的，但是值函数 $Q^\pi$ 仍然为知识 $\hat{Q}$ 提供了一个有用的理论语义和基础真理。
+这个值函数($Q^\pi(s,a)$)是对“在策略 $\pi$ 下每一个状态-动作对的回报是多少？”问题的准确数值回答，而近似值函数($\hat(Q)$)提供了一个近似值回答。
+在这个精确的意义上，这个值函数为AT智能体的近似值函数所表示的知识提供了一个语义。
+
+最后，我们注意到，评估策略的值函数通常只是为了改进策略。
+给定一个策略 $\pi$ 以及它的值函数 $Q^\pi$，我们可以构造一个新的确定性的贪婪策略 $\pi' = greedy(Q^\pi)$，因此有，$\pi'(s, \mathop{argmax}\limits_{a} Q^\pi(s,a)) = 1$，且新策略在某种意义上被确保会有所提升，
+即 $\forall\ s \in \mathcal{S}, a \in \mathcal{A},\ Q^{\pi'}(s,a) \geq Q^\pi(s,a)$，当且仅当两个策略都是最优时取等号。
+通过逐步的估计和提升，使得期望回报最优的策略可以被找到。
+这样，值函数理论可以为以目标为导向的知识（控制）和预测知识提供一个语义。
+
+### FROM VALUES TO KNOWLEDGE (GENERAL VALUE FUNCTIONS)
+在明确了传统的价值函数如何为即将到来的奖励的知识提供grounded（落地的）语义之后，在本节，我们将展示 `通用价值函数` 如何为更一般的世界知识提供grounded语义。
+
+首先注意，尽管动作值函数 $Q^\pi$ 只有策略这一个传统意义上的上标，但是它同样依赖于奖励 $r$ 和终止奖励函数 $z$。
+这些函数同样可以被认为是和策略 $\pi$ 一样以同样的形式被输入到值函数中。
+也就是说，我们或许可以定义一个更一般的值函数，$Q^{\pi,r,z}$，它将使用式(1)中定义的任意伪奖励函数 $r$ 和伪终止奖励函数 $z$代表的回报。
+例如，假设我们正在玩一个游戏，这个游戏的基本终止奖励为：赢了 $z = +1$，输了 $z = -1$（每一个时间步的奖励为 $r = 0$）。
+除此之外，我们或许还会提出另一个独立的问题：游戏还会走多少步？
+这可以表示为一个具有伪奖励函数 $r = 1$、伪终止奖励函数 $z = 0$ 的通用值函数。
+
+从值函数到通用值函数的第二步是转换终止函数 $\gamma$ 为一个伪形式。
+这稍微更实质一些，因为与奖励和终止奖励不同，它们在任何形式中都不涉及到状态演变，但是终止通常是指正常状态转换流中的中断，以及充值到初始状态或者初始状态分布。
+对于伪终止，我们简单地忽略了这个常规终止的附加含义。
+这个真正的、基本的问题仍然有真正的终点，也可能根本没有终点。
+然而，我们可以认为 `pseudo terminations` 在任何时候都可能发生。
+例如，在比赛中，我们可以考虑一个在一半赛程终止的伪终止函数。
+在一般意义上，这是关于值函数问题的一个很好的定义。
+或者说，如果我们是赛手的配偶，那么我们或许不关心比赛什么时候结束，而是关心赛手什么时候回家吃晚饭，这可能是我们的伪终止。
+对于同一个world（相同的动作和状态转移），有很多预测问题可以以通用值函数的形式定义。
+
+正式地，我们定义 **通用值函数，GVF** 为一个函数 $q\ : \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$，它有四个 auxiliary functional 的输入 $\pi, \gamma, r, z$，
+这与之前的定义有相同的范围，但是现在它们表示任意的奖励、终止奖励以及终止函数，与基本问题的奖励、终止奖励以及终止函数没有什么必要的关系：
+
+$$
+\begin{align}
+q(s, a; \pi, \gamma, r, z) = \mathbb{E}[G_t|S_t = s, A_t = a, A_{t+1:T-1} \sim \pi, T \sim \gamma]
+\end{align}
+$$
+
+其中，$G_t$ 仍然是由式(1)定义的那样，但是现在是对给定函数的。
+这四个函数，$\pi, \gamma, r, z$，被统称为GVF的 *question functions*；它们定义了GVF的问题或者语义。
+注意到传统的值函数为GVF的一个特例。
+因此，我们可以任务所有的值函数都是GVF的一种情况。
+为了简单期间，在本文的其余部分，我们有时使用“value function”表示通用情况，当需要消除歧义时使用“conventional value function”。
+我们也会去掉问题函数的前缀"pseudo-"，当不存在歧义时。
+在我们稍后提出的机器人实验中，不存在特别的基本问题，所以不存在混淆。
+
+### THE HORDE ARCHITECTURE
+**Horde** 结构是有许多被称为 **demons** 的“子智能体”组成的完整智能体构成。
+每一个demon是一个独立的强化学习智能体，负责学习基本智能体羽环境交互中的一小部分知识。
+每一个demon学习一个关于GVF $q$ 的近似 $\hat{q}$，对应于四个问题函数 $\pi, \gamma, r, z$ 关于这个demon的设置。
+
+现在我们来描述Horde机制，它可以用有限数量的 **weights** 来近似GVF，并学习这些 weights。
+本文采用标准的线性方法来进行函数逼近。
+我们假设，每一个时间步的状态和动作，$S_t, A_t$，都被翻译(可能不完全通过sensory解读)为一个固定大小的 **feature vector** $\phi_t = \phi(S_t,A_t) \in \mathbb{R}^n$，
+其中 $n \ll |\mathcal{S}|$。
+对于所有的状态-动作对，我们表示所有的特征集为 $\Phi$。
+在我们的实验中，特征向量时通过tile（平铺）编码来构造的，因此为二进制表示，$\phi_t \in {0,1}^n$，具有一个常数1的特征。
+我们也关注了 $|\mathcal{S}|$ 很大的情况，可能是无限的，但是 $|\mathcal{A}|$ 是有限的，相比来说很小，这在强化学习问题中很常见。
+这都是一些实用的特殊情况，但是对于我们的方法来说，没有一种是必要的。
+我们近似的GVF，表示为 $\hat{q} \ :\ \mathcal{S} \times \mathcal{A} \times \mathbb{R}^n \rightarrow \mathbb{R}$，在特征向量中是线性的：
+
+$$
+\begin{align}
+\hat{q}(s,a,\theta) = \theta^T\phi(s,a)
+\end{align}
+$$
+
+其中，$\theta \in \mathbb{R}^n$ 是可以被学习的 **weights** 向量，$v^T w = \sum_i v_i w_i$ 表示两个向量 $v 和 w$ 的内积。
+
+为了学习weights，我们使用最近开发的梯度下降时序差分算法。
+这个算法的独特之处在于，它可以从 *off-policy* 的经验中稳定有效地学习函数逼近。
+off-policy的经验指的是由被称为 **behavior policy** 的策略产生的经验，它与被称为 **target policy** 的用于学习的策略不同。
+似乎天生就面临着要从无监督的交互中有效地学习知识，因为想要并行的学习很多策略（每一个GVF的不同目标策略$\pi$），但是，当然，每次只能按照一个策略执行。
+
+对于一个典型的GVF，行为策略所采取的动作只有在偶然情况下才会匹配目标策略，并且很少会连续执行多个步骤。
+为了有效地学习，我们需要能够从这些相关经验的片段中进行学习，这就需要off-policy的学习。
+另一种选择（on-policy的学习）要求仅仅从那些完全匹配GVF目标策略的经验片段中学习，这是一种不常见的情况。
+如果可以从不完整的经验片段中进行off-policy的学习，那么它可以进行大量的并行学习，并且比on-policy的学习要快得多。
+
+直到最近几年，才出现了能够可靠地使用函数逼近和适用于实时学习和预测的off-policy学习算法。
+特别地，在这篇文章中我们使用 $GQ(\lambda)$ 算法。
+对于每一个GVF，该算法维护除了 $\theta$ 和资格迹向量 $e \in \mathbb{R}^n$之外的第二组weights $w \in \mathbb{R}^n$。
+这三个向量被初始化为0。
+然后，每一步 $GQ(\lambda)$ 计算两个中间量 $\bar{\phi}_t \in \mathbb{R}^n$ 和 $\delta_t \in \mathbb{R}$：
+
+$$
+\begin{align}
+\bar{\phi}_t &= \sum_a \pi(S_{t+1}, a)\phi(S_{t+1}, a)\\
+\delta_t &= r(S_{t+1}) + (1 - \gamma(S_{t+1}))z(S_{t+1}) + \gamma(S_{t+1})\theta^T\bar{\phi}_t - \theta^T\phi(S_t,A_t)
+\end{align}
+$$
+
+然后更新这三个向量：
+
+$$
+\begin{align}
+\theta_{t+1} &= \theta_t + \alpha_\theta(\delta_t e_t - \gamma(S_{t+1})(1 - \lambda(S_{t+1}))(w_t^T e_t)\bar{\phi}_t)\\
+w_{t+1} &= w_t + \alpha_w (\delta_t e_t - (w_t^T \phi(S_t,A_t))\phi(S_t,A_t))\\
+e_t &= \phi(S_t,A_t) + \gamma(S_t)\lambda(S_t)\frac{\pi(S_t,A_t)}{b(S_t,A_t)}e_{t-1}
+\end{align}
+$$
+
+其中，$b\ :\ \mathcal{S} \times \mathcal{A} \rightarrow [0,1]$ 是行为策略，$\lambda\ :\ S \rightarrow [0,1]$ 是一个资格迹函数，它决定了在 $TD(\lambda)$ 算法中的资格迹的衰变率。
+注意，这个算法的每一步计算随特征的个数 $n$ 线性扩展。
+然而，如果特征是二值的，那么只要稍加注意，每一步的复杂性就可以被控制在特征"1"的数量的倍数上。
+
+通过 $GQ(\lambda)$ 算法渐进近似可以被发现时依赖于特征向量 $\Phi$、行为策略 $b$、以及资格迹函数 $\lambda$。
+这三个函数统称为应答函数。
+在这篇文章的实验中，我们通常使用固定的$\lambda$，并且所有的demons共享$\Phi$ 和 $b$。
+最后，我们注意，Maei and Sutton 定义了一个终止函数 $\beta$，它和我们的 $\gamma$ 具有相反的意义；也就是说，$\beta(s) = 1 - \gamma(s)$。
+这只是存粹的符号差异，并不会以任何方式影响算法。
+
+我们可以认为有两种demons。
+一种是带有给定目标策略 $\pi$ 的demon，被称为 `prediction demon`，而另一种demon的目标策略是与我们的近似GVF对应的贪婪策略
+（即 $\pi = greedy(\hat{q})$ 或 $\pi(s, \mathop{argmax}\limits_{a} \hat{q}(s,a,\theta)) = 1$)，被称为 `contorl demon`。
+控制demons可以学习和表示如何到达目标，而在预测demons中知识是更好的描述事实的思想。
+demons不完全独立的一种方式是，预测demons可以参考控制demons的目标策略。
+例如，在这种方式中，人们可以问这样的问题“If I follow this wall as long as I can, will my light sensor then have a high reading?”。
+Demons也可以使用其他在这个问题上的答案（就像在时序差分网络中那样）。
+这允许一个demon学习一个像“接近一个障碍”这样的概念，意味着在几秒钟内读取一个高碰撞传感器的随机动作的概率，然后另一个demon基于这种概念来学习一些东西，
+就像通过在它的终止奖励函数(即 $z(s) = \mathop{max}\limits_{a} \hat{q}(s,a,\theta_{first\ demon})$)中使用第一个demon的近似GVF，“如果我沿着这面墙走到头，那么我将会靠近一个障碍吗？”。
+
+### RESULTS WITH HORDE ON THE CRITIERBOT
+
+
+
+
+
+
 
 
 
