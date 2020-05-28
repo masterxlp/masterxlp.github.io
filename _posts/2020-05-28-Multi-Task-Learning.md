@@ -64,6 +64,7 @@ categories: RL Multi-Task
 23. &emsp; Do regression update of $\psi(g) toward \hat{\psi}_g$  
 24. **end for**  
 25. **return** $Q(s,a,g) = h(\phi(s,a), \psi(g))$   
+
 **--------------------------------------------------------------------------------------------------------------------**  
 
 其核心理念就是通过部分状态和目标的value function训练出更为一般通用的value function，可以泛化到unseen的状态和目标中去。
