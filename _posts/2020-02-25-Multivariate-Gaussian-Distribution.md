@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "Multivariate Gaussian Distribution"
+title:  "[C] Multivariate Gaussian Distribution"
 date:   2020-05-25 12:17:00 +0800
 categories: Guassian Math
 ---
 
 转载自[知乎](https://zhuanlan.zhihu.com/p/58987388 "多元高斯分布详解")
 
-## Multivariate Gaussian Distribution
+## [C] Multivariate Gaussian Distribution
 > 由中心极限定理我们知道，大量独立同分布的随机变量的均值在做适当标准化后会依分布收敛于高斯分布，这使得高斯分布具有普适性的建模能力.
 > 数学上，当使用高斯分布对贝叶斯推断的似然和先验进行建模时，得到的后验同样为高斯分布，即其具有共轭先验性质.
 

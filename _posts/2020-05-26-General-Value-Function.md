@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "General Value Function"
+title:  "[A] General Value Function"
 date:   2020-05-26 17:56:00 +0800
-categories: RL Multi-Task
+categories: RL Multi-Task Horde GVF
 ---
 
-## Horde: A Scalable Real-time Architecture for Learning Knowledge from Unsupervised Sensorimotor Interaction
+## [A] Horde: A Scalable Real-time Architecture for Learning Knowledge from Unsupervised Sensorimotor Interaction
 ### ABSTRACT
 对于机器人和其他人工智能系统来说，在复杂多变的环境中保持精确的 "world knowledge" 是一个一直以来就存在的问题。
 我们的被称为 `Horde` 的结构就是用来处理这个问题的，它是由大量的相互独立的子强化学习智能体（或者称为 `demons`）组成的。
