@@ -38,6 +38,7 @@ Brunskill and Li 得出了在终身学习中进行option discovery的样本复�
 这些components(组件)的新式组合产生了一个持续学习的智能体，我们称为 `Unicorn`，它能够大规模地学习具有深度依赖结构（Figure 1a, top）的non-trivial的任务。
 独角兽智能体通过在任务之间共享experience、重用表示以及技能解决这些领域的相关问题，并且表现超过了baselines methods（Figure 1a, bottom）。
 我们也证明了独角兽可以轻而易举地：(A) 解决多种任务（没有依赖关系）以及 (B) 当任务相关时表现出协同效应。
+![Figure 1](../image/Unicorn-structure.png "Unicorn structure")
 
 ### Background
 **Reinforcement Learning**(RL) 是一种计算框架，用于在不确定的序贯决策问题中做决策。
@@ -52,6 +53,17 @@ $\gamma \in [0,1)$ 表示折扣系数。
 **Q-learning** 可以通过一个迭代引导过程来估计这个最优值函数 $Q^{*}(s,a)$，这其中 $Q(s_t,a_t)$ 朝着导向目标 $Z_t$ 更新，
 $Z_t$ 是用下一个状态的估计Q值来构造的：$Z_t = r_{t+1} + \gamma \mathop{max}\limits_{a} Q(s_{t+1}, a)$。
 $\delta_t = Z_t - Q(s_t, a_t)$ 表示的是时间差分误差(TD误差)。
+
+**Multi-step Q-learning** variants 在单个导引目标中使用多条transitions。
+一个常用的选择是 **n-step return**，它定义为：$G_t^{(n)} = \sum_{k=1}^{n} \gamma^{k-1} r_{t+k} + \gamma^n \mathop{max}\limits_{a} Q(s_{t+n, a})$。
+在计算 n-step returns 时，目标策略和行为策略之间的n步动作选择可能不一致。
+为了使用off-policy的方法，可以使用各种技术来纠正这种不匹配。
+我们通过在选择non-greedy的action时截断returns来处理off-policy修正，正如 Watkins 建议的那样。
+
+**Universal Value Function Approximators**(UVFA)扩展值函数为以单个目标 $g \in \mathcal{G}$ 为条件的值函数，这种函数近似（如深度神经网络）共享一个内在的、独立于目标的状态表示 $f(s)$。
+因此，UVFA $Q(s,a;g)$ 能够紧凑的表示多种策略；例如，以任意单个目标 $g$ 为条件产生相对应的贪婪策略。
+
+
 
 
 

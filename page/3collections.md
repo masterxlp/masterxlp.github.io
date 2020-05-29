@@ -26,6 +26,11 @@ DDPG + Multi-task
 * [Distral: Robust Multitask Reinforcement Learning](https://arxiv.org/abs/1707.04175)   
 Distill & transfer learning
 
+* [Universal Value Function Approximators](http://proceedings.mlr.press/v37/schaul15.pdf)  
+通用值函数近似，对传统的值函数进行扩展，添加了目标作为输入
+
+* 
+
 ## Comments
 
 {% include comments.html %}
