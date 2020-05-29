@@ -41,7 +41,7 @@ Brunskill and Li 得出了在终身学习中进行option discovery的样本复�
 
 ### Background
 **Reinforcement Learning**(RL) 是一种计算框架，用于在不确定的序贯决策问题中做决策。
-强化学习问题被描述为一个Markov decision process (MDP)，定义为五元组 $<\matcal{S}, \mathcal{A}, r, \mathcal{P}, \gamma>$，其中 $\mathcal{S}$ 表示状态集，$\mathcal{A}$ 表示动作集，
+强化学习问题被描述为一个Markov decision process (MDP)，定义为五元组 $<\mathcal{S}, \mathcal{A}, r, \mathcal{P}, \gamma>$，其中 $\mathcal{S}$ 表示状态集，$\mathcal{A}$ 表示动作集，
 $r\ :\ \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$ 表示奖励函数，$\mathcal{P}\ :\ \mathcal{S} \times \mathcal{A} \times \mathcal{S} \rightarrow [0,1]$ 表示转移概率分布，
 $\gamma \in [0,1)$ 表示折扣系数。
 策略 $\pi$ 映射状态 $s \in \mathcal{S}$ 到动作的概率分布。
