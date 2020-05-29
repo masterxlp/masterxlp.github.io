@@ -47,7 +47,7 @@ $\gamma \in [0,1)$ 表示折扣系数。
 策略 $\pi$ 映射状态 $s \in \mathcal{S}$ 到动作的概率分布。
 我们定义给定时间步 $t$ 时的 *return* 为折扣奖励的和：$R_t = r_{t+1} + \gamma r_{t+2} + \gamma^2 r_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k r{t+k+1}$，其中 $r_t = r(s_t, a_t)$。
 动作值函数 $Q^\pi(s,a) = \mathbb{E}^\pi [R_t|s_t = s, a_t = a]$ 估计一个智能体的 *return* 的期望值，该智能体在遵循策略 $\pi$ 之后，在一些状态 $s \in \mathcal{S}$ 下选择动作 $a \in \mathcal{A}$。
-最优动作值函数 $Q^{*}(s,a)$ 估计的是基于最优策略 $\pi^{*}$ 时的 *return* 的期望。
+最优动作值函数 $$Q^{*}(s,a)$$ 估计的是基于最优策略 $$\pi^{*}$$ 时的 *return* 的期望。
 
 **Q-learning** 可以通过一个迭代引导过程来估计这个最优值函数 $Q^{*}(s,a)$，这其中 $Q(s_t,a_t)$ 朝着导向目标 $Z_t$ 更新，
 $Z_t$ 是用下一个状态的估计Q值来构造的：$Z_t = r_{t+1} + \gamma \mathop{max}\limits_{a} Q(s_{t+1}, a)$。
