@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Proximal Policy Optimization Algorithms - paper"
+title:  "[A] Proximal Policy Optimization Algorithms"
 date:   2020-05-21 14:48:00 +0800
 categories: RL PPO paper
 ---
 
-## Proximal Policy Optimization Algorithms
+## [A] Proximal Policy Optimization Algorithms
 ### Abstract
 
 
