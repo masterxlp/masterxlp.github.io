@@ -23,6 +23,9 @@ UVFA在多任务中的应用 + 终身学习
 * [The Intentional Unintentional Agent: Learning to Solve Many Continuous Control Tasks Simultaneously](https://arxiv.org/abs/1707.03300)  
 DDPG + Multi-task
 
+* [Distral: Robust Multitask Reinforcement Learning](https://arxiv.org/abs/1707.04175)   
+Distill & transfer learning
+
 ## Comments
 
 {% include comments.html %}
