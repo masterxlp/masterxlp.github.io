@@ -166,7 +166,7 @@ UVFA的扩展使用
 
 * [2019 - Value Propagation Networks](https://arxiv.org/abs/1805.11199)
 
-### on-policy -> off-policy
+### On-policy to Off-policy
 
 * [2018 - IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures](https://arxiv.org/abs/1802.01561)
 `重要性权重`
