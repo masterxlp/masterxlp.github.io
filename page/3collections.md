@@ -168,7 +168,7 @@ UVFA的扩展使用
 
 ### On-policy to Off-policy
 
-* [2018 - IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures](https://arxiv.org/abs/1802.01561)
+* [2018 - IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures](https://arxiv.org/abs/1802.01561)   
 `重要性权重`
 
 ## Comments
