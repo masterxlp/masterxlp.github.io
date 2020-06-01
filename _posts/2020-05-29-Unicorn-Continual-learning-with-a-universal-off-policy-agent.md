@@ -62,9 +62,73 @@ $\delta_t = Z_t - Q(s_t, a_t)$ 表示的是时间差分误差(TD误差)。
 
 **Universal Value Function Approximators**(UVFA)扩展值函数为以单个目标 $g \in \mathcal{G}$ 为条件的值函数，这种函数近似（如深度神经网络）共享一个内在的、独立于目标的状态表示 $f(s)$。
 因此，UVFA $Q(s,a;g)$ 能够紧凑的表示多种策略；例如，以任意单个目标 $g$ 为条件产生相对应的贪婪策略。
+先前，UVFA是通过两步实现的，包括一个矩阵分解步来学习embedding以及一个单独的多变量回归过程。
+相比之下，unicorn在一个离策略目标学习和纠正的联合并行训练中端到端的学习 $Q(s,a;g)$。
+
+**Tasks vs. goals** 在本文中我们对任务(task $\tau$)和目标信号(goal signal $g$) 赋予了不同的含义。
+*goal signal* 调整智能体的 *hehavior*（例如，作为UVFA的输入）。
+相比之下，任务定义为一个伪奖励(pseudo-reward) $r_\tau$（例如，$r_{key} = 1$ if a key was collected and 0 otherwise）。
+在学习过程中，每条transition上的包含所有伪奖励的向量对应智能体来说都是可见的，即使它正在pursue一个specific goal。
+每组实验定 $K$ 个离散的任务 ${\tau_1, \tau_2, \cdots, \tau_K}$。
+在迁移实验中，任务被分为$K'$个训练任务和 $K - K'$ 个hold-out任务。
+
+### Unicorn
+这一节将介绍Unicorn智能体结构，为了促进持续学习它具有以下性能：
+*(A):* 智能体应该具有同时学习多个任务的能力，以及在不断遇到的新任务的领域学习的能力。
+我们使用联合并行训练设置，让不同的actor完成不同的任务以达到这个性能。
+*(B):* 随着智能体累积越来越多的知识，我们希望它通过重用(reuse)一些知识来解决相关的任务，以实现一般化(泛化)。
+这是通过使用一个单独的UVFA来获得关于所有任务的知识来实现的，通过分离相关目标和不相关目标的表示来促进泛化。
+*(C):* 在任务具有深度依赖结构的领域中，智能体应当以然是有效的。
+这是最具有挑战性的，但是可以通过在所有任务的experience中off-policy learning的方式来实现。
+例如，一个actor是以door为目标的，有时候它打开了一个门，但随后错误的打开了一个chest（柜子）。
+对于以door为目标的actor来说，这是一个无关紧要的event（因为没有奖励），但是当学习关于chest的任务时，这个相同的event是highly interesting的，因为它是一个罕见的non-zero奖励的transition。
+
+#### Value function architecture
+Unicorn agent的一个关键部分就是UVFA，它是一个是用来学习逼近 $Q(s,a;g)$ 的逼近器，例如神经网络。
+这个逼近器的强大之处在于它能以信号目标 $g$ 为条件。
+这就使得UVFA可以同时学习多个任务，而任务本身的难度可能也不尽相同（例如，具有深度依赖关系的任务）。
+UVFA的示意图如图2所示：当前的可视输入帧由卷积神经网络(CNN)来处理，然后是一个循环的长短期记忆(LSTM)层。
+在引用[11]中，先前的action和reward是observe的一部分。
+LSTM的输出与一个“inventory stack”连接在一起，形成与目标无关的状态表示 $f(s)$。
+然后该向量与一个目标 $g$ 相连接，通过一个以ReLU为非线性激活函数的两层MLP处理输出Q-value的向量（对于每一个可能的action $a \in \mathcal{A}$）。
+所有这些部分的可训练参数的组合被表示为 $\theta$。
+关于这个网络和超参数的进一步的细节可以在附录A中找到。
+![Figure 1](../image/UVFA结构图.png "Unicorn structure")
+
+#### Behaviour policy
+在每一个episode开始时，以均匀分布采样得到目标信号 $g_i$，并在整个episode中保持不变。
+在当前目标信号 $g_i$ 上以UVFA为条件执行 $\epsilon - greedy$ 策略：以 $\epsilon$ 的概率从 $\mathcal{A}$ 中均匀采样动作 $a_t$，否则 $a_t = \mathop{argmax}\limits_{a} Q(s_t, a; g_i)$。
+
+#### Off-policy multi-task learning
+Unicorn的另一个关键的部分是学习多任务off-policy的能力。
+因此，即使它对于特定的任务使用on-policy，它仍然可以并行的从共享的experience中学习其他任务。
+具体地，当从一个transitions的序列中学习的时候，在训练集中对于所有的目标信号 $g_i$ 进行 Q-values的估计，
+对于每一个相对应的任务 $\tau_i$ 计算n-step returns $G_{t,i}^{(n)} = \sum_{k=1}^{n} \gamma^{k-1} r_{\tau_i}(s_{t+k},a_{t+k}) + \gamma^n \mathop{max}\limits_{a} Q(s_{t+n}, a; g_j)$。
+当一个策略以目标信号 $g_i$ （关于这条trajectory的 on-policy goal）为条件产生一条trajectory，但是被用来学习另一个目标信号 $g_j$ （关于这条trajectory的 off-policy goal）的策略时，往往会出现动作不匹配的情况，
+因此，off-policy 的多步 bootstrapped 的目标变的越来越不准确。
+因此，根据引用[50]，当选择的动作与以目标 $g_j$ 为条件的策略选择的动作不匹配时（即 $a_t \neq \mathop{argmax}\limits_{a} Q(s_t, a; g_i)$），我们通过bootstrapping来阶段n-step return。
+通过对任务和unrolled的长度为 $H$ 的trajectory的TD误差的和应用梯度下降方法来更新网络，产生平方损失(式1)，这里的误差没有传播到目标 $G_{t,i}^{(n)}$。
+
+$$
+\begin{align}
+\mathcal{L} = \frac{1}{2} \sum_{i=1}^{K'} \sum_{t=0}^{H} (G_{t,i}^{(n)} - Q(s_t, a_t; g_i))^2 \tag{1}
+\end{align}
+$$
 
 
+#### Parallel agent implememtation
+为了有效地训练这样一个系统，我们采用一个由多个actor组成的并行的智能体，每一个actor单独运行在一个机器上（CPU），生成一个与环境交互的序列，以及一个单独的learner（GPU机器），
+它从一个queue中取出一些experience，处理成一个mini-batch，然后更新value网络。
+这与最近提出的Importance Weighted Actor-Learner Architecture agent 类似。
 
+对一些目标信号 $g_i$ 每个actor连续地执行这最新的策略。
+然后它们产生相应的experience（这些经验存储在一个global queue中），以长度为 $H$ 的trajectory的形式送给learner。
+在产生新的trajectory之前，actor会向learner请求最新的UVFA参数 $\theta$。
+注意，所有M个actor是并行运行的，在任意给定的时间，它们都follow不同的goal。
+
+Learner从global queue中取一个batch大小的trajectories，输入到神经网络中，根据式1计算loss，更新参数 $\theta$ ，并且为actor提高最新的参数 $\theta$。
+Batching发生在所有的 $k'$ 个训练任务以及 $B \times H$ （$B$ trajectories of leangth $H$）时间步上。
+与DQN不同，我们没有使用目标网络，没有使用经验回放：大量不同的experience足够保证稳定性。
 
 
 
