@@ -32,6 +32,15 @@ Distill & transfer learning
 * [NEVER GIVE UP: LEARNING DIRECTED EXPLORATION STRATEGIES](https://arxiv.org/pdf/2002.06038)  
 UVFA的扩展使用
 
+* [DHER: hindsight experience replay for dynamic goals](http://tongzhang-ml.org/papers/iclr19-dher.pdf)
+
+### Multi-objective
+* [2018 - A Multi-Objective Deep Reinforcement Learning Framework](https://arxiv.org/abs/1803.02965)
+
+* [2019 - Dynamic Weights in Multi-Objective Deep Reinforcement Learning](https://arxiv.org/abs/1809.07803)
+
+* [Multi-Objective Reinforcement Learning using Sets of Pareto Dominating Policies](http://jmlr.org/papers/volume15/vanmoffaert14a/vanmoffaert14a.pdf)
+
 ### DeepMind
 * [2015 - Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/pdf/1509.06461.pdf)
 

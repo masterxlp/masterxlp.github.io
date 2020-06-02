@@ -1,10 +1,11 @@
-I",<ul id="markdown-toc">
+I"X.<ul id="markdown-toc">
   <li><a href="#blogs" id="markdown-toc-blogs">Blogs</a>    <ul>
       <li><a href="#multi-task" id="markdown-toc-multi-task">Multi-Task</a></li>
     </ul>
   </li>
   <li><a href="#paper" id="markdown-toc-paper">Paper</a>    <ul>
       <li><a href="#multi-task-1" id="markdown-toc-multi-task-1">Multi-Task</a></li>
+      <li><a href="#multi-objective" id="markdown-toc-multi-objective">Multi-objective</a></li>
       <li><a href="#deepmind" id="markdown-toc-deepmind">DeepMind</a></li>
       <li><a href="#on-policy-to-off-policy" id="markdown-toc-on-policy-to-off-policy">On-policy to Off-policy</a></li>
     </ul>
@@ -42,6 +43,19 @@ Distill &amp; transfer learning</p>
   <li>
     <p><a href="https://arxiv.org/pdf/2002.06038">NEVER GIVE UP: LEARNING DIRECTED EXPLORATION STRATEGIES</a><br />
 UVFA的扩展使用</p>
+  </li>
+  <li>
+    <p><a href="http://tongzhang-ml.org/papers/iclr19-dher.pdf">DHER: hindsight experience replay for dynamic goals</a></p>
+  </li>
+</ul>
+
+<h3 id="multi-objective">Multi-objective</h3>
+<ul>
+  <li>
+    <p><a href="https://arxiv.org/abs/1803.02965">2018 - A Multi-Objective Deep Reinforcement Learning Framework</a></p>
+  </li>
+  <li>
+    <p><a href="https://arxiv.org/abs/1809.07803">2019 - Dynamic Weights in Multi-Objective Deep Reinforcement Learning</a></p>
   </li>
 </ul>
 
