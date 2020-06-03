@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "[D] Multi-Objective Related"
+title:  "[C] Multi-Objective Related"
 date:   2020-06-03 10:33:00 +0800
 categories: Multi-Objective RL overview
 ---
 
-## 多目标强化学习总结
+## [C] 多目标强化学习总结
 ### Wuji: Automatic Online Combat Game Testing Using Evolutionary Deep Reinforcement Learning
 > 2019年 - 34th IEEE/ACM International Conference on Automated Software Engineering - 软件工程领域顶级会议论文  
 > Author: 天津大学强化学习实验室、网易伏羲人工智能实验室、NTU  
