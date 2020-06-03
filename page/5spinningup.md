@@ -1,7 +1,7 @@
 ---
 layout: page
-title: SpiningUp
-permalink: /spiningup/
+title: SpinningUp
+permalink: /spinningup/
 icon: bookmark
 type: page
 ---
