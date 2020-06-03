@@ -43,6 +43,8 @@ UVFA的扩展使用
 
 * [2016 - Multi-Objective Deep Reinforcement Learning](https://arxiv.org/abs/1610.02707)
 
+* [2014 - A Survey of Multi-Objective Sequential Decision-Making](https://arxiv.org/abs/1402.0590)
+
 ### DeepMind
 * [2015 - Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/pdf/1509.06461.pdf)
 
