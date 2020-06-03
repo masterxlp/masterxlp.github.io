@@ -6,6 +6,10 @@ categories: RL PPO paper
 ---
 
 ## [A] Proximal Policy Optimization Algorithms
+> 2017 - arXiv - OpenAI  
+> Author: John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov  
+> URL: [原文链接](https://arxiv.org/abs/1707.06347)
+
 ### Abstract
 
 
