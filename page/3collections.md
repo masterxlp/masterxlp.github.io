@@ -15,10 +15,13 @@ type: page
 * [多任务介绍](https://mp.weixin.qq.com/s/DSDkksVM89gZsbP37kpG3Q?)  
 Deep Learning 回顾之多任务学习
 
+* [直接特征预测](https://mp.weixin.qq.com/s/XHdaoOWBgOWX7SrOemY4jw)  
+多目标学习 + **直接特征预测** + 无人机送货 + 项目实战 + 监督学习 + [参考文章：Learning to Act by Predicting the Future](https://arxiv.org/abs/1611.01779)
+
 ## Paper
 ### Multi-Task
 * [Unicorn: Continual learning with a universal, off-policy agent](https://arxiv.org/pdf/1802.08294)  
-UVFA在多任务中的应用 + 终身学习
+**UVFA** + **end-to-end** + 终身学习
 
 * [The Intentional Unintentional Agent: Learning to Solve Many Continuous Control Tasks Simultaneously](https://arxiv.org/abs/1707.03300)  
 DDPG + Multi-task
@@ -27,7 +30,7 @@ DDPG + Multi-task
 Distill & transfer learning
 
 * [Universal Value Function Approximators](http://proceedings.mlr.press/v37/schaul15.pdf)  
-通用值函数近似，对传统的值函数进行扩展，添加了目标作为输入
+**UVFA** + 通用值函数近似 + **Horde-based** + **bootstrapping** + **监督学习**
 
 * [NEVER GIVE UP: LEARNING DIRECTED EXPLORATION STRATEGIES](https://arxiv.org/pdf/2002.06038)  
 UVFA的扩展使用
