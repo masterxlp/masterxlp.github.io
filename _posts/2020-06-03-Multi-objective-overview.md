@@ -9,7 +9,7 @@ categories: Multi-Objective RL overview
 ### Wuji: Automatic Online Combat Game Testing Using Evolutionary Deep Reinforcement Learning
 > 2019年 - 34th IEEE/ACM International Conference on Automated Software Engineering - 软件工程领域顶级会议论文  
 > Author: 天津大学强化学习实验室、网易伏羲人工智能实验室、NTU  
-> URL: [原文链接](https://yanzzzzz.github.io/files/PID6139619.pdf)  
+> Link: [原文链接](https://yanzzzzz.github.io/files/PID6139619.pdf)  
 > 参考自: [机器之心](https://www.jiqizhixin.com/articles/2019-10-22-11)
 
 #### 背景
@@ -77,6 +77,14 @@ CDS尽可能选择两端的策略，以及均匀分布在两个极端之间的�
 
 综上所述，Wuji 借助进化强化学习算法框架，结合多目标优化机制，使得种群内的策略朝着胜率以及探索能力两个方向不断优化，
 同时还保证部分策略均匀的分布在两个优化目标之间。二者的融合使 Wuji 能够完成更多任务并探索游戏的更多状态，提升发现 bug 的几率。
+
+### Direct Feature Prediction
+> Author1: Arthur Juliani  
+> Author2: 王瀚宸  
+> Link1: [原文链接](https://arxiv.org/abs/1611.01779)  
+> Link2: 参考自[量子位](https://mp.weixin.qq.com/s/XHdaoOWBgOWX7SrOemY4jw)
+
+
 
 
 

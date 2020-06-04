@@ -8,7 +8,7 @@ categories: RL Multi-Task Horde GVF
 ## [A] Horde: A Scalable Real-time Architecture for Learning Knowledge from Unsupervised Sensorimotor Interaction
 > 2011 - International Foundation for Autonomous Agents and Multiagent Systems  
 > Author: Richard S. Sutton, Joseph Modayil, Michael Delp, Thomas Degris, Patrick M. Pilarski, Adam White  
-> URL: [原文链接](https://www.cs.swarthmore.edu/~meeden/DevelopmentalRobotics/horde1.pdf)
+> Link: [原文链接](https://www.cs.swarthmore.edu/~meeden/DevelopmentalRobotics/horde1.pdf)
 
 ### ABSTRACT
 对于机器人和其他人工智能系统来说，在复杂多变的环境中保持精确的 "world knowledge" 是一个一直以来就存在的问题。
