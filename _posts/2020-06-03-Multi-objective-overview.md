@@ -82,7 +82,7 @@ CDS尽可能选择两端的策略，以及均匀分布在两个极端之间的�
 > Author1: Arthur Juliani  
 > Author2: 王瀚宸  
 > Link1: [原文链接](https://arxiv.org/abs/1611.01779)  
-> Link2: 参考自[量子位](https://mp.weixin.qq.com/s/XHdaoOWBgOWX7SrOemY4jw)
+> 参考自[量子位](https://mp.weixin.qq.com/s/XHdaoOWBgOWX7SrOemY4jw)
 
 
 
