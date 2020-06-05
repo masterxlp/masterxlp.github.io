@@ -6,7 +6,7 @@ categories: Skill
 ---
 
 ### Markdown
-> 在GitHub Page和Jekyll中如何让图片或者文字居中显示？ 
+> Question: 在GitHub Page和Jekyll中如何让图片或者文字居中显示？ 
  
 ```
 # 图片居中显示
