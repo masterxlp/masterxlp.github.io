@@ -6,7 +6,7 @@ categories: RL Multi-Task UVFA-variant paper
 ---
 
 ## [A] Unicorn: Continual learning with a universal, off-policy agent 
-> 2018 - arXiv - DeepMind  
+> 2018 - Computer Science > Machine Learning - arXiv - DeepMind  
 > Author: Daniel J. Mankowitz, Augustin Žídek, André Barreto, Dan Horgan, Matteo Hessel, John Quan, Junhyuk Oh, Hado van Hasselt, David Silver, Tom Schaul  
 > Link: [原文链接](https://arxiv.org/abs/1802.08294)
 

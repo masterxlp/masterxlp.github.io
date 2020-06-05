@@ -6,7 +6,7 @@ categories: RL PPO paper
 ---
 
 ## [A] Proximal Policy Optimization Algorithms
-> 2017 - arXiv - OpenAI  
+> 2017 - Computer Science > Machine Learning - arXiv - OpenAI  
 > Author: John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov  
 > Link: [原文链接](https://arxiv.org/abs/1707.06347)
 
