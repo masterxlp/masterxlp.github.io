@@ -219,7 +219,7 @@ $$
 
 补充：  
 ![Figure 4](../image/协方差对模型的影响.png "Conv matrix")
-<div align=center> 协方差对模型的影响 </div>
+<div align="center"> 协方差对模型的影响 </div>
 
 ### 多元高斯分布的几何意义
 我们知道，随机向量 $\overrightarrow{X} \sim \mathcal{N}(\overrightarrow{\mu},\Sigma)$ 的联合概率密度函数是通过线性变换
