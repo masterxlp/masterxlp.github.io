@@ -1,0 +1,10 @@
+I"�<h3 id="markdown">Markdown</h3>
+<blockquote>
+  <p>在GitHub Page和Jekyll中如何让图片或者文字居中显示？</p>
+</blockquote>
+
+<figure class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="c1"># 图片居中显示</span>
+<span class="o">&lt;</span><span class="n">div</span> <span class="n">align</span><span class="o">=</span><span class="s2">"center"</span><span class="o">&gt;&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="p">[</span><span class="n">local</span> <span class="n">path</span> <span class="n">or</span> <span class="n">http</span> <span class="n">path</span><span class="p">]</span><span class="o">&gt;&lt;</span><span class="sr">/div&gt;
+# 文字居中显示
+&lt;div align="center"&gt;[something you want to show here]&lt;/</span><span class="n">div</span><span class="o">&gt;</span></code></pre></figure>
+:ET
