@@ -91,7 +91,7 @@ $$
 由(7)可知，其等高线为以(0,0)为圆心的同心圆。
 
 ![Figure 1](../image/二次标准高斯概率密度函数图.jpg "multi-gaussian")
-<div align=center> 二次标准高斯分布概率密度函数图 </div>
+<div align="center"> 二次标准高斯分布概率密度函数图 </div>
 
 ### 多元高斯分布
 我们知道，当随机变量 $\overrightarrow{Z} \sim \mathcal{N}(\overrightarrow{0}, \boldsymbol{I})$ 时，
@@ -209,16 +209,16 @@ $$
 随机向量 $\overrightarrow{X}$ 中的随机变量不是彼此独立的。
 
 ![Figure 2](../image/协方差矩阵为非对角阵时的多元高斯图.jpg "Off-diagonal matrix")
-<div align=center> 协方差矩阵为非对角阵时的二元高斯图 </div>
+<div align="center"> 协方差矩阵为非对角阵时的二元高斯图 </div>
 
 如果协方差矩阵 $\Sigma$ 是对角矩阵，则正交对角化得到的酉矩阵 $Q$ 就是标准正交基，则投影是在标准正交基上完成的，此时的椭圆应该是一个水平的椭圆，
 随机向量 $\overrightarrow{X}$ 中的随机变量就是彼此独立的。
 
 ![Figure 3](../image/协方差矩阵为对角阵时多元高斯图.jpg "Ddiagonal matrix")
-<div align=center> 协方差矩阵为对角阵时的二元高斯图 </div>
+<div align="center"> 协方差矩阵为对角阵时的二元高斯图 </div>
 
 补充：  
-![Figure 4](../image/协方差对模型的影响.png "Conv matrix")
+<div align="center"> ![Figure 4](../image/协方差对模型的影响.png "Conv matrix") </div>
 <div align="center"> 协方差对模型的影响 </div>
 
 ### 多元高斯分布的几何意义
