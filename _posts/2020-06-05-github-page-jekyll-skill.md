@@ -8,9 +8,11 @@ categories: Skill
 ### Markdown
 > 在GitHub Page和Jekyll中如何让图片或者文字居中显示？ 
  
-{% highlight ruby %}
+<!-- {% highlight ruby %} -->
+~~~ruby
 # 图片居中显示
 <div align="center"><img src=[local path or http path]></div>
 # 文字居中显示
 <div align="center">[something you want to show here]</div>
-{% endhighlight %}
+~~~
+<!-- {% endhighlight %} -->
