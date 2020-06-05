@@ -1,4 +1,4 @@
-I"�'<h2 id="c-多目标强化学习总结">[C] 多目标强化学习总结</h2>
+I"�'<h2 id="c-多目标强化学习总结">[C] 多目标强化学习总结</h2>
 <h3 id="wuji-automatic-online-combat-game-testing-using-evolutionary-deep-reinforcement-learning">Wuji: Automatic Online Combat Game Testing Using Evolutionary Deep Reinforcement Learning</h3>
 <blockquote>
   <p>2019年 - 34th IEEE/ACM International Conference on Automated Software Engineering - 软件工程领域顶级会议论文<br />
@@ -108,8 +108,7 @@ Q^{*}(s,a) = r + \gamma \mathop{max}\limits_{a'}Q(s',a') \tag{1}
 <p>在我们设置的环境中，agent将占据 5 * 5 方格拦中的一个位置，然后目的地在另外一个位置，这个agent可以在上下左右四个方向上随意移动。
 如果我们希望无人机能够学会运送货物，我们通常会在无人机成功飞到标记点、完成送货时，提供一个+1的正向奖励。</p>
 
-<div align="center"><img src="../image/无人机送货示意图.png" /></div>
-<p>&lt;/div&gt;</p>
+<div align="center">&lt;img src='../image/无人机送货示意图.png', width="200px", height="200px"&gt;</div>
 
 <p>上图展示了我们agent的学习内容和环境，我们将会使用 5 * 5 的RGB网格(共有75种可能)这样一个更简单的形式表示环境。
 这会把学习的时间从小时量级降低到分钟量级。
@@ -120,4 +119,5 @@ Q^{*}(s,a) = r + \gamma \mathop{max}\limits_{a'}Q(s',a') \tag{1}
 具体实现过程见：<a href="https://github.com/awjuliani/dfp/blob/master/Async-Q.ipynb">链接</a></p>
 
 <p>我们在一台机器上</p>
+
 :ET
