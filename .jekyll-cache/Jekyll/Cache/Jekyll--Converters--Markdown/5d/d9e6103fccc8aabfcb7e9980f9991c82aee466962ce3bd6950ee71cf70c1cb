@@ -1,4 +1,4 @@
-I"�<h2 id="list">list</h2>
+I"�<h2 id="list">list</h2>
 <blockquote>
   <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
 </blockquote>
@@ -9,6 +9,7 @@
 
 <span class="nb">print</span><span class="p">(</span><span class="s1">'Extend list : '</span><span class="p">,</span> <span class="n">aList</span><span class="p">)</span>
 <span class="c1"># =&gt; Extend list :  [2020, 'xlp', 'create', 'zara', 'and', 'fresh']</span>
+</code></pre></div></div>
 
 <h2 id="random">random</h2>
 <blockquote>
