@@ -48,6 +48,14 @@ UVFA的扩展使用
 
 * [2014 - A Survey of Multi-Objective Sequential Decision-Making](https://arxiv.org/abs/1402.0590)
 
+### On-policy to Off-policy
+
+* [2018 - IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures](https://arxiv.org/abs/1802.01561)   
+`重要性权重`
+
+### network structure
+* [深度强化学习中的对抗网络结构](https://arxiv.org/abs/1511.06581)
+
 ### DeepMind
 * [2015 - Deep Reinforcement Learning with Double Q-learning](https://arxiv.org/pdf/1509.06461.pdf)
 
@@ -181,11 +189,6 @@ UVFA的扩展使用
 * [2019 - LEARNING TO UNDERSTAND GOAL SPECIFICATIONS BY MODELLING REWARD](https://arxiv.org/abs/1806.01946)
 
 * [2019 - Value Propagation Networks](https://arxiv.org/abs/1805.11199)
-
-### On-policy to Off-policy
-
-* [2018 - IMPALA: Scalable Distributed Deep-RL with Importance Weighted Actor-Learner Architectures](https://arxiv.org/abs/1802.01561)   
-`重要性权重`
 
 ## Comments
 
