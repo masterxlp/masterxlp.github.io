@@ -1,0 +1,46 @@
+I"�<h2 id="list">list</h2>
+<blockquote>
+  <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="s1">'xlp'</span><span class="p">,</span> <span class="s1">'create'</span><span class="p">]</span>
+<span class="n">bList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'zara'</span><span class="p">,</span> <span class="s1">'and'</span><span class="p">,</span> <span class="s1">'fresh'</span><span class="p">]</span>
+<span class="n">aList</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">bList</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Extend list : '</span><span class="p">,</span> <span class="n">aList</span><span class="p">)</span>
+<span class="c1"># =&gt; Extend list :  [2020, 'xlp', 'create', 'zara', 'and', 'fresh']</span>
+
+<h2 id="random">random</h2>
+<blockquote>
+  <p>random模块包含random、randint、randrange、uniform、choice、sample、shuffle等方法<br />
+random()方法返回一个[0,1)之间的随机浮点数<br />
+uniform(1,2)方法返回一个[1,2]之间的随机浮点数，注意与numpy.random.uniform区别，numpy返回的是从均匀分布中生成的随机数<br />
+randint(1,5)方法返回一个[1,5]之间的随机整数<br />
+choice(str)方法返回的是str中的一个随机元素<br />
+sample(seq, num)方法是从seq中不重复的选择num个随机元素，seq是iter的<br />
+shuffle(seq)方法返回打乱顺序的seq，该方法无返回值</p>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">import</span> <span class="n">random</span>
+
+<span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+<span class="c1"># =&gt; 0.5801035425996243</span>
+
+<span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># =&gt; 1.4719897016478751</span>
+
+<span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># =&gt; 3</span>
+
+<span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="s2">"I am a good boy."</span><span class="p">)</span>
+<span class="c1"># =&gt; 'b'</span>
+
+<span class="n">random</span><span class="p">.</span><span class="nf">sample</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># =&gt; [2, 1, 3]</span>
+
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Shuffled list is '</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+<span class="c1"># =&gt; Shuffled list is [1, 3, 4, 2, 5]</span>
+</code></pre></div></div>
+:ET
