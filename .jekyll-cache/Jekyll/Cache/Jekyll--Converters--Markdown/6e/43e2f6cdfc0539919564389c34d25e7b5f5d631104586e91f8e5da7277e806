@@ -1,0 +1,99 @@
+I"�%<h1 id="python-内置函数">Python-内置函数</h1>
+<h2 id="list">list</h2>
+<blockquote>
+  <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="s1">'xlp'</span><span class="p">,</span> <span class="s1">'create'</span><span class="p">]</span>
+<span class="n">bList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'zara'</span><span class="p">,</span> <span class="s1">'and'</span><span class="p">,</span> <span class="s1">'fresh'</span><span class="p">]</span>
+<span class="n">aList</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">bList</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Extend list : '</span><span class="p">,</span> <span class="n">aList</span><span class="p">)</span>
+<span class="c1"># =&gt; Extend list :  [2020, 'xlp', 'create', 'zara', 'and', 'fresh']</span>
+</code></pre></div></div>
+
+<h2 id="random">random</h2>
+<blockquote>
+  <p>random模块包含random、randint、randrange、uniform、choice、sample、shuffle等方法</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">random()</code>方法返回一个[0,1)之间的随机浮点数<br />
+<code class="highlighter-rouge">uniform(1,2)</code>方法返回一个[1,2]之间的随机浮点数，注意与numpy.random.uniform区别，numpy返回的是从均匀分布中生成的随机数<br />
+<code class="highlighter-rouge">randint(1,5)</code>方法返回一个[1,5]之间的随机整数<br />
+<code class="highlighter-rouge">choice(str)</code>方法返回的是str中的一个随机元素<br />
+<code class="highlighter-rouge">sample(seq, num)</code>方法是从seq中不重复的选择num个随机元素，seq是iter的<br />
+<code class="highlighter-rouge">shuffle(seq)</code>方法返回打乱顺序的seq，该方法无返回值</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">import</span> <span class="n">random</span>
+
+<span class="c1"># Test random</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+<span class="c1"># =&gt; 0.5801035425996243</span>
+
+<span class="c1"># Test uniform</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># =&gt; 1.4719897016478751</span>
+
+<span class="c1"># Test randint</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># =&gt; 3</span>
+
+<span class="c1"># Test choice</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="s2">"I am a good boy."</span><span class="p">)</span>
+<span class="c1"># =&gt; 'b'</span>
+
+<span class="c1"># Test sample</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">sample</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># =&gt; [2, 1, 3]</span>
+
+<span class="c1"># Test shuffle</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Shuffled list is '</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+<span class="c1"># =&gt; Shuffled list is [1, 3, 4, 2, 5]</span>
+</code></pre></div></div>
+
+<h1 id="python-numpy">python-numpy</h1>
+<h2 id="eye">eye</h2>
+<blockquote>
+  <p>eye(N, M=None, k=0, dtype=&lt;class ‘float’&gt;, order=’C’)<br />
+Returns:</p>
+  <blockquote>
+    <p>返回一个shape=[N, M]的二维数组，其除了k-th的对角线上的数值为1之外，其他位置的数值均为0，且其数据类型符合dtype</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Params:</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">N</code>: int，输出的行数<br />
+<code class="highlighter-rouge">M</code>: int，输出的列数，默认为None，即与N相等<br />
+<code class="highlighter-rouge">k</code>: int，对角线的索引，默认为0，当 $k&lt;0$ 时，指的是下半对角线的索引，当 $k&gt;0$ 时，指的是上半对角线的索引<br />
+<code class="highlighter-rouge">dtype</code>: data-type，返回的数值中数据的类型，默认为float类型<br />
+<code class="highlighter-rouge">order</code>: {‘C’, ‘F’}，’C’ 表示以行为主进行排序存储在内存中，’F’ 表示以列为主进行排序存储在内存中</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># N = 2, M = None = N, k = 0, dtype = int</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="c1"># N = 3, M = None = N, k = 1, dtype = float</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">]])</span>
+<span class="c1"># N = 3, M = None = N, k = -1, dtype = float</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">]])</span>
+<span class="c1"># N = 3, M = 2, k = 0, dtype = float</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">]])</span>
+</code></pre></div></div>
+
+:ET
