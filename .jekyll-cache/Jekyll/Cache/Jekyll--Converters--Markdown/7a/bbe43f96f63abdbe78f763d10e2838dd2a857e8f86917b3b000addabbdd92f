@@ -1,0 +1,283 @@
+I"\�<h2 id="python-内置函数">Python-内置函数</h2>
+<h3 id="list">list</h3>
+<blockquote>
+  <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="s1">'xlp'</span><span class="p">,</span> <span class="s1">'create'</span><span class="p">]</span>
+<span class="n">bList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'zara'</span><span class="p">,</span> <span class="s1">'and'</span><span class="p">,</span> <span class="s1">'fresh'</span><span class="p">]</span>
+<span class="n">aList</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">bList</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Extend list : '</span><span class="p">,</span> <span class="n">aList</span><span class="p">)</span>
+<span class="c1"># =&gt; Extend list :  [2020, 'xlp', 'create', 'zara', 'and', 'fresh']</span>
+</code></pre></div></div>
+
+<h3 id="random">random</h3>
+<blockquote>
+  <p>random模块包含random、randint、randrange、uniform、choice、sample、shuffle等方法</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">random()</code>方法返回一个[0,1)之间的随机浮点数<br />
+<code class="highlighter-rouge">uniform(1,2)</code>方法返回一个[1,2]之间的随机浮点数，注意与numpy.random.uniform区别，numpy返回的是从均匀分布中生成的随机数<br />
+<code class="highlighter-rouge">randint(1,5)</code>方法返回一个[1,5]之间的随机整数<br />
+<code class="highlighter-rouge">choice(str)</code>方法返回的是str中的一个随机元素<br />
+<code class="highlighter-rouge">sample(seq, num)</code>方法是从seq中不重复的选择num个随机元素，seq是iter的<br />
+<code class="highlighter-rouge">shuffle(seq)</code>方法返回打乱顺序的seq，该方法无返回值</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">import</span> <span class="n">random</span>
+
+<span class="c1"># Test random</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+<span class="c1"># =&gt; 0.5801035425996243</span>
+
+<span class="c1"># Test uniform</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># =&gt; 1.4719897016478751</span>
+
+<span class="c1"># Test randint</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># =&gt; 3</span>
+
+<span class="c1"># Test choice</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="s2">"I am a good boy."</span><span class="p">)</span>
+<span class="c1"># =&gt; 'b'</span>
+
+<span class="c1"># Test sample</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">sample</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># =&gt; [2, 1, 3]</span>
+
+<span class="c1"># Test shuffle</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Shuffled list is '</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+<span class="c1"># =&gt; Shuffled list is [1, 3, 4, 2, 5]</span>
+</code></pre></div></div>
+
+<h2 id="python-numpy">python-numpy</h2>
+<h3 id="eye">eye</h3>
+<blockquote>
+  <p>np.eye(N, M=None, k=0, dtype=&lt;class ‘float’&gt;, order=’C’)<br />
+Returns:</p>
+  <blockquote>
+    <p>返回一个shape=[N, M]的二维数组，其除了k-th的对角线上的数值为1之外，其他位置的数值均为0，且其数据类型符合dtype</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Params:</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">N</code>: int，输出的行数<br />
+<code class="highlighter-rouge">M</code>: int，输出的列数，默认为None，即与N相等<br />
+<code class="highlighter-rouge">k</code>: int，对角线的索引，默认为0，当 $k&lt;0$ 时，指的是下半对角线的索引，当 $k&gt;0$ 时，指的是上半对角线的索引<br />
+<code class="highlighter-rouge">dtype</code>: data-type，返回的数值中数据的类型，默认为float类型<br />
+<code class="highlighter-rouge">order</code>: {‘C’, ‘F’}，’C’ 表示以行为主进行排序存储在内存中，’F’ 表示以列为主进行排序存储在内存中</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># N = 2, M = None = N, k = 0, dtype = int</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">int</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+<span class="c1"># N = 3, M = None = N, k = 1, dtype = float</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">]])</span>
+<span class="c1"># N = 3, M = None = N, k = -1, dtype = float</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">k</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">]])</span>
+<span class="c1"># N = 3, M = 2, k = 0, dtype = float</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">1</span><span class="o">.</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">.</span><span class="nf">,</span> <span class="mi">0</span><span class="o">.</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<h3 id="tile">tile</h3>
+<blockquote>
+  <p>np.tile(A, reps)<br />
+Returns:</p>
+  <blockquote>
+    <p>构造一个重复输入数组A，reps次的数组并返回</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Params:</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">A</code>: array_like，输入的数组<br />
+<code class="highlighter-rouge">reps</code>: array_like，A的每个轴（维度）重复的次数</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Note:</p>
+  <blockquote>
+    <p>If <code class="highlighter-rouge">A.ndim &lt; d</code>，<strong>A</strong> 通过添加新的轴提升维度到 <em>d</em> 维。因此对于一个 shape = (3,) 的数组在 d = 2 时，被提升为 shape = (1, 3) 的二维数组，在 d = 3 时，被提升为 shape = (1, 1, 3) 的三维数组<br />
+If <code class="highlighter-rouge">A.ndim &gt; d</code>，<strong>reps</strong> 通过添加 <em>1</em> 来提升到 <em>A.ndim</em> 维。因此，对于一个 shape = (2, 3, 4, 5) 的数组A以及 reps = (2, 2) 时，reps将会被处理为 reps = (1, 1, 2, 2)<br />
+因此，If reps的长度为 d，那么最终输出的数组的维度数一定为 <code class="highlighter-rouge">max(d, A.ndim)</code></p>
+  </blockquote>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># A.ndim = 1, reps = 2, d = 1, output.ndim = 1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># A.ndim = 1, reps = (2, 2), d = 2, output.ndim = 2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">tile</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="c1"># A.ndim = 2, reps = 2, d = 1, output.ndim = 2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">tile</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="c1"># A.ndim = 2, reps = (2, 1), d = 2, output.ndim = 2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">tile</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<h3 id="insert">insert</h3>
+<blockquote>
+  <p>np.insert(arr, obj, values, axis=None)<br />
+Returns:</p>
+  <blockquote>
+    <p>返回一个插入values值的arr数组的copy，值得注意的是它返回的是一个新的数组，原数组没有发生改变</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Params:</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">arr</code>: array_like，输入数组<br />
+<code class="highlighter-rouge">obj</code>: int, slice or sequence of ints，定义了要插入相应值的位置索引<br />
+<code class="highlighter-rouge">values</code>: array_like，要插入arr数组的值，如果values的数据类型与arr不同，那么需要先将values转化为arr的数据类型，再进行插入<br />
+<code class="highlighter-rouge">axis</code>: int，指定在哪个轴上插入values，如果 axis = None，那么先将 arr 数组展平，再在展平后的第 obj 索引处插入 values 值，否则，在 axis 轴的第 obj 索引位置插入 values 值</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Note:</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">[a]</code>. 在多个位置插入多个值时，axis 和 obj 均是以原数组为准，而不是插值后的数组<br />
+<code class="highlighter-rouge">[b]</code>. 在一个位置插入多个值时，即 obj 为数值，而 values 中的元素为向量时，需要先将每个元素扩展后才进行插入，且不同元素为平行插入<br />
+<code class="highlighter-rouge">[c]</code>. 在多个位置插入一个值时，即 obj 为多维向量，而 values 为数值时， 需要先将每个元素扩展后才进行插入</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="c1"># obj = 1, values = 5, axis = None</span>
+<span class="c1"># 即 先展平数组 a 得到 [1, 1, 2, 2, 3, 3]，然后在 index = 1 的位置（即第二个1的位置）插入 values = 5 的值，并返回</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="c1"># obj = 1, values = 5, axis = 1</span>
+<span class="c1"># 即 在第二个轴（即在列上）的 index = 1 的位置插入 values = 5（需扩展为[5, 5, 5]，以使插入后合法） 的值，并返回</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="c1"># obj = [1], values = [[1], [2], [3]], axis = 1</span>
+<span class="c1"># 它与 obj = 1, values = [1, 2, 3], axis = 1 是等价的，相当于在第二个轴的 index = 1 的位置插入相对应的值，即插入列</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="c1"># obj = [2, 2], values = [5, 6], axis = None</span>
+<span class="c1"># 在原数组的第二个索引上插入值5和6，值得注意的是 在多个位置上插入多个值时，obj均是以原数组维准</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="nf">flatten</span><span class="p">()</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="c1"># obj = slice(2, 4), values = [5, 6], axis = None</span>
+<span class="c1"># slice(2, 4) 表示切片 (2, 4, None)，所以它与 obj = (2, 3) 相同，即在原数组的索引为 2 和 3 的位置插入 5 和 6</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="c1"># obj = [2, 2], values = [7.13, False], axis = None</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mf">7.13</span><span class="p">,</span> <span class="no">False</span><span class="p">])</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">8</span><span class="p">).</span><span class="nf">reshape</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">]])</span>
+
+<span class="c1"># 在一个位置插入多个值</span>
+<span class="c1"># np.insert(a, 1, [[1, 1, 1], [2, 2, 2], [3, 3, 3]], axis=1) 与 np.insert(a, 1, [[1], [2], [3]], axis=1) 是等价的</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">np</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">[[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+</code></pre></div></div>
+
+<h2 id="python技巧">python技巧</h2>
+<h3 id="嵌套函数-代替-条件判断">“嵌套函数” 代替 “条件判断”</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 变量nb_entires表示当前buffer中的数据量</span>
+<span class="n">nb_entires</span> <span class="o">=</span> <span class="n">memory</span><span class="p">.</span><span class="nf">nb_entires</span>
+
+<span class="c1"># 实现：根据当前的数据量确定训练的次数nb_train</span>
+<span class="c1"># 一般实现</span>
+<span class="c1"># # 定义常量threshold表示开始改变训练次数的临界点</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">int</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+<span class="n">nb_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">nb_entires</span> <span class="sr">//</span> <span class="n">threshold</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">nb_entires</span> <span class="o">%</span> <span class="n">threshold</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">10</span>
+
+<span class="c1"># 函数嵌套实现</span>
+<span class="k">def</span> <span class="nf">constfn</span><span class="p">(</span><span class="n">threshold</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">nb_entires</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">nb_entires</span> <span class="sr">//</span> <span class="n">threshold</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span>
+
+<span class="c1"># # 使用时</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">constfn</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+<span class="n">nb_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">nb_entires</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="多维数组取值">多维数组取值</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ------------------------------------ #</span>
+<span class="c1"># 第一个位置表示要取值的维度索引           #</span>
+<span class="c1"># 第二个位置表示要去值的维度的子数组的索引  #</span>
+<span class="c1"># 两个位置的shape应当相同                #</span>
+<span class="c1"># ------------------------------------ #</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">40</span><span class="p">).</span><span class="nf">reshape</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">39</span><span class="p">]])</span>
+<span class="c1"># 取一个值</span>
+<span class="c1"># # 方法1：一般方法</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">0</span>
+<span class="c1"># # 方法2：列表取值</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="mi">0</span>
+<span class="c1"># 单个维度取多个值</span>
+<span class="c1"># # 方法1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="o">...</span>     <span class="n">lst</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+<span class="o">...</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="o">...</span> 
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># # 方法2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># 多个维度取单个值</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">18</span><span class="p">])</span>
+<span class="c1"># 多个维度取多个值</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]]</span>
+</code></pre></div></div>
+
+:ET
