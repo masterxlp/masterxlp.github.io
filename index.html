@@ -2,7 +2,6 @@
 layout: default
 ---
 <link href="./css/rouge.css" rel="stylesheet"/>
-$.headerCollapseRobot('#page-content', ['h1', 'h2', 'h3'], ['blockquote']);
 <div class="page clearfix" index>
     <div class="left">
         <h1>Welcome to Xlp's blog </h1>
@@ -36,6 +35,7 @@ $.headerCollapseRobot('#page-content', ['h1', 'h2', 'h3'], ['blockquote']);
                 </div>
                 <div class="excerpt">
                     {{post.excerpt}}
+                    $.headerCollapseRobot('#page-content', ['h1', 'h2', 'h3'], ['blockquote']);
                 </div>
                 <div class="read-all">
                     <a  href="{{ post.url | prepend: site.baseurl }}"><i class="fa fa-newspaper-o"></i>Read All</a>
