@@ -33,9 +33,8 @@ layout: default
                     {% include tag.html %}
                     </div>
                 </div>
-                <div class="excerpt">
+                <div class="excerpt" data-role='collapsible'>
                     {{post.excerpt}}
-                    $.headerCollapseRobot('#page-content', ['h1', 'h2', 'h3'], ['blockquote']);
                 </div>
                 <div class="read-all">
                     <a  href="{{ post.url | prepend: site.baseurl }}"><i class="fa fa-newspaper-o"></i>Read All</a>
