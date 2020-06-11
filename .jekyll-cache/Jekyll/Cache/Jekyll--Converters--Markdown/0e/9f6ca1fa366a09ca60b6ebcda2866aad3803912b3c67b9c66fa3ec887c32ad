@@ -1,4 +1,5 @@
-I"q�<h2 id="python-内置函数">Python-内置函数</h2>
+I"
+�<h2 id="python-内置函数">Python-内置函数</h2>
 <h3 id="list">list</h3>
 <blockquote>
   <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
@@ -116,9 +117,10 @@ Returns:</p>
 <blockquote>
   <p>Note:</p>
   <blockquote>
-    <p>If <code class="highlighter-rouge">A.ndim &lt; d</code>，<strong>A</strong> 通过添加新的轴提升维度到 <em>d</em> 维。因此对于一个 shape = (3,) 的数组在 d = 2 时，被提升为 shape = (1, 3) 的二维数组，在 d = 3 时，被提升为 shape = (1, 1, 3) 的三维数组<br />
-If <code class="highlighter-rouge">A.ndim &gt; d</code>，<strong>reps</strong> 通过添加 <em>1</em> 来提升到 <em>A.ndim</em> 维。因此，对于一个 shape = (2, 3, 4, 5) 的数组A以及 reps = (2, 2) 时，reps将会被处理为 reps = (1, 1, 2, 2)<br />
-因此，If reps的长度为 d，那么最终输出的数组的维度数一定为 <code class="highlighter-rouge">max(d, A.ndim)</code></p>
+    <p><code class="highlighter-rouge">[a]</code>：If <code class="highlighter-rouge">A.ndim &lt; d</code>，<strong>A</strong> 通过添加新的轴提升维度到 <em>d</em> 维。因此对于一个 shape = (3,) 的数组在 d = 2 时，被提升为 shape = (1, 3) 的二维数组，在 d = 3 时，被提升为 shape = (1, 1, 3) 的三维数组<br />
+<code class="highlighter-rouge">[b]</code>：If <code class="highlighter-rouge">A.ndim &gt; d</code>，<strong>reps</strong> 通过添加 <em>1</em> 来提升到 <em>A.ndim</em> 维。因此，对于一个 shape = (2, 3, 4, 5) 的数组A以及 reps = (2, 2) 时，reps将会被处理为 reps = (1, 1, 2, 2)<br />
+<code class="highlighter-rouge">[c]</code>：因此，If reps的长度为 d，那么最终输出的数组的维度数一定为 <code class="highlighter-rouge">max(d, A.ndim)</code><br />
+<code class="highlighter-rouge">[d]</code>：另外，如果仅要求在一维上做复制时，其他维度必须显式的设定为1，否则它导致维度混乱（由[b]可知）</p>
   </blockquote>
 </blockquote>
 
@@ -229,6 +231,32 @@ Return:</p>
     <p>a: array_like，<br />
 axes: list of ints，</p>
   </blockquote>
+</blockquote>
+
+<h3 id="expand_dims">expand_dims</h3>
+<blockquote>
+  <p>np.expand_dims()
+Return:</p>
+  <blockquote>
+
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Params:</p>
+</blockquote>
+
+<h3 id="squeeze">squeeze</h3>
+<blockquote>
+  <p>np.squeeze()
+Return:</p>
+  <blockquote>
+
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Params:</p>
 </blockquote>
 
 <h2 id="python技巧">python技巧</h2>
