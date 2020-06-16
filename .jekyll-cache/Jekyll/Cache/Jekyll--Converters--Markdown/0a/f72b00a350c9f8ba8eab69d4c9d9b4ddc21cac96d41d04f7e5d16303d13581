@@ -1,4 +1,4 @@
-I"�<h2 id="100-interview-questions-for-algorithm-engineer">100+ Interview Questions for Algorithm Engineer</h2>
+I"+<h2 id="100-interview-questions-for-algorithm-engineer">100+ Interview Questions for Algorithm Engineer</h2>
 <blockquote>
   <p>内容来源于 <strong>葫芦娃</strong> 编著的 <strong>百面机器学习</strong></p>
 </blockquote>
@@ -64,20 +64,24 @@ z = \frac{x - \mu}{\sigma} \tag{1.2}
 <ul>
   <li>
     <p>序号编码<br />
-序号编码（Ordinal Encoding）通常用于 <strong>处理类别间具有大小关系的数据</strong>。
+序号编码（Ordinal Encoding）通常用于<strong>处理类别间具有大小关系的数据</strong>。
 例如成绩，可以分为低、中、高三档，并且存在“高 &gt; 中 &gt; 低”的排序关系。
 序号编码会按照大小关系对类别特征赋予一个数值 <strong>ID</strong>，例如高表示为3、中表示为2、低表示为1，转换后依然保留了大小关系。</p>
   </li>
-  <li>
-    <p>独热编码<br />
-独热编码（One-Hot Encoding）通常用于 <strong>处理类别间不具有大小关系的特征</strong>。
+  <li>独热编码<br />
+独热编码（One-Hot Encoding）通常用于<strong>处理类别间不具有大小关系的特征</strong>。<br />
 例如血型，一共有4个取值（A型血、B型血、AB型血、O型血），独热编码会把血型变成一个4维稀疏向量，A型血表示为 $(1, 0, 0, 0)$，
-B型血表示为 $(0, 1, 0, 0)$，AB型血表示为 $(0, 0, 1, 0)$，O型血表示为 $(0, 0, 0, 1)$。
-对于类别取值较多的情况下使用独热编码需要注意以下问题：</p>
+B型血表示为 $(0, 1, 0, 0)$，AB型血表示为 $(0, 0, 1, 0)$，O型血表示为 $(0, 0, 0, 1)$。<br />
+对于类别取值较多的情况下使用独热编码需要注意以下问题：
     <ul>
       <li>使用稀疏向量来节省空间。在独热编码下，特征向量只有某一维取值为1，其他位置取值均为0。
   因此可以利用向量的稀疏表示有效地节省空间，并且目前大部分算法均接受稀疏向量形式的输入。</li>
+      <li>配合特征选择来降低维度。高维度特征会带来几方面的问题。一是在K近邻算法中，高维空间下两点之间的距离很难得到有效的衡量；
+  二是在逻辑回归模型中，参数的数量会随着维度的增加而增加，容易引起过拟合问题；三是通常只有部分维度是对分类、预测有帮助，因此可以考虑配合特征选择来降低维度。</li>
     </ul>
   </li>
+  <li>二进制编码
+二进制编码主要分为两步，先用序号编码给每个类别赋予一个类别ID，然后将类别ID对应的二进制编码作为结果。<br />
+以A、B、AB、O型血为列</li>
 </ul>
 :ET
