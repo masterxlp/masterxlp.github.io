@@ -1,5 +1,4 @@
-I"
-�<h2 id="python-内置函数">Python-内置函数</h2>
+I"\o<h2 id="python-内置函数">Python-内置函数</h2>
 <h3 id="list">list</h3>
 <blockquote>
   <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
@@ -158,9 +157,9 @@ Returns:</p>
   <p>Params:</p>
   <blockquote>
     <p><code class="highlighter-rouge">arr</code>: array_like，输入数组<br />
-<code class="highlighter-rouge">obj</code>: int, slice or sequence of ints，定义了要插入相应值的位置索引<br />
+<code class="highlighter-rouge">obj</code>: int, slice or sequence of ints，指定按axis方式插入数据的索引位置（即第几行 或 列 或 位置）<br />
 <code class="highlighter-rouge">values</code>: array_like，要插入arr数组的值，如果values的数据类型与arr不同，那么需要先将values转化为arr的数据类型，再进行插入<br />
-<code class="highlighter-rouge">axis</code>: int，指定在哪个轴上插入values，如果 axis = None，那么先将 arr 数组展平，再在展平后的第 obj 索引处插入 values 值，否则，在 axis 轴的第 obj 索引位置插入 values 值</p>
+<code class="highlighter-rouge">axis</code>: int，指定插入数据的方式（0 代表按行插入数据，1 代表按列插入数据），如果 axis = None，那么先将 arr 数组展平，再在展平后的第 obj 索引处插入 values 值</p>
   </blockquote>
 </blockquote>
 
@@ -232,97 +231,4 @@ Return:</p>
 axes: list of ints，</p>
   </blockquote>
 </blockquote>
-
-<h3 id="expand_dims">expand_dims</h3>
-<blockquote>
-  <p>np.expand_dims()
-Return:</p>
-  <blockquote>
-
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <p>Params:</p>
-</blockquote>
-
-<h3 id="squeeze">squeeze</h3>
-<blockquote>
-  <p>np.squeeze()
-Return:</p>
-  <blockquote>
-
-  </blockquote>
-</blockquote>
-
-<blockquote>
-  <p>Params:</p>
-</blockquote>
-
-<h2 id="python技巧">python技巧</h2>
-<h3 id="嵌套函数-代替-条件判断">“嵌套函数” 代替 “条件判断”</h3>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 变量nb_entires表示当前buffer中的数据量</span>
-<span class="n">nb_entires</span> <span class="o">=</span> <span class="n">memory</span><span class="p">.</span><span class="nf">nb_entires</span>
-
-<span class="c1"># 实现：根据当前的数据量确定训练的次数nb_train</span>
-<span class="c1"># 一般实现</span>
-<span class="c1"># # 定义常量threshold表示开始改变训练次数的临界点</span>
-<span class="n">threshold</span> <span class="o">=</span> <span class="n">int</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
-<span class="n">nb_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">nb_entires</span> <span class="sr">//</span> <span class="n">threshold</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">nb_entires</span> <span class="o">%</span> <span class="n">threshold</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">10</span>
-
-<span class="c1"># 函数嵌套实现</span>
-<span class="k">def</span> <span class="nf">constfn</span><span class="p">(</span><span class="n">threshold</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">nb_entires</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">nb_entires</span> <span class="sr">//</span> <span class="n">threshold</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">f</span>
-
-<span class="c1"># # 使用时</span>
-<span class="n">train</span> <span class="o">=</span> <span class="n">constfn</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
-<span class="n">nb_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">nb_entires</span><span class="p">)</span>
-</code></pre></div></div>
-
-<h3 id="多维数组取值">多维数组取值</h3>
-
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ------------------------------------ #</span>
-<span class="c1"># 第一个位置表示要取值的维度索引           #</span>
-<span class="c1"># 第二个位置表示要去值的维度的子数组的索引  #</span>
-<span class="c1"># 两个位置的shape应当相同                #</span>
-<span class="c1"># ------------------------------------ #</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">40</span><span class="p">).</span><span class="nf">reshape</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-<span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
-       <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
-       <span class="p">[</span> <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span>
-       <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">39</span><span class="p">]])</span>
-<span class="c1"># 取一个值</span>
-<span class="c1"># # 方法1：一般方法</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="mi">0</span>
-<span class="c1"># # 方法2：列表取值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-<span class="mi">0</span>
-<span class="c1"># 单个维度取多个值</span>
-<span class="c1"># # 方法1</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<span class="o">...</span>     <span class="n">lst</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-<span class="o">...</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
-<span class="o">...</span> 
-<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="c1"># # 方法2</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
-<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
-<span class="c1"># 多个维度取单个值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
-<span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">18</span><span class="p">])</span>
-<span class="c1"># 多个维度取多个值</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]]</span>
-</code></pre></div></div>
-
 :ET
