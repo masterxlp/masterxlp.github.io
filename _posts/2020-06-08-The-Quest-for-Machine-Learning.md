@@ -128,16 +128,16 @@ $$
 
 <div align="center">表1.4 用户ID和物品ID对点击的影响</div>
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; |是否点击|用户ID|物品ID| &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-|:-:|:-:|:-:|:
-|0|1|1|
-|1|2|1|
-|...|...|...|
-|1|m|1|
-|1|1|2|
-|0|2|2|
-|...|...|...|
-|1|m|n|
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; |是否点击|用户ID|物品ID| &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|
+|:-:|:-:|:-:|:-:|:-:|
+||0|1|1||
+||1|2|1||
+||...|...|...||
+||1|m|1||
+||1|1|2||
+||0|2|2||
+||...|...|...||
+||1|m|n||
 
 <div align="center">表1.5 用户ID和物品ID的组合特征对点击的影响</div>
 
