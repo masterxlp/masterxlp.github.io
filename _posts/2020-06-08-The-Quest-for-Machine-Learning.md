@@ -97,12 +97,12 @@ A型血的ID为1，二进制表示为001；B型血的ID为2，二进制表示为
 
 <div align="center">表1.2 语言和类型对点击的影响</div>
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; |是否点击|语言|类型| &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-|:-:|:-:|:-:|
-|0|中文|电影|
-|1|英文|电影|
-|1|中文|电视剧|
-|0|英文|电视剧|
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|是否点击|语言|类型|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|
+|:-:|:-:|:-:|:-:|:-:|
+||0|中文|电影||
+||1|英文|电影||
+||1|中文|电视剧||
+||0|英文|电视剧||
 
 <div align="center">表1.3 语言和类型的组合特征对点击的影响</div>
 
@@ -128,7 +128,7 @@ $$
 
 <div align="center">表1.4 用户ID和物品ID对点击的影响</div>
 
-|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; |是否点击|用户ID|物品ID| &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;|是否点击|用户ID|物品ID|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;|
 |:-:|:-:|:-:|:-:|:-:|
 ||0|1|1||
 ||1|2|1||
