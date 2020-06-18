@@ -1,4 +1,4 @@
-I"|<h2 id="100-interview-questions-for-algorithm-engineer">100+ Interview Questions for Algorithm Engineer</h2>
+I"�!<h2 id="100-interview-questions-for-algorithm-engineer">100+ Interview Questions for Algorithm Engineer</h2>
 <blockquote>
   <p>内容来源于 <strong>葫芦娃</strong> 编著的 <strong>百面机器学习</strong></p>
 </blockquote>
@@ -90,44 +90,46 @@ A型血的ID为1，二进制表示为001；B型血的ID为2，二进制表示为
 <div align="center">表1.1 二进制编码和独热编码</div>
 
 <table>
+  <thead>
+    <tr>
+      <th style="text-align: center">              </th>
+      <th style="text-align: center">血型</th>
+      <th style="text-align: center">类别ID</th>
+      <th style="text-align: center">二进制表示</th>
+      <th>独热编码</th>
+      <th>              </th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
-      <td>              </td>
-      <td>血型</td>
-      <td>类别ID</td>
-      <td>二进制表示</td>
-      <td>独热编码</td>
-      <td>              </td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td>A</td>
-      <td>1</td>
-      <td>0 0 1</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">A</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0 0 1</td>
       <td>1 0 0 0</td>
       <td> </td>
     </tr>
     <tr>
-      <td> </td>
-      <td>B</td>
-      <td>2</td>
-      <td>0 1 0</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">B</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">0 1 0</td>
       <td>0 1 0 0</td>
       <td> </td>
     </tr>
     <tr>
-      <td> </td>
-      <td>AB</td>
-      <td>3</td>
-      <td>0 1 1</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">AB</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">0 1 1</td>
       <td>0 0 1 0</td>
       <td> </td>
     </tr>
     <tr>
-      <td> </td>
-      <td>O</td>
-      <td>4</td>
-      <td>1 0 0</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">O</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">1 0 0</td>
       <td>0 0 0 1</td>
       <td> </td>
     </tr>
