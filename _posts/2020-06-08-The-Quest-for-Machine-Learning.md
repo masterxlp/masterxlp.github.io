@@ -81,12 +81,12 @@ A型血的ID为1，二进制表示为001；B型血的ID为2，二进制表示为
 
 <div align="center">表1.1 二进制编码和独热编码</div>
 
-&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; |血型|类别ID|二进制表示|独热编码| &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-|:-:|:-:|:-:|:-:|
-|A|1|0 0 1|1 0 0 0|
-|B|2|0 1 0|0 1 0 0|
-|AB|3|0 1 1|0 0 1 0|
-|O|4|1 0 0|0 0 0 1|
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;|血型|类别ID|二进制表示|独热编码|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;|
+|:-:|:-:|:-:|:-:|:-:|:-:|
+||A|1|0 0 1|1 0 0 0||
+||B|2|0 1 0|0 1 0 0||
+||AB|3|0 1 1|0 0 1 0||
+||O|4|1 0 0|0 0 0 1||
 
 
 ### 03. 高维组合特征的处理
@@ -167,6 +167,7 @@ $$
 这其实就等价于 **矩阵分解**。
 
 
+### 04. 组合特征
 
 
 
