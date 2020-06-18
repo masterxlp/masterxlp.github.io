@@ -1,4 +1,4 @@
-I"�<h2 id="100-interview-questions-for-algorithm-engineer">100+ Interview Questions for Algorithm Engineer</h2>
+I"|<h2 id="100-interview-questions-for-algorithm-engineer">100+ Interview Questions for Algorithm Engineer</h2>
 <blockquote>
   <p>内容来源于 <strong>葫芦娃</strong> 编著的 <strong>百面机器学习</strong></p>
 </blockquote>
@@ -92,12 +92,12 @@ A型血的ID为1，二进制表示为001；B型血的ID为2，二进制表示为
 <table>
   <tbody>
     <tr>
-      <td>                </td>
+      <td>              </td>
       <td>血型</td>
       <td>类别ID</td>
       <td>二进制表示</td>
       <td>独热编码</td>
-      <td>                </td>
+      <td>              </td>
     </tr>
     <tr>
       <td> </td>
@@ -133,4 +133,5 @@ A型血的ID为1，二进制表示为001；B型血的ID为2，二进制表示为
     </tr>
   </tbody>
 </table>
+
 :ET
