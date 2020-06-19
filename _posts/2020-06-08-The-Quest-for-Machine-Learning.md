@@ -197,7 +197,7 @@ $$
 
 <div align="center">表1.6 两个不同样本对应的原始输入特征</div>
 
-|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;|是否点击|年领|性别|用户类型|物品类型|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;|
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|是否点击|年领|性别|用户类型|物品类型|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;|
 |:-:||:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 ||是|28|女|免费|护肤||
 ||否|36|男|付费|食品||
