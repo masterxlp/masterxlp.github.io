@@ -165,7 +165,7 @@ Y = sigmoid(\sum_i \sum_j w_{ij} <x_i, x_j>) \tag{1.4}
 \end{align}
 $$
 
-其中 $w_{ij} = x_{i}^{\'} \cdot x_{j}^{'}$，$x_{i}^{'}$ 和 $x_{j}^{'}$ 分别表示 $x_i$ 和 $x_j$ 对应的低维向量。
+其中 $w_{ij} = x_{i}^{\'} \cdot x_{j}^{\'}$，$x_{i}^{\'}$ 和 $x_{j}^{\'}$ 分别表示 $x_i$ 和 $x_j$ 对应的低维向量。
 在表1.5的推荐问题中，需要学习的参数的规模变为 $m \times k + n \times k$。
 这其实就等价于 **矩阵分解**。
 
@@ -197,7 +197,7 @@ $$
 
 <div align="center">表1.6 两个不同样本对应的原始输入特征</div>
 
-|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|是否点击|年领|性别|用户类型|物品类型|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|
+|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|是否点击|年领|性别|用户类型|物品类型|&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|
 |:-:||:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 ||是|28|女|免费|护肤||
 ||否|36|男|付费|食品||
