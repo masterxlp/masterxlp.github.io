@@ -72,9 +72,12 @@ $$
 
 $$
 \begin{align}
-\mathop{I}(m) = D_{KL}(\delta_{im}||{p_i})$
+\mathop{I}(m) &= D_{KL}(\delta_{im}||{p_i})$ \\
+&= - ln(P(X))
 \end{align}
 $$
+
+  - $I(X)$ 表示 $X$ 的信息量，其本身就是个随机变数
 
 - 互信息和KL散度
 
@@ -90,8 +93,10 @@ $$
 
 $$
 \begin{align}
-H(X) &= E_{x}{I(x)}
-&= log N - D_{KL}(P(X) \parallel P_{U}(X))
+H(X) &= E_{x}{I(x)} \\
+&= log N - D_{KL}(P(X) \parallel P_{U}(X)) \\
+&= E [- ln (P(X))] \\
+&= \sum_i P(x_i)I(x_i) = - \sum_i P(x_i) ln P(x_i)
 \end{align}
 $$
 
@@ -99,7 +104,18 @@ $$
 
 $$
 \begin{align}
-H(X \mid Y) = log N
+H(X \mid Y) &= log N - D_{KL}(P(X, Y) \parallel P_{U}(X)P(Y)) \\
+&= log N - D_{KL}(P(X, Y) \parallel P(X)P(Y)) - D_{KL}(P(X) \parallel P_{U}(X)) \\
+&= H(X) - I(X; Y) \\
+&= log N - E_{Y}{D_{KL}(P(X \mid Y) \parallel P_{U}(X))}
+\end{align}
+$$
+
+- 交叉熵和KL散度
+
+$$
+\begin{align}
+H(p, q) = E_{p}[-log q] = H(p) + D_{KL}(p \mid q)
 \end{align}
 $$
 
