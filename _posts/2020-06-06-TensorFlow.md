@@ -3,6 +3,7 @@ layout: post
 title:  "[G] TensorFlow"
 date:   2020-06-06 13:20:00 +0800
 categories: TensorFlow
+tags: tensorflow [G]
 ---
 
 ## slim
