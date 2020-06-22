@@ -7,7 +7,7 @@
 
 # Site settings
 title: 爱攀岩di水
-brief-intro: RL, ML, DL, Algorithm, Python
+brief-intro: Artificial Intelligence
 baseurl: "https://masterxlp.github.io" # the subpath of your site, e.g. /blog
 url: "https://masterxlp.github.io" # the base hostname & protocol for your site
 
