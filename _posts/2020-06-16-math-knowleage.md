@@ -68,8 +68,26 @@ $$
 
 #### KL散度和其他量的关系
 
-- 自信息与KL散度：$\mathop{I}(m) = D_{KL}(\delta_{im}||{p_i})$
-- 
+- 自信息与KL散度
+
+$$
+\begin{align}
+\mathop{I}(m) = D_{KL}(\delta_{im}||{p_i})$
+\end{align}
+$$
+
+- 互信息和KL散度
+
+$$
+\begin{align}
+\mathop{I}(X;Y) &= D_{KL}(P(X,Y) || P(X)P(Y))
+&= E_{X}{D_{KL}(P(Y|X)||P(X))}
+&= E_{Y}{D_{KL}(P(X|Y)||P(X))}
+\end{align}
+$$
+
+- 条件熵和KL散度
+
 
 ### 02. 矩阵分解
 
