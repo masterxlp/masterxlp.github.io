@@ -2,8 +2,8 @@
 layout: post
 title:  "[G] 机器学习算法工程师面试宝典集锦"
 date:   2020-06-08 11:00:00 +0800
-categories: ML interview
-tags: book G
+categories: ML DL 
+tags: Interview G
 ---
 
 ## 100+ Interview Questions for Algorithm Engineer

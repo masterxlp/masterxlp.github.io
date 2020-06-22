@@ -2,7 +2,7 @@
 layout: post
 title:  "[C] Multivariate Gaussian Distribution"
 date:   2020-05-25 12:17:00 +0800
-categories: Guassian Math
+categories: Math
 tags: Guassian C
 ---
 

@@ -2,8 +2,8 @@
 layout: post
 title:  "[D] Multi-Task Learning"
 date:   2020-05-28 10:16:00 +0800
-categories: RL Multi-Task
-tags: MultiTask D
+categories: MultiTask RL
+tags: OverView D
 ---
 
 ## [D] Multi-Task Learning
