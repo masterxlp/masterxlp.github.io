@@ -10,6 +10,9 @@ type: page
 {:toc}
 
 ## Blogs
+### 工具
+* [markdown编写数学公式](https://www.jianshu.com/p/93ccc63e5a1b)
+
 ### Multi-Task
 
 * [多任务介绍](https://mp.weixin.qq.com/s/DSDkksVM89gZsbP37kpG3Q?)  
