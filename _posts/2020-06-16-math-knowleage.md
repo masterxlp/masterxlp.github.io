@@ -61,10 +61,10 @@ $$
 
 #### 特性
 
-- 相对熵的值为非负数：$D_{KL}(P \|| Q) >= 0$
-- 由吉布斯不等式可知，当且仅当 $P = Q$ 时，$D_{KL}(P \|| Q) = 0$
+- 相对熵的值为非负数：$D_{KL}(P \parallel Q) >= 0$
+- 由吉布斯不等式可知，当且仅当 $P = Q$ 时，$D_{KL}(P \parallel Q) = 0$
 - 尽管从直觉上KL散度是一个度量或距离函数，但是事实上，它并不是一个真正的度量或距离
-- KL散度不具有对称性：从分布$P$到$Q$的距离通常并不等于从$Q$到$P$的距离，即 $D_{KL}(P||Q) \neq D_{KL}(Q \|| P)$
+- KL散度不具有对称性：从分布$P$到$Q$的距离通常并不等于从$Q$到$P$的距离，即 $D_{KL}(P \parallel Q) \neq D_{KL}(Q \parallel P)$
 
 #### KL散度和其他量的关系
 
@@ -80,14 +80,28 @@ $$
 
 $$
 \begin{align}
-\mathop{I}(X;Y) &= D_{KL}(P(X,Y) || P(X)P(Y))
-&= E_{X}{D_{KL}(P(Y|X)||P(X))}
+\mathop{I}(X;Y) &= D_{KL}(P(X,Y) || P(X)P(Y)) \\
+&= E_{X}{D_{KL}(P(Y|X)||P(X))} \\
 &= E_{Y}{D_{KL}(P(X|Y)||P(X))}
+\end{align}
+$$
+
+- 信息熵和KL散度
+
+$$
+\begin{align}
+H(X) &= E_{x}{I(x)}
+&= log N - D_{KL}(P(X) \parallel P_{U}(X))
 \end{align}
 $$
 
 - 条件熵和KL散度
 
+$$
+\begin{align}
+H(X \mid Y) = log N
+\end{align}
+$$
 
 ### 02. 矩阵分解
 
