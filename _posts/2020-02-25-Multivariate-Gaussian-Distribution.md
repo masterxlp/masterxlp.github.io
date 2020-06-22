@@ -3,7 +3,7 @@ layout: post
 title:  "[C] Multivariate Gaussian Distribution"
 date:   2020-05-25 12:17:00 +0800
 categories: Guassian Math
-tags: Guassian [C]
+tags: Guassian C
 ---
 
 转载自[知乎](https://zhuanlan.zhihu.com/p/58987388 "多元高斯分布详解")

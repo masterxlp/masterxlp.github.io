@@ -3,7 +3,7 @@ layout: post
 title:  "[C] Multi-Objective Related"
 date:   2020-06-03 10:33:00 +0800
 categories: Multi-Objective RL overview
-tags: MultiObj [C]
+tags: MultiObj C
 ---
 
 ## [C] 多目标强化学习总结
