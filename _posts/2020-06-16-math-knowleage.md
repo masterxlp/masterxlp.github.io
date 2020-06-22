@@ -69,6 +69,7 @@ $$
 #### KL散度和其他量的关系
 
 - 自信息与KL散度
+  - $I(X)$ 表示 $X$ 的信息量，其本身就是个随机变数
 
 $$
 \begin{align}
@@ -77,15 +78,13 @@ $$
 \end{align}
 $$
 
-  - $I(X)$ 表示 $X$ 的信息量，其本身就是个随机变数
-
 - 互信息和KL散度
 
 $$
 \begin{align}
 \mathop{I}(X;Y) &= D_{KL}(P(X,Y) || P(X)P(Y)) \\
-&= E_{X}{D_{KL}(P(Y|X)||P(X))} \\
-&= E_{Y}{D_{KL}(P(X|Y)||P(X))}
+&= E_{X}[D_{KL}(P(Y|X)||P(X))] \\
+&= E_{Y}[D_{KL}(P(X|Y)||P(X))]
 \end{align}
 $$
 
@@ -93,7 +92,7 @@ $$
 
 $$
 \begin{align}
-H(X) &= E_{x}{I(x)} \\
+H(X) &= E_{x}[I(x)] \\
 &= log N - D_{KL}(P(X) \parallel P_{U}(X)) \\
 &= E [- ln (P(X))] \\
 &= \sum_i P(x_i)I(x_i) = - \sum_i P(x_i) ln P(x_i)
@@ -107,7 +106,7 @@ $$
 H(X \mid Y) &= log N - D_{KL}(P(X, Y) \parallel P_{U}(X)P(Y)) \\
 &= log N - D_{KL}(P(X, Y) \parallel P(X)P(Y)) - D_{KL}(P(X) \parallel P_{U}(X)) \\
 &= H(X) - I(X; Y) \\
-&= log N - E_{Y}{D_{KL}(P(X \mid Y) \parallel P_{U}(X))}
+&= log N - E_{Y}[D_{KL}(P(X \mid Y) \parallel P_{U}(X))]
 \end{align}
 $$
 
