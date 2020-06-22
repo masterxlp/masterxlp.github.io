@@ -270,5 +270,4 @@ $$
 **而我们如果只保留** $(Q\Lambda^{-\frac{1}{2}})(\overrightarrow{X}-\overrightarrow{\mu})$ **这个投影后坐标轴长度较长的那个坐标，我们就可以达到
 将随机向量** $\overrightarrow{X}$ **进行降维的效果了，而这，就是所谓的PCA(Principal Component Analysis, 主成分分析)。**
 
-
-
+<br /><br /><br /><br />
