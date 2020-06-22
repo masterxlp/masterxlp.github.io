@@ -11,7 +11,7 @@ categories: math
 > KL散度（Kullback-Leibler divergence, KLD），在信息系统中称为 **相对熵** （relative entropy），在连续时间序列中称为 **随机性** （randomness），
 > 在统计模型推断中称为 **信息增益** （information gain），也称为 **信息散度**（information divergence）。
 
-KL散度是两个概率分布$P$和$Q$差别的非对称性的度量。
+KL散度是两个概率分布$P$和$Q$差别的 **非对称性** 的度量。
 KL散度是用来度量使用基于$Q$的分布来编码服从P的分布的样本所需的额外的平均比特数。
 KL散度在不同的场景下代表的具体函数不尽相同，但其本质都大同小异。
 典型情况下，$P$表示数据的真实分布，$Q$表示数据的理论分布、估计的模型分布、或P的近似分布。
@@ -35,6 +35,7 @@ KL散度仅当概率$P$和$Q$各自总和均为1，且对于任何 $i$ 满足 $Q
 $$
 \begin{align}
 D_{KL}(P||Q) = \int_{-\infty}{\infty} p(x) \mathop{ln} \frac{p(x)}{q(x)} dx \tag{1.2}
+\end{align}
 $$
 
 其中$p$和$q$分布表示分布$P$和$Q$的密度。
@@ -44,6 +45,74 @@ $$
 $$
 \begin{align}
 D_{KL}(P||Q) = \int_{X} \mathop{ln} \frac{dP}{dQ}dP \tag{1.3}
+\end{align}
+$$
 
+其中，假定右侧的表达形式存在，则 $\frac{dP}{dQ}$ 为 $Q$ 关于 $P$ 的 R-N 导数。
+
+相应地，若$P$关于$Q$绝对连续，则
+
+$$
+\begin{align}
+D_{KL}(P||Q) &= \int_{X} \mathop{ln} \frac{dP}{dQ}dP \\
+&= \int_{X} \frac{dP}{dQ} \mathop{ln} \frac{dP}{dQ} dQ \tag{1.4}
+\end{align}
+$$
+
+#### 特性
+- 相对熵的值为非负数：$D_{KL}(P||Q) >= 0$
+- 由吉布斯不等式可知，当且仅当 $P = Q$ 时，$D_{KL}(P||Q) = 0$
+- 尽管从直觉上KL散度是一个度量或距离函数，但是事实上，它并不是一个真正的度量或距离
+- KL散度不具有对称性：从分布$P$到$Q$的距离通常并不等于从$Q$到$P$的距离，即 $D_{KL}(P||Q) \neq D_{KL}(Q||P)$
+
+#### KL散度和其他量的关系
+- 自信息
 
 ### 02. 矩阵分解
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
