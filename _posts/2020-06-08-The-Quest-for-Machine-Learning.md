@@ -28,7 +28,7 @@ tags: Interview G
 在学习速率相同的情况下，$x_1$ 的更新速度会大于 $x_2$，需要较多的迭代才能找到最优解。
 如果将 $x_1$ 和 $x_2$ 归一化到相同的数值区间后，优化目标的等值图会变成图1.1(b)中的圆形，$x_1$ 和 $x_2$ 的更新速度变的更为一致，容易更快地通过梯度下降找到最优解。
 
-<div align="center"><img src="../image/数据归一化对梯度下降收敛速度产生的影响.png" width="50%" height="50%"></div>
+<div align="center"><img src="../../../../image/数据归一化对梯度下降收敛速度产生的影响.png" width="50%" height="50%"></div>
 <div align="center">图1.1 数据归一化对梯度下降收敛速度产生的影响</div>
 
 当然，数据归一化并不是万能的。
@@ -185,7 +185,7 @@ $$
 
 以点击预测问题为例，假设原始输入特征包含年龄、性别、用户类型（试用期、付费）、物品类型（护肤、食品等）四个方面的信息，并且根据原始输入和标签（点击、未点击）构造出决策树，如图1.2所示。
 
-<div align="center"><img src="../image/基于决策树的特征组合方法.png"></div>
+<div align="center"><img src="../../../../image/基于决策树的特征组合方法.png"></div>
 
 <div align="center">图1.2 基于决策树的特征组合方法</div>
 
@@ -266,7 +266,7 @@ $K$ 维空间的每一维也可以看作一个隐含的主题，只不过不像�
 CBOW的目标是根据上下文出现的词语来预测当前词的生成概率，如图1.3(a)所示；
 而Skip-gram是根据当前词来预测上下文中各词的生成概率，如图1.3(b)所示。
 
-<div align="center"><img src="../image/Word2Vec的两种模型结构.png"></div>
+<div align="center"><img src="../../../../image/Word2Vec的两种模型结构.png"></div>
 
 <div align="center">图1.3 Word2Vec的两种网络结构</div>
 

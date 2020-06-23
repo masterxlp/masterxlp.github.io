@@ -94,7 +94,7 @@ $$
 
 由(7)可知，其等高线为以(0,0)为圆心的同心圆。
 
-![Figure 1](../image/二次标准高斯概率密度函数图.jpg "multi-gaussian")
+![Figure 1](../../../../image/二次标准高斯概率密度函数图.jpg "multi-gaussian")
 <div align="center"> 二次标准高斯分布概率密度函数图 </div>
 
 ### 多元高斯分布
@@ -212,17 +212,17 @@ $$
 如果协方差矩阵 $\Sigma$ 不是对角矩阵，则正交对角化得到的酉矩阵 $Q$ 不是标准正交基，其代表一个旋转，此时的椭圆应该是一个倾斜的椭圆，
 随机向量 $\overrightarrow{X}$ 中的随机变量不是彼此独立的。
 
-![Figure 2](../image/协方差矩阵为非对角阵时的多元高斯图.jpg "Off-diagonal matrix")
+![Figure 2](../../../../image/协方差矩阵为非对角阵时的多元高斯图.jpg "Off-diagonal matrix")
 <div align="center"> 协方差矩阵为非对角阵时的二元高斯图 </div>
    
 如果协方差矩阵 $\Sigma$ 是对角矩阵，则正交对角化得到的酉矩阵 $Q$ 就是标准正交基，则投影是在标准正交基上完成的，此时的椭圆应该是一个水平的椭圆，
 随机向量 $\overrightarrow{X}$ 中的随机变量就是彼此独立的。
 
-![Figure 3](../image/协方差矩阵为对角阵时多元高斯图.jpg "Ddiagonal matrix")
+![Figure 3](../../../../image/协方差矩阵为对角阵时多元高斯图.jpg "Ddiagonal matrix")
 <div align="center"> 协方差矩阵为对角阵时的二元高斯图 </div>
 
 补充：  
-![Figure 4](../image/协方差对模型的影响.png "Conv matrix")
+![Figure 4](../../../../image/协方差对模型的影响.png "Conv matrix")
 <div align="center"> 协方差对模型的影响 </div>
 
 ### 多元高斯分布的几何意义
@@ -268,7 +268,7 @@ $$
 后的随机变量在新的正交基上彼此独立。
 值得注意的是，如果随机向量 $\overrightarrow{X}$ 本来就是独立随机变量组成的，此时其协方差矩阵是一个对角阵，则酉矩阵是一个单位矩阵，此线性变换中就只有拉伸没有旋转。
 
- <div align="center"> <img src='../image/多元高斯分布随机变量去相关性图.png'></div>
+ <div align="center"> <img src='../../../../image/多元高斯分布随机变量去相关性图.png'></div>
 
 **而我们如果只保留** $(Q\Lambda^{-\frac{1}{2}})(\overrightarrow{X}-\overrightarrow{\mu})$ **这个投影后坐标轴长度较长的那个坐标，我们就可以达到
 将随机向量** $\overrightarrow{X}$ **进行降维的效果了，而这，就是所谓的PCA(Principal Component Analysis, 主成分分析)。**

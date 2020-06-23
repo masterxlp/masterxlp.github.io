@@ -110,12 +110,12 @@ $$
 值得注意的是，当 $\theta = \theta_{old}$ 时（即 $r = 1$），$L^{CLIP}(\theta) = L^{CPI}(\theta)$。
 然而，它们随着 $\theta$ 逐渐远离 $\theta_{old}$ 而变得不同。
 图1画出了在时间t时 $L^{CLIP}$ 的变化；注意到当优势值为正或负时， *probability ratio* 在点 $1 - \epsilon$ 或点 $1 + \epsilon$ 处被相应的截断。
-![Figure 1](../image/ppo截断图.png "clipped objective value")
+![Figure 1](../../../../image/ppo截断图.png "clipped objective value")
 
 图2提供了另一种关于 *surrogate objective* $L^{CLIP}$ 的直观理解。
 它展示了当我们在一个连续控制问题中沿着由PPO算法获得的策略更新方向插值（interpolate）时，几种目标函数是如何变化的。
 我们可以看到对过大的策略更新施加惩罚的目标函数 $L^{CLIP}$ 是 $L^{CPI}$ 的一个 *lower bound*。
-![Figure 2](../image/ppo-几种surrogate目标的比较.png "several surrogate objective compare")
+![Figure 2](../../../../image/ppo-几种surrogate目标的比较.png "several surrogate objective compare")
 
 ### Adaptive KL Penalty Coefficient
 
