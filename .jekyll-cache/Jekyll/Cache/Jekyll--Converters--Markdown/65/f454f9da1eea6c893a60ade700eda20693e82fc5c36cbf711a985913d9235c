@@ -1,4 +1,4 @@
-I"�B<p>转载自<a href="https://zhuanlan.zhihu.com/p/58987388" title="多元高斯分布详解">知乎</a></p>
+I"�B<p>转载自<a href="https://zhuanlan.zhihu.com/p/58987388" title="多元高斯分布详解">知乎</a></p>
 
 <h2 id="c-multivariate-gaussian-distribution">[C] Multivariate Gaussian Distribution</h2>
 <blockquote>
@@ -224,4 +224,8 @@ $\overrightarrow{Z} = B^{-1} (\overrightarrow{X} - \overrightarrow{\mu})$ 的帮
 <p><strong>而我们如果只保留</strong> $(Q\Lambda^{-\frac{1}{2}})(\overrightarrow{X}-\overrightarrow{\mu})$ <strong>这个投影后坐标轴长度较长的那个坐标，我们就可以达到
 将随机向量</strong> $\overrightarrow{X}$ <strong>进行降维的效果了，而这，就是所谓的PCA(Principal Component Analysis, 主成分分析)。</strong></p>
 
+<p>&lt;/br&gt;
+&lt;/br&gt;
+&lt;/br&gt;
+&lt;/br&gt;</p>
 :ET
