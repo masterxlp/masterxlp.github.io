@@ -1,0 +1,21 @@
+I"d<h2 id="numpy">Numpy</h2>
+<h3 id="eye">eye</h3>
+<blockquote>
+  <p>np.eye(N, M=None, k=0, dtype=&lt;class ‘float’&gt;, order=’C’)<br />
+Returns:</p>
+  <blockquote>
+    <p>返回一个shape=[N, M]的二维数组，其除了k-th的对角线上的数值为1之外，其他位置的数值均为0，且其数据类型符合dtype</p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <p>Params:</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">N</code>: int，输出的行数<br />
+<code class="highlighter-rouge">M</code>: int，输出的列数，默认为None，即与N相等<br />
+<code class="highlighter-rouge">k</code>: int，对角线的索引，默认为0，当 $k&lt;0$ 时，指的是下半对角线的索引，当 $k&gt;0$ 时，指的是上半对角线的索引<br />
+<code class="highlighter-rouge">dtype</code>: data-type，返回的数值中数据的类型，默认为float类型<br />
+<code class="highlighter-rouge">order</code>: {‘C’, ‘F’}，’C’ 表示以行为主进行排序存储在内存中，’F’ 表示以列为主进行排序存储在内存中</p>
+  </blockquote>
+</blockquote>
+:ET
