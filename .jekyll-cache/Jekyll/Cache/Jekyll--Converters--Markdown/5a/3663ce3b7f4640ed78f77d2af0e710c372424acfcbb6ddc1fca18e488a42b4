@@ -1,0 +1,19 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#b-proximal-policy-optimization-algorithms" id="markdown-toc-b-proximal-policy-optimization-algorithms">[B] Proximal Policy Optimization Algorithms</a>    <ul>
+      <li><a href="#脉络分析" id="markdown-toc-脉络分析">脉络分析</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="b-proximal-policy-optimization-algorithms">[B] Proximal Policy Optimization Algorithms</h2>
+<h3 id="脉络分析">脉络分析</h3>
+<p>PPO论文实际上时提出了一个 <code class="highlighter-rouge">clipped surrogate objective</code>，并通过实验证明该目标函数表现确实不错（实际上还是分场景的）。</p>
+
+<p>从 <strong>Policy Gradient</strong> 开始，其目标函数为 \(L^{PG}(\theta) = \hat{\mathbb{E}}_t [log\pi_{\theta}(a_t|s_t)\hat{A}_t]\)。
+直观地，其策略更新依赖于 <strong>策略</strong> $\pi(\theta)$ 以及 <strong>优势值</strong>  $\hat{A}_t$。
+事实上，策略梯度方法的更新方式为：依据于当前的策略，通过与环境交互收集一批数据，基于这批数据执行一次策略更新。
+因此，它属于 <strong>on-policy</strong> 的算法。
+对于on-policy的方法，如果利用“旧”数据（\(\pi_{old}\) 收集到的样本）进行策略更新会导致 <strong>过大的策略更新</strong>。
+那么，为什么要使用 <strong>off-policy</strong> 的方法呢？
+这是因为 <strong>data efficiency</strong> 的缘故，on-policy方法对于数据的利用效率太低。</p>
+:ET
