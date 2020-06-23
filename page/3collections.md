@@ -40,6 +40,9 @@ UVFA的扩展使用
 
 * [DHER: hindsight experience replay for dynamic goals](http://tongzhang-ml.org/papers/iclr19-dher.pdf)
 
+* [Multi-task Deep Reinforcement Learning with PopArt](https://arxiv.org/abs/1809.04474)
+对多个任务中的奖励使用PopArt技术进行裁剪，使得智能体不会偏向于奖励高的任务
+
 ### Multi-objective
 * [2018 - A Multi-Objective Deep Reinforcement Learning Framework](https://arxiv.org/abs/1803.02965)
 
