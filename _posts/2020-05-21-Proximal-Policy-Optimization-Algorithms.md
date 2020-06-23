@@ -4,6 +4,7 @@ title:  "[A] Proximal Policy Optimization Algorithms"
 date:   2020-05-21 14:48:00 +0800
 categories: RL
 tags: PPO A
+author: Xlp
 ---
 * content
 {:toc}

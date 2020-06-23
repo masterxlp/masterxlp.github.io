@@ -4,6 +4,7 @@ title:  "[C] Multivariate Gaussian Distribution"
 date:   2020-05-25 12:17:00 +0800
 categories: Math
 tags: Guassian C
+author: Xlp
 ---
 * content
 {:toc}

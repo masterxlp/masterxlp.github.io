@@ -4,6 +4,7 @@ title:  "[E] GitHub Page and Jekyll Skill"
 date:   2020-06-05 14:41:00 +0800
 categories: Tools
 tags: GitHub E
+author: Xlp
 ---
 * content
 {:toc}

@@ -4,6 +4,7 @@ title:  "[A] General Value Function"
 date:   2020-05-26 17:56:00 +0800
 categories: RL MultiTask
 tags: Horde GVF A
+author: Xlp
 ---
 * content
 {:toc}
