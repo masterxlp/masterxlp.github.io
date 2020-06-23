@@ -5,18 +5,20 @@ date:   2020-05-25 12:17:00 +0800
 categories: Math
 tags: Guassian C
 ---
+* content
+{:toc}
 
 转载自[知乎](https://zhuanlan.zhihu.com/p/58987388 "多元高斯分布详解")
 
-## [C] Multivariate Gaussian Distribution
+## 简介
 > 由中心极限定理我们知道，大量独立同分布的随机变量的均值在做适当标准化后会依分布收敛于高斯分布，这使得高斯分布具有普适性的建模能力.
 > 数学上，当使用高斯分布对贝叶斯推断的似然和先验进行建模时，得到的后验同样为高斯分布，即其具有共轭先验性质.
 
 
 
 
-### 多元标准高斯分布
-#### 一元高斯分布
+## 多元标准高斯分布
+### 一元高斯分布
 若随机变量 $X \sim \mathcal{N}(\mu, \sigma^2)$ ，则有如下的概率密度函数
 $$
 \begin{align}
@@ -54,7 +56,7 @@ $$
 通过将随机变量的值减去其均值再除以标准差，使得随机变量与其均值的差距可以用若干个标准差来衡量，从而实现了不同随机变量与其对应均值的差距
 可以以一种相对的距离来比较。**
 
-#### 多元标准高斯分布
+### 多元标准高斯分布
 那么一元标准高斯分布与多元标准高斯分布有什么关系呢？事实上，多元标准高斯分布的概率密度函数正式从式(4)中导出的。
 假设我们有随机向量 $\overrightarrow{Z} = [Z_1, \cdots, Z_n]^T$，其中 $Z_i \sim \mathcal{N}(0,1)\ (i=1, \cdots, n)$
 且 $Z_i, Z_j\ (i,j=1, \cdots, n,\ i \neq j)$ 彼此独立，即随机向量中的每个随机变量 $Z_i$ 都服从标准高斯分布且两两彼此独立，
@@ -97,7 +99,7 @@ $$
 ![Figure 1](../../../../image/二次标准高斯概率密度函数图.jpg "multi-gaussian")
 <div align="center"> 二次标准高斯分布概率密度函数图 </div>
 
-### 多元高斯分布
+## 多元高斯分布
 我们知道，当随机变量 $\overrightarrow{Z} \sim \mathcal{N}(\overrightarrow{0}, \boldsymbol{I})$ 时，
 其每个随机变量 $Z_i \sim \mathcal{N}(0,1)\ (i = 1, \cdots, n)$ 彼此独立，我们可通过式(4)与独立随机变量概率密度函数之间的关系得出其联合概率密度函数(式5)。
 那么，对于一般的随机变量 $\overrightarrow{X} \sim \mathcal{N}(\overrightarrow{\mu}, \Sigma)$，
@@ -272,8 +274,3 @@ $$
 
 **而我们如果只保留** $(Q\Lambda^{-\frac{1}{2}})(\overrightarrow{X}-\overrightarrow{\mu})$ **这个投影后坐标轴长度较长的那个坐标，我们就可以达到
 将随机向量** $\overrightarrow{X}$ **进行降维的效果了，而这，就是所谓的PCA(Principal Component Analysis, 主成分分析)。**
-
-</br>
-</br>
-</br>
-</br>

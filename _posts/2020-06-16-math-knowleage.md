@@ -5,8 +5,10 @@ date:   2020-06-16 16:54:00 +0800
 categories: math
 tags: essential G
 ---
+* content
+{:toc}
 
-### 01. KL散度
+## 01. KL散度
 主要内容来源于[维基百科](https://zh.wikipedia.org/wiki/%E7%9B%B8%E5%AF%B9%E7%86%B5)
 
 > KL散度（Kullback-Leibler divergence, KLD），在信息系统中称为 **相对熵** （relative entropy），在连续时间序列中称为 **随机性** （randomness），
@@ -20,7 +22,7 @@ KL散度在不同的场景下代表的具体函数不尽相同，但其本质都
 
 
 
-#### 定义
+### 定义
 对于离散随机变量，其概率分布$P$和$Q$的KL散度定义为
 
 $$
@@ -63,14 +65,14 @@ D_{KL}(P||Q) &= \int_{X} \mathop{ln} \frac{dP}{dQ}dP \\
 \end{align}
 $$
 
-#### 特性
+### 特性
 
 - 相对熵的值为非负数：$D_{KL}(P \parallel Q) >= 0$
 - 由吉布斯不等式可知，当且仅当 $P = Q$ 时，$D_{KL}(P \parallel Q) = 0$
 - 尽管从直觉上KL散度是一个度量或距离函数，但是事实上，它并不是一个真正的度量或距离
 - KL散度不具有对称性：从分布$P$到$Q$的距离通常并不等于从$Q$到$P$的距离，即 $D_{KL}(P \parallel Q) \neq D_{KL}(Q \parallel P)$
 
-#### KL散度和其他量的关系
+### KL散度和其他量的关系
 
 - 自信息与KL散度
   - $I(X)$ 表示 $X$ 的信息量，其本身就是个随机变数
@@ -122,7 +124,7 @@ H(p, q) = E_{p}[-log q] = H(p) + D_{KL}(p \mid q)
 \end{align}
 $$
 
-### 02. 矩阵分解
+## 02. 矩阵分解
 
 
 

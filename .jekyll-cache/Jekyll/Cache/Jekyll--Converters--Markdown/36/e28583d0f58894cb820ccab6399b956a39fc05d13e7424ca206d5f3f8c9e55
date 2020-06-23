@@ -1,0 +1,17 @@
+I"Q<ul id="markdown-toc">
+  <li><a href="#01-kl散度" id="markdown-toc-01-kl散度">01. KL散度</a></li>
+</ul>
+
+<h2 id="01-kl散度">01. KL散度</h2>
+<p>主要内容来源于<a href="https://zh.wikipedia.org/wiki/%E7%9B%B8%E5%AF%B9%E7%86%B5">维基百科</a></p>
+
+<blockquote>
+  <p>KL散度（Kullback-Leibler divergence, KLD），在信息系统中称为 <strong>相对熵</strong> （relative entropy），在连续时间序列中称为 <strong>随机性</strong> （randomness），
+在统计模型推断中称为 <strong>信息增益</strong> （information gain），也称为 <strong>信息散度</strong>（information divergence）。</p>
+</blockquote>
+
+<p>KL散度是两个概率分布$P$和$Q$差别的 <strong>非对称性</strong> 的度量。
+KL散度是用来度量使用基于$Q$的分布来编码服从P的分布的样本所需的额外的平均比特数。
+KL散度在不同的场景下代表的具体函数不尽相同，但其本质都大同小异。
+典型情况下，$P$表示数据的真实分布，$Q$表示数据的理论分布、估计的模型分布、或P的近似分布。</p>
+:ET

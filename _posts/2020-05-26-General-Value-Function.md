@@ -5,13 +5,15 @@ date:   2020-05-26 17:56:00 +0800
 categories: RL MultiTask
 tags: Horde GVF A
 ---
+* content
+{:toc}
 
-## [A] Horde: A Scalable Real-time Architecture for Learning Knowledge from Unsupervised Sensorimotor Interaction
+## 简介
 > 2011 - International Foundation for Autonomous Agents and Multiagent Systems  
 > Author: Richard S. Sutton, Joseph Modayil, Michael Delp, Thomas Degris, Patrick M. Pilarski, Adam White  
 > Link: [原文链接](https://www.cs.swarthmore.edu/~meeden/DevelopmentalRobotics/horde1.pdf)
 
-### ABSTRACT
+## ABSTRACT
 对于机器人和其他人工智能系统来说，在复杂多变的环境中保持精确的 "world knowledge" 是一个一直以来就存在的问题。
 我们的被称为 `Horde` 的结构就是用来处理这个问题的，它是由大量的相互独立的子强化学习智能体（或者称为 `demons`）组成的。
 每一个 “demon” 负责回答一个预测(predictive)或以目标为导向(goal-oriented)的“world”的问题，从而以一种分解的、模块化的方式对系统的整体知识做出贡献。
@@ -25,7 +27,7 @@ Horde是迈向实时架构的重要一步，可以有效地从无监督的 senso
 
 
 
-### THE PROBLEM OF EXPRESSIVE AND LEARNABLE KNOWLEDGE
+## THE PROBLEM OF EXPRESSIVE AND LEARNABLE KNOWLEDGE
 如何学习、表示以及使用一般意义上的world knowledge，仍是人工智能(AI)中的一个关键的开放性的问题。
 有一些基于一阶谓词逻辑和贝叶斯网络的高级表示语言具有非常强大的表达能力，但在这些语言中，学习知识是很困难的而且使用计算成本也很昂贵。
 还有一些低级语言，像微分方程和状态转化矩阵，可以在无监督的情况下从数据中学习出来，但是这些语言的表达能力要差的多。
@@ -46,7 +48,7 @@ Kaelbling et al.(2001)和Pasula et al.(2007)探索了随机域中关系规则表
 Pierce和Kuipers(1997)，他们学习了空间模型和控制律，Oates等人(2000)，他们学习了机器人的集群轨迹，Yu和Ballard(2004)，他们学习了单词的含义，Natale(2005)，他们学习了目标导向的物理动作。
 所有这些作品都学到了重要的知识，但都是专门针对某一特定类型的知识;他们使用的知识表示不像多个近似值函数的知识表示那样普遍。
 
-### VALUE FUNCTIONS AS SEMANTICS
+## VALUE FUNCTIONS AS SEMANTICS
 近似值函数作为一个知识表示语言的一个独特的、吸引人的特点是，它们在"sensorimotor"交互中有明确的语义，有清晰的真理概念。
 只要近似值函数的值与它所近似的数学定义上的值函数的值相匹配，那么我们就认为表示为近似值函数的一些知识是正确的，或者更精确的说，是准确的。
 一个值函数提问一个问题 -- 未来的累积回报是多少？ -- 近似值函数提供关于这个问题的答案。
@@ -101,7 +103,7 @@ $$
 通过逐步的估计和提升，使得期望回报最优的策略可以被找到。
 这样，值函数理论可以为以目标为导向的知识（控制）和预测知识提供一个语义。
 
-### FROM VALUES TO KNOWLEDGE (GENERAL VALUE FUNCTIONS)
+## FROM VALUES TO KNOWLEDGE (GENERAL VALUE FUNCTIONS)
 在明确了传统的价值函数如何为即将到来的奖励的知识提供grounded（落地的）语义之后，在本节，我们将展示 `通用价值函数` 如何为更一般的世界知识提供grounded语义。
 
 首先注意，尽管动作值函数 $Q^\pi$ 只有策略这一个传统意义上的上标，但是它同样依赖于奖励 $r$ 和终止奖励函数 $z$。
@@ -138,7 +140,7 @@ $$
 我们也会去掉问题函数的前缀"pseudo-"，当不存在歧义时。
 在我们稍后提出的机器人实验中，不存在特别的基本问题，所以不存在混淆。
 
-### THE HORDE ARCHITECTURE
+## THE HORDE ARCHITECTURE
 **Horde** 结构是有许多被称为 **demons** 的“子智能体”组成的完整智能体构成。
 每一个demon是一个独立的强化学习智能体，负责学习基本智能体羽环境交互中的一小部分知识。
 每一个demon学习一个关于GVF $q$ 的近似 $\hat{q}$，对应于四个问题函数 $\pi, \gamma, r, z$ 关于这个demon的设置。
@@ -214,7 +216,7 @@ Demons也可以使用其他在这个问题上的答案（就像在时序差分�
 这允许一个demon学习一个像“接近一个障碍”这样的概念，意味着在几秒钟内读取一个高碰撞传感器的随机动作的概率，然后另一个demon基于这种概念来学习一些东西，
 就像通过在它的终止奖励函数(即 $z(s) = \mathop{max}\limits_{a} \hat{q}(s,a,\theta_{first\ demon})$)中使用第一个demon的近似GVF，“如果我沿着这面墙走到头，那么我将会靠近一个障碍吗？”。
 
-### RESULTS WITH HORDE ON THE CRITIERBOT
+## RESULTS WITH HORDE ON THE CRITIERBOT
 
 
 

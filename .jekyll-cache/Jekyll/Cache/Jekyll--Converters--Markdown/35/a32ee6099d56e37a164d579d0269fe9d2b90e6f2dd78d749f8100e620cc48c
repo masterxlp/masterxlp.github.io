@@ -1,0 +1,53 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#脉络分析" id="markdown-toc-脉络分析">脉络分析</a></li>
+  <li><a href="#模型流程图" id="markdown-toc-模型流程图">模型流程图</a></li>
+</ul>
+
+<h2 id="脉络分析">脉络分析</h2>
+<p>PPO论文实际上时提出了一个 <code class="highlighter-rouge">clipped surrogate objective</code>，并通过实验证明该目标函数表现确实不错（实际上还是分场景的）。</p>
+
+<p>从 <strong>Policy Gradient</strong> 开始，其目标函数为 \(L^{PG}(\theta) = \hat{\mathbb{E}}_t [log\pi_{\theta}(a_t|s_t)\hat{A}_t]\)。
+直观地，其策略更新依赖于 <strong>策略</strong> $\pi(\theta)$ 以及 <strong>优势值</strong>  $\hat{A}_t$。
+事实上，策略梯度方法的更新方式为：依据于当前的策略，通过与环境交互收集一批数据，基于这批数据执行一次策略更新。
+因此，它属于 <strong>on-policy</strong> 的算法。
+对于on-policy的方法，如果利用“旧”数据（\(\pi_{old}\) 收集到的样本）进行策略更新会导致 <strong>过大的策略更新</strong>。
+那么，为什么要使用 <strong>off-policy</strong> 的方法呢？
+这是因为 <strong>data efficiency</strong> 的缘故，on-policy方法对于数据的利用效率太低。</p>
+
+<p>而 <strong>Trust-Region Policy Optimization</strong> 通过数学推导提出了一种 <strong>surrogate objective</strong>，这种目标函数在对策略更新幅度上加以限制后，可以做到策略的单调提升。
+其目标函数为</p>
+
+\[\begin{align}
+\mathop{maximize}\limits_{\theta} \quad \hat{\mathbb{E}}_t [\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}\hat{A}_t]
+\end{align}\]
+
+\[\begin{align}
+subject\ to\ \hat{\mathbb{E}}_t [KL[\pi_{\theta_{old}}(\cdot|s_t), \pi_\theta(\cdot|s_t)]] \leq \delta
+\end{align}\]
+
+<p>这是一个带约束的目标函数，根据拉格朗日乘子法可将带约束的函数转换为带拉格朗日乘子（惩罚）的目标函数：</p>
+
+\[\begin{align}
+\mathop{maximize}\limits_{\theta} \quad \hat{\mathbb{E}}_t [\frac{\pi_{\theta}(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)} \hat{A}_t - \beta KL[\pi_{\theta_{old}}(\cdot|s_t), \pi_{\theta}(\cdot|s_t)]]
+\end{align}\]
+
+<p>但是在现实中，我们无法确定一个固定的 $\beta$ 来适应于不同的任务，甚至是同一种任务的不同状态。
+但是，TRPO又拥有不可多得的优势：可以guarantee策略的稳步上升，或者至少不会下降。</p>
+
+<p>基于此，提出了PPO方法，该方法通过对 <strong>probability ratio</strong> 加以截断，即限制 $r_t(\theta)$ 的大小，当 $r_t(\theta)$ 使得目标函数减少时，截断它，使得目标函数不会减少。
+通过截断的方式达到与TRPO相同的效果，但是却比TRPO要更简单，因为它是优化一个无约束的目标函数。
+其目标函数为：</p>
+
+\[\begin{align}
+L^{CLIP}(\theta) = \hat{\mathbb{E}}_t [min(r_t(\theta) \hat{A}_t, clip(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t)]
+\end{align}\]
+
+<p>文章中通过实验证明，当 $\epsilon = 0.2$ 时，模型性能最佳。</p>
+
+<h2 id="模型流程图">模型流程图</h2>
+<p>基于DeepMind的baselines，画出了其PPO2算法的流程图，如下：</p>
+<div align="center"> ![Figure 1](../../../../image/ppo网络结构图.png "ppo structure") </div>
+
+<p>另一种attention结构+mask机制的PPO算法流程图，如下：
+<img src="../../../../image/alpha-star-ppo网络结构图.png" alt="Figure 2" title="attention structure" /></p>
+:ET

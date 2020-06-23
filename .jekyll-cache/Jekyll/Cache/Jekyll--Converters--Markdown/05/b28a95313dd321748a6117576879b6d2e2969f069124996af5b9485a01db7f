@@ -1,0 +1,21 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#简介" id="markdown-toc-简介">简介</a>    <ul>
+      <li><a href="#abstract" id="markdown-toc-abstract">Abstract</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="简介">简介</h2>
+<blockquote>
+  <p>2017 - Computer Science &gt; Machine Learning - arXiv - OpenAI<br />
+Author: John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov<br />
+Link: <a href="https://arxiv.org/abs/1707.06347">原文链接</a></p>
+</blockquote>
+
+<h3 id="abstract">Abstract</h3>
+
+<p>我们提出了一种用于强化学习的策略梯度类的方法，该方法表现为通过与环境交互来sample datas和借助 <em>stochastic gradient ascent</em> 来优化一个“surrogate”目标函数，两者之间交替执行。 
+与每采样一次数据就进行一次梯度更新的standard策略梯度方法不同，我们提出了一种新颖的目标函数，可以实现多个epochs的小批量更新。
+这个新方法我们把它称为<strong>近端策略优化</strong>（proximal policy optimization, ppo），该方法拥有置信域策略优化（TRPO）的部分优势，但是该方法有具有比TRPO更易实现、更一般化、以及更优的样本复杂性的优点。
+我们在一组benchmark的任务中测试了PPO算法，包括仿真机器人运动（simulated robotic locomotion）和Atari游戏，实验结果表明PPO比其他在线策略梯度表现的都要好，总体上在样本的复杂性、简易性以及有效性之间达到了一个有效的平衡。</p>
+:ET

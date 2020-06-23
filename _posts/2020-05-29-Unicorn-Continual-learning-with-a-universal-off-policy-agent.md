@@ -5,13 +5,15 @@ date:   2020-05-29 14:28:00 +0800
 categories: RL MultiTask
 tags: UVFA variant A
 ---
+* content
+{:toc}
 
-## [A] Unicorn: Continual learning with a universal, off-policy agent 
+## 简介 
 > 2018 - Computer Science > Machine Learning - arXiv - DeepMind  
 > Author: Daniel J. Mankowitz, Augustin Žídek, André Barreto, Dan Horgan, Matteo Hessel, John Quan, Junhyuk Oh, Hado van Hasselt, David Silver, Tom Schaul  
 > Link: [原文链接](https://arxiv.org/abs/1802.08294)
 
-### Abstract
+## Abstract
 一些real-word领域最好的描述是作为一个单任务来描述，但是对于其他领域来说，这种观点是有局限性的。
 相反，随着智能体的competence的提高，一些任务的复杂性也不断增加。
 在持续学习中（也称为终身学习），没有明确的任务边界或curricula。
@@ -24,7 +26,7 @@ tags: UVFA variant A
 
 
 
-### Introduction
+## Introduction
 持续学习，是一种利用之前获得的知识或技巧的方式从有关连续任务的经验中学习的方法，它一直是人工智能领域的一个长期挑战。
 该方法的一个主要优点就是，它为一个完全自主的智能体提高了增量地构构建其能力以及在不需要人为的提供数据集、任务边界或reward shaping的情况下解决在丰富(rich)、复杂的环境中表示它的挑战的潜力。
 相反，随着智能体能力的提升，它会考虑增加任务的复杂性。
@@ -49,7 +51,7 @@ Brunskill and Li 得出了在终身学习中进行option discovery的样本复�
 我们也证明了独角兽可以轻而易举地：(A) 解决多种任务（没有依赖关系）以及 (B) 当任务相关时表现出协同效应。
 ![Figure 1](../image/Unicorn-structure.png "Unicorn structure")
 
-### Background
+## Background
 **Reinforcement Learning**(RL) 是一种计算框架，用于在不确定的序贯决策问题中做决策。
 强化学习问题被描述为一个Markov decision process (MDP)，定义为五元组 $<\mathcal{S}, \mathcal{A}, r, \mathcal{P}, \gamma>$，其中 $\mathcal{S}$ 表示状态集，$\mathcal{A}$ 表示动作集，
 $r\ :\ \mathcal{S} \times \mathcal{A} \rightarrow \mathbb{R}$ 表示奖励函数，$\mathcal{P}\ :\ \mathcal{S} \times \mathcal{A} \times \mathcal{S} \rightarrow [0,1]$ 表示转移概率分布，
@@ -81,7 +83,7 @@ $\delta_t = Z_t - Q(s_t, a_t)$ 表示的是时间差分误差(TD误差)。
 每组实验定 $K$ 个离散的任务 ${\tau_1, \tau_2, \cdots, \tau_K}$。
 在迁移实验中，任务被分为$K'$个训练任务和 $K - K'$ 个hold-out任务。
 
-### Unicorn
+## Unicorn
 这一节将介绍Unicorn智能体结构，为了促进持续学习它具有以下性能：
 *(A):* 智能体应该具有同时学习多个任务的能力，以及在不断遇到的新任务的领域学习的能力。
 我们使用联合并行训练设置，让不同的actor完成不同的任务以达到这个性能。
@@ -92,7 +94,7 @@ $\delta_t = Z_t - Q(s_t, a_t)$ 表示的是时间差分误差(TD误差)。
 例如，一个actor是以door为目标的，有时候它打开了一个门，但随后错误的打开了一个chest（柜子）。
 对于以door为目标的actor来说，这是一个无关紧要的event（因为没有奖励），但是当学习关于chest的任务时，这个相同的event是highly interesting的，因为它是一个罕见的non-zero奖励的transition。
 
-#### Value function architecture
+### Value function architecture
 Unicorn agent的一个关键部分就是UVFA，它是一个是用来学习逼近 $Q(s,a;g)$ 的逼近器，例如神经网络。
 这个逼近器的强大之处在于它能以信号目标 $g$ 为条件。
 这就使得UVFA可以同时学习多个任务，而任务本身的难度可能也不尽相同（例如，具有深度依赖关系的任务）。
@@ -104,11 +106,11 @@ LSTM的输出与一个“inventory stack”连接在一起，形成与目标无�
 关于这个网络和超参数的进一步的细节可以在附录A中找到。
 ![Figure 1](../image/UVFA结构图.png "Unicorn structure")
 
-#### Behaviour policy
+### Behaviour policy
 在每一个episode开始时，以均匀分布采样得到目标信号 $g_i$，并在整个episode中保持不变。
 在当前目标信号 $g_i$ 上以UVFA为条件执行 $\epsilon - greedy$ 策略：以 $\epsilon$ 的概率从 $\mathcal{A}$ 中均匀采样动作 $a_t$，否则 $a_t = \mathop{argmax}\limits_{a} Q(s_t, a; g_i)$。
 
-#### Off-policy multi-task learning
+### Off-policy multi-task learning
 Unicorn的另一个关键的部分是学习多任务off-policy的能力。
 因此，即使它对于特定的任务使用on-policy，它仍然可以并行的从共享的experience中学习其他任务。
 具体地，当从一个transitions的序列中学习的时候，在训练集中对于所有的目标信号 $g_i$ 进行 Q-values的估计，
@@ -125,7 +127,7 @@ $$
 $$
 
 
-#### Parallel agent implememtation
+### Parallel agent implememtation
 为了有效地训练这样一个系统，我们采用一个由多个actor组成的并行的智能体，每一个actor单独运行在一个机器上（CPU），生成一个与环境交互的序列，以及一个单独的learner（GPU机器），
 它从一个queue中取出一些experience，处理成一个mini-batch，然后更新value网络。
 这与最近提出的Importance Weighted Actor-Learner Architecture agent 类似。

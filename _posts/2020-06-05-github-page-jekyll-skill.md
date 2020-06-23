@@ -5,8 +5,11 @@ date:   2020-06-05 14:41:00 +0800
 categories: Tools
 tags: GitHub E
 ---
+* content
+{:toc}
 
-### Markdown
+## Markdown
+### 图片居中
 > Q: 在GitHub Page和Jekyll中如何让图片或者文字居中显示？ 
  
 ```
@@ -19,6 +22,7 @@ tags: GitHub E
 
 
 
+### 相对路径
 > Q: 如何在GitHub Page上用相对路径引用图片？
 
 在GitHub Page和Jekyll上引用图片时，使用相对地址相对来说很方便，例如，一般地，若图片与md文件在同级目录下时，可以使用 `./` 来表示；

@@ -1,0 +1,21 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+  <li><a href="#abstract" id="markdown-toc-abstract">Abstract</a></li>
+</ul>
+
+<h2 id="简介">简介</h2>
+<blockquote>
+  <p>2018 - Computer Science &gt; Machine Learning - arXiv - DeepMind<br />
+Author: Daniel J. Mankowitz, Augustin Žídek, André Barreto, Dan Horgan, Matteo Hessel, John Quan, Junhyuk Oh, Hado van Hasselt, David Silver, Tom Schaul<br />
+Link: <a href="https://arxiv.org/abs/1802.08294">原文链接</a></p>
+</blockquote>
+
+<h2 id="abstract">Abstract</h2>
+<p>一些real-word领域最好的描述是作为一个单任务来描述，但是对于其他领域来说，这种观点是有局限性的。
+相反，随着智能体的competence的提高，一些任务的复杂性也不断增加。
+在持续学习中（也称为终身学习），没有明确的任务边界或curricula。
+随着学习中的智能体变的越来越强大，持续学习仍然是阻碍快速进步的前沿领域之一。
+为了测试持续学习的能力，我们考虑一个具有挑战性的3D领域，该领域具有隐式的任务序列和稀疏的奖励。
+我们提出了一种新颖的智能体结构，“独角兽(Unicorn)”，它展示了强大的持续学习能力，并在上面提出的领域中超过了几种基线智能体的表现。
+智能体通过联合表示以及使用一个并行的off-policy的设定高效的学习多个策略来实现这一点。</p>
+:ET
