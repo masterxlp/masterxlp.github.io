@@ -11,8 +11,8 @@ author: Xlp
 
 ## 简介
 > Title: Proximal Policy Optimization Algorithms  
-> 2017 - Computer Science > Machine Learning - arXiv - OpenAI  
-> Author: John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov  
+> 2017 - Computer Science > Machine Learning - arXiv 
+> Author: OpenAI   
 > Link: [PPO](https://arxiv.org/abs/1707.06347)
 
 

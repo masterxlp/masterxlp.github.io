@@ -12,7 +12,7 @@ author: Xlp
 ## 简介
 > Title: General Value Function  
 > 2011 - International Foundation for Autonomous Agents and Multiagent Systems  
-> Author: Richard S. Sutton, Joseph Modayil, Michael Delp, Thomas Degris, Patrick M. Pilarski, Adam White  
+> Author: Richard S. Sutton, Joseph Modayil, etc.    
 > Link: [GVF](https://www.cs.swarthmore.edu/~meeden/DevelopmentalRobotics/horde1.pdf)
 
 

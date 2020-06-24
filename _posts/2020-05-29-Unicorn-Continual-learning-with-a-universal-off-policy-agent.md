@@ -11,8 +11,8 @@ author: Xlp
 
 ## 简介 
 > Title: Unicorn: Continual learning with a universal, off-policy agent  
-> 2018 - Computer Science > Machine Learning - arXiv - DeepMind  
-> Author: Daniel J. Mankowitz, Augustin Žídek, André Barreto, Dan Horgan, Matteo Hessel, John Quan, Junhyuk Oh, Hado van Hasselt, David Silver, Tom Schaul  
+> 2018 - Computer Science > Machine Learning - arXiv  
+> Author: DeepMind   
 > Link: [Unicorn](https://arxiv.org/abs/1802.08294)
 
 
