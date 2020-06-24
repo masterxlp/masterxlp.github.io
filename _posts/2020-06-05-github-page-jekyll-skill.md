@@ -48,7 +48,7 @@ author: Xlp
 :%s/string//ng
 ```
 
-- 统计字符串string在文件中出现的行数
+- 统计字符串string在文件file中出现的行数
 
 ```ruby
 cat file|grep -i string |wc -l

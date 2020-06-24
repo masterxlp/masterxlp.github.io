@@ -1,0 +1,60 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#01-markdown" id="markdown-toc-01-markdown">01. Markdown</a>    <ul>
+      <li><a href="#图片居中" id="markdown-toc-图片居中">图片居中</a></li>
+      <li><a href="#相对路径" id="markdown-toc-相对路径">相对路径</a></li>
+    </ul>
+  </li>
+  <li><a href="#02-vim" id="markdown-toc-02-vim">02. Vim</a>    <ul>
+      <li><a href="#统计字符串出现的次数" id="markdown-toc-统计字符串出现的次数">统计字符串出现的次数</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="01-markdown">01. Markdown</h2>
+<h3 id="图片居中">图片居中</h3>
+<blockquote>
+  <p>Q: 在GitHub Page和Jekyll中如何让图片或者文字居中显示？</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 图片居中显示
+&lt;div align="center"&gt;&lt;img src=[local path or http path]&gt;&lt;/div&gt;
+# 文字居中显示
+&lt;div align="center"&gt;[something you want to show here]&lt;/div&gt;
+</code></pre></div></div>
+
+<h3 id="相对路径">相对路径</h3>
+<blockquote>
+  <p>Q: 如何在GitHub Page上用相对路径引用图片？</p>
+</blockquote>
+
+<p>在GitHub Page和Jekyll上引用图片时，使用相对地址相对来说很方便，例如，一般地，若图片与md文件在同级目录下时，可以使用 <code class="highlighter-rouge">./</code> 来表示；
+若处于上一级目录时可使用 <code class="highlighter-rouge">../</code> 来表示。</p>
+
+<p>在我的结构中，当在内容页显示图片时，由于其地址为 “xxx/xxx/xxx/2020/06/23/IMPALA/”，图片的相对路径与“2020”处于同一级目录，所以，
+引用图片时的相对路径为 <code class="highlighter-rouge">../../../../</code>。</p>
+
+<h2 id="02-vim">02. Vim</h2>
+<h3 id="统计字符串出现的次数">统计字符串出现的次数</h3>
+
+<ul>
+  <li>统计从m行到n行中，字符串string出现的次数</li>
+</ul>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">:m</span><span class="p">,</span> <span class="n">ns</span><span class="o">/</span><span class="p">\</span><span class="o">&lt;</span><span class="n">string</span><span class="p">\</span><span class="o">&gt;</span><span class="sr">//</span><span class="n">gn</span>
+</code></pre></div></div>
+
+<ul>
+  <li>在当前编辑的文件中统计字符串string出现的次数</li>
+</ul>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">:%</span><span class="n">s</span><span class="o">/</span><span class="n">string</span><span class="o">/</span><span class="sr">/ng
+</span></code></pre></div></div>
+
+<ul>
+  <li>统计字符串string在文件file中出现的行数</li>
+</ul>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span> <span class="n">file</span><span class="o">|</span><span class="n">grep</span> <span class="o">-</span><span class="n">i</span> <span class="n">string</span> <span class="o">|</span><span class="n">wc</span> <span class="o">-</span><span class="n">l</span>
+</code></pre></div></div>
+
+:ET
