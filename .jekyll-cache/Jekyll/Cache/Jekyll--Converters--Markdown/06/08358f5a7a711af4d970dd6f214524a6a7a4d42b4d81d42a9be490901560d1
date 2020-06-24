@@ -1,11 +1,11 @@
-I"�<ul id="markdown-toc">
-  <li><a href="#markdown" id="markdown-toc-markdown">Markdown</a>    <ul>
+I"�<ul id="markdown-toc">
+  <li><a href="#01-markdown" id="markdown-toc-01-markdown">01. Markdown</a>    <ul>
       <li><a href="#图片居中" id="markdown-toc-图片居中">图片居中</a></li>
     </ul>
   </li>
 </ul>
 
-<h2 id="markdown">Markdown</h2>
+<h2 id="01-markdown">01. Markdown</h2>
 <h3 id="图片居中">图片居中</h3>
 <blockquote>
   <p>Q: 在GitHub Page和Jekyll中如何让图片或者文字居中显示？</p>

@@ -1,15 +1,15 @@
 ---
 layout: post
-title:  "[E] GitHub Page and Jekyll Skill"
+title:  "[E] The Important Skill for Everything."
 date:   2020-06-05 14:41:00 +0800
-categories: Tools
-tags: GitHub E
+categories: Tools Command
+tags: SKILL E
 author: Xlp
 ---
 * content
 {:toc}
 
-## Markdown
+## 01. Markdown
 ### 图片居中
 > Q: 在GitHub Page和Jekyll中如何让图片或者文字居中显示？ 
  
@@ -31,3 +31,26 @@ author: Xlp
 
 在我的结构中，当在内容页显示图片时，由于其地址为 “xxx/xxx/xxx/2020/06/23/IMPALA/”，图片的相对路径与“2020”处于同一级目录，所以，
 引用图片时的相对路径为 `../../../../`。
+
+
+## 02. Vim
+### 统计字符串出现的次数
+
+- 统计从m行到n行中，字符串string出现的次数
+
+```ruby
+:m, ns/\<string\>//gn
+```
+
+- 在当前编辑的文件中统计字符串string出现的次数
+
+```ruby
+:%s/string//ng
+```
+
+- 统计字符串string在文件中出现的行数
+
+```ruby
+cat file|grep -i string |wc -l
+```
+
