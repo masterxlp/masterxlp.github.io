@@ -1,0 +1,168 @@
+I"�&<ul id="markdown-toc">
+  <li><a href="#abstract" id="markdown-toc-abstract">Abstract</a></li>
+  <li><a href="#说明" id="markdown-toc-说明">说明</a></li>
+  <li><a href="#impala-过程" id="markdown-toc-impala-过程">IMPALA 过程</a>    <ul>
+      <li><a href="#single-learner" id="markdown-toc-single-learner">Single Learner</a></li>
+      <li><a href="#multiple-synchronous-learners" id="markdown-toc-multiple-synchronous-learners">Multiple Synchronous Learners</a></li>
+    </ul>
+  </li>
+  <li><a href="#v-trace" id="markdown-toc-v-trace">V-Trace</a></li>
+  <li><a href="#actor-critic" id="markdown-toc-actor-critic">Actor-Critic</a>    <ul>
+      <li><a href="#critic更新" id="markdown-toc-critic更新">Critic更新</a></li>
+      <li><a href="#actor更新" id="markdown-toc-actor更新">Actor更新</a></li>
+      <li><a href="#熵" id="markdown-toc-熵">熵</a></li>
+    </ul>
+  </li>
+  <li><a href="#实验结果" id="markdown-toc-实验结果">实验结果</a></li>
+  <li><a href="#其他技术" id="markdown-toc-其他技术">其他技术</a></li>
+</ul>
+
+<p>转载自<a href="https://zhuanlan.zhihu.com/p/58226117">知乎</a></p>
+
+<h2 id="abstract">Abstract</h2>
+<blockquote>
+  <p>这篇文章提出了一个可用于大规模强化学习训练的框架 – IMPALA，其主要思想是通过大量的与训练无关的Actor来采集样本，将训练集中于Learner中，这样采样与训练便可以并行运行，
+该框架具有较高的性能、较好的扩展性以及较高的数据效率。</p>
+</blockquote>
+
+<blockquote>
+  <p>V-Trace 技术则是用来矫正由于采样与训练并行时导致的策略错位情况，通过V-Trace技术完成使用Off-Policy的样本进行训练的目的。</p>
+</blockquote>
+
+<h2 id="说明">说明</h2>
+<p>在文章中，各个符号具有以下含义：</p>
+<ul>
+  <li>$x_t$ ：状态</li>
+  <li>$a_t$ ：动作</li>
+  <li>$r_t$ ：奖励</li>
+  <li>$\mu(a_t \mid x_t)$ ：策略分布</li>
+</ul>
+
+<h2 id="impala-过程">IMPALA 过程</h2>
+
+<div align="center"><img src="../../../../image/impala.png" width="60%" height="60%" /></div>
+
+<h3 id="single-learner">Single Learner</h3>
+<p>在single learner模式中，learner的主要作用是通过获取actor采样的轨迹进行SGD以更新各个神经网络的参数，在文章中，learner单独使用一块GPU进行训练。
+而actor则是定期的从learner中获取最新的神经网络参数（最新的策略），并以此参数在自己独立的模拟环境（一个actor对于一个独立的模拟环境）中进行采样，
+并把自己采集到的轨迹 $\lbrace x_t, a_t, r_t, \mu(a_t|x_t) \rbrace$ 通过 queue 传递给learner以供learner进行下一轮的参数更新。
+由于模拟环境的运行通常不便于做并行，因此actor一般使用CPU。</p>
+
+<h3 id="multiple-synchronous-learners">Multiple Synchronous Learners</h3>
+<p>当训练规模进一步扩大时，考虑使用multiple synchronous learners模式，它使用多个learner（每个learner使用一块GPU），每个learner有配合多个actor（CPU）。
+每个learner只从它们自己的actor群中获取样本进行参数的更新。
+但是，learner之间可以定期交换梯度用于进行网络更新。
+与single learner一样，actor会定期的从任意learner上获取最新的网络参数（策略）。</p>
+
+<p>IMPALA中的actor和learner相互异步工作，极大提高了时间利用率</p>
+
+<p>文章与Batched A2C做了对比，如图2所示。</p>
+
+<div align="center"><img src="../../../../image/batcha2c-impala.png" width="60%" height="60%" /></div>
+
+<p>图2(a)中，正向传播和反向传播都凑成一批来做，因此每一步都需要同步，而模拟环境各步所需时间的方差却很大，这样就导致了浪费大量的时间在做等待；
+图2(b)中，只把耗时较长的反向传播凑层一批来做，而正向传播就给各个actor自己做，这样还是有一部分的时间浪费在了等待上；
+图2(c)中，IMPALA则完全把actor和learner分开，异步进行，这样actor不用去等待别的actor，可以尽量多的做采样，这是以牺牲每次得到的on-policy样本实现的。
+为了对off-policy的样本做矫正，使得off-policy的样本可以用于learner的训练，作者提出了V-Trance技术。</p>
+
+<h2 id="v-trace">V-Trace</h2>
+<p>算法需要根据采样得到的样本来维护一个状态价值函数 $V_\theta (x)$。
+V-Trace的目的是根据采样到的 $\lbrace x_t, a_t, r_t, \mu(a_t \mid x_t) \rbrace$ 和当前状态价值函数网络来给出当前状态价值函数的一个更好的估计 $v_s$（$s$ 下标表示他是其中的一个样本），
+这样价值神经网络就可以把它作为一个更新的目标来更新权重。</p>
+
+<p>$v_s$ 的表达式被定义为：</p>
+
+\[\begin{align}
+&amp;v_s \doteq V(x_s) + \sum_{t=s}^{s+n-1} \gamma^{t-s} (\prod_{i=s}^{t-1} c_i) \delta_t V \\
+&amp;\delta_t V \doteq \rho_t (r_t + \gamma V(x_{t+1} - V(x_t))) \\
+&amp;\rho_t \doteq min(\bar{\rho}, \frac{\pi(a_t \mid x_t)}{\mu(a_t \mid x_t)}) \\
+&amp;c_i \doteq min(\bar{c}, \frac{\pi(a_i \mid x_i)}{\mu(a_i \mid x_i)})\ such\ that\ \bar{\rho} &gt;= \bar{c}
+\end{align}\]
+
+<p>其中，$\delta_t V$ 是 $V$ 的一个时间差分（temporal difference），$\rho_t$ 和 $c_i$ 是截断的重要性采样权重（truncated importance sampling weights）。
+另外，当 $s = t$ 时，我们令 $\prod_{i=s}^{t-1} c_i = 1$；且截断满足 $\bar{\rho} &gt;= \bar{c}$。</p>
+
+<p>它具有如下性质：</p>
+
+<ul>
+  <li>状态价值函数 $V_\theta(x)$ 每次向 $v_s$ 上更新，最后都能够收敛</li>
+  <li>状态价值函数 $V_\theta(x)$ 每次向 $v_s$ 上更新，收敛到的状态价值函数时介于 $V^\pi$ 和 $V^\mu$ 之间的某个价值函数，我们记该价值函数为 $V^{\pi_{\bar{\rho}}}$，该价值函数对于的策略表示为</li>
+</ul>
+
+\[\begin{align}
+\pi_{\bar{\rho}}(a \mid x) \doteq \frac{min(\bar{\rho} \mu(a \mid x), \pi(a \mid x))}{\sum_{b \in A} min(\bar{\rho} \mu(b \mid x), \pi(b \mid x))}
+\end{align}\]
+
+<ul>
+  <li>为了避免 importance weight 发散，需要加上相应的上界</li>
+  <li>参数 $\bar{\rho}$ 决定了收敛到的不动点的位置</li>
+  <li>$\bar{c}$ 和 $\bar{\rho}$ 决定了收敛的速率</li>
+  <li>在 on-policy 的情况下，如果 $\bar{\rho} &gt;= \bar{c} &gt;= 1$ 的话，那么 $v_s$ 就退化为了 on-policy n-steps Bellman target</li>
+</ul>
+
+<h2 id="actor-critic">Actor-Critic</h2>
+<p>在IMPALA中需要维护两个神经网络，一个是策略神经网络（用作actor），一个是状态价值函数网络（用作critic）。</p>
+
+<h3 id="critic更新">Critic更新</h3>
+<p>Critic的更新方式为最小化拟合的价值函数 $V_\theta(x_s)$ 相对于目标价值函数 $v_s$ 的均方误差，即朝着如下的方向进行更新：</p>
+
+\[\begin{align}
+(v_s - V_\theta(x_s))\nabla_\theta V_\theta(x_s)
+\end{align}\]
+
+<h3 id="actor更新">Actor更新</h3>
+<p>Actor朝着off-policy的policy gradient给出的方向更新，即</p>
+
+\[\begin{align}
+\mathbb{E}_\mu [\nabla log \mu(a_s \mid x_s) Q^\mu (x_s, a_s)]
+\end{align}\]
+
+<p>我们更新的目标策略是 $\pi$，而不是策略 $\mu$，因此要做代换 $\mu \rightarrow (\frac{\mu}{\pi})\pi$，我们把括号中的 $\frac{\mu}{\pi}$ 当作系数，
+把 $\pi$ 当作变量，有：</p>
+
+\[\begin{align}
+\mathbb{E}_\mu [\nabla log \mu(a_s \mid x_s) Q^\mu(x_s, a_s)] &amp;= \mathbb{E}_\mu [\frac{1}{\frac{\mu}{\pi}\pi} \nabla_\pi Q^\pi(x_s, a_s)] \\
+&amp;= \mathbb{E}_\mu [\frac{\pi(a_s \mid x_s)}{\mu(a_s \mid x_s)} \nabla log \pi Q^\pi(x_s, a_s)]
+\end{align}\]
+
+<p>因为有：</p>
+
+<ul>
+  <li>$\frac{\pi(a_s \mid x_s)}{\mu(a_s \mid x_s)}$ 容易发散，所以，我们做一个替换 $\frac{\pi_{\bar{\rho}}(a_s \mid x_s)}{\mu(a_s \mid x_s)} \propto min(\bar{\rho}, \frac{\pi(a_s \mid x_s)}{\mu(a_s \mid x_s)}) = \rho_s$</li>
+  <li>$Q^\pi$ 无法进行估计，而我们只能估计到 $Q^{\pi_{\bar{\rho}}}$，所以，使用 $r_s + \gamma v_{s+1}$ 作为估计</li>
+  <li>使用baseline来减少误差，所以减去 $V_\theta(x_s)$</li>
+</ul>
+
+<p>所以，最后actor的更新可以写为：</p>
+
+\[\begin{align}
+\rho_s \nabla_\omega log \pi_\omega(a_s \mid x_s) (r_s + \gamma v_{s+1} - V_\theta(x_s))
+\end{align}\]
+
+<h3 id="熵">熵</h3>
+<p>最后添加熵项以鼓励探索，因此最后得到的算法的更新公式为：</p>
+
+\[\begin{align}
+-\nabla_\omega \sum_a \pi_\omega(a \mid x_s) log \pi_\omega (a \mid x_s)
+\end{align}\]
+
+<h2 id="实验结果">实验结果</h2>
+<p>文中的实验主要说明了一下几点：</p>
+
+<ul>
+  <li>相比于A3C和batched A2C，IMPALA具有更好的高性能计算</li>
+  <li>单任务训练相比于分布式A3C、单机A3C和batched A2C有更好的性能，并且对于超参数更稳定</li>
+  <li>V-trance相比于no correction、$\epsilon-$ correction、one step importance sampling有更好的效果（ablation study），其中no correction 值的是样本为on-policy样本，$\epsilon-$ correction 指的是仅仅在计算 $log \pi$ 时加上一个很小的数值以防止不稳定</li>
+  <li>训练单一智能体去完成多个任务</li>
+</ul>
+
+<h2 id="其他技术">其他技术</h2>
+<p>在这种大规模训练中，为了避免训练的这一波陷入局部极小值点，采用了population based training (PBT)方法。
+每次训练若干个智能体，每隔一段时间剔除表现不好的，并且对表现较好的只能进进行mutation（通常是扰动一下超参数组合）。
+通过这种方法，可以保证长达几天的训练结束后能够得到好的结果。</p>
+
+<p>通过这种方法，学习率会随着学习进度自然而然的慢慢减小，这和很大算法里面的linear scheduled learning rate的trick不谋而合。</p>
+
+<div align="center"><img src="../../../../image/IMPALA-PBT.png" width="60%" height="60%" /></div>
+
+:ET
