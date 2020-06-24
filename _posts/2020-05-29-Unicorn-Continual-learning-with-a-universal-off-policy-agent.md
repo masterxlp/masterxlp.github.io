@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[A] Unicorn: Continual learning with a universal, off-policy agent"
+title:  "[A] Unicorn Translation"
 date:   2020-05-29 14:28:00 +0800
 categories: RL MultiTask
 tags: UVFA variant A
@@ -10,9 +10,14 @@ author: Xlp
 {:toc}
 
 ## 简介 
+> Title: Unicorn: Continual learning with a universal, off-policy agent  
 > 2018 - Computer Science > Machine Learning - arXiv - DeepMind  
 > Author: Daniel J. Mankowitz, Augustin Žídek, André Barreto, Dan Horgan, Matteo Hessel, John Quan, Junhyuk Oh, Hado van Hasselt, David Silver, Tom Schaul  
-> Link: [原文链接](https://arxiv.org/abs/1802.08294)
+> Link: [Unicorn](https://arxiv.org/abs/1802.08294)
+
+
+
+
 
 ## Abstract
 一些real-word领域最好的描述是作为一个单任务来描述，但是对于其他领域来说，这种观点是有局限性的。
@@ -22,10 +27,6 @@ author: Xlp
 为了测试持续学习的能力，我们考虑一个具有挑战性的3D领域，该领域具有隐式的任务序列和稀疏的奖励。
 我们提出了一种新颖的智能体结构，“独角兽(Unicorn)”，它展示了强大的持续学习能力，并在上面提出的领域中超过了几种基线智能体的表现。
 智能体通过联合表示以及使用一个并行的off-policy的设定高效的学习多个策略来实现这一点。
-
-
-
-
 
 ## Introduction
 持续学习，是一种利用之前获得的知识或技巧的方式从有关连续任务的经验中学习的方法，它一直是人工智能领域的一个长期挑战。

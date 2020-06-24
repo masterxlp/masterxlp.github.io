@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[A] Proximal Policy Optimization Algorithms"
+title:  "[A] PPO Translation"
 date:   2020-05-21 14:48:00 +0800
 categories: RL
 tags: PPO A
@@ -10,9 +10,13 @@ author: Xlp
 {:toc}
 
 ## 简介
+> Title: Proximal Policy Optimization Algorithms  
 > 2017 - Computer Science > Machine Learning - arXiv - OpenAI  
 > Author: John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov  
-> Link: [原文链接](https://arxiv.org/abs/1707.06347)
+> Link: [PPO](https://arxiv.org/abs/1707.06347)
+
+
+
 
 ## Abstract
 
@@ -20,9 +24,6 @@ author: Xlp
 与每采样一次数据就进行一次梯度更新的standard策略梯度方法不同，我们提出了一种新颖的目标函数，可以实现多个epochs的小批量更新。
 这个新方法我们把它称为**近端策略优化**（proximal policy optimization, ppo），该方法拥有置信域策略优化（TRPO）的部分优势，但是该方法有具有比TRPO更易实现、更一般化、以及更优的样本复杂性的优点。
 我们在一组benchmark的任务中测试了PPO算法，包括仿真机器人运动（simulated robotic locomotion）和Atari游戏，实验结果表明PPO比其他在线策略梯度表现的都要好，总体上在样本的复杂性、简易性以及有效性之间达到了一个有效的平衡。
-
-
-
 
 ## Introduction
 

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "[C] Multi-Objective Related"
+title:  "[C] Wuji Architecture"
 date:   2020-06-03 10:33:00 +0800
-categories: RL MultiObj
+categories: RL MultiObj Supervised-Learning
 tags: OverView C
 author: Xlp
 ---

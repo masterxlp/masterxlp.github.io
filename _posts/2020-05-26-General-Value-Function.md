@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "[A] General Value Function"
+title:  "[A] GVF Translation"
 date:   2020-05-26 17:56:00 +0800
 categories: RL MultiTask
 tags: Horde GVF A
@@ -10,9 +10,14 @@ author: Xlp
 {:toc}
 
 ## 简介
+> Title: General Value Function  
 > 2011 - International Foundation for Autonomous Agents and Multiagent Systems  
 > Author: Richard S. Sutton, Joseph Modayil, Michael Delp, Thomas Degris, Patrick M. Pilarski, Adam White  
-> Link: [原文链接](https://www.cs.swarthmore.edu/~meeden/DevelopmentalRobotics/horde1.pdf)
+> Link: [GVF](https://www.cs.swarthmore.edu/~meeden/DevelopmentalRobotics/horde1.pdf)
+
+
+
+
 
 ## ABSTRACT
 对于机器人和其他人工智能系统来说，在复杂多变的环境中保持精确的 "world knowledge" 是一个一直以来就存在的问题。
@@ -24,9 +29,6 @@ author: Xlp
 Horde在固定的时间和内存中运行，因此，它适合在像机器人等实时应用程序中进行在线学习。
 我们在一个多传感器的移动机器人上展示了使用“Horde”成功从离策略经验中学习以目标为导向的行为和远期预测的结果。
 Horde是迈向实时架构的重要一步，可以有效地从无监督的 sensorimotor interaction 中学习一般化的知识。
-
-
-
 
 ## THE PROBLEM OF EXPRESSIVE AND LEARNABLE KNOWLEDGE
 如何学习、表示以及使用一般意义上的world knowledge，仍是人工智能(AI)中的一个关键的开放性的问题。
