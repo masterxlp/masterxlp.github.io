@@ -1,9 +1,0 @@
-I"�<h2 id="d-multi-task-learning">[D] Multi-Task Learning</h2>
-<blockquote>
-  <p>多任务学习(MTL)是同时学习多个相关任务，旨在通过使用多个任务共享的相关信息获得更好的性能，其原理是通过利用任务相关性结构在所有任务的联合假设空间中引入归纳偏差。
-它还可以防止单个任务中的过度适应，从而具有更好的泛化能。</p>
-</blockquote>
-
-<p><code class="highlighter-rouge">定义2.1</code> <strong>多任务学习(MTL)</strong> 是关于同时学习多个任务 $T = {1, 2, \cdots, N}$ 的过程。
-每个任务 $t \in T$ 有自己的训练数据 $D_t$，其目标是使所有任务的性能最大化。</p>
-:ET
