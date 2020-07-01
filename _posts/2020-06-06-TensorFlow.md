@@ -19,7 +19,7 @@ author: Xlp
 ### 原理
 LSTM可处理序列式的数据，其每个cell是由三种门限机制组成的，详见图1.
 
-<div align="center"><img src="../../../../image/LSTM结构图.png" width="60%" height="60%"></div>
+<div align="center"><img src="../../../../image/LSTM结构.png" width="60%" height="60%"></div>
 <div align="center">图1. LSTM cell结构图</div>
 
 <div align="center"><img src="../../../../image/LSTM中的符号说明.png" width="60%" height="60%"></div>
