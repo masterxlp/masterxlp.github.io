@@ -134,16 +134,35 @@ Returns:
 
 ```
 # 常量初始化函数
-tf.constant_initializer()
+tf.constant_initializer(
+    value = 0,                                    # 可以是python数值、列表、元组、N维数组，初始化变量为参数value定义的数值，当value为list类型时，其shape必须与需初始化的variable的shape相同
+)
 
 # 满足正态分布的初始化
-tf.random_normal_initializer()
+                                                  # 用于生成满足高斯分布（默认为标准高斯分布）的初始化值
+tf.random_normal_initializer(
+    mean = 0.0,                                   # 服从的正太分布的均值，一个 python 标量或一个标量张量
+    stddev = 1.0,                                 # 服从的正太分布的标准差，一个 python 标量或一个标量张量
+    seed = None,                                  # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,                           # 生成的数据的数据类型，只支持浮点数类型
+)
 
 # 满足截取的正太分布的初始化
-tf.truncated_normal_initializer()
+                                                  # 用于生成满足阶段的高斯分布（默认为标准高斯分布）的初始化值，该截断表现为：当生成的值超过两个标准差时就会被丢弃，重新生成
+tf.truncated_normal_initializer(
+    mean = 0.0,                                   # 服从的正太分布的均值，一个 python 标量或一个标量张量
+    sttddev = 1.0,                                # 服从的正太分布的标准差，一个 python 标量或一个标量张量
+    seed = None,                                  # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,                           # 生成的数据的数据类型，只支持浮点数类型
+)
 
-# 满足均匀分布的初始化
-tf.random_uniform_initializer()
+# 满足均匀分布的初始化                               # 用于生成具有均匀分布的张量的初始化器
+tf.random_uniform_initializer(
+    minval = 0,                                   # 生成随机值范围的下限，为一个python标量或一个标量张量
+    maxval = None,                                # 生成随机值范围的上限，对浮点数默认为1.0，为一个python标量或一个标量张量
+    seed = None,                                  # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,                           # 生成的数据的数据类型
+)
 
 # 满足均匀分布，但不影响输出数量级的随机值初始化
 tf.uniform_unit_scaling_initializer()
