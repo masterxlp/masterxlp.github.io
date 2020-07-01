@@ -1,30 +1,27 @@
----
-layout: post
-title:  "[G] LeetCode"
-date:   2020-07-1 11:23:00 +0800
-categories: Algorithm
-tags: 答题记录 方法总结 G
-author: Xlp
----
-* content
-{:toc}
+I"J"<ul id="markdown-toc">
+  <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
+      <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
+      <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
+      <li><a href="#我的解题思路及代码" id="markdown-toc-我的解题思路及代码">我的解题思路及代码</a></li>
+      <li><a href="#其他方法" id="markdown-toc-其他方法">其他方法</a></li>
+    </ul>
+  </li>
+</ul>
 
-> 题目来自：[LeetCode](https://leetcode.com/)、[LeetCode-cn](https://leetcode-cn.com/)  
-> 该部分主要包含本人对LeetCode题目的自答以及题解社区中的优质回答的综述，包括代码和解题思路  
+<blockquote>
+  <p>题目来自：<a href="https://leetcode.com/">LeetCode</a>、<a href="https://leetcode-cn.com/">LeetCode-cn</a><br />
+该部分主要包含本人对LeetCode题目的自答以及题解社区中的优质回答的综述，包括代码和解题思路</p>
+</blockquote>
 
-
-
-
-## 寻找两个正序数组的中位数
-### 题目描述
-给定两个大小为 m 和 n 的正序数组 nums1 和 nums2。
+<h2 id="寻找两个正序数组的中位数">寻找两个正序数组的中位数</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给定两个大小为 m 和 n 的正序数组 nums1 和 nums2。
 请找出这两个正序数组的中位数，并且要求算法的时间复杂度为 $O(log(m+n))$。
-假设 nums1 和 nums2 不会同时为空。
+假设 nums1 和 nums2 不会同时为空。</p>
 
-### 示例
+<h3 id="示例">示例</h3>
 
-```
-// 示例1
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 示例1
 
 nums1 = [1,3]
 nums2 = [2]
@@ -37,19 +34,18 @@ nums1 = [1,2]
 nums2 = [3,4]
 
 则中位数是 (2 + 3) / 2 = 2.5
-```
+</code></pre></div></div>
 
-### 我的解题思路及代码
-首先，能最快想到的就是暴力法，即对数组中的所有值进行重新排序，然后取中位数，但是该方法的时间复杂度最差时为 $O(m+n)$，不满足题目中的时间复杂度的要求。
-但是，只是为了寻找中位数，因此，不必进行完全排序，只需进行 $\frac{m+n}{2}$ 次的排序即可。
+<h3 id="我的解题思路及代码">我的解题思路及代码</h3>
+<p>首先，能最快想到的就是暴力法，即对数组中的所有值进行重新排序，然后取中位数，但是该方法的时间复杂度最差时为 $O(m+n)$，不满足题目中的时间复杂度的要求。
+但是，只是为了寻找中位数，因此，不必进行完全排序，只需进行 $\frac{m+n}{2}$ 次的排序即可。</p>
 
-又注意到，假设 nums1 和 nums2 不会同时为空，因此，必然存在一种情况那就是，nums1 和 nums2 其中一个为空的情况，且 num1 和 num2 本身是有序的。
+<p>又注意到，假设 nums1 和 nums2 不会同时为空，因此，必然存在一种情况那就是，nums1 和 nums2 其中一个为空的情况，且 num1 和 num2 本身是有序的。
 因此，第一种情况是：num1 和 num2 有一个为空，这时寻找中位数其实就是不为空的那个数组的中间值，时间复杂度为 $O(1)$。
 第二种情况是：num1 和 num2 均不为空，这时我们最差只需要寻找 $\frac{m+n}{2}$ 次即可找到。
-具体见代码。
+具体见代码。</p>
 
-```
-def findMedianSortedArrays(nums1, nums2):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def findMedianSortedArrays(nums1, nums2):
     nums1_len = len(nums1)
     nums2_len = len(nums2)
     
@@ -77,11 +73,11 @@ def findMedianSortedArrays(nums1, nums2):
         for i in range(num):
             num1 = nums1[a]
             num2 = nums2[b]
-            # 分情况讨论：num1 < num2 和 num1 > num2，这两种情况时对称的，解决一个另外一个也就解决了
-            if num1 < num2:
+            # 分情况讨论：num1 &lt; num2 和 num1 &gt; num2，这两种情况时对称的，解决一个另外一个也就解决了
+            if num1 &lt; num2:
                 a += 1
                 # 讨论：当某一个数组的索引超过其最大限度但还未停止寻找
-                if a >= nums1_len and i < num - 1:
+                if a &gt;= nums1_len and i &lt; num - 1:
                     if type(index) is int:
                         r = nums2[b + num - i - 1]
                         break
@@ -89,7 +85,7 @@ def findMedianSortedArrays(nums1, nums2):
                         r = float((nums2[b + num - i - 1] + nums2[b + num - i - 2]) / 2)
                         break
                 # 讨论：当某一个数组的索引超过其最大限度但已到达停止寻找的条件
-                elif a >= nums1_len and i == num - 1:
+                elif a &gt;= nums1_len and i == num - 1:
                     if type(index) is int:
                         r = float(max(num1, num2))
                         break
@@ -97,47 +93,48 @@ def findMedianSortedArrays(nums1, nums2):
                         r = float((num1 + num2) / 2)
                         break
                 # 讨论：当某一个数组的索引未超过其最大限度但已到达停止寻找的条件
-                elif i == num - 1 and a < nums1_len:
+                elif i == num - 1 and a &lt; nums1_len:
                     f_num1 = nums1[a]
-                    num2 = num2 if f_num1 > num2 else f_num1
+                    num2 = num2 if f_num1 &gt; num2 else f_num1
             else:
                 b += 1
-                if b >= nums2_len and i < num - 1:
+                if b &gt;= nums2_len and i &lt; num - 1:
                     if type(index) is int:
                         r = nums1[a + num - i - 1]
                         break
                     else:
                         r = float((nums1[a + num - i - 1] + nums1[a + num - i - 2]) / 2)
                         break
-                elif b >= nums2_len and i == num - 1:
+                elif b &gt;= nums2_len and i == num - 1:
                     if type(index) is int:
                         r = float(max(num1, num2))
                         break
                     else:
                         r = float((num1 + num2) / 2)
                         break
-                elif i == num - 1 and b < nums2_len:
+                elif i == num - 1 and b &lt; nums2_len:
                     f_num2 = nums2[b]
-                    num1 = num1 if f_num2 > num1 else f_num2
+                    num1 = num1 if f_num2 &gt; num1 else f_num2
             if i == num - 1:
                 if type(index) is int:
                     r = float(max(num1, num2))
                 else:
                     r = float((num1 + num2) / 2)
         return r
-```
+</code></pre></div></div>
 
-### 其他方法
-二分查找：目标是找到一条分割线，该分割线两边的元素满足一下两个条件：  
-- 满足分割线两边元素个数的关系：当 $m + n$ 为奇数时，分割线左边的元素个数比分割线右边的元素个数多一个；当 $m + n$ 为偶数时，分割线两边的元素的个数相等；
-- 满足交叉小于等于关系：第一个数组分割线左边的第一个元素的数值要小于第二个数组分割线右边的第一个元素的数值；第二个数组分割线左边的第一个元素的数值也要小于第一个数组分割线右边的第一个元素的数值；
+<h3 id="其他方法">其他方法</h3>
+<p>二分查找：目标是找到一条分割线，该分割线两边的元素满足一下两个条件：</p>
+<ul>
+  <li>满足分割线两边元素个数的关系：当 $m + n$ 为奇数时，分割线左边的元素个数比分割线右边的元素个数多一个；当 $m + n$ 为偶数时，分割线两边的元素的个数相等；</li>
+  <li>满足交叉小于等于关系：第一个数组分割线左边的第一个元素的数值要小于第二个数组分割线右边的第一个元素的数值；第二个数组分割线左边的第一个元素的数值也要小于第一个数组分割线右边的第一个元素的数值；</li>
+</ul>
 
-第一个条件是由中位数的特性决定的：中位数实际上就是在有序数组最中间的那个数，中位数两边的数值是相等的（不包含中位数本身）。
-第二个条件是由有序数组决定的，该方法成立的条件也是：两个数组必须为有序数组。
+<p>第一个条件是由中位数的特性决定的：中位数实际上就是在有序数组最中间的那个数，中位数两边的数值是相等的（不包含中位数本身）。
+第二个条件是由有序数组决定的，该方法成立的条件也是：两个数组必须为有序数组。</p>
 
-```
-def findMedianSortedArrays(nums1, nums2):
-    if len(nums1) > len(nums2):
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def findMedianSortedArrays(nums1, nums2):
+    if len(nums1) &gt; len(nums2):
         return findMedianSortedArrays(nums2, nums1)
 
     # 定义一个极大、极小数，以应对分割线的左边或右边没有数可比较的情况
@@ -155,9 +152,9 @@ def findMedianSortedArrays(nums1, nums2):
     # 1. 定义：分割线在第一个数组右边的第一个元素的下标 i = 分割线在第一个数组左边的元素的个数
     #         分割线在第二个数组右边的第一个元素的下标 j = 分割线在第二个数组左边的元素的个数
     #    其中，i, j 满足：(m + n + 1) / 2 = i + j
-    # 2. 分割线需满足的条件为：nums1[i-1] <= nums2[j] && nums2[j-1] <= nums1[i]
+    # 2. 分割线需满足的条件为：nums1[i-1] &lt;= nums2[j] &amp;&amp; nums2[j-1] &lt;= nums1[i]
 
-    while left <= right:
+    while left &lt;= right:
         i = (left + right) // 2
         j = totalLeft - i
 
@@ -166,59 +163,13 @@ def findMedianSortedArrays(nums1, nums2):
         nums_jm1 = -infinty if j == 0 else nums2[j-1]       # 第二个数组分割线左边的最大值
         nums_j = infinty if j == n else nums2[j]            # 第二个数组分割线右边的最小值
 
-        if nums_im1 <= nums_j:
+        if nums_im1 &lt;= nums_j:
             median1, median2 = max(nums_im1, nums_jm1), min(nums_i, nums_j)        # 第一个中位数为分割线左边的最大值，第二个中位数为分割线右边的最小值
             left = i + 1
         else:
             right = i - 1
 
     return (median1 + median2) / 2 if (m + n) % 2 == 0 else float(median1)
-```
+</code></pre></div></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+:ET
