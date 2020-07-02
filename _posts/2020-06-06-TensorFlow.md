@@ -156,7 +156,8 @@ tf.truncated_normal_initializer(
     dtype = tf.float32,                           # 生成的数据的数据类型，只支持浮点数类型
 )
 
-# 满足均匀分布的初始化                               # 用于生成具有均匀分布的张量的初始化器
+# 满足均匀分布的初始化                               
+                                                  # 用于生成具有均匀分布的张量的初始化器
 tf.random_uniform_initializer(
     minval = 0,                                   # 生成随机值范围的下限，为一个python标量或一个标量张量
     maxval = None,                                # 生成随机值范围的上限，对浮点数默认为1.0，为一个python标量或一个标量张量
@@ -165,7 +166,12 @@ tf.random_uniform_initializer(
 )
 
 # 满足均匀分布，但不影响输出数量级的随机值初始化
-tf.uniform_unit_scaling_initializer()
+                                                  # 可生成初始化张量但不会缩放方差，即初始化深度网络时，保持输入方差的比例不变，因此它不会因为到最后一层而迅速扩大或减少
+tf.uniform_unit_scaling_initializer(
+    factor = 1.0,                                 # 浮点型，乘法因子，其值将被缩放
+    seed = None,                                  # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,                           # 生成的数据的数据类型，仅支持浮点型
+)
 
 # 零初始化
 tf.zeros_initializer()
