@@ -1,0 +1,91 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#vi" id="markdown-toc-vi">Vi</a>    <ul>
+      <li><a href="#统计字符串在文本中出现的次数" id="markdown-toc-统计字符串在文本中出现的次数">统计字符串在文本中出现的次数</a></li>
+    </ul>
+  </li>
+  <li><a href="#grep命令" id="markdown-toc-grep命令">grep命令</a>    <ul>
+      <li><a href="#选项" id="markdown-toc-选项">选项</a></li>
+      <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>目的：对一些在日常工作中常用的命令进行记录、再学习，争取可以做到知其然，知其所以然 <br />
+涉及：涉及的范围包括但不限于Linux、Mac、Vi(m)等</p>
+</blockquote>
+
+<h2 id="vi">Vi</h2>
+<h3 id="统计字符串在文本中出现的次数">统计字符串在文本中出现的次数</h3>
+<p>在Linux系统上工作时，常常需要对日志文件进行分析、统计，这时就会涉及到想要统计某个字符串在文本中到底出现了多少次的需求。
+在vi中可以是通过以下命令来完成对字符串的统计：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 在整个文本中统计字符串出现的次数
+:%s/字符串//ng
+
+// 在整个文本的第m行到第n行统计字符串出现的次数
+// 注意：在vi中“&lt;&gt;”符号是需要转义才能使用
+:m,ns/\&lt;字符串\&gt;//gn
+
+// 当然也可以借助Linux命令来实现该功能
+// grep 统计字符串出现的行 wc -l 统计出现的次数
+cat filename | grep -i 字符串 | wc -l
+</code></pre></div></div>
+
+<h2 id="grep命令">grep命令</h2>
+<blockquote>
+  <p>内容来自<a href="https://wangchujiang.com/linux-command/c/grep.html">GitHub</a><br />
+grep (global search regualr expression adn print out the line, 全面搜索正则表达式并打印行) 是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
+</blockquote>
+
+<h3 id="选项">选项</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-B &lt;显示行数&gt;       --before-context=&lt;显示行数&gt;            // 除了显示符合表达式的那一行之外，额外显示指定的改行之前&lt;显示行数&gt;行的内容
+-C &lt;显示行数&gt;       --context=&lt;显示行数&gt;或-&lt;显示行数&gt;       // 除了显示符合表达式的那一行之外，额外显示指定的改行之后&lt;显示行数&gt;行的内容
+-d &lt;进行动作&gt;       --directories=&lt;动作&gt;                  // 当指定要查找的是目录而非文件时，必须使用该参数，否则grep命令将回报信息并停止动作
+-e &lt;范本样式&gt;       --regexp=&lt;范本样式&gt;                   // 指定字符串作为查找文件内容的范本样式
+-f &lt;范本文件&gt;       --file=&lt;规则文件&gt;                     // 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一行的范本样式
+-m &lt;num&gt;           --max-count=&lt;num&gt;                    // 找到num行之后停止查找，用来限制匹配的行数
+
+-c                 --count                              // 计算符合范式的总行数
+-E                 --extended-regexp                    // 将范本样式为延伸的普通表示法来使用，意味着能使用扩展正则表达式，使用正则表达式时，需要加此参数
+-F                 --fixed-regexp                       // 将范式样本视为固定的字符串的列表
+-G                 --basic-regexp                       // 将范式样本视为普通的表示法来使用
+-h                 --no-filename                        // 在显示符合范式样本的那一行之前，不标示该列所属的文件名称
+-H                 --with-filename                      // 在显示符合范式样本的那一行之前，标示该列所属的文件名称
+-i                 --ignore-case                        // 忽略字符大小写的差别
+-l                 --file-with-matches                  // 列出文件内容符合指定的范本样式的文件名称
+-L                 --file-without-match                 // 列出文件内容不符合指定的范本样式的文件名称
+-n                 --line-number                        // 在显示符合范式样例的那一行之前，标示出该行的编号
+-P                 --perl-regexp                        // Pattern 是一个 Perl 正则表达式
+-q                 --quiet或--silent                    // 不显示任何信息
+-R / -r            --recursive                          // 此参数的效果和 "-d recurse" 参数相同
+-s                 --no-messages                        // 不显示错误信息
+-v                 --revert-match                       // 反转查找
+-V                 --version                            // 显示版本信息
+-w                 --word-regexp                        // 只显示全字符合的行
+-x                 --line-regexp                        // 只显示全行符合的行
+-y                                                      // 此参数与 "-i" 相同
+-o                                                      // 只输出文件中匹配到的部分
+</code></pre></div></div>
+
+<h3 id="示例">示例</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 使用正则表达式 -E 选项
+// 返回结果：输出全部文本，对匹配到的信息加以标注
+echo I am a number 9. | grep -E "[1-9]+"                // I am a number 9（在测试中，数字 9 是通过红色标记出来的）
+
+// 使用只输出文件中匹配到的部分 -o 选项
+echo this is a test line. | grep -o -E "[a-z]+\."       // line.
+
+// 使用统计行数的选项 -c
+grep -c "全部" memory.txt                               // 50129
+
+// 使用显示行号的选项 -n
+grep "全部" -n memory.txt                               // 431871:id : 0, target goal: 全部，它与 grep -n "全部" memory.txt 一样
+
+// 使用选项 -e 来执行多次匹配
+echo this is a text line | grep -e "is" -e "line" -o   // is is line
+</code></pre></div></div>
+
+:ET
