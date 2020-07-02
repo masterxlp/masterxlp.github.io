@@ -1,51 +1,51 @@
----
-layout: post
-title:  "[G] The record of Common Command"
-date:   2020-07-02 09:50:00 +0800
-categories: Tools
-tags: Command G
-author: Xlp
----
-* content
-{:toc}
+I"<ul id="markdown-toc">
+  <li><a href="#vi" id="markdown-toc-vi">Vi</a>    <ul>
+      <li><a href="#01-统计字符串在文本中出现的次数" id="markdown-toc-01-统计字符串在文本中出现的次数">01. 统计字符串在文本中出现的次数</a></li>
+    </ul>
+  </li>
+  <li><a href="#grep命令" id="markdown-toc-grep命令">grep命令</a>    <ul>
+      <li><a href="#选项" id="markdown-toc-选项">选项</a></li>
+      <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
+    </ul>
+  </li>
+</ul>
 
-> 目的：对一些在日常工作中常用的命令进行记录、再学习，争取可以做到知其然，知其所以然   
-> 涉及：涉及的范围包括但不限于Linux、Mac、Vi(m)等  
+<blockquote>
+  <p>目的：对一些在日常工作中常用的命令进行记录、再学习，争取可以做到知其然，知其所以然 <br />
+涉及：涉及的范围包括但不限于Linux、Mac、Vi(m)等</p>
+</blockquote>
 
+<h2 id="vi">Vi</h2>
+<h3 id="01-统计字符串在文本中出现的次数">01. 统计字符串在文本中出现的次数</h3>
+<p>在Linux系统上工作时，常常需要对日志文件进行分析、统计，这时就会涉及到想要统计某个字符串在文本中到底出现了多少次的需求。
+在vi中可以是通过以下命令来完成对字符串的统计：</p>
 
-
-
-## Vi
-### 01. 统计字符串在文本中出现的次数
-在Linux系统上工作时，常常需要对日志文件进行分析、统计，这时就会涉及到想要统计某个字符串在文本中到底出现了多少次的需求。
-在vi中可以是通过以下命令来完成对字符串的统计：
-
-```
-// 在整个文本中统计字符串出现的次数
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 在整个文本中统计字符串出现的次数
 :%s/字符串//ng
 
 // 在整个文本的第m行到第n行统计字符串出现的次数
-// 注意：在vi中“<>”符号是需要转义才能使用
-:m,ns/\<字符串\>//gn
+// 注意：在vi中“&lt;&gt;”符号是需要转义才能使用
+:m,ns/\&lt;字符串\&gt;//gn
 
 // 当然也可以借助Linux命令来实现该功能
 // grep 统计字符串出现的行 wc -l 统计出现的次数
 cat filename | grep -i 字符串 | wc -l
-```
+</code></pre></div></div>
 
-## grep命令
-> 内容来自[GitHub](https://wangchujiang.com/linux-command/c/grep.html)  
-> grep (global search regualr expression adn print out the line, 全面搜索正则表达式并打印行) 是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。
+<h2 id="grep命令">grep命令</h2>
+<blockquote>
+  <p>内容来自<a href="https://wangchujiang.com/linux-command/c/grep.html">GitHub</a><br />
+grep (global search regualr expression adn print out the line, 全面搜索正则表达式并打印行) 是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。</p>
+</blockquote>
 
-### 选项
+<h3 id="选项">选项</h3>
 
-```
--B <显示行数>                     --before-context=<显示行数>                     // 除了显示符合表达式的那一行之外，额外显示指定的改行之前<显示行数>行的内容
--C <显示行数>                     --context=<显示行数>或-<显示行数>                // 除了显示符合表达式的那一行之外，额外显示指定的改行之后<显示行数>行的内容
--d <进行动作>                     --directories=<动作>                           // 当指定要查找的是目录而非文件时，必须使用该参数，否则grep命令将回报信息并停止动作
--e <范本样式>                     --regexp=<范本样式>                            // 指定字符串作为查找文件内容的范本样式
--f <范本文件>                     --file=<规则文件>                              // 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一行的范本样式
--m <num>                         --max-count=<num>                             // 找到num行之后停止查找，用来限制匹配的行数
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-B &lt;显示行数&gt;                     --before-context=&lt;显示行数&gt;                     // 除了显示符合表达式的那一行之外，额外显示指定的改行之前&lt;显示行数&gt;行的内容
+-C &lt;显示行数&gt;                     --context=&lt;显示行数&gt;或-&lt;显示行数&gt;                // 除了显示符合表达式的那一行之外，额外显示指定的改行之后&lt;显示行数&gt;行的内容
+-d &lt;进行动作&gt;                     --directories=&lt;动作&gt;                           // 当指定要查找的是目录而非文件时，必须使用该参数，否则grep命令将回报信息并停止动作
+-e &lt;范本样式&gt;                     --regexp=&lt;范本样式&gt;                            // 指定字符串作为查找文件内容的范本样式
+-f &lt;范本文件&gt;                     --file=&lt;规则文件&gt;                              // 指定范本文件，其内容有一个或多个范本样式，让grep查找符合范本条件的文件内容，格式为每一行的范本样式
+-m &lt;num&gt;                         --max-count=&lt;num&gt;                             // 找到num行之后停止查找，用来限制匹配的行数
 
 -c                               --count                                       // 计算符合范式的总行数
 -E                               --extended-regexp                             // 将范本样式为延伸的普通表示法来使用，意味着能使用扩展正则表达式，使用正则表达式时，需要加此参数
@@ -67,12 +67,11 @@ cat filename | grep -i 字符串 | wc -l
 -x                               --line-regexp                                 // 只显示全行符合的行
 -y                                                                             // 此参数与 "-i" 相同
 -o                                                                             // 只输出文件中匹配到的部分
-```
+</code></pre></div></div>
 
-### 示例
+<h3 id="示例">示例</h3>
 
-```
-// 使用正则表达式 -E 选项
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 使用正则表达式 -E 选项
 // 返回结果：输出全部文本，对匹配到的信息加以标注
 echo I am a number 9. | grep -E "[1-9]+"                        // I am a number 9（在测试中，数字 9 是通过红色标记出来的）
 
@@ -87,47 +86,6 @@ grep "全部" -n memory.txt                                        // 431871:id 
 
 // 使用选项 -e 来执行多次匹配
 echo this is a text line | grep -e "is" -e "line" -o            // is is line
-```
+</code></pre></div></div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+:ET
