@@ -133,66 +133,75 @@ Returns:
 > 该小结是对tensorflow中的各种初始化方法的总结
 
 ```
-                                                  # 常量初始化函数
+# 常量初始化函数
+
 tf.constant_initializer(
-    value = 0,                                    # 可以是python数值、列表、元组、N维数组，初始化变量为参数value定义的数值，当value为list类型时，其shape必须与需初始化的variable的shape相同
+    value = 0,                      # 可以是python数值、列表、元组、N维数组，初始化变量为参数value定义的数值，当value为list类型时，其shape必须与需初始化的variable的shape相同
 )
 
-                                                  # 满足正态分布的初始化
-                                                  # 用于生成满足高斯分布（默认为标准高斯分布）的初始化值
+# 满足正态分布的初始化
+# 用于生成满足高斯分布（默认为标准高斯分布）的初始化值
+
 tf.random_normal_initializer(
-    mean = 0.0,                                   # 服从的正太分布的均值，一个 python 标量或一个标量张量
-    stddev = 1.0,                                 # 服从的正太分布的标准差，一个 python 标量或一个标量张量
-    seed = None,                                  # 一个 Python 整数，用于创建随机种子
-    dtype = tf.float32,                           # 生成的数据的数据类型，只支持浮点数类型
+    mean = 0.0,                     # 服从的正太分布的均值，一个 python 标量或一个标量张量
+    stddev = 1.0,                   # 服从的正太分布的标准差，一个 python 标量或一个标量张量
+    seed = None,                    # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,             # 生成的数据的数据类型，只支持浮点数类型
 )
 
-                                                  # 满足截取的正太分布的初始化
-                                                  # 用于生成满足阶段的高斯分布（默认为标准高斯分布）的初始化值，该截断表现为：当生成的值超过两个标准差时就会被丢弃，重新生成
+# 满足截取的正太分布的初始化
+# 用于生成满足阶段的高斯分布（默认为标准高斯分布）的初始化值，该截断表现为：当生成的值超过两个标准差时就会被丢弃，重新生成
+
 tf.truncated_normal_initializer(
-    mean = 0.0,                                   # 服从的正太分布的均值，一个 python 标量或一个标量张量
-    sttddev = 1.0,                                # 服从的正太分布的标准差，一个 python 标量或一个标量张量
-    seed = None,                                  # 一个 Python 整数，用于创建随机种子
-    dtype = tf.float32,                           # 生成的数据的数据类型，只支持浮点数类型
+    mean = 0.0,                      # 服从的正太分布的均值，一个 python 标量或一个标量张量
+    sttddev = 1.0,                   # 服从的正太分布的标准差，一个 python 标量或一个标量张量
+    seed = None,                     # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,              # 生成的数据的数据类型，只支持浮点数类型
 )
 
-                                                  # 满足均匀分布的初始化                               
-                                                  # 用于生成具有均匀分布的张量的初始化器
+# 满足均匀分布的初始化                               
+# 用于生成具有均匀分布的张量的初始化器
+
 tf.random_uniform_initializer(
-    minval = 0,                                   # 生成随机值范围的下限，为一个python标量或一个标量张量
-    maxval = None,                                # 生成随机值范围的上限，对浮点数默认为1.0，为一个python标量或一个标量张量
-    seed = None,                                  # 一个 Python 整数，用于创建随机种子
-    dtype = tf.float32,                           # 生成的数据的数据类型
+    minval = 0,                      # 生成随机值范围的下限，为一个python标量或一个标量张量
+    maxval = None,                   # 生成随机值范围的上限，对浮点数默认为1.0，为一个python标量或一个标量张量
+    seed = None,                     # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,              # 生成的数据的数据类型
 )
 
-                                                  # 满足均匀分布，但不影响输出数量级的随机值初始化
-                                                  # 可生成初始化张量但不会缩放方差，即初始化深度网络时，保持输入方差的比例不变，因此它不会因为到最后一层而迅速扩大或减少
-                                                  # 例如：当输入为 x 时，操作是：x * W，这时我们想要初始化 W，则需要我们从 [-sqrt(3) / sqrt(dim), sqrt(3) / sqrt(dim)]* factor 
-                                                  # 中挑选 W，保持该比例不变，其中 dim = W.shape[0](输入的大小)。当存在非线性时，需要乘以一个常数factor。
-                                                  # 和均匀分布大致相同，只不过该方法不用指定最大最小值，而是通过计算得出来的。
+# 满足均匀分布，但不影响输出数量级的随机值初始化
+# 可生成初始化张量但不会缩放方差，即初始化深度网络时，保持输入方差的比例不变，因此它不会因为到最后一层而迅速扩大或减少
+# 例如：当输入为 x 时，操作是：x * W，这时我们想要初始化 W，则需要我们从 [-sqrt(3) / sqrt(dim), sqrt(3) / sqrt(dim)]* factor 
+# 中挑选 W，保持该比例不变，其中 dim = W.shape[0](输入的大小)。当存在非线性时，需要乘以一个常数factor。
+# 和均匀分布大致相同，只不过该方法不用指定最大最小值，而是通过计算得出来的。
+
 tf.uniform_unit_scaling_initializer(
-    factor = 1.0,                                 # 浮点型，乘法因子，其值将被缩放
-    seed = None,                                  # 一个 Python 整数，用于创建随机种子
-    dtype = tf.float32,                           # 生成的数据的数据类型，仅支持浮点型
+    factor = 1.0,                    # 浮点型，乘法因子，其值将被缩放
+    seed = None,                     # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,              # 生成的数据的数据类型，仅支持浮点型
 )
-                                                  # 当 distribution = "normal" 时，生成 truncated normal distribution 的随机数，其中 stddev = sqrt(scale / n)，n的计算与mode参数有关
-                                                  # If mode = "fan_in"，n为输入单元的结点数；If mode = "fan_out"，n为输出单元的结点数； If mode = "fan_avg"，n为输入单元和输出单元结点数的平均值
-                                                  # 当 distribution = "uniform" 时，生成均匀分布的随机数，假设分布区间为 [-limit, limit]，则 limit = sqrt(3 * scale / n)
+
+
+# 当 distribution = "normal" 时，生成 truncated normal distribution 的随机数，其中 stddev = sqrt(scale / n)，n的计算与mode参数有关
+# If mode = "fan_in"，n为输入单元的结点数；If mode = "fan_out"，n为输出单元的结点数； If mode = "fan_avg"，n为输入单元和输出单元结点数的平均值
+# 当 distribution = "uniform" 时，生成均匀分布的随机数，假设分布区间为 [-limit, limit]，则 limit = sqrt(3 * scale / n)
+
 tf.variance_scaling_initializer(
-    scale = 1.0,                                  # 缩放尺度（正浮点数类型）
-    mode = "fan_in",                              # "fan_in"、 "fan_out"、 "fan_avg"中的一个，用于计算标准差stddev的值
-    distribution = 'normal',                      # 分类类型，"normal"、"uniform"中的一个
-    seed = None,                                  # 一个 Python 整数，用于创建随机种子
-    dtype = tf.float32,                           # 生成的数据的数据类型
+    scale = 1.0,                     # 缩放尺度（正浮点数类型）
+    mode = "fan_in",                 # "fan_in"、 "fan_out"、 "fan_avg"中的一个，用于计算标准差stddev的值
+    distribution = 'normal',         # 分类类型，"normal"、"uniform"中的一个
+    seed = None,                     # 一个 Python 整数，用于创建随机种子
+    dtype = tf.float32,              # 生成的数据的数据类型
 )
                          
-                                                  # 生成正交矩阵的随机数
-                                                  # 当需要生成的参数时2维时，这个正交矩阵是由均匀分布的随机数矩阵经过SVD分解而来的
+# 生成正交矩阵的随机数
+# 当需要生成的参数时2维时，这个正交矩阵是由均匀分布的随机数矩阵经过SVD分解而来的
+
 tf.orthogonal_initializer()
 
-                                                  # 也称之为 Xavier uniform initializer，由一个均匀分布来初始化数据
-                                                  # 假设均匀分布的区间是 [-limit, limit]，则 limit = sqrt(6 / (fan_in + fan_out))
-                                                  # 其中 fan_in 和 fan_out 分别代表输入单元的结点数和输出单元的结点数
+# 也称之为 Xavier uniform initializer，由一个均匀分布来初始化数据
+# 假设均匀分布的区间是 [-limit, limit]，则 limit = sqrt(6 / (fan_in + fan_out))
+# 其中 fan_in 和 fan_out 分别代表输入单元的结点数和输出单元的结点数
 tf.glorot_uniform_initializer()
 ```
 
