@@ -1,9 +1,18 @@
-I"�"<ul id="markdown-toc">
+I"�/<ul id="markdown-toc">
   <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
       <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
       <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
       <li><a href="#我的解题思路及代码" id="markdown-toc-我的解题思路及代码">我的解题思路及代码</a></li>
       <li><a href="#其他方法" id="markdown-toc-其他方法">其他方法</a></li>
+    </ul>
+  </li>
+  <li><a href="#最长回文字串" id="markdown-toc-最长回文字串">最长回文字串</a>    <ul>
+      <li><a href="#题目描述-1" id="markdown-toc-题目描述-1">题目描述</a></li>
+      <li><a href="#示例-1" id="markdown-toc-示例-1">示例</a></li>
+      <li><a href="#题解" id="markdown-toc-题解">题解</a>        <ul>
+          <li><a href="#暴力匹配" id="markdown-toc-暴力匹配">暴力匹配</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
@@ -176,5 +185,70 @@ nums2 = [3,4]
   <li>其时间复杂度为 $O(log min(m, n))$</li>
   <li>空间复杂度为 $O(1)$</li>
 </ul>
+
+<h2 id="最长回文字串">最长回文字串</h2>
+<h3 id="题目描述-1">题目描述</h3>
+<p>给定一个字符串s，找到s中最长的回文子串。可以假设s的最大长度不超过1000。</p>
+
+<h3 id="示例-1">示例</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入："babad"
+输出："bab"
+注意："aba" 也是一个答案
+
+输入："cbbd"
+输出："bb"
+</code></pre></div></div>
+
+<h3 id="题解">题解</h3>
+<h4 id="暴力匹配">暴力匹配</h4>
+<p>暴力匹配法的思路：遍历所有长度大于等于2的子串，依次判断它们是否是回文字串，再从其中找到最长的回文字串返回。</p>
+
+<p>在实现时，我们可以只记录回文字串的起始位置以及回文串的长度即可，这样我们就可以找到所有的回文子串。</p>
+
+<p>由于题目中要求我们寻找最长的回文字串，那么我们可以通过维护一个maxLen变量的形式来记录最长回文子串的长度以及一个begin变量来记录最长回文子串的其实位置即可。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
+    stringLen = len(s)
+    if stringLen &lt; 2:
+        return s
+
+    # 定义两个变量来分别表示最长回文子串的起始位置和长度
+    begin, maxLen = 0, 1
+
+    # 遍历所有长度大于等于2的子串，并判断它们是否为回文
+    for i in range(stringLen - 1):                                    # 左边界的范围：[0, 字符串长度 - 2]
+        for j in range(i + 1, stringLen):                             # 右边界的范围：[1, 字符串长度 - 1]
+            if j - i + 1 &gt; maxLen and validPalindromic(s, i, j):      # 如果为回文串，那么它的长度：右边界值 - 左边界值 + 1
+                maxLen = j - i + 1
+                begin = i
+    return s[begin: begin + maxLen]
+
+def validPalindromic(string, left, right):
+    while left &lt; right:
+        if string[left] != string[right]:
+            return False
+        left += 1
+        right -= 1
+
+    return True
+</code></pre></div></div>
+
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>外层循环维护左边界，内层循环维护右边界，最内层循环验证子串是否为回文字串</li>
+      <li>外层总共循环 $n-1$ 次，每一次外循环时，内层总共循环 $n-1, n-2, \cdots, 1$，每一次内循环时，内部还有一层循环，最差的情况就是循环 $n-1, n-2, \cdots, 1$</li>
+      <li>因此，时间复杂度为 $(n-1)^2 + (n-2)^2 + \cdots + 1^2 = \frac{(n (n-1) (2n-1))}{6}$，$O(\frac{(n (n-1) (2n-1))}{6}) = O(n^3)$</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>因为。仅使用了常数个临时变量，与字符串的长度无关</li>
+      <li>因此，空间复杂度为 $O(1)$</li>
+    </ul>
+  </li>
+</ul>
+
+<p>####</p>
 
 :ET
