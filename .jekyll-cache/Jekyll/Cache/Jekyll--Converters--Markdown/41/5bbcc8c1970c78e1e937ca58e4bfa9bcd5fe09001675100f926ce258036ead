@@ -1,0 +1,13 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#01-内置函数" id="markdown-toc-01-内置函数">01. 内置函数</a>    <ul>
+      <li><a href="#列表" id="markdown-toc-列表">列表</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="01-内置函数">01. 内置函数</h2>
+<h3 id="列表">列表</h3>
+<blockquote>
+  <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
+</blockquote>
+:ET

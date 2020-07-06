@@ -13,15 +13,16 @@ author: Xlp
 ### 图片居中
 > Q: 在GitHub Page和Jekyll中如何让图片或者文字居中显示？ 
  
+
+
+
+ 
 ```
 # 图片居中显示
 <div align="center"><img src=[local path or http path]></div>
 # 文字居中显示
 <div align="center">[something you want to show here]</div>
 ```
-
-
-
 
 ### 相对路径
 > Q: 如何在GitHub Page上用相对路径引用图片？

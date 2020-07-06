@@ -1,0 +1,12 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#01-kl散度" id="markdown-toc-01-kl散度">01. KL散度</a></li>
+</ul>
+
+<h2 id="01-kl散度">01. KL散度</h2>
+<p>主要内容来源于<a href="https://zh.wikipedia.org/wiki/%E7%9B%B8%E5%AF%B9%E7%86%B5">维基百科</a></p>
+
+<blockquote>
+  <p>KL散度（Kullback-Leibler divergence, KLD），在信息系统中称为 <strong>相对熵</strong> （relative entropy），在连续时间序列中称为 <strong>随机性</strong> （randomness），
+在统计模型推断中称为 <strong>信息增益</strong> （information gain），也称为 <strong>信息散度</strong>（information divergence）。</p>
+</blockquote>
+:ET

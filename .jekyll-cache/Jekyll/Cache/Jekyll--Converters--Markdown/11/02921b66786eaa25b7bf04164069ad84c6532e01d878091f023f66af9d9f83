@@ -1,0 +1,16 @@
+I"<ul id="markdown-toc">
+  <li><a href="#自然语言处理中的n-gram模型" id="markdown-toc-自然语言处理中的n-gram模型">自然语言处理中的n-gram模型</a>    <ul>
+      <li><a href="#什么是n-gram" id="markdown-toc-什么是n-gram">什么是n-gram？</a></li>
+    </ul>
+  </li>
+</ul>
+
+<p>转载自<a href="https://zhuanlan.zhihu.com/p/32829048">知乎</a></p>
+
+<h2 id="自然语言处理中的n-gram模型">自然语言处理中的n-gram模型</h2>
+<h3 id="什么是n-gram">什么是n-gram？</h3>
+<blockquote>
+  <p>n-gram是一种用来将文本表示成数值型特征的工具。
+正如这篇知乎中提到的：经过筛选后的gram列表就是这个文本的特征向量空间，列表中的每一种gram就是一个特征向量维度。</p>
+</blockquote>
+:ET
