@@ -1,4 +1,4 @@
-I"?H<ul id="markdown-toc">
+I"<H<ul id="markdown-toc">
   <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
       <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
       <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
@@ -327,7 +327,7 @@ def validPalindromic(string, left, right):
     for i in range(len(s)):                                            # 初始化对角线
         dp[i][i] = True
     
-    for j in range(1, len(s)):                                         # 从上到下，从左到右的填表
+    for j in range(1, len(s)):                                         # 按列，自上而下进行填表
         for i in range(0, j):
             if s[i] == s[j]:                                           # 边界判断
                 if j - i &lt; 3:
