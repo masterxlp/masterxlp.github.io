@@ -1,4 +1,4 @@
-I"ԝ<ul id="markdown-toc">
+I"��<ul id="markdown-toc">
   <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
       <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
       <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
@@ -33,6 +33,7 @@
               <li><a href="#代码展示1" id="markdown-toc-代码展示1">代码展示1</a></li>
               <li><a href="#复杂度分析-2" id="markdown-toc-复杂度分析-2">复杂度分析</a></li>
               <li><a href="#manacher" id="markdown-toc-manacher">Manacher</a></li>
+              <li><a href="#manacher算法原理演示" id="markdown-toc-manacher算法原理演示">Manacher算法原理演示</a></li>
               <li><a href="#代码展示2" id="markdown-toc-代码展示2">代码展示2</a></li>
               <li><a href="#复杂度分析-3" id="markdown-toc-复杂度分析-3">复杂度分析</a></li>
             </ul>
@@ -476,6 +477,7 @@ def _center_spread(string, left, right):
 <table>
   <thead>
     <tr>
+      <th style="text-align: center">         </th>
       <th style="text-align: center">char</th>
       <th style="text-align: center">#</th>
       <th style="text-align: center">a</th>
@@ -490,10 +492,12 @@ def _center_spread(string, left, right):
       <th style="text-align: center">#</th>
       <th style="text-align: center">b</th>
       <th style="text-align: center">#</th>
+      <th style="text-align: center">         </th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">index</td>
       <td style="text-align: center">0</td>
       <td style="text-align: center">1</td>
@@ -508,9 +512,12 @@ def _center_spread(string, left, right):
       <td style="text-align: center">10</td>
       <td style="text-align: center">11</td>
       <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">p</td>
+      <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
@@ -528,13 +535,12 @@ def _center_spread(string, left, right):
   </tbody>
 </table>
 
-<ul>
-  <li>p[0]：以 <strong>char[0] = ‘#’</strong> 为中心，向两边扩散，向左扩散一步时碰到边界，因此只能扩散0步，即 <code class="highlighter-rouge">p[0] = 0</code></li>
-</ul>
+<p>p[0]：以 <strong>char[0] = ‘#’</strong> 为中心，向两边扩散，向左扩散一步时碰到边界，因此只能扩散0步，即 <code class="highlighter-rouge">p[0] = 0</code></p>
 
 <table>
   <thead>
     <tr>
+      <th style="text-align: center">         </th>
       <th style="text-align: center">char</th>
       <th style="text-align: center">#</th>
       <th style="text-align: center">a</th>
@@ -549,10 +555,12 @@ def _center_spread(string, left, right):
       <th style="text-align: center">#</th>
       <th style="text-align: center">b</th>
       <th style="text-align: center">#</th>
+      <th style="text-align: center">         </th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">index</td>
       <td style="text-align: center">0</td>
       <td style="text-align: center">1</td>
@@ -567,10 +575,13 @@ def _center_spread(string, left, right):
       <td style="text-align: center">10</td>
       <td style="text-align: center">11</td>
       <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">p</td>
       <td style="text-align: center">0</td>
+      <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
@@ -587,13 +598,12 @@ def _center_spread(string, left, right):
   </tbody>
 </table>
 
-<ul>
-  <li>p[1]：以 <strong>char[1] = ‘a’</strong> 为中心，向两边扩散，扩散一步时，左右均是 “#”，构成回文子串，满足回文特性，继续扩散第二步时，向左碰到边界，无法扩散，因此只能扩散1步，即 <code class="highlighter-rouge">p[1] = 1</code></li>
-</ul>
+<p>p[1]：以 <strong>char[1] = ‘a’</strong> 为中心，向两边扩散，扩散一步时，左右均是 “#”，构成回文子串，满足回文特性，继续扩散第二步时，向左碰到边界，无法扩散，因此只能扩散1步，即 <code class="highlighter-rouge">p[1] = 1</code></p>
 
 <table>
   <thead>
     <tr>
+      <th style="text-align: center">         </th>
       <th style="text-align: center">char</th>
       <th style="text-align: center">#</th>
       <th style="text-align: center">a</th>
@@ -608,10 +618,12 @@ def _center_spread(string, left, right):
       <th style="text-align: center">#</th>
       <th style="text-align: center">b</th>
       <th style="text-align: center">#</th>
+      <th style="text-align: center">         </th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">index</td>
       <td style="text-align: center">0</td>
       <td style="text-align: center">1</td>
@@ -626,11 +638,14 @@ def _center_spread(string, left, right):
       <td style="text-align: center">10</td>
       <td style="text-align: center">11</td>
       <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">p</td>
       <td style="text-align: center">0</td>
       <td style="text-align: center">1</td>
+      <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
       <td style="text-align: center"> </td>
@@ -651,6 +666,7 @@ def _center_spread(string, left, right):
 <table>
   <thead>
     <tr>
+      <th style="text-align: center">         </th>
       <th style="text-align: center">char</th>
       <th style="text-align: center">#</th>
       <th style="text-align: center">a</th>
@@ -665,10 +681,12 @@ def _center_spread(string, left, right):
       <th style="text-align: center">#</th>
       <th style="text-align: center">b</th>
       <th style="text-align: center">#</th>
+      <th style="text-align: center">         </th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">index</td>
       <td style="text-align: center">0</td>
       <td style="text-align: center">1</td>
@@ -683,8 +701,10 @@ def _center_spread(string, left, right):
       <td style="text-align: center">10</td>
       <td style="text-align: center">11</td>
       <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
     </tr>
     <tr>
+      <td style="text-align: center"> </td>
       <td style="text-align: center">p</td>
       <td style="text-align: center">0</td>
       <td style="text-align: center">1</td>
@@ -699,6 +719,7 @@ def _center_spread(string, left, right):
       <td style="text-align: center">2</td>
       <td style="text-align: center">1</td>
       <td style="text-align: center">0</td>
+      <td style="text-align: center"> </td>
     </tr>
   </tbody>
 </table>
@@ -766,7 +787,7 @@ def _center_spread(s, center):
 <ul>
   <li>maxRight 记录当前向右扩展的最远边界，即从开始到现在使用“中心扩散法”能得到的回文子串延伸到的最右端的位置
     <ul>
-      <li>“向右最远”是在计算辅助数组p的过程中，能扩散到的最远的索引位置；</li>
+      <li>“向右最远”是在计算辅助数组p的过程中，能扩散到的最远的 <strong>索引</strong> 位置；</li>
       <li>maxRight对应的回文子串，并不一定是当前的到的“最长回文子串”，例如当某个回文子串较短，但它正好位于整个字符串比较靠后的位置；</li>
       <li>停止扩散的原因可能有两点：一是左边界不能扩散，导致右边界扩散受限，此时，maxRight的下一个位置看不到；二是能看到maxRight的下一个位置，但是左右不相同，导致maxRight不能继续扩散；</li>
     </ul>
@@ -786,11 +807,43 @@ def _center_spread(s, center):
     <ul>
       <li>当 $p[mirror] &lt; maxRight - i$ 时，$p[i] = p[mirror]$；</li>
       <li>当 $p[mirror] == maxRight - i$ 时，$p[i]$ 至少是 maxRight - i，还需继续扩散，因此可以先把 p[mirror] 的值复制过来，然后继续扩散，增加maxRight的值；</li>
-      <li>当 $p[mirror] &gt; maxRight - i$ 时，$p[i] = maxRight - i$，不需继续扩散；</li>
+      <li>当 $p[mirror] &gt; maxRight - i$ 时，$p[i] = maxRight - i$，不需继续扩散，这是因为，；</li>
       <li>于是，综合来说，当 $i &lt; maxRight$ 时，$p[i] = min(maxRight - i, p[mirror])$；</li>
     </ul>
   </li>
 </ul>
+
+<h5 id="manacher算法原理演示">Manacher算法原理演示</h5>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-001.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-002.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-003.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-004.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-005.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-006.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-007.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-008.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-009.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-010.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-011.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-012.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-013.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-014.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-015.jpeg" width="80%" height="80%" /></div>
 
 <h5 id="代码展示2">代码展示2</h5>
 
