@@ -1,4 +1,4 @@
-I"��<ul id="markdown-toc">
+I"[�<ul id="markdown-toc">
   <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
       <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
       <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
@@ -10,13 +10,16 @@
       <li><a href="#题目描述-1" id="markdown-toc-题目描述-1">题目描述</a></li>
       <li><a href="#示例-1" id="markdown-toc-示例-1">示例</a></li>
       <li><a href="#题解" id="markdown-toc-题解">题解</a>        <ul>
-          <li><a href="#暴力匹配" id="markdown-toc-暴力匹配">暴力匹配</a></li>
+          <li><a href="#暴力匹配" id="markdown-toc-暴力匹配">暴力匹配</a>            <ul>
+              <li><a href="#复杂度分析" id="markdown-toc-复杂度分析">复杂度分析</a></li>
+            </ul>
+          </li>
           <li><a href="#动态规划" id="markdown-toc-动态规划">动态规划</a>            <ul>
               <li><a href="#引言" id="markdown-toc-引言">引言</a></li>
               <li><a href="#思想" id="markdown-toc-思想">思想</a></li>
               <li><a href="#过程" id="markdown-toc-过程">过程</a></li>
               <li><a href="#代码展示" id="markdown-toc-代码展示">代码展示</a></li>
-              <li><a href="#复杂度分析" id="markdown-toc-复杂度分析">复杂度分析</a></li>
+              <li><a href="#复杂度分析-1" id="markdown-toc-复杂度分析-1">复杂度分析</a></li>
               <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
             </ul>
           </li>
@@ -24,18 +27,18 @@
               <li><a href="#思想-1" id="markdown-toc-思想-1">思想</a></li>
               <li><a href="#讨论" id="markdown-toc-讨论">讨论</a></li>
               <li><a href="#代码展示-1" id="markdown-toc-代码展示-1">代码展示</a></li>
-              <li><a href="#复杂度分析-1" id="markdown-toc-复杂度分析-1">复杂度分析</a></li>
+              <li><a href="#复杂度分析-2" id="markdown-toc-复杂度分析-2">复杂度分析</a></li>
             </ul>
           </li>
           <li><a href="#manacher算法" id="markdown-toc-manacher算法">Manacher算法</a>            <ul>
               <li><a href="#预处理" id="markdown-toc-预处理">预处理</a></li>
               <li><a href="#辅助数组" id="markdown-toc-辅助数组">辅助数组</a></li>
               <li><a href="#代码展示1" id="markdown-toc-代码展示1">代码展示1</a></li>
-              <li><a href="#复杂度分析-2" id="markdown-toc-复杂度分析-2">复杂度分析</a></li>
+              <li><a href="#复杂度分析-3" id="markdown-toc-复杂度分析-3">复杂度分析</a></li>
               <li><a href="#manacher" id="markdown-toc-manacher">Manacher</a></li>
               <li><a href="#manacher算法原理演示" id="markdown-toc-manacher算法原理演示">Manacher算法原理演示</a></li>
               <li><a href="#代码展示2" id="markdown-toc-代码展示2">代码展示2</a></li>
-              <li><a href="#复杂度分析-3" id="markdown-toc-复杂度分析-3">复杂度分析</a></li>
+              <li><a href="#复杂度分析-4" id="markdown-toc-复杂度分析-4">复杂度分析</a></li>
             </ul>
           </li>
         </ul>
@@ -260,6 +263,7 @@ def validPalindromic(string, left, right):
     return True
 </code></pre></div></div>
 
+<h5 id="复杂度分析">复杂度分析</h5>
 <ul>
   <li>时间复杂度
     <ul>
@@ -368,7 +372,7 @@ def validPalindromic(string, left, right):
     return s[begin: begin+maxLen]
 </code></pre></div></div>
 
-<h5 id="复杂度分析">复杂度分析</h5>
+<h5 id="复杂度分析-1">复杂度分析</h5>
 <ul>
   <li>时间复杂度
     <ul>
@@ -433,7 +437,7 @@ def _center_spread(string, left, right):
     return right - left - 1                                                      # 回文边界为 (left, right) 为开区间，因此回文长度 = right - 1 - (left + 1) + 1 = right - left - 1
 </code></pre></div></div>
 
-<h5 id="复杂度分析-1">复杂度分析</h5>
+<h5 id="复杂度分析-2">复杂度分析</h5>
 <ul>
   <li>时间复杂度
     <ul>
@@ -763,7 +767,7 @@ def _center_spread(s, center):
     return right - left - 1
 </code></pre></div></div>
 
-<h5 id="复杂度分析-2">复杂度分析</h5>
+<h5 id="复杂度分析-3">复杂度分析</h5>
 <ul>
   <li>时间复杂度
     <ul>
@@ -888,7 +892,7 @@ def _center_spread(s, center):
     return s[begin : begin + maxLen]
 </code></pre></div></div>
 
-<h5 id="复杂度分析-3">复杂度分析</h5>
+<h5 id="复杂度分析-4">复杂度分析</h5>
 <ul>
   <li>时间复杂度
     <ul>
