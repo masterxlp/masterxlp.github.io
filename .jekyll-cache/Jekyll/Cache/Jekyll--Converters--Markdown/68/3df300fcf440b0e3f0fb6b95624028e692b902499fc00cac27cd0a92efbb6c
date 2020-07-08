@@ -1,0 +1,1016 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
+      <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
+      <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
+      <li><a href="#我的解题思路及代码" id="markdown-toc-我的解题思路及代码">我的解题思路及代码</a></li>
+      <li><a href="#其他方法" id="markdown-toc-其他方法">其他方法</a></li>
+    </ul>
+  </li>
+  <li><a href="#最长回文字串" id="markdown-toc-最长回文字串">最长回文字串</a>    <ul>
+      <li><a href="#题目描述-1" id="markdown-toc-题目描述-1">题目描述</a></li>
+      <li><a href="#示例-1" id="markdown-toc-示例-1">示例</a></li>
+      <li><a href="#题解" id="markdown-toc-题解">题解</a>        <ul>
+          <li><a href="#暴力匹配" id="markdown-toc-暴力匹配">暴力匹配</a>            <ul>
+              <li><a href="#复杂度分析" id="markdown-toc-复杂度分析">复杂度分析</a></li>
+            </ul>
+          </li>
+          <li><a href="#动态规划" id="markdown-toc-动态规划">动态规划</a>            <ul>
+              <li><a href="#引言" id="markdown-toc-引言">引言</a></li>
+              <li><a href="#思想" id="markdown-toc-思想">思想</a></li>
+              <li><a href="#过程" id="markdown-toc-过程">过程</a></li>
+              <li><a href="#代码展示" id="markdown-toc-代码展示">代码展示</a></li>
+              <li><a href="#复杂度分析-1" id="markdown-toc-复杂度分析-1">复杂度分析</a></li>
+              <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
+            </ul>
+          </li>
+          <li><a href="#中心扩散法" id="markdown-toc-中心扩散法">中心扩散法</a>            <ul>
+              <li><a href="#思想-1" id="markdown-toc-思想-1">思想</a></li>
+              <li><a href="#讨论" id="markdown-toc-讨论">讨论</a></li>
+              <li><a href="#代码展示-1" id="markdown-toc-代码展示-1">代码展示</a></li>
+              <li><a href="#复杂度分析-2" id="markdown-toc-复杂度分析-2">复杂度分析</a></li>
+            </ul>
+          </li>
+          <li><a href="#manacher算法" id="markdown-toc-manacher算法">Manacher算法</a>            <ul>
+              <li><a href="#预处理" id="markdown-toc-预处理">预处理</a></li>
+              <li><a href="#辅助数组" id="markdown-toc-辅助数组">辅助数组</a></li>
+              <li><a href="#代码展示1" id="markdown-toc-代码展示1">代码展示1</a></li>
+              <li><a href="#复杂度分析-3" id="markdown-toc-复杂度分析-3">复杂度分析</a></li>
+              <li><a href="#manacher" id="markdown-toc-manacher">Manacher</a></li>
+              <li><a href="#manacher算法原理演示" id="markdown-toc-manacher算法原理演示">Manacher算法原理演示</a></li>
+              <li><a href="#代码展示2" id="markdown-toc-代码展示2">代码展示2</a></li>
+              <li><a href="#复杂度分析-4" id="markdown-toc-复杂度分析-4">复杂度分析</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#z-字形变换" id="markdown-toc-z-字形变换">Z 字形变换</a>    <ul>
+      <li><a href="#题目描述-2" id="markdown-toc-题目描述-2">题目描述</a></li>
+      <li><a href="#示例-2" id="markdown-toc-示例-2">示例</a></li>
+      <li><a href="#思路" id="markdown-toc-思路">思路</a></li>
+      <li><a href="#代码展示-2" id="markdown-toc-代码展示-2">代码展示</a></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>题目来自：<a href="https://leetcode.com/">LeetCode</a>、<a href="https://leetcode-cn.com/">LeetCode-cn</a><br />
+该部分主要包含本人对LeetCode题目的自答以及题解社区中的优质回答的综述，包括代码和解题思路</p>
+</blockquote>
+
+<h2 id="寻找两个正序数组的中位数">寻找两个正序数组的中位数</h2>
+<h3 id="题目描述">题目描述</h3>
+<p>给定两个大小为 m 和 n 的正序数组 nums1 和 nums2。
+请找出这两个正序数组的中位数，并且要求算法的时间复杂度为 $O(log(m+n))$。
+假设 nums1 和 nums2 不会同时为空。</p>
+
+<h3 id="示例">示例</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 示例1
+
+nums1 = [1,3]
+nums2 = [2]
+
+则中位数是 2.0
+
+// 示例2
+
+nums1 = [1,2]
+nums2 = [3,4]
+
+则中位数是 (2 + 3) / 2 = 2.5
+</code></pre></div></div>
+
+<h3 id="我的解题思路及代码">我的解题思路及代码</h3>
+<p>首先，能最快想到的就是暴力法，即对数组中的所有值进行重新排序，然后取中位数，但是该方法的时间复杂度最差时为 $O(m+n)$，不满足题目中的时间复杂度的要求。
+但是，只是为了寻找中位数，因此，不必进行完全排序，只需进行 $\frac{m+n}{2}$ 次的排序即可。</p>
+
+<p>又注意到，假设 nums1 和 nums2 不会同时为空，因此，必然存在一种情况那就是，nums1 和 nums2 其中一个为空的情况，且 num1 和 num2 本身是有序的。
+因此，第一种情况是：num1 和 num2 有一个为空，这时寻找中位数其实就是不为空的那个数组的中间值，时间复杂度为 $O(1)$。
+第二种情况是：num1 和 num2 均不为空，这时我们最差只需要寻找 $\frac{m+n}{2}$ 次即可找到。
+具体见代码。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def findMedianSortedArrays(nums1, nums2):
+    nums1_len = len(nums1)
+    nums2_len = len(nums2)
+    
+    length = nums1_len + nums2_len
+    
+    if length % 2 != 0:
+        index = int(length // 2)
+    else:
+        index = (int(length / 2) - 1, int(length / 2))
+    
+    # Case 1. nums1 和 nums2 有一个为空
+    if nums1_len == 0 or nums2_len == 0:
+        nums = nums1 if nums2_len == 0 else nums2
+        if type(index) is int:
+            return float(nums[index])
+        else:
+            return float((nums[index[0]] + nums[index[1]]) / 2)
+    # Case 2. nums1 和 nums2 均为空
+    elif nums1_len == 0 and nums2_len == 0:
+        raise ValueError("Both arrays are empty.")
+    # Case 3. nums1 和 nums2 均不为空
+    else:
+        num = index if type(index) is int else index[-1]
+        a, b = 0, 0
+        for i in range(num):
+            num1 = nums1[a]
+            num2 = nums2[b]
+            # 分情况讨论：num1 &lt; num2 和 num1 &gt; num2，这两种情况时对称的，解决一个另外一个也就解决了
+            if num1 &lt; num2:
+                a += 1
+                # 讨论：当某一个数组的索引超过其最大限度但还未停止寻找
+                if a &gt;= nums1_len and i &lt; num - 1:
+                    if type(index) is int:
+                        r = nums2[b + num - i - 1]
+                        break
+                    else:
+                        r = float((nums2[b + num - i - 1] + nums2[b + num - i - 2]) / 2)
+                        break
+                # 讨论：当某一个数组的索引超过其最大限度但已到达停止寻找的条件
+                elif a &gt;= nums1_len and i == num - 1:
+                    if type(index) is int:
+                        r = float(max(num1, num2))
+                        break
+                    else:
+                        r = float((num1 + num2) / 2)
+                        break
+                # 讨论：当某一个数组的索引未超过其最大限度但已到达停止寻找的条件
+                elif i == num - 1 and a &lt; nums1_len:
+                    f_num1 = nums1[a]
+                    num2 = num2 if f_num1 &gt; num2 else f_num1
+            else:
+                b += 1
+                if b &gt;= nums2_len and i &lt; num - 1:
+                    if type(index) is int:
+                        r = nums1[a + num - i - 1]
+                        break
+                    else:
+                        r = float((nums1[a + num - i - 1] + nums1[a + num - i - 2]) / 2)
+                        break
+                elif b &gt;= nums2_len and i == num - 1:
+                    if type(index) is int:
+                        r = float(max(num1, num2))
+                        break
+                    else:
+                        r = float((num1 + num2) / 2)
+                        break
+                elif i == num - 1 and b &lt; nums2_len:
+                    f_num2 = nums2[b]
+                    num1 = num1 if f_num2 &gt; num1 else f_num2
+            if i == num - 1:
+                if type(index) is int:
+                    r = float(max(num1, num2))
+                else:
+                    r = float((num1 + num2) / 2)
+        return r
+</code></pre></div></div>
+
+<h3 id="其他方法">其他方法</h3>
+<p>二分查找：目标是找到一条分割线，该分割线两边的元素满足一下两个条件：</p>
+<ul>
+  <li>满足分割线两边元素个数的关系：当 $m + n$ 为奇数时，分割线左边的元素个数比分割线右边的元素个数多一个；当 $m + n$ 为偶数时，分割线两边的元素的个数相等；</li>
+  <li>满足交叉小于等于关系：第一个数组分割线左边的第一个元素的数值要小于第二个数组分割线右边的第一个元素的数值；第二个数组分割线左边的第一个元素的数值也要小于第一个数组分割线右边的第一个元素的数值；</li>
+</ul>
+
+<p>第一个条件是由中位数的特性决定的：中位数实际上就是在有序数组最中间的那个数，中位数两边的数值是相等的（不包含中位数本身）。
+第二个条件是由有序数组决定的，该方法成立的条件也是：两个数组必须为有序数组。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def findMedianSortedArrays(nums1, nums2):
+    if len(nums1) &gt; len(nums2):
+        return findMedianSortedArrays(nums2, nums1)
+
+    # 定义一个极大、极小数，以应对分割线的左边或右边没有数可比较的情况
+    infinty = 2**40
+    m, n = len(nums1), len(nums2)
+
+    # 计算分割线左边总共需要有多少个元素：奇数时左边为 (m + n + 1) // 2 偶数时左边为 (m + n) // 2
+    # 但是为了不区分奇偶情况，利用整除为向下取正的特性，定义统一表达式 (m + n + 1) // 2
+    totalLeft = (m + n + 1) // 2
+
+    left, right = 0, m
+    median1, median2 = 0, 0
+
+    # 二分查找逻辑：
+    # 1. 定义：分割线在第一个数组右边的第一个元素的下标 i = 分割线在第一个数组左边的元素的个数
+    #         分割线在第二个数组右边的第一个元素的下标 j = 分割线在第二个数组左边的元素的个数
+    #    其中，i, j 满足：(m + n + 1) / 2 = i + j
+    # 2. 分割线需满足的条件为：nums1[i-1] &lt;= nums2[j] &amp;&amp; nums2[j-1] &lt;= nums1[i]
+
+    while left &lt;= right:
+        i = (left + right) // 2
+        j = totalLeft - i
+
+        nums_im1 = -infinty if i == 0 else nums1[i-1]       # 第一个数组分割线左边的最大值
+        nums_i = infinty if i == m else nums1[i]            # 第一个数组分割线右边的最小值
+        nums_jm1 = -infinty if j == 0 else nums2[j-1]       # 第二个数组分割线左边的最大值
+        nums_j = infinty if j == n else nums2[j]            # 第二个数组分割线右边的最小值
+
+        if nums_im1 &lt;= nums_j:
+            median1, median2 = max(nums_im1, nums_jm1), min(nums_i, nums_j)        # 第一个中位数为分割线左边的最大值，第二个中位数为分割线右边的最小值
+            left = i + 1
+        else:
+            right = i - 1
+
+    return (median1 + median2) / 2 if (m + n) % 2 == 0 else float(median1)
+</code></pre></div></div>
+
+<ul>
+  <li>其时间复杂度为 $O(log min(m, n))$</li>
+  <li>空间复杂度为 $O(1)$</li>
+</ul>
+
+<h2 id="最长回文字串">最长回文字串</h2>
+<h3 id="题目描述-1">题目描述</h3>
+<p>给定一个字符串s，找到s中最长的回文子串。可以假设s的最大长度不超过1000。</p>
+
+<h3 id="示例-1">示例</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入："babad"
+输出："bab"
+注意："aba" 也是一个答案
+
+输入："cbbd"
+输出："bb"
+</code></pre></div></div>
+
+<h3 id="题解">题解</h3>
+<h4 id="暴力匹配">暴力匹配</h4>
+<p>暴力匹配法的思路：遍历所有长度大于等于2的子串，依次判断它们是否是回文字串，再从其中找到最长的回文字串返回。</p>
+
+<p>在实现时，我们可以只记录回文字串的起始位置以及回文串的长度即可，这样我们就可以找到所有的回文子串。</p>
+
+<p>由于题目中要求我们寻找最长的回文字串，那么我们可以通过维护一个maxLen变量的形式来记录最长回文子串的长度以及一个begin变量来记录最长回文子串的其实位置即可。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
+    stringLen = len(s)
+    if stringLen &lt; 2:
+        return s
+
+    # 定义两个变量来分别表示最长回文子串的起始位置和长度
+    begin, maxLen = 0, 1
+
+    # 遍历所有长度大于等于2的子串，并判断它们是否为回文
+    for i in range(stringLen - 1):                                    # 左边界的范围：[0, 字符串长度 - 2]
+        for j in range(i + 1, stringLen):                             # 右边界的范围：[1, 字符串长度 - 1]
+            if j - i + 1 &gt; maxLen and validPalindromic(s, i, j):      # 如果为回文串，那么它的长度：右边界值 - 左边界值 + 1
+                maxLen = j - i + 1
+                begin = i
+    return s[begin: begin + maxLen]
+
+def validPalindromic(string, left, right):
+    while left &lt; right:
+        if string[left] != string[right]:
+            return False
+        left += 1
+        right -= 1
+
+    return True
+</code></pre></div></div>
+
+<h5 id="复杂度分析">复杂度分析</h5>
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>外层循环维护左边界，内层循环维护右边界，最内层循环验证子串是否为回文字串</li>
+      <li>外层总共循环 $n-1$ 次，每一次外循环时，内层总共循环 $n-1, n-2, \cdots, 1$，每一次内循环时，内部还有一层循环，最差的情况就是循环 $n-1, n-2, \cdots, 1$</li>
+      <li>因此，时间复杂度为 $(n-1)^2 + (n-2)^2 + \cdots + 1^2 = \frac{(n (n-1) (2n-1))}{6}$，$O(\frac{(n (n-1) (2n-1))}{6}) = O(n^3)$</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>因为。仅使用了常数个临时变量，与字符串的长度无关</li>
+      <li>因此，空间复杂度为 $O(1)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="动态规划">动态规划</h4>
+<h5 id="引言">引言</h5>
+<blockquote>
+  <p>“动态规划”的“规划”（programming）就是“填表格”的意思，所以“动态规划”也叫“表格法”，它就是“以空间换时间”思想的体现。
+而“动态”（dynamic）的意思是“从一个最基本的问题出发”。 <br />
+它不像我们熟悉的“递归+记忆化”的方法。 <br />
+“递归+记忆化”的方法是直接对问题求解，遇到新的问题，就先记录一下，再遇到的时候直接读取，这种方式叫“自顶向下”。
+“动态”的思路是“自底向上”，我们通过发现这个问题“最初的样子”，即 <strong>从一个最基本的问题出发，逐步计算中间过程，最后得到要求问题的解</strong>。
+“动态”的思想就体现在，我们不是直接面对要解决的问题。</p>
+</blockquote>
+
+<h5 id="思想">思想</h5>
+<p>回文串的特点是：字符串无论是正读还是反读都是相同的。
+那么，对于一个回文串来说：在去头尾的两个字符后，它依然满足回文串的特性。
+因此，从最内层开始，依次向外扩张，如果每一个子串都是回文串的话，那么该字符串就是回文串。
+这种思想就是动态规划。</p>
+
+<p>在了解了什么是动态规划之后，该方法关于本题的解题思路就清晰可见了：「动态规划」的一个关键步骤就是要想清楚「状态如何转移」。
+而事实上，「回文」就天然地具有「状态转移」的性质，即「一个回文去掉首尾后，剩余部分仍然是回文」。</p>
+
+<p>因此，从 <strong>回文的定义</strong> 来看：如果一个字符串的头尾两个字符都不相同，那么该字符串一定不是回文串；
+反之，如果一个字符串的头尾相同，那么它有可能是回文串，这时需要进一步向内判断：如果内部的子串是回文串，那么该字符串为回文串；反之，如果内部的子串不构成回文串时，这整个字符串都不构成回文串。</p>
+
+<p>也就是说，<strong>在头尾字符相同的情况下，内部子串的回文性决定了整个子串的回文性</strong>，这就是状态转移。
+因此，可以把「状态」定义为原字符串的一个子串是否为回文串。</p>
+
+<h5 id="过程">过程</h5>
+<p><strong>第一步：定义状态</strong></p>
+
+<p><code class="highlighter-rouge">dp[i][j]</code>表示子串<code class="highlighter-rouge">s[i:j]</code>是否为回文子串，注意，这里子串<code class="highlighter-rouge">s[i:j]</code>定义为左闭右闭区间，即可以取到<code class="highlighter-rouge">s[i]</code>和<code class="highlighter-rouge">s[j]</code>。</p>
+
+<p><strong>第二步：状态转移方程</strong></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dp[i][j] = (s[i] == s[j]) and dp[i + 1][j - 1]
+</code></pre></div></div>
+<p>说明：</p>
+<ul>
+  <li>「动态规划」事实上是在填一张二维表格，表格的行与列均为该字符串，由于需要构成子串，因此<code class="highlighter-rouge">i</code>与<code class="highlighter-rouge">j</code>的关系是<code class="highlighter-rouge">i &lt;= j</code>，又因对称性的存在，因此，只需填写对角线以上的部分即可</li>
+  <li>由于 <code class="highlighter-rouge">dp[i+1][j-1]</code>，因此需要考虑边界情况，以防越界</li>
+  <li>边界条件为：<code class="highlighter-rouge">[i+1, j-1]</code>不构成区间，即长度严格小于<code class="highlighter-rouge">2</code>，于是有，<code class="highlighter-rouge">j - 1 - (i + 1) + 1 &lt; 2</code>，即 <code class="highlighter-rouge">j - i &lt; 3</code></li>
+  <li>显然，<code class="highlighter-rouge">j - i &lt; 3</code>等价于<code class="highlighter-rouge">j - i + 1 &lt; 4</code>，即当子串 <code class="highlighter-rouge">s[i:j]</code> 的长度等于<code class="highlighter-rouge">2</code>或<code class="highlighter-rouge">3</code>时，其实只需判断一下首尾两个字符是否相等即可</li>
+</ul>
+
+<p>因此，在 <code class="highlighter-rouge">s[i] == s[j]</code> 和 <code class="highlighter-rouge">j - i &lt; 3</code> 成立的前提下，可以直接说 <code class="highlighter-rouge">dp[i][j] = True</code>，否则才执行状态转移。</p>
+
+<p><strong>第三步：初始化</strong></p>
+
+<p>初始化整个表格为False，由于单个字符必然构成回文串，因此，初始化对角线上的元素为True。</p>
+
+<p><strong>第四步：输出</strong></p>
+
+<p>为了节省空间，提升性能，我们仅在 <code class="highlighter-rouge">dp[i][j] = True</code> 时，记录最长回文子串的「起始位置」和「回文长度」即可，而不需要保存整个字符串。</p>
+
+<p><strong>第五步：优化</strong></p>
+
+<p>这里不进行优化。</p>
+
+<div align="center"><img src="../../../../image/最长回文子串动态规划填表顺序.png" width="60%" height="60%" /></div>
+
+<div align="center">图1. 最长回文子串动态规划填表顺序</div>
+
+<h5 id="代码展示">代码展示</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
+    if len(s) &lt; 2:
+        return s
+    
+    dp = [[False for _ in range(len(s))] for _ in range(len(s))]       # 初始化表格
+    
+    begin, maxLen = 0, 1
+    
+    for i in range(len(s)):                                            # 初始化对角线
+        dp[i][i] = True
+    
+    for j in range(1, len(s)):                                         # 按列，自上而下进行填表
+        for i in range(0, j):
+            if s[i] == s[j]:                                           # 边界判断
+                if j - i &lt; 3:
+                    dp[i][j] = True                                    # 两则都满足时，必然为回文子串
+                else:
+                    dp[i][j] = dp[i+1][j-1]                            # 状态转移
+            else:
+                dp[i][j] = False
+            
+            if dp[i][j]:
+                curLen = j - i + 1  
+                if curLen &gt; maxLen:                                    # 记录最长子串的起始位置和回文长度
+                    maxLen = curLen
+                    begin = i
+    
+    return s[begin: begin+maxLen]
+</code></pre></div></div>
+
+<h5 id="复杂度分析-1">复杂度分析</h5>
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>两层循环，外层循环 $n-1$，内层循环 $1, 2, \cdots, n-1$，因此，时间复杂度为 $O(1 + 2 + \cdots + n-1) = O(n^2)$</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>由于建立了一张边长为 $n$ 的二维表格来存储回文性质，因此，其空间复杂度为 $O(n^2)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="总结">总结</h5>
+<ul>
+  <li>由于「动态规划」是一种打表格的方法，它本身就是在利用「空间」换「时间」，因此「动态规划」是典型的「空间换时间」思想的体现</li>
+  <li>动态规划本质上还是暴力解法的思想，因为它要枚举左右边界</li>
+</ul>
+
+<h4 id="中心扩散法">中心扩散法</h4>
+<h5 id="思想-1">思想</h5>
+<p>中心扩散法的思想和暴力法正好相反：暴力法考虑的是从两边开始向中间靠，依次判断是否是回文串；而中心扩散法则是从中间向两边扩散，依次判断是否构成回文串。
+具体地，遍历每一个索引，以该索引为中心，向两边扩散，每扩散一步，利用回文的中心对称性质判断，该扩散是否构成回文串，直到扩散到最远距离为止。</p>
+
+<h5 id="讨论">讨论</h5>
+<p>可以注意到，回文串的长度为奇数时，其「回文中心」与长度为偶数时的形式不同。
+当回文串为奇数时，其回文中心是一个字符；而当回文串为偶数时，其回文中心为两个字符（或一个间隙）。</p>
+
+<p>另外，对于一个字符串来讲，当字符串的长度大于等于2时，其回文中心可能的位置一般在其第二个字符到倒数第二个字符之间。</p>
+
+<p>因此，为了兼容这两种情况，设计：</p>
+<ul>
+  <li>如果传入重合的索引编码，那么扩散得到的回文子串的长度为奇数；</li>
+  <li>如果传入相邻的索引编码，那么扩散得到的回文子串的长度为偶数；</li>
+</ul>
+
+<h5 id="代码展示-1">代码展示</h5>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
+    if len(s) &lt; 2:
+        return s
+    
+    center, maxLen = 0, 1                                                        # 初始化最长回文中心和回文长度
+    
+    for i in range(len(s)):
+        oddPalLen = _center_spread(s, i, i)                                      # 当回文长度为奇数时，以 i 为回文中心，返回最长回文长度
+        evenPalLen = _center_spread(s, i, i+1)                                   # 当回文长度为偶数时，以 i， i+1 为回文中心，返回最长回文长度
+        maxPalLen = max(oddPalLen, evenPalLen)                                   # 取最长回文长度
+        if maxPalLen &gt; maxLen:
+            maxLen = maxPalLen                                                   # 更新最长回文中心和回文长度
+            center = i
+    if maxLen % 2 == 0:
+        return s[center - maxLen // 2 + 1 : center + maxLen // 2 + 1]
+    else:
+        return s[center - maxLen // 2 : center + maxLen // 2]
+    
+        
+def _center_spread(string, left, right):
+    while left &gt;= 0 and right &lt; len(string) and string[left] == string[right]:
+        left -= 1
+        right += 1
+    return right - left - 1                                                      # 回文边界为 (left, right) 为开区间，因此回文长度 = right - 1 - (left + 1) + 1 = right - left - 1
+</code></pre></div></div>
+
+<h5 id="复杂度分析-2">复杂度分析</h5>
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>时间复杂度为 $O(n^2)$</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>空间复杂度为 $O(1)$，这是因为它仅开辟常数个变量来维护最长回文的中心和长度</li>
+    </ul>
+  </li>
+</ul>
+
+<h4 id="manacher算法">Manacher算法</h4>
+
+<blockquote>
+  <p>Manacher 算法本质上还是中心扩散法，只不过它使用了类似<a href="https://zh.wikipedia.org/wiki/%E5%85%8B%E5%8A%AA%E6%96%AF-%E8%8E%AB%E9%87%8C%E6%96%AF-%E6%99%AE%E6%8B%89%E7%89%B9%E7%AE%97%E6%B3%95">KMP算法</a>的技巧，
+充分挖掘了已经进行回文判断的子串的特点，在遍历的过程中，记录了已经遍历过的子串的信息，也是典型的以「空间换时间」思想的体现。</p>
+</blockquote>
+
+<h5 id="预处理">预处理</h5>
+<p>首先我们要做的就是对原始字符串进行添加分割符的预处理，使得字符串的长度一定为奇数，这样回文中心就变为了一个字符，而不再是间隙。
+预处理表现为在字符串的首尾以及相邻字符之间插入分隔符，例如 “babad” 添加分隔符 “#” 之后得到 “#b#a#b#a#d”。</p>
+
+<p>对于添加分隔符的预处理的说明：</p>
+<ul>
+  <li>分隔符是一个字符，其种类在一个字符串中只有一种，且该字符一定没有在原字符串中出现过；</li>
+  <li>新字符串中的任意一个回文子串在原始字符串中都一定能找到唯一的一个回文子串与之相对应；</li>
+  <li>新字符串的回文子串的长度一定是奇数；</li>
+  <li>新字符串的回文子串一定以分隔符作为两边的边界，因此分隔符起到“哨兵”的作用；</li>
+</ul>
+
+<h5 id="辅助数组">辅助数组</h5>
+
+<blockquote>
+  <p>辅助数组 <code class="highlighter-rouge">p</code> 记录了新字符串中以每个字符为中心的回文子串的信息。</p>
+</blockquote>
+
+<p>以字符串 “abbabb” 为例，演示如何计算辅助数组p的值：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">           </th>
+      <th style="text-align: center">char</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">           </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">index</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">p</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>p[0]：以 <strong>char[0] = ‘#’</strong> 为中心，向两边扩散，向左扩散一步时碰到边界，因此只能扩散0步，即 <code class="highlighter-rouge">p[0] = 0</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">           </th>
+      <th style="text-align: center">char</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">           </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">index</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">p</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>p[1]：以 <strong>char[1] = ‘a’</strong> 为中心，向两边扩散，扩散一步时，左右均是 “#”，构成回文子串，满足回文特性，继续扩散第二步时，向左碰到边界，无法扩散，因此只能扩散1步，即 <code class="highlighter-rouge">p[1] = 1</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">           </th>
+      <th style="text-align: center">char</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">           </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">index</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">p</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>依次类推，得到：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: center">           </th>
+      <th style="text-align: center">char</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">a</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">b</th>
+      <th style="text-align: center">#</th>
+      <th style="text-align: center">           </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">index</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">3</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">6</td>
+      <td style="text-align: center">7</td>
+      <td style="text-align: center">8</td>
+      <td style="text-align: center">9</td>
+      <td style="text-align: center">10</td>
+      <td style="text-align: center">11</td>
+      <td style="text-align: center">12</td>
+      <td style="text-align: center"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: center"> </td>
+      <td style="text-align: center">p</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">4</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">5</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">2</td>
+      <td style="text-align: center">1</td>
+      <td style="text-align: center">0</td>
+      <td style="text-align: center"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>关于辅助数组 <code class="highlighter-rouge">p</code> 的结论：</p>
+<ul>
+  <li>辅助数组 <code class="highlighter-rouge">p</code> 的最大值就是最长回文子串的长度</li>
+</ul>
+
+<h5 id="代码展示1">代码展示1</h5>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
+    if len(s) &lt; 2:
+        return s
+    
+    new_s = '#'                                                 # 构造新字符串，首位添加 '#'
+    for i in range(len(s)):
+        new_s += s[i]
+        new_s += '#'                                            # i = len(s) - 1 表示 末尾添加 '#'
+    
+    lens = len(new_s)
+    
+    begin, maxLen = 0, 1
+    
+    for i in range(lens):
+        subPalLen = _center_spread(new_s, i)
+        if subPalLen &gt; maxLen:
+            maxLen = subPalLen
+            begin = i
+    longPal = new_s[begin - maxLen // 2 : begin + maxLen // 2]
+    longPal = longPal.replace('#', '')
+    return longPal
+    
+def _center_spread(s, center):
+    left, right = center - 1, center + 1
+    
+    while left &gt;= 0 and right &lt; len(s) and s[left] == s[right]:
+        left -= 1
+        right += 1
+    
+    return right - left - 1
+</code></pre></div></div>
+
+<h5 id="复杂度分析-3">复杂度分析</h5>
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>时间复杂度为 $O(n^2)$</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>空间复杂度为 $O(n)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="manacher">Manacher</h5>
+
+<blockquote>
+  <p>Manacher算法在填写新的复杂数组 <code class="highlighter-rouge">p</code> 的值时，使得新字符串中的每个字符只访问一次，整体时间复杂度由 $O(n^2)$ 改进到 $O(n)$。</p>
+</blockquote>
+
+<p>在遍历过程中，除了循环变量 <code class="highlighter-rouge">i</code> 以外，还需维护两个变量 <code class="highlighter-rouge">maxRight</code> 和 <code class="highlighter-rouge">center</code>：</p>
+<ul>
+  <li>maxRight 记录当前向右扩展的最远边界，即从开始到现在使用“中心扩散法”能得到的回文子串延伸到的最右端的位置
+    <ul>
+      <li>“向右最远”是在计算辅助数组p的过程中，能扩散到的最远的 <strong>索引</strong> 位置；</li>
+      <li>maxRight对应的回文子串，并不一定是当前的到的“最长回文子串”，例如当某个回文子串较短，但它正好位于整个字符串比较靠后的位置；</li>
+      <li>停止扩散的原因可能有两点：一是左边界不能扩散，导致右边界扩散受限，此时，maxRight的下一个位置看不到；二是能看到maxRight的下一个位置，但是左右不相同，导致maxRight不能继续扩散；</li>
+    </ul>
+  </li>
+  <li>center 是与maxRight相关的一个变量，它是上述maxRight的回文中心的索引值：
+    <ul>
+      <li>$center = argmax{x + p[x] \mid 0 &lt;= x &lt; i}$，i表示循环变量，$0 &lt;= x &lt; i$ 在 i 之前的所有索引里使得 $x + p[x]$ 最大的值就是 center，其值 $x + p[x]$ 就表示 maxRight；</li>
+      <li>center与maxRight一一对应，同时更新；</li>
+    </ul>
+  </li>
+</ul>
+
+<p>下面就循环变量 <strong>i</strong> 与 <strong>maxRight</strong> 的关系进行讨论：</p>
+<ul>
+  <li>当 $i &gt;= maxRight$ 时，这种情况是循环刚刚开始或者一个回文子串刚扫描完，此时只能根据“中心扩散法”进行扩散，逐渐扩大 maxRight；</li>
+  <li>当 $i &lt; maxRight$ 时，根据回文性质，循环变量 i 关于 center 对称的那个索引 mirror 的 p[mirror] 的值就很重要，其中 $mirror = 2 * center - i$，有以下结论：
+    <ul>
+      <li>当 $p[mirror] &lt; maxRight - i$ 时，$p[i] = p[mirror]$；</li>
+      <li>当 $p[mirror] == maxRight - i$ 时，$p[i]$ 至少是 maxRight - i，还需继续扩散，因此可以先把 p[mirror] 的值复制过来，然后继续扩散，增加maxRight的值；</li>
+      <li>当 $p[mirror] &gt; maxRight - i$ 时，$p[i] = maxRight - i$，不需继续扩散，这是因为，；</li>
+      <li>于是，综合来说，当 $i &lt; maxRight$ 时，$p[i] = min(maxRight - i, p[mirror])$；</li>
+    </ul>
+  </li>
+</ul>
+
+<h5 id="manacher算法原理演示">Manacher算法原理演示</h5>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-001.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-002.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-003.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-004.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-005.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-006.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-007.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-008.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-009.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-010.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-011.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-012.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-013.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-014.jpeg" width="80%" height="80%" /></div>
+
+<div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-015.jpeg" width="80%" height="80%" /></div>
+
+<h5 id="代码展示2">代码展示2</h5>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
+    if len(s) &lt; 2:
+        return s
+    
+    new_s = '#'
+    for i in range(len(s)):
+        new_s += s[i]
+        new_s += '#'
+    
+    lens = len(new_s)
+    
+    p = [0 for _ in range(lens)]
+    
+    maxRight, center = 0, 0
+    
+    maxLen, begin = 1, 0
+    
+    for i in range(lens):                                                    # 当 i &gt;= maxRight 时，需要扩散，增大 maxRight
+        if i &lt; maxRight:                                                     # 当 i &lt; maxRight 时，根据 mirror 的 p 值 与 maxRight - i 的关系来确定 p[i] 的值
+            mirror = 2 * center - i
+            p[i] = min(maxRight - i, p[mirror])
+        
+        left = i - (1 + p[i])
+        right = i + (1 + p[i])
+        
+        while left &gt;= 0 and right &lt; lens and new_s[left] == new_s[right]:    # 扩散
+            p[i] += 1                                                        # 更新 p[i]
+            left -= 1
+            right += 1
+        
+        if i + p[i] &gt; maxRight:                                              # i 表示当前的回文中心索引，p[i] 表示当前回文半径，i + p[i] 表示回文右边界
+            maxRight = i + p[i]                                              # 当 回文右边界 &gt; maxRight 时，更新最大回文右边界 maxRight
+            center = i                                                       # 更新 回文中心
+        
+        if p[i] &gt; maxLen:                                                    # 记录最大回文半径，原字符串回文长度
+            maxLen = p[i]
+            begin = (i - maxLen) // 2                                        # 记录原字符串最大回文其实位置索引
+    
+    return s[begin : begin + maxLen]
+</code></pre></div></div>
+
+<h5 id="复杂度分析-4">复杂度分析</h5>
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>时间复杂度为 $O(n)$，Manacher算法只有在遇到还未匹配过的位置时才进行匹配，因此对于字符串的每一个位置，都只进行一次匹配，算法的复杂度为 $O(2n+1) = O(n)$</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>空间复杂度为 $O(n)$</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="z-字形变换">Z 字形变换</h2>
+<h3 id="题目描述-2">题目描述</h3>
+
+<p>将一个给定字符串根据给定的行数，以从上往下、从左到右进行 Z 字形排列。
+比如输入字符串为 “LEETCODEISHIRING” 行数为 3 时，排列如下：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>L   C   I   R
+E T O E S I I G
+E   D   H   N
+</code></pre></div></div>
+
+<p>之后，你的输出需要从左往右逐行读取，产生出一个新的字符串，比如：”LCIRETOESIIGEDHN”。</p>
+
+<p>请你实现这个将字符串进行指定行数变换的函数：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>string convert(string s, int numRows);
+</code></pre></div></div>
+
+<h3 id="示例-2">示例</h3>
+<p>示例 1：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入: s = "LEETCODEISHIRING", numRows = 3
+输出: "LCIRETOESIIGEDHN"
+</code></pre></div></div>
+
+<p>示例2:</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入: s = "LEETCODEISHIRING", numRows = 4
+输出: "LDREOEIIECIHNTSG"
+解释:
+
+L     D     R
+E   O E   I I
+E C   I H   N
+T     S     G
+</code></pre></div></div>
+
+<h3 id="思路">思路</h3>
+<p>看到这道题我的第一思路是：很显然，可以把排列结果看成一张二维表格，最后按行合并字符串即可。
+按照这种思路，我们首先需要确定的是，这张二维表格的行数和列数，显然，行数就是函数输入的 numRows。
+那么列数该如何确定？<br />
+如果我们把 “Z” 的一竖和它右相临的一斜杠看成一组的话，那么每一组的元素个数 $units = numRows + numRows - 2 = 2 (numRows - 1)$，
+那么，一个字符串可以分 n 个组，即 $n = lens // units$，对于构不成组的元素的个数用 m 表示，即 $m = lens % units$。</p>
+
+<p>进一步，讨论 m 与 numRows 的关系：当 $m == 0$ 时，即 没有多余的元素，那么此时 $numColumns = n(1 + numRows - 2) = n(numRows - 1)$；
+当 $0 &lt; m &lt;= numRows$ 时，即 多余的元素构成一竖，此时 $numColumns = n(1 + numRows - 2) + 1 = n(numRows - 1) + 1$；
+当 $numRows &lt; m &lt; units$，即 多余的元素构成一竖和一部分的斜杠，此时 $numColumns = n(1 + numRows - 2) + (m - numRows) + 1 = n(numRows - 1) + (m - numRows) + 1$。</p>
+
+<p>这样我们就可以建立一张行数为 numRows、列数为 numColunms 的二维表格。</p>
+
+<p>那么下一步，我们该讨论该如何去填这张表格了。</p>
+
+<p>不难发现，每一竖的位置都在地 numRows 的倍数列，即 $(0, numRows, 2numRows, \cdots)$，而斜杠中元素的位置的行和列索引和刚好等于numRows - 1，即 $i + j == numRows - 1$。</p>
+
+<p>这样我们就可以填完整张表格了。
+最后只需按行进行字符串的合并即可。</p>
+
+<h3 id="代码展示-2">代码展示</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def convert(s, numRows):
+    lens = len(s)
+    
+    if lens &lt; 3 or lens &lt;= numRows or numRows == 1:                  # 特殊处理
+        return s
+    
+    units = numRows + numRows - 2                                    # 计算每一组元素的个数
+    n = lens // units                                                # 计算可以分多少组
+    m = lens % units                                                 # 计算还剩余多少元素未成组
+    
+    if m == 0:                                                       # 若没有多余元素，那么列数就等于 组数 * (numRows - 1)
+        numColumns = n * (1 + numRows - 2)
+    elif 0 &lt; m &lt;= numRows:                                           # 若多余元素不够一竖，那么列数就等于 组数 * (numRows - 1) + 1
+        numColumns = n * (1 + numRows - 2) + 1
+    else:                                                            # 否则，列数等于 组数 * (numRows - 1) + 1 + (m - numRows)
+        numColumns = n * (1 + numRows - 2) + (m - numRows) + 1       # m - numRows 表示 斜杠元素的个数，一个一列
+    
+    lst = [['' for _ in range(numColumns)] for _ in range(numRows)]  # 建立二维表格
+    
+    h = 0
+    for j in range(numColumns):
+        for i in range(numRows):
+            if h &lt; lens:
+                if j % (numRows - 1) != 0:                           # 对于 列 不满足 numRows - 1 的倍数的，需要进一步判断
+                    if (i + j) % (numRows - 1) == 0:                 # 如果 行 + 列 是 numRows - 1 的倍数，那么填充元素
+                        lst[i][j] = s[h]
+                        h += 1
+                else:                                                # 对于 列 满足 numRows - 1 的倍数的，按序填充元素
+                    lst[i][j] = s[h]
+                    h += 1
+            else:
+                break
+    
+    result = ''
+    for i in range(numRows):                                         # 按行合并字符串
+        for j in range(numColumns):
+            result += lst[i][j]
+    
+    return result
+</code></pre></div></div>
+
+:ET
