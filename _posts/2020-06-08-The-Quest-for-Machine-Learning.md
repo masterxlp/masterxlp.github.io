@@ -391,9 +391,11 @@ y &= g(Vh_t) \tag{8.4}
 $$
 
 $$
+\begin{align}
 \therefore \frac{\partial net_t}{\partial net_{t-1}} &= \frac{\partial net_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial net_{t-1}} \\
 &= W \cdot diag[f'(net_{t-1})] \\
 &= \left\lgroup\begin{matrix} w_{11} f'(net_{t-1}^1) & \cdots & w_{1n} f'(net_{t-1}^n) \cr \vdots & \ddots & \vdots \cr w_{n1} f'(net_{t-1}^1) & \cdots & w_{nn} f'(net_{t-1}^n) \tag{8.5}
+\end{align}
 $$
 
 其中 $n$ 为隐含层 $h_{t-1}$ 的维度（即隐藏单元的个数），$\frac{\partial net_t}{\partial net_{t-1}}$ 对应的 $n \times n$ 维矩阵，又被称为雅可比矩阵。
@@ -514,7 +516,9 @@ Sigmoid 函数的输出在 $0 \sim 1$ 之间，符合门控的物理定义，
 其最常见的变种是加入了窥孔机制，让记忆 $C_{t-1}$ 也参与到门控的计算中，此时输入门的更新变为 
 
 $$
+\begin{align}
 i_t = \sigmoid (W_i x_t + U_i h_{t-1} + V_i c_{t-1} + b_i) \tag{10.7}
+\end{align}
 $$
 
 
