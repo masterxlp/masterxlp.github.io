@@ -395,7 +395,7 @@ $$
 \begin{align}
 \therefore \frac{\partial net_t}{\partial net_{t-1}} &= \frac{\partial net_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial net_{t-1}} \\
 &= W \cdot diag[f'(net_{t-1})] \\
-&= \left\lgroup\begin{matrix} w_{11} f'(net_{t-1}^1) & \cdots & w_{1n} f'(net_{t-1}^n) \cr \vdots & \ddots & \vdots \cr w_{n1} f'(net_{t-1}^1) & \cdots & w_{nn} f'(net_{t-1}^n) \tag{8.5}
+&= \left\lgroup\begin{matrix} w_{11} f'(net_{t-1}^1) & \cdots & w_{1n} f'(net_{t-1}^n) \cr \vdots & \ddots & \vdots \cr w_{n1} f'(net_{t-1}^1) & \cdots & w_{nn} f'(net_{t-1}^n) \end{matrix}\right\rgroup \tag{8.5}
 \end{align}
 $$
 
@@ -445,7 +445,7 @@ $$
 $$
 \frac{\partial net_t}{\partial net_{t-1}} &= \frac{\partial net_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial net_{t-1}} \\
 &= W \cdot diag[f'(net_{t-1})] \\
-&= \left\lgroup\begin{matrix} w_{11} f'(net_{t-1}^1) & \cdots & w_{1n} f'(net_{t-1}^n) \cr \vdots & \ddots & \vdots \cr w_{n1} f'(net_{t-1}^1) & \cdots & w_{nn} f'(net_{t-1}^n)
+&= \left\lgroup\begin{matrix} w_{11} f'(net_{t-1}^1) & \cdots & w_{1n} f'(net_{t-1}^n) \cr \vdots & \ddots & \vdots \cr w_{n1} f'(net_{t-1}^1) & \cdots & w_{nn} f'(net_{t-1}^n) \end{matrix}\right\rgroup
 $$
 
 假设采用 ReLU 激活函数，且一开始所有的神经元都处于激活中（即输入大于 0），则 $diag[f'(net_{t-1})]$ 为单位矩阵，有 $\frac{\partial net_t}{\partial net_{t-1}} = W$。
