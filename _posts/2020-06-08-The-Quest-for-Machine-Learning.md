@@ -390,6 +390,7 @@ y &= g(Vh_t) \tag{8.4}
 \end{align}
 $$
 
+所以，有
 $$
 \begin{align}
 \therefore \frac{\partial net_t}{\partial net_{t-1}} &= \frac{\partial net_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial net_{t-1}} \\
