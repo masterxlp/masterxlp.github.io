@@ -1,4 +1,4 @@
-I"jf<ul id="markdown-toc">
+I".�<ul id="markdown-toc">
   <li><a href="#01-内置函数" id="markdown-toc-01-内置函数">01. 内置函数</a>    <ul>
       <li><a href="#列表" id="markdown-toc-列表">列表</a></li>
       <li><a href="#字典" id="markdown-toc-字典">字典</a>        <ul>
@@ -14,6 +14,20 @@
     </ul>
   </li>
   <li><a href="#03-python执行linux命令" id="markdown-toc-03-python执行linux命令">03. Python执行Linux命令</a></li>
+  <li><a href="#04-python-切片" id="markdown-toc-04-python-切片">04. python 切片</a>    <ul>
+      <li><a href="#功能" id="markdown-toc-功能">功能</a></li>
+      <li><a href="#负索引" id="markdown-toc-负索引">负索引</a></li>
+      <li><a href="#示例-1" id="markdown-toc-示例-1">示例</a></li>
+    </ul>
+  </li>
+  <li><a href="#05-正则表达式" id="markdown-toc-05-正则表达式">05. 正则表达式</a>    <ul>
+      <li><a href="#定位符" id="markdown-toc-定位符">定位符</a></li>
+      <li><a href="#限定符" id="markdown-toc-限定符">限定符</a></li>
+      <li><a href="#特殊字符" id="markdown-toc-特殊字符">特殊字符</a></li>
+      <li><a href="#非打印字符" id="markdown-toc-非打印字符">非打印字符</a></li>
+      <li><a href="#示例-2" id="markdown-toc-示例-2">示例</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="01-内置函数">01. 内置函数</h2>
@@ -220,6 +234,147 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s2">"Success install package %s==%s."</span> <span class="o">%</span> <span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="nb">name</span><span class="p">),</span> <span class="n">str</span><span class="p">(</span><span class="n">version</span><span class="p">)))</span>
             <span class="ss">else:
                 </span><span class="nb">print</span><span class="p">(</span><span class="s2">"Don't install package %s==%s."</span> <span class="o">%</span> <span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="nb">name</span><span class="p">),</span> <span class="n">str</span><span class="p">(</span><span class="n">version</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h2 id="04-python-切片">04. python 切片</h2>
+
+<blockquote>
+  <p>切片（slice）是对序列型对象（如list、string、tuple）的一种高级索引方法。<br />
+形式：squeue[start : end : step]</p>
+</blockquote>
+
+<h3 id="功能">功能</h3>
+<p>普通索引只能取出一个下标（索引）对应位置的元素，而切片则可以实现对一个范围内的下标（索引）的读取。
+值得注意的是，这里的范围不仅包括狭义上的连续片段，而且还包括不连续的片段，这主要是依靠切片的 step 参数。</p>
+
+<h3 id="负索引">负索引</h3>
+<p>Python的切片不仅支持正索引，而且还支持负索引。
+负索引的含义表示的是：一个序列从尾到首的一个索引编号，其值是从 -1 开始。</p>
+
+<p>另外值得注意的是，切片的 start、end、step 参数都是可以省略的，当 start 省略时，表示索引从负无穷开始，无效片段会被省略；
+当 end 省略时，表示到正无穷止，同样无效片段会被省略；step 默认为 1，即表示普通切片；当 step 为负时，表示以序列的逆序输出；</p>
+
+<h3 id="示例-1">示例</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">string</span> <span class="o">=</span> <span class="s1">'abcab'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="s1">'abca'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="s1">'abca'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="s1">'bcab'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="o">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="s1">'acb'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="o">::-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s1">'bacba'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[:</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s1">'bacb'</span>
+</code></pre></div></div>
+
+<h2 id="05-正则表达式">05. 正则表达式</h2>
+
+<blockquote>
+  <p>正则表达式，Regular Expression，常简写为regex、regexp或RE，它使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。</p>
+</blockquote>
+
+<h3 id="定位符">定位符</h3>
+
+<ul>
+  <li>’^’：匹配字符串开始的位置</li>
+  <li>’$’：匹配字符串结束的位置</li>
+  <li>‘\b’：匹配一个单词的边界，即字与空格之间的位置
+    <ul>
+      <li>‘\b’ 表示字母数字与非字母数字的边界，非字母数字与字母数字的边界</li>
+      <li>这里的字母和数字是 pattern 中定义的字母和数字</li>
+    </ul>
+  </li>
+  <li>‘\B’：非单词边界匹配
+    <ul>
+      <li>‘\B’ 表示字母数字与字母数字的边界，非字母数字与非字母数字的边界；</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="限定符">限定符</h3>
+
+<ul>
+  <li>‘*‘：匹配前面的子表达式 0 次或多次，贪婪限定符；</li>
+  <li>’+’：匹配前面的子表达式 1 次或多次，贪婪限定符；</li>
+  <li>’?’：匹配前面的子表达式 0 次或 1 次，非贪婪限定符；</li>
+  <li>{n}：n 是一个非负整数，匹配确定的 n 次；</li>
+  <li>{n,}：n 是一个非负整数，匹配至少 n 次；</li>
+  <li>{n, m}：n, m 是一个非负整数，且 $n &lt;= m$，匹配至少 n 次，至多 m 次；
+    <ul>
+      <li>值得注意的是，{n}、{n,}、{n, m} 在匹配时，是连续的，即匹配表达式连续的 n 次或至少 n 次或至少 n 次 至多 m 次；</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="特殊字符">特殊字符</h3>
+
+<ul>
+  <li>’()’：标记一个子表达式的开始和结束的位置；
+    <ul>
+      <li>以 ‘()’ 标记的表达式匹配成功的条件是：连续的子串必须与 ‘()’ 中的表达式完全一致；</li>
+    </ul>
+  </li>
+  <li>’.’：匹配除换行符 \n 之外的所有单字符；</li>
+  <li>’[‘：标记一个中括号表达式的开始；
+    <ul>
+      <li>以 ‘[]’ 标记的表达式匹配成功的条件是：连续的子串内部只要仅包含’[]’中定义的字符，即成功；</li>
+    </ul>
+  </li>
+  <li>’'：将下一个字符标记为特殊字符、原义字符、向后引用或八进制转义字符；</li>
+  <li>’^’：在 ‘[]’ 中的 ‘^’ 表示匹配除了 ‘[]’ 中定义的表达式之外的字符；</li>
+  <li>’{‘：标记限定符表达式的开始；</li>
+  <li>
+    <table>
+      <tbody>
+        <tr>
+          <td>’</td>
+          <td>‘：指明两个表达式之间的一个匹配成功即成功；</td>
+        </tr>
+      </tbody>
+    </table>
+  </li>
+</ul>
+
+<h3 id="非打印字符">非打印字符</h3>
+
+<ul>
+  <li>‘\cx’：匹配由x指明的控制字符；例如，\cM匹配一个Control-M或回车符。x的值必须指定为A-Z或a-z之一，否则，将c视为一个原义的’c’字符；</li>
+  <li>‘\f’：匹配一个换页符；</li>
+  <li>‘\n’：匹配一个换行符；</li>
+  <li>‘\r’：匹配一个回车符；</li>
+  <li>‘\s’：匹配任何空白字符，包括空格、制表符、换页符；</li>
+  <li>‘\S’：匹配任何非空白字符，等价于 [^\f\n\r\t\v]；</li>
+  <li>‘\t’：匹配一个制表符；</li>
+  <li>‘\v’：匹配哟个垂直制表符；</li>
+  <li>‘\d’：匹配任意数字，等价于 [0-9]；</li>
+  <li>‘\w’：匹配数字字母下划线；</li>
+  <li>‘\W’：匹配非字母数字下划线；</li>
+  <li>‘\D’：匹配非数字；</li>
+  <li>‘\G’：匹配最后完成的位置；</li>
+</ul>
+
+<h3 id="示例-2">示例</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import re
+
+string = 'abc123 == abc123'
+
+# '\b' 的解释
+# '\b' 和 '\B' 是单词边界，不匹配任何实际字符，所以实际是看不到的；
+
+re.split('123\\b', string)
+
+# ==&gt; ['abc', ' == abc', '']
+
+string = '1pycthon py5 2pyc342 pyc1py2py4 pyp3 3pyc# pyc'
+
+re.split('pyc\B', string)
+
+# ==&gt; ['1', 'thon py5 2', '342 ', '1py2py4 pyp3 3pyc# pyc']
 </code></pre></div></div>
 
 :ET
