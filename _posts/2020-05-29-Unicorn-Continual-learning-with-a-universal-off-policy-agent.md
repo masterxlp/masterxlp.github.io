@@ -51,7 +51,7 @@ Brunskill and Li 得出了在终身学习中进行option discovery的样本复�
 这些components(组件)的新式组合产生了一个持续学习的智能体，我们称为 `Unicorn`，它能够大规模地学习具有深度依赖结构（Figure 1a, top）的non-trivial的任务。
 独角兽智能体通过在任务之间共享experience、重用表示以及技能解决这些领域的相关问题，并且表现超过了baselines methods（Figure 1a, bottom）。
 我们也证明了独角兽可以轻而易举地：(A) 解决多种任务（没有依赖关系）以及 (B) 当任务相关时表现出协同效应。
-![Figure 1](../image/Unicorn-structure.png "Unicorn structure")
+![Figure 1](../../../../image/Unicorn-structure.png "Unicorn structure")
 
 ## Background
 **Reinforcement Learning**(RL) 是一种计算框架，用于在不确定的序贯决策问题中做决策。
