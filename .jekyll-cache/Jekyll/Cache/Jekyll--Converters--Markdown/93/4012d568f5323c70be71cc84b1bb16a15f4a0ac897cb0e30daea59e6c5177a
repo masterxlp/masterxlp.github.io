@@ -1,0 +1,371 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#01-内置函数" id="markdown-toc-01-内置函数">01. 内置函数</a>    <ul>
+      <li><a href="#列表" id="markdown-toc-列表">列表</a></li>
+      <li><a href="#字典" id="markdown-toc-字典">字典</a>        <ul>
+          <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
+        </ul>
+      </li>
+      <li><a href="#random" id="markdown-toc-random">random</a></li>
+    </ul>
+  </li>
+  <li><a href="#02-技巧" id="markdown-toc-02-技巧">02. 技巧</a>    <ul>
+      <li><a href="#嵌套函数-代替-条件判断" id="markdown-toc-嵌套函数-代替-条件判断">“嵌套函数” 代替 “条件判断”</a></li>
+      <li><a href="#多维数组取值" id="markdown-toc-多维数组取值">多维数组取值</a></li>
+    </ul>
+  </li>
+  <li><a href="#03-python执行linux命令" id="markdown-toc-03-python执行linux命令">03. Python执行Linux命令</a></li>
+  <li><a href="#04-python-切片" id="markdown-toc-04-python-切片">04. python 切片</a>    <ul>
+      <li><a href="#功能" id="markdown-toc-功能">功能</a></li>
+      <li><a href="#负索引" id="markdown-toc-负索引">负索引</a></li>
+      <li><a href="#示例-1" id="markdown-toc-示例-1">示例</a></li>
+    </ul>
+  </li>
+  <li><a href="#05-正则表达式" id="markdown-toc-05-正则表达式">05. 正则表达式</a>    <ul>
+      <li><a href="#定位符" id="markdown-toc-定位符">定位符</a></li>
+      <li><a href="#限定符" id="markdown-toc-限定符">限定符</a></li>
+      <li><a href="#特殊字符" id="markdown-toc-特殊字符">特殊字符</a></li>
+      <li><a href="#非打印字符" id="markdown-toc-非打印字符">非打印字符</a></li>
+      <li><a href="#示例-2" id="markdown-toc-示例-2">示例</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="01-内置函数">01. 内置函数</h2>
+<h3 id="列表">列表</h3>
+<blockquote>
+  <p>extend()方法：用于在列表末尾一次性追加另一个序列中的多个值（用新列表来扩展原来的列表）</p>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">aList</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2020</span><span class="p">,</span> <span class="s1">'xlp'</span><span class="p">,</span> <span class="s1">'create'</span><span class="p">]</span>
+<span class="n">bList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'zara'</span><span class="p">,</span> <span class="s1">'and'</span><span class="p">,</span> <span class="s1">'fresh'</span><span class="p">]</span>
+<span class="n">aList</span><span class="p">.</span><span class="nf">extend</span><span class="p">(</span><span class="n">bList</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Extend list : '</span><span class="p">,</span> <span class="n">aList</span><span class="p">)</span>
+<span class="c1"># =&gt; Extend list :  [2020, 'xlp', 'create', 'zara', 'and', 'fresh']</span>
+</code></pre></div></div>
+
+<h3 id="字典">字典</h3>
+<blockquote>
+  <p>字典的get方法：在取不到值时，返回提供的默认返回值</p>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">dict</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span>
+    <span class="n">key</span><span class="p">,</span>            <span class="c1"># 字典中要查找的键值</span>
+    <span class="n">default</span><span class="o">=</span><span class="no">None</span>    <span class="c1"># 当指定的键值不存在时，返回该默认值</span>
+<span class="p">)</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">test_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">4</span><span class="p">}</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">test_dict</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="no">None</span><span class="p">))</span>
+<span class="no">None</span>
+<span class="mi">2</span>
+<span class="no">None</span>
+<span class="mi">4</span>
+</code></pre></div></div>
+
+<h4 id="示例">示例</h4>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Vocab</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">num_word_threshold</span><span class="p">):</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">_word_to_id</span> <span class="o">=</span> <span class="p">{}</span>    <span class="c1"># 以下划线命名的变量为私有变量，不能够被它的对象直接访问，而需要通过函数来进行访问</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">_unk</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">_num_word_threshold</span> <span class="o">=</span> <span class="n">num_word_threshold</span>
+        <span class="nb">self</span><span class="p">.</span><span class="nf">_read_dict</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">_read_dict</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="s2">"""将filename中的词语和词频读取出来，放到_word_to_id中"""</span>
+        <span class="n">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="n">as</span> <span class="ss">f:
+            </span><span class="n">lines</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="nf">readlines</span><span class="p">()</span>
+            
+        <span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="ss">lines:
+            </span><span class="n">word</span><span class="p">,</span> <span class="n">frequency</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">strip</span><span class="p">(</span><span class="s1">'\r\n'</span><span class="p">).</span><span class="nf">split</span><span class="p">(</span><span class="s1">'\t'</span><span class="p">)</span>
+            <span class="n">frequency</span> <span class="o">=</span> <span class="n">int</span><span class="p">(</span><span class="n">frequency</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">frequency</span> <span class="o">&lt;</span> <span class="nb">self</span><span class="p">.</span><span class="nf">_num_word_threshold</span><span class="p">:</span>
+                <span class="n">continue</span>
+            
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">len</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">_word_to_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">word</span> <span class="o">==</span> <span class="s1">'&lt;UNK&gt;'</span><span class="p">:</span>
+                <span class="nb">self</span><span class="p">.</span><span class="nf">_unk</span> <span class="o">=</span> <span class="n">idx</span>
+            
+            <span class="nb">self</span><span class="p">.</span><span class="nf">_word_to_id</span><span class="p">[</span><span class="n">word</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span>
+        
+    <span class="k">def</span> <span class="nf">word_to_id</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">word</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">_word_to_id</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="nb">self</span><span class="p">.</span><span class="nf">_unk</span><span class="p">)</span>
+    
+    <span class="c1"># 添加 @property 就可以像调成员变量那样调该方法，而不需要像调函数那样调它</span>
+    <span class="vi">@property</span>
+    <span class="k">def</span> <span class="nf">unk</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">self</span><span class="p">.</span><span class="nf">_unk</span>
+    
+    <span class="k">def</span> <span class="nf">size</span><span class="p">(</span><span class="nb">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">len</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">_word_to_id</span><span class="p">)</span>
+    
+    <span class="k">def</span> <span class="nf">sentence_to_id</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">sentence</span><span class="p">):</span>
+        <span class="n">word_ids</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">word_to_id</span><span class="p">(</span><span class="n">cur_word</span><span class="p">)</span> <span class="k">for</span> <span class="n">cur_word</span> <span class="k">in</span> <span class="n">sentence</span><span class="p">.</span><span class="nf">split</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">word_ids</span>
+</code></pre></div></div>
+
+<h3 id="random">random</h3>
+<blockquote>
+  <p>random模块包含random、randint、randrange、uniform、choice、sample、shuffle等方法</p>
+  <blockquote>
+    <p><code class="highlighter-rouge">random()</code>方法返回一个[0,1)之间的随机浮点数<br />
+<code class="highlighter-rouge">uniform(1,2)</code>方法返回一个[1,2]之间的随机浮点数，注意与numpy.random.uniform区别，numpy返回的是从均匀分布中生成的随机数<br />
+<code class="highlighter-rouge">randint(1,5)</code>方法返回一个[1,5]之间的随机整数<br />
+<code class="highlighter-rouge">choice(str)</code>方法返回的是str中的一个随机元素<br />
+<code class="highlighter-rouge">sample(seq, num)</code>方法是从seq中不重复的选择num个随机元素，seq是iter的<br />
+<code class="highlighter-rouge">shuffle(seq)</code>方法返回打乱顺序的seq，该方法无返回值</p>
+  </blockquote>
+</blockquote>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">import</span> <span class="n">random</span>
+
+<span class="c1"># Test random</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">random</span><span class="p">()</span>
+<span class="c1"># =&gt; 0.5801035425996243</span>
+
+<span class="c1"># Test uniform</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">uniform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># =&gt; 1.4719897016478751</span>
+
+<span class="c1"># Test randint</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="c1"># =&gt; 3</span>
+
+<span class="c1"># Test choice</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">choice</span><span class="p">(</span><span class="s2">"I am a good boy."</span><span class="p">)</span>
+<span class="c1"># =&gt; 'b'</span>
+
+<span class="c1"># Test sample</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">sample</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span>
+<span class="c1"># =&gt; [2, 1, 3]</span>
+
+<span class="c1"># Test shuffle</span>
+<span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">random</span><span class="p">.</span><span class="nf">shuffle</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Shuffled list is '</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+<span class="c1"># =&gt; Shuffled list is [1, 3, 4, 2, 5]</span>
+</code></pre></div></div>
+
+<h2 id="02-技巧">02. 技巧</h2>
+<h3 id="嵌套函数-代替-条件判断">“嵌套函数” 代替 “条件判断”</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 变量nb_entires表示当前buffer中的数据量</span>
+<span class="n">nb_entires</span> <span class="o">=</span> <span class="n">memory</span><span class="p">.</span><span class="nf">nb_entires</span>
+
+<span class="c1"># 实现：根据当前的数据量确定训练的次数nb_train</span>
+<span class="c1"># 一般实现</span>
+<span class="c1"># # 定义常量threshold表示开始改变训练次数的临界点</span>
+<span class="n">threshold</span> <span class="o">=</span> <span class="n">int</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+<span class="n">nb_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">nb_entires</span> <span class="sr">//</span> <span class="n">threshold</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">nb_entires</span> <span class="o">%</span> <span class="n">threshold</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">10</span>
+
+<span class="c1"># 函数嵌套实现</span>
+<span class="k">def</span> <span class="nf">constfn</span><span class="p">(</span><span class="n">threshold</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">nb_entires</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">max</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">nb_entires</span> <span class="sr">//</span> <span class="n">threshold</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">f</span>
+
+<span class="c1"># # 使用时</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">constfn</span><span class="p">(</span><span class="n">threshold</span><span class="p">)</span>
+<span class="n">nb_train</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">nb_entires</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="多维数组取值">多维数组取值</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># ------------------------------------ #</span>
+<span class="c1"># 第一个位置表示要取值的维度索引           #</span>
+<span class="c1"># 第二个位置表示要去值的维度的子数组的索引  #</span>
+<span class="c1"># 两个位置的shape应当相同                #</span>
+<span class="c1"># ------------------------------------ #</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="nf">arange</span><span class="p">(</span><span class="mi">40</span><span class="p">).</span><span class="nf">reshape</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">array</span><span class="p">([[</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">1</span><span class="p">,</span>  <span class="mi">2</span><span class="p">,</span>  <span class="mi">3</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">4</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span>  <span class="mi">6</span><span class="p">,</span>  <span class="mi">7</span><span class="p">],</span>
+       <span class="p">[</span> <span class="mi">8</span><span class="p">,</span>  <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">17</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">23</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">24</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">27</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">28</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">31</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">32</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">35</span><span class="p">],</span>
+       <span class="p">[</span><span class="mi">36</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">39</span><span class="p">]])</span>
+<span class="c1"># 取一个值</span>
+<span class="c1"># # 方法1：一般方法</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="mi">0</span>
+<span class="c1"># # 方法2：列表取值</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="mi">0</span>
+<span class="c1"># 单个维度取多个值</span>
+<span class="c1"># # 方法1</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="k">for</span> <span class="n">i</span> <span class="k">in</span> <span class="n">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+<span class="o">...</span>     <span class="n">lst</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+<span class="o">...</span> <span class="n">np</span><span class="p">.</span><span class="nf">array</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<span class="o">...</span> 
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># # 方法2</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">array</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])</span>
+<span class="c1"># 多个维度取单个值</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[</span><span class="n">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+<span class="n">array</span><span class="p">([</span> <span class="mi">0</span><span class="p">,</span>  <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">18</span><span class="p">])</span>
+<span class="c1"># 多个维度取多个值</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">a</span><span class="p">[[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">]],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]]</span>
+</code></pre></div></div>
+
+<h2 id="03-python执行linux命令">03. Python执行Linux命令</h2>
+<blockquote>
+  <p>在python中执行Linux命令的方法有很多，如sys、command等，但是官方推荐的方法为 subprocess</p>
+</blockquote>
+
+<p>通过subprocess模块实现批量pip install包的程序的实现：</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">import</span> <span class="n">subprocess</span>
+<span class="n">import</span> <span class="n">time</span>
+
+<span class="k">def</span> <span class="nf">install</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="n">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="n">as</span> <span class="ss">file:
+        </span><span class="k">for</span> <span class="n">line</span> <span class="k">in</span> <span class="ss">file:
+            </span><span class="n">line</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">,</span> <span class="s1">''</span><span class="p">).</span><span class="nf">strip</span><span class="p">().</span><span class="nf">split</span><span class="p">(</span><span class="s1">' '</span><span class="p">)</span>
+            <span class="nb">name</span><span class="p">,</span> <span class="n">version</span> <span class="o">=</span> <span class="n">line</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">line</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">subprocess</span><span class="p">.</span><span class="nf">call</span><span class="p">(</span><span class="s2">"pip install "</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="nb">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"=="</span> <span class="o">+</span> <span class="n">str</span><span class="p">(</span><span class="n">version</span><span class="p">),</span> <span class="n">shell</span><span class="o">=</span><span class="no">True</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">"Success install package %s==%s."</span> <span class="o">%</span> <span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="nb">name</span><span class="p">),</span> <span class="n">str</span><span class="p">(</span><span class="n">version</span><span class="p">)))</span>
+            <span class="ss">else:
+                </span><span class="nb">print</span><span class="p">(</span><span class="s2">"Don't install package %s==%s."</span> <span class="o">%</span> <span class="p">(</span><span class="n">str</span><span class="p">(</span><span class="nb">name</span><span class="p">),</span> <span class="n">str</span><span class="p">(</span><span class="n">version</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h2 id="04-python-切片">04. python 切片</h2>
+
+<blockquote>
+  <p>切片（slice）是对序列型对象（如list、string、tuple）的一种高级索引方法。<br />
+形式：squeue[start : end : step]</p>
+</blockquote>
+
+<h3 id="功能">功能</h3>
+<p>普通索引只能取出一个下标（索引）对应位置的元素，而切片则可以实现对一个范围内的下标（索引）的读取。
+值得注意的是，这里的范围不仅包括狭义上的连续片段，而且还包括不连续的片段，这主要是依靠切片的 step 参数。</p>
+
+<h3 id="负索引">负索引</h3>
+<p>Python的切片不仅支持正索引，而且还支持负索引。
+负索引的含义表示的是：一个序列从尾到首的一个索引编号，其值是从 -1 开始。</p>
+
+<p>另外值得注意的是，切片的 start、end、step 参数都是可以省略的，当 start 省略时，表示索引从负无穷开始，无效片段会被省略；
+当 end 省略时，表示到正无穷止，同样无效片段会被省略；step 默认为 1，即表示普通切片；当 step 为负时，表示以序列的逆序输出；</p>
+
+<h3 id="示例-1">示例</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">string</span> <span class="o">=</span> <span class="s1">'abcab'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="s1">'abca'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="s1">'abca'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+<span class="s1">'bcab'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="o">::</span><span class="mi">2</span><span class="p">]</span>
+<span class="s1">'acb'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[</span><span class="o">::-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s1">'bacba'</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">string</span><span class="p">[:</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s1">'bacb'</span>
+</code></pre></div></div>
+
+<h2 id="05-正则表达式">05. 正则表达式</h2>
+
+<blockquote>
+  <p>正则表达式，Regular Expression，常简写为regex、regexp或RE，它使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。</p>
+</blockquote>
+
+<h3 id="定位符">定位符</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">^</code>：匹配字符串开始的位置</li>
+  <li><code class="highlighter-rouge">$</code>：匹配字符串结束的位置</li>
+  <li><code class="highlighter-rouge">\b</code>：匹配一个单词的边界，即字与空格之间的位置
+    <ul>
+      <li><code class="highlighter-rouge">\b</code> 表示字母数字与非字母数字的边界，非字母数字与字母数字的边界</li>
+      <li>这里的字母和数字是 pattern 中定义的字母和数字</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">\B</code>：非单词边界匹配
+    <ul>
+      <li><code class="highlighter-rouge">\B</code> 表示字母数字与字母数字的边界，非字母数字与非字母数字的边界；</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="限定符">限定符</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">*</code>：匹配前面的子表达式 0 次或多次，贪婪限定符；</li>
+  <li><code class="highlighter-rouge">+</code>：匹配前面的子表达式 1 次或多次，贪婪限定符；</li>
+  <li><code class="highlighter-rouge">?</code>：匹配前面的子表达式 0 次或 1 次，非贪婪限定符；</li>
+  <li><code class="highlighter-rouge">{n}</code>：n 是一个非负整数，匹配确定的 n 次；</li>
+  <li><code class="highlighter-rouge">{n,}</code>：n 是一个非负整数，匹配至少 n 次；</li>
+  <li><code class="highlighter-rouge">{n, m}</code>：n, m 是一个非负整数，且 $n &lt;= m$，匹配至少 n 次，至多 m 次；
+    <ul>
+      <li>值得注意的是，{n}、{n,}、{n, m} 在匹配时，是连续的，即匹配表达式连续的 n 次或至少 n 次或至少 n 次 至多 m 次；</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="特殊字符">特殊字符</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">()</code>：标记一个子表达式的开始和结束的位置；
+    <ul>
+      <li>以 <code class="highlighter-rouge">()</code> 标记的表达式匹配成功的条件是：连续的子串必须与 <code class="highlighter-rouge">()</code> 中的表达式完全一致；</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">.</code>：匹配除换行符 \n 之外的所有单字符；</li>
+  <li><code class="highlighter-rouge">[</code>：标记一个中括号表达式的开始；
+    <ul>
+      <li>以 <code class="highlighter-rouge">[]</code> 标记的表达式匹配成功的条件是：连续的子串内部只要仅包含 <code class="highlighter-rouge">[]</code> 中定义的字符，即成功；</li>
+    </ul>
+  </li>
+  <li><code class="highlighter-rouge">\</code>：将下一个字符标记为特殊字符、原义字符、向后引用或八进制转义字符；</li>
+  <li><code class="highlighter-rouge">^</code>：在 <code class="highlighter-rouge">[]</code> 中的 <code class="highlighter-rouge">^</code> 表示匹配除了 <code class="highlighter-rouge">[]</code> 中定义的表达式之外的字符；</li>
+  <li><code class="highlighter-rouge">{</code>：标记限定符表达式的开始；</li>
+  <li><code class="highlighter-rouge">|</code>：指明两个表达式之间的一个匹配成功即成功；</li>
+</ul>
+
+<h3 id="非打印字符">非打印字符</h3>
+
+<ul>
+  <li><code class="highlighter-rouge">\cx</code>：匹配由x指明的控制字符；例如，\cM匹配一个Control-M或回车符。x的值必须指定为A-Z或a-z之一，否则，将c视为一个原义的’c’字符；</li>
+  <li><code class="highlighter-rouge">\f</code>：匹配一个换页符；</li>
+  <li><code class="highlighter-rouge">\n</code>：匹配一个换行符；</li>
+  <li><code class="highlighter-rouge">\r</code>：匹配一个回车符；</li>
+  <li><code class="highlighter-rouge">\s</code>：匹配任何空白字符，包括空格、制表符、换页符；</li>
+  <li><code class="highlighter-rouge">\S</code>：匹配任何非空白字符，等价于 <strong>[^\f\n\r\t\v]</strong>；</li>
+  <li><code class="highlighter-rouge">\t</code>：匹配一个制表符；</li>
+  <li><code class="highlighter-rouge">\v</code>：匹配哟个垂直制表符；</li>
+  <li><code class="highlighter-rouge">\d</code>：匹配任意数字，等价于 <strong>[0-9]</strong>；</li>
+  <li><code class="highlighter-rouge">\w</code>：匹配数字字母下划线；</li>
+  <li><code class="highlighter-rouge">\W</code>：匹配非字母数字下划线；</li>
+  <li><code class="highlighter-rouge">\D</code>：匹配非数字；</li>
+  <li><code class="highlighter-rouge">\G</code>：匹配最后完成的位置；</li>
+</ul>
+
+<h3 id="示例-2">示例</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import re
+
+string = 'abc123 == abc123'
+
+# '\b' 的解释
+# '\b' 和 '\B' 是单词边界，不匹配任何实际字符，所以实际是看不到的；
+
+re.split('123\\b', string)
+
+# ==&gt; ['abc', ' == abc', '']
+
+string = '1pycthon py5 2pyc342 pyc1py2py4 pyp3 3pyc# pyc'
+
+re.split('pyc\B', string)
+
+# ==&gt; ['1', 'thon py5 2', '342 ', '1py2py4 pyp3 3pyc# pyc']
+</code></pre></div></div>
+
+:ET
