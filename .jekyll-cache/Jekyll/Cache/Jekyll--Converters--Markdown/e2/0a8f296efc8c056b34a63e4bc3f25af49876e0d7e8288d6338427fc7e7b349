@@ -1,4 +1,4 @@
-I"��<ul id="markdown-toc">
+I""�<ul id="markdown-toc">
   <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
       <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
       <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
@@ -65,6 +65,13 @@
       <li><a href="#题目描述-4" id="markdown-toc-题目描述-4">题目描述</a></li>
       <li><a href="#代码展示1-1" id="markdown-toc-代码展示1-1">代码展示1</a></li>
       <li><a href="#代码展示2-1" id="markdown-toc-代码展示2-1">代码展示2</a></li>
+    </ul>
+  </li>
+  <li><a href="#回文数判断" id="markdown-toc-回文数判断">回文数判断</a>    <ul>
+      <li><a href="#题目描述-5" id="markdown-toc-题目描述-5">题目描述</a></li>
+      <li><a href="#示例-4" id="markdown-toc-示例-4">示例</a></li>
+      <li><a href="#代码展示-4" id="markdown-toc-代码展示-4">代码展示</a></li>
+      <li><a href="#复杂度分析-6" id="markdown-toc-复杂度分析-6">复杂度分析</a></li>
     </ul>
   </li>
 </ul>
@@ -1135,5 +1142,57 @@ def myAtoi(s):
 # 如果匹配失败，则返回 []
 # int([]) = 0
 </code></pre></div></div>
+
+<h2 id="回文数判断">回文数判断</h2>
+<h3 id="题目描述-5">题目描述</h3>
+<p>判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。</p>
+
+<h3 id="示例-4">示例</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入: 121
+输出: true
+
+输入: -121
+输出: false
+解释: 从左向右读, 为 -121 。 从右向左读, 为 121- 。因此它不是一个回文数。
+
+输入: 10
+输出: false
+解释: 从右向左读, 为 01 。因此它不是一个回文数。
+</code></pre></div></div>
+
+<h3 id="代码展示-4">代码展示</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def isPalindrome(x):
+    strX = str(x)
+    lens = len(strX)
+    
+    if lens == 1:
+        return True
+    
+    left, right = 0, lens - 1
+    
+    while left &lt;= right:
+        if strX[left] != strX[right]:
+            return False
+        left += 1
+        right -= 1
+    
+    return True
+</code></pre></div></div>
+
+<h3 id="复杂度分析-6">复杂度分析</h3>
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>最差情况下循环 lens // 2 次，因此时间复杂度为 $O(n)$，$n$ 为整数长度；</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>仅使用两个变量 left、right 来执行判断，因此，空间复杂度为 $O(1)$；</li>
+    </ul>
+  </li>
+</ul>
 
 :ET
