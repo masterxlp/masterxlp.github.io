@@ -1,4 +1,4 @@
-I"=I<ul id="markdown-toc">
+I"XI<ul id="markdown-toc">
   <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
   <li><a href="#背景" id="markdown-toc-背景">背景</a></li>
   <li><a href="#wuji优势概括" id="markdown-toc-wuji优势概括">wuji优势概括</a></li>
@@ -35,13 +35,13 @@ Link: <a href="https://yanzzzzz.github.io/files/PID6139619.pdf">原文链接</a>
 才有可能被触发，这就要求游戏测试算法拥有类人的智能。
 近年来，深度强化学习算法（DRL）取得的非凡的成功，特别在游戏控制领域，甚至表现出了超越人类的智能，这为推进自动化游戏测试提供了启示。
 然而，既有的 DRL 算法主要关注如何赢得游戏，而不是游戏测试，导致其可能无法广泛地覆盖需要测试的分支场景。</p>
-<div align="center"><img src="../image/Wuji中智能体与环境的交互示意图.png" width="70%" height="50%" /></div>
+<div align="center"><img src="../../../../image/Wuji中智能体与环境的交互示意图.png" width="70%" height="50%" /></div>
 
 <h2 id="wuji优势概括">wuji优势概括</h2>
 <p>Wuji融合了进化算法、深度强化学习算法以及多目标优化机制，实现了智能的自动化游戏测试，在赢得游戏和探索游戏空间（两个目标）之间取得了较好的平衡，
 其中，赢得游戏可以使得智能体在游戏中取得进展，而空间探索则可以增加发现BUG的可能性。</p>
 
-<p><img src="../image/Wuji结构图.png" alt="Figure 2" title="Wuji结构图" /></p>
+<p><img src="../../../../image/Wuji结构图.png" alt="Figure 2" title="Wuji结构图" /></p>
 
 <h2 id="wuji---基于多目标优化的进化强化学习框架">Wuji - 基于多目标优化的进化强化学习框架</h2>
 <p>从强化学习算法的角度看，不同的策略 $\pi$ 都能够探索到游戏中不同的状态空间。
@@ -72,7 +72,7 @@ FV(\pi) = [RS_G^{\pi}, ES_G^{\pi}]
 值得注意的是，当将 $F_3$ 加入到后代种群中时，如果遇到种群规模超出上限阈值的情况，需要针对 $F_3$ 内的策略进行筛选。
 具体见算法(2-4)</p>
 
-<div align="center"><img src="../image/wuji算法1.png" width="50%" height="50%" /></div>
+<div align="center"><img src="../../../../image/wuji算法1.png" width="50%" height="50%" /></div>
 
 <p>为此，提出使用 <strong>聚集距离（crowding distance）对策略的密集程度进行度量</strong>，
 并基于聚集距离实现策略的聚集距离排序算法（Crowding distance sorting，CDS）实现策略的末位淘汰。
