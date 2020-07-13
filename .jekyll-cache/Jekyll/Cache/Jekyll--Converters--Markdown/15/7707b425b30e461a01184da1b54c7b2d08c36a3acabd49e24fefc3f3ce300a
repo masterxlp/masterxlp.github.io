@@ -1,4 +1,4 @@
-I""�<ul id="markdown-toc">
+I"C�<ul id="markdown-toc">
   <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
       <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
       <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
@@ -72,6 +72,14 @@
       <li><a href="#示例-4" id="markdown-toc-示例-4">示例</a></li>
       <li><a href="#代码展示-4" id="markdown-toc-代码展示-4">代码展示</a></li>
       <li><a href="#复杂度分析-6" id="markdown-toc-复杂度分析-6">复杂度分析</a></li>
+    </ul>
+  </li>
+  <li><a href="#正则表达式匹配" id="markdown-toc-正则表达式匹配">正则表达式匹配</a>    <ul>
+      <li><a href="#题目描述-6" id="markdown-toc-题目描述-6">题目描述</a></li>
+      <li><a href="#示例-5" id="markdown-toc-示例-5">示例</a></li>
+      <li><a href="#题解思路" id="markdown-toc-题解思路">题解思路</a></li>
+      <li><a href="#代码展示-5" id="markdown-toc-代码展示-5">代码展示</a></li>
+      <li><a href="#复杂度分析-7" id="markdown-toc-复杂度分析-7">复杂度分析</a></li>
     </ul>
   </li>
 </ul>
@@ -1191,6 +1199,119 @@ def myAtoi(s):
   <li>空间复杂度
     <ul>
       <li>仅使用两个变量 left、right 来执行判断，因此，空间复杂度为 $O(1)$；</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="正则表达式匹配">正则表达式匹配</h2>
+<h3 id="题目描述-6">题目描述</h3>
+<p>给你一个字符串 <code class="highlighter-rouge">s</code> 和一个字符规律 <code class="highlighter-rouge">p</code>，请你来实现一个支持 <code class="highlighter-rouge">'.'</code> 和 <code class="highlighter-rouge">'*'</code> 的正则表达式匹配。</p>
+
+<ul>
+  <li><code class="highlighter-rouge">'.'</code> 匹配任意单个字符</li>
+  <li><code class="highlighter-rouge">'*'</code> 匹配零个或多个前面的那一个元素</li>
+</ul>
+
+<p>所谓匹配，是要涵盖 <strong>整个</strong> 字符串 <code class="highlighter-rouge">s</code> 的，而不是部分字符串。</p>
+
+<p>说明:</p>
+
+<ul>
+  <li><code class="highlighter-rouge">s</code> 可能为空，且只包含从 <code class="highlighter-rouge">a-z</code> 的小写字母。</li>
+  <li><code class="highlighter-rouge">p</code> 可能为空，且只包含从 <code class="highlighter-rouge">a-z</code> 的小写字母，以及字符 <code class="highlighter-rouge">.</code> 和 <code class="highlighter-rouge">*</code>。</li>
+</ul>
+
+<h3 id="示例-5">示例</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>输入:
+s = "aa"
+p = "a"
+输出: false
+解释: "a" 无法匹配 "aa" 整个字符串。
+
+输入:
+s = "aa"
+p = "a*"
+输出: true
+解释: 因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。
+
+输入:
+s = "ab"
+p = ".*"
+输出: true
+解释: ".*" 表示可匹配零个或多个（'*'）任意字符（'.'）。
+
+输入:
+s = "aab"
+p = "c*a*b"
+输出: true
+解释: 因为 '*' 表示零个或多个，这里 'c' 为 0 个, 'a' 被重复一次。因此可以匹配字符串 "aab"。
+
+输入:
+s = "mississippi"
+p = "mis*is*p*."
+输出: false
+</code></pre></div></div>
+
+<h3 id="题解思路">题解思路</h3>
+
+<p>动态规划的思想解题：</p>
+<ul>
+  <li>状态 $dp[i][j]$ ：字符串 s 的前 i 个字符是否能够用正则表达式 p 的前 j 个字符匹配成功；</li>
+  <li>状态转移：
+    <ul>
+      <li>当 $p[j] != ‘*’$ 时，那么 $p[j]$ 一定是 <code class="highlighter-rouge">a-z</code> 的字母或者 <code class="highlighter-rouge">'.'</code>，这时 如果 $p[j] == s[i]$，那么 $dp[i][j] = dp[i-1][j-1]$，即取决于 表达式的前 j-1 个字符 匹配字符串的前 i-1 个字符 的结果；而当 $p[j] != s[i]$ 时，$dp[i][j] = False$；</li>
+      <li>当 $p[j] == ‘*’$ 时，当 <code class="highlighter-rouge">字母 + '*'</code> 不被忽略时，即 <code class="highlighter-rouge">字母</code> 能够匹配成功，即 $s[i] == p[j-1]$，那么有情况1 $dp[i][j] = dp[i-1][j]$，这时是 <code class="highlighter-rouge">'*'</code> 复制了多次 <code class="highlighter-rouge">字母</code>，情况2 $dp[i][j] = dp[i][j-2]$，这时是 <code class="highlighter-rouge">'*'</code> 复制了 <code class="highlighter-rouge">字母</code> 1次；当 <code class="highlighter-rouge">字母 + '*'</code> 被忽略时，即 <code class="highlighter-rouge">字母</code> 匹配不成功，即 $s[i] != p[j-1]$，那么 $dp[i][j] = dp[i][j-2]$，这时 <code class="highlighter-rouge">'*'</code> 被置为 0。</li>
+    </ul>
+  </li>
+</ul>
+
+<p>值得注意的是：</p>
+<ul>
+  <li>当 s 为空，p 不为空时，可能存在匹配的情况，如 <code class="highlighter-rouge">s = '', p = 'a*b*c*'</code> ，只要那个字符后面跟 <code class="highlighter-rouge">'*'</code> 号，时成立的，因此，依然需要规划；</li>
+  <li>对于特殊符号 <code class="highlighter-rouge">'.'</code> ，我们可以把它看成一个可以匹配任何字母的字符就可，只需在判断是否匹配时考虑它即可，在分类讨论中忽略它；</li>
+  <li>最后，特别要注意的是，在索引中，一旦出现 <code class="highlighter-rouge">index -1</code> 或者 <code class="highlighter-rouge">index + 1</code> 时，一定要考虑越界的情况；</li>
+</ul>
+
+<h3 id="代码展示-5">代码展示</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def isMatch(s, p):
+    m, n = len(s), len(p)
+
+    dp = [[False for _ in range(n + 1)] for _ in range(m + 1)]  # 初始化二维数组
+
+    dp[0][0] = True                                             # 设定 s、p 均为空时的结果
+
+    for i in range(m + 1):
+        for j in range(1, n + 1):
+            if p[j - 1] != '*':
+                if mathces(s, p, i, j):
+                    dp[i][j] = dp[i-1][j-1]
+            else:
+                if mathces(s, p, i, j - 1):
+                    dp[i][j] = dp[i-1][j] or dp[i][j-2]
+                else:
+                    dp[i][j] = dp[i][j-2]
+    return dp[m][n]
+
+def mathces(s, p, i, j):
+    if i == 0:
+        return False
+    if p[j-1] == '.':
+        return True
+    return s[i-1] == p[j-1]
+</code></pre></div></div>
+
+<h3 id="复杂度分析-7">复杂度分析</h3>
+<ul>
+  <li>时间复杂度
+    <ul>
+      <li>两个for循环，因此时间复杂度为 $O(mn)$；</li>
+    </ul>
+  </li>
+  <li>空间复杂度
+    <ul>
+      <li>动态规划，创建 $m \times n$ 维的表格，因此空间复杂度为 $O(mn)$；</li>
     </ul>
   </li>
 </ul>
