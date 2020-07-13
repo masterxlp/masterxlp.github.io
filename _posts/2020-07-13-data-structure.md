@@ -33,7 +33,7 @@ author: Xlp
 
 示例：
 
-<div align="center"><img src= "../../../../image/队列/quque.jpeg" width="70%" height="70%"></div>
+<div align="center"><img src= "../../../../image/队列/队列.jpeg" width="70%" height="70%"></div>
 <div align="center">图1. 队列的入队和出队示意图</div>
 
 ### 循环队列
