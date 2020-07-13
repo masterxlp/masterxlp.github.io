@@ -1,52 +1,51 @@
----
-layout: post
-title:  "[G] Data Structure"
-date:   2020-07-13 10:23:00 +0800
-categories: Data Structure
-tags: 答题记录 代码实现 知识总结 G
-author: Xlp
----
-* content
-{:toc}
+I"�(<ul id="markdown-toc">
+  <li><a href="#队列" id="markdown-toc-队列">队列</a>    <ul>
+      <li><a href="#先入先出的数据结构" id="markdown-toc-先入先出的数据结构">先入先出的数据结构</a></li>
+      <li><a href="#队列的缺点" id="markdown-toc-队列的缺点">队列的缺点</a></li>
+      <li><a href="#循环队列" id="markdown-toc-循环队列">循环队列</a></li>
+      <li><a href="#循环队列的实现" id="markdown-toc-循环队列的实现">循环队列的实现</a></li>
+      <li><a href="#数据流中的移动平均值" id="markdown-toc-数据流中的移动平均值">数据流中的移动平均值</a></li>
+    </ul>
+  </li>
+</ul>
 
-> 题目来自：[LeetCode-cn](https://leetcode-cn.com/explore/learn)  
-> 该部分主要记录对数据结构的总结及其结构的实现
+<blockquote>
+  <p>题目来自：<a href="https://leetcode-cn.com/explore/learn">LeetCode-cn</a><br />
+该部分主要记录对数据结构的总结及其结构的实现</p>
+</blockquote>
 
+<h2 id="队列">队列</h2>
 
+<blockquote>
+  <p>当你想要 <strong>按顺序处理元素</strong> 时，使用队列是一个很好的选择。</p>
+</blockquote>
 
+<h3 id="先入先出的数据结构">先入先出的数据结构</h3>
+<p>在 FIFO 数据结构中，将 <strong>首先处理添加到队列中的第一个元素</strong>。</p>
 
+<p>队列是典型的 FIFO 数据结构。
+插入（insert）操作也称为入队（enqueue），<strong>新元素始终被添加在队列的末尾</strong>。
+删除（delete）操作也称为出队（dequeue），<strong>每次仅移除队列的第一个元素</strong>。</p>
 
-## 队列
+<h3 id="队列的缺点">队列的缺点</h3>
+<p>队列在某些情况下效率很低：随着指针的移动，会浪费越来越多的空间。
+当我们有空间限制时，这将是难以接受的。</p>
 
-> 当你想要 **按顺序处理元素** 时，使用队列是一个很好的选择。
+<p>示例：</p>
 
-### 先入先出的数据结构
-在 FIFO 数据结构中，将 **首先处理添加到队列中的第一个元素**。
-
-队列是典型的 FIFO 数据结构。
-插入（insert）操作也称为入队（enqueue），**新元素始终被添加在队列的末尾**。
-删除（delete）操作也称为出队（dequeue），**每次仅移除队列的第一个元素**。
-
-### 队列的缺点
-队列在某些情况下效率很低：随着指针的移动，会浪费越来越多的空间。
-当我们有空间限制时，这将是难以接受的。
-
-示例：
-
-<div align="center"><img src= "../../../../image/队列/queue.jpeg" width="70%" height="70%"></div>
+<div align="center"><img src="../../../../image/队列/queue.jpeg" width="70%" height="70%" /></div>
 <div align="center">图1. 队列的入队和出队示意图</div>
 
-### 循环队列
-具体来说，我们可以使用 **固定大小的数组** 和 **两个指针** 来指示起始位置和结束位置，目的是 **重用** 之前提到的 被浪费的内存。
+<h3 id="循环队列">循环队列</h3>
+<p>具体来说，我们可以使用 <strong>固定大小的数组</strong> 和 <strong>两个指针</strong> 来指示起始位置和结束位置，目的是 <strong>重用</strong> 之前提到的 被浪费的内存。</p>
 
-示例：
+<p>示例：</p>
 
-![循环队列示意图](../../../../image/队列/循环队列演示.gif)
+<p><img src="../../../../image/队列/循环队列演示.gif" alt="循环队列示意图" /></p>
 
-### 循环队列的实现
+<h3 id="循环队列的实现">循环队列的实现</h3>
 
-```
-# MyCode
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># MyCode
 
 class MyCircularQueue:
 
@@ -62,7 +61,7 @@ class MyCircularQueue:
         
         self.queue = [[] for _ in range(k)]
 
-    def enQueue(self, value: int) -> bool:
+    def enQueue(self, value: int) -&gt; bool:
         """
         Insert an element into the circular queue. Return true if the operation is successful.
         """
@@ -71,7 +70,7 @@ class MyCircularQueue:
                 self.queue[0] = value
                 self.head, self.tail = 0, 0
             else:
-                if self.tail < self.size - 1:
+                if self.tail &lt; self.size - 1:
                     self.tail += 1
                 else:
                     self.tail = 0
@@ -82,13 +81,13 @@ class MyCircularQueue:
         
         
 
-    def deQueue(self) -> bool:
+    def deQueue(self) -&gt; bool:
         """
         Delete an element from the circular queue. Return true if the operation is successful.
         """
         if not self.isEmpty():
             self.queue[self.head] = []
-            if self.head < self.size - 1:
+            if self.head &lt; self.size - 1:
                 self.head += 1
             else:
                 self.head = 0
@@ -98,28 +97,28 @@ class MyCircularQueue:
                 
         
 
-    def Front(self) -> int:
+    def Front(self) -&gt; int:
         """
         Get the front item from the queue.
         """
         return self.queue[self.head] if not self.isEmpty() else -1
         
 
-    def Rear(self) -> int:
+    def Rear(self) -&gt; int:
         """
         Get the last item from the queue.
         """
         return self.queue[self.tail] if not self.isEmpty() else -1
         
 
-    def isEmpty(self) -> bool:
+    def isEmpty(self) -&gt; bool:
         """
         Checks whether the circular queue is empty or not.
         """
         return self.cur_size == 0
         
 
-    def isFull(self) -> bool:
+    def isFull(self) -&gt; bool:
         """
         Checks whether the circular queue is full or not.
         """
@@ -135,14 +134,13 @@ class MyCircularQueue:
 # param_4 = obj.Rear()
 # param_5 = obj.isEmpty()
 # param_6 = obj.isFull()
-```
+</code></pre></div></div>
 
-```
-# 官方给出的 c++ 实现
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 官方给出的 c++ 实现
 
 class MyCircularQueue {
 private:
-    vector<int> data;
+    vector&lt;int&gt; data;
     int head;
     int tail;
     int size;
@@ -219,10 +217,9 @@ public:
  * bool param_5 = obj.isEmpty();
  * bool param_6 = obj.isFull();
  */
-```
+</code></pre></div></div>
 
-```
-# 官方 c++ 代码的 Python 实现
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 官方 c++ 代码的 Python 实现
 
 class MyCircularQueue:
 
@@ -237,7 +234,7 @@ class MyCircularQueue:
         
         self.queue = [[] for _ in range(k)]
 
-    def enQueue(self, value: int) -> bool:
+    def enQueue(self, value: int) -&gt; bool:
         """
         Insert an element into the circular queue. Return true if the operation is successful.
         """
@@ -253,7 +250,7 @@ class MyCircularQueue:
         
         
 
-    def deQueue(self) -> bool:
+    def deQueue(self) -&gt; bool:
         """
         Delete an element from the circular queue. Return true if the operation is successful.
         """
@@ -269,28 +266,28 @@ class MyCircularQueue:
                 
         
 
-    def Front(self) -> int:
+    def Front(self) -&gt; int:
         """
         Get the front item from the queue.
         """
         return self.queue[self.head] if not self.isEmpty() else -1
         
 
-    def Rear(self) -> int:
+    def Rear(self) -&gt; int:
         """
         Get the last item from the queue.
         """
         return self.queue[self.tail] if not self.isEmpty() else -1
         
 
-    def isEmpty(self) -> bool:
+    def isEmpty(self) -&gt; bool:
         """
         Checks whether the circular queue is empty or not.
         """
         return self.head == -1
         
 
-    def isFull(self) -> bool:
+    def isFull(self) -&gt; bool:
         """
         Checks whether the circular queue is full or not.
         """
@@ -306,21 +303,26 @@ class MyCircularQueue:
 # param_4 = obj.Rear()
 # param_5 = obj.isEmpty()
 # param_6 = obj.isFull()
-```
+</code></pre></div></div>
 
-### 数据流中的移动平均值
+<h3 id="数据流中的移动平均值">数据流中的移动平均值</h3>
 
-> 给定一个整数数据流和一个窗口大小，根据该滑动窗口的大小，计算其所有整数的移动平均值。
+<blockquote>
+  <p>给定一个整数数据流和一个窗口大小，根据该滑动窗口的大小，计算其所有整数的移动平均值。</p>
+</blockquote>
 
-> 示例：   
->> MovingAverage m = new MovingAverage(3);  
->> m.next(1) = 1  
->> m.next(10) = (1 + 10) / 2  
->> m.next(3) = (1 + 10 + 3) / 3  
->> m.next(5) = (10 + 3 + 5) / 3   
+<blockquote>
+  <p>示例：</p>
+  <blockquote>
+    <p>MovingAverage m = new MovingAverage(3);<br />
+m.next(1) = 1<br />
+m.next(10) = (1 + 10) / 2<br />
+m.next(3) = (1 + 10 + 3) / 3<br />
+m.next(5) = (10 + 3 + 5) / 3</p>
+  </blockquote>
+</blockquote>
 
-```
-class MovingAverage:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class MovingAverage:
 
     def __init__(self, size: int):
         """
@@ -331,8 +333,8 @@ class MovingAverage:
         self.queue = []
         
 
-    def next(self, val: int) -> float:
-        if len(self.queue) < self.size:
+    def next(self, val: int) -&gt; float:
+        if len(self.queue) &lt; self.size:
             self.queue.append(val)
         else:
             self.queue = list(reversed(self.queue))
@@ -347,4 +349,5 @@ class MovingAverage:
 # Your MovingAverage object will be instantiated and called as such:
 # obj = MovingAverage(size)
 # param_1 = obj.next(val)
-```
+</code></pre></div></div>
+:ET
