@@ -1,4 +1,4 @@
-I"�(<ul id="markdown-toc">
+I"�(<ul id="markdown-toc">
   <li><a href="#队列" id="markdown-toc-队列">队列</a>    <ul>
       <li><a href="#先入先出的数据结构" id="markdown-toc-先入先出的数据结构">先入先出的数据结构</a></li>
       <li><a href="#队列的缺点" id="markdown-toc-队列的缺点">队列的缺点</a></li>
@@ -33,7 +33,7 @@
 
 <p>示例：</p>
 
-<div align="center"><img src="../../../../image/队列/queue.jpeg" width="70%" height="70%" /></div>
+<div align="center">&lt;img src=site.baseurl + "/image/队列/queue.jpeg" width="70%" height="70%"&gt;</div>
 <div align="center">图1. 队列的入队和出队示意图</div>
 
 <h3 id="循环队列">循环队列</h3>
