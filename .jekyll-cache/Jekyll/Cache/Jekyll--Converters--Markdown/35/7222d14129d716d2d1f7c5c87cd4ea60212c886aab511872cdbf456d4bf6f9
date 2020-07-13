@@ -1,4 +1,4 @@
-I"�(<ul id="markdown-toc">
+I"�)<ul id="markdown-toc">
   <li><a href="#队列" id="markdown-toc-队列">队列</a>    <ul>
       <li><a href="#先入先出的数据结构" id="markdown-toc-先入先出的数据结构">先入先出的数据结构</a></li>
       <li><a href="#队列的缺点" id="markdown-toc-队列的缺点">队列的缺点</a></li>
@@ -7,6 +7,7 @@
       <li><a href="#数据流中的移动平均值" id="markdown-toc-数据流中的移动平均值">数据流中的移动平均值</a></li>
     </ul>
   </li>
+  <li><a href="#队列和广度优先搜索" id="markdown-toc-队列和广度优先搜索">队列和广度优先搜索</a></li>
 </ul>
 
 <blockquote>
@@ -350,4 +351,6 @@ m.next(5) = (10 + 3 + 5) / 3</p>
 # obj = MovingAverage(size)
 # param_1 = obj.next(val)
 </code></pre></div></div>
+
+<h2 id="队列和广度优先搜索">队列和广度优先搜索</h2>
 :ET
