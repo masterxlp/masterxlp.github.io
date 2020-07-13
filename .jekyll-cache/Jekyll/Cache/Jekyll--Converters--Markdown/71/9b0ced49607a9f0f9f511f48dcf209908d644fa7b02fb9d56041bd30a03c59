@@ -1,0 +1,276 @@
+I"<ul id="markdown-toc">
+  <li><a href="#队列" id="markdown-toc-队列">队列</a>    <ul>
+      <li><a href="#循环队列的实现" id="markdown-toc-循环队列的实现">循环队列的实现</a></li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>题目来自：<a href="https://leetcode-cn.com/explore/learn">LeetCode-cn</a><br />
+该部分主要记录对数据结构的总结及其结构的实现</p>
+</blockquote>
+
+<h2 id="队列">队列</h2>
+
+<h3 id="循环队列的实现">循环队列的实现</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># MyCode
+
+class MyCircularQueue:
+
+    def __init__(self, k: int):
+        """
+        Initialize your data structure here. Set the size of the queue to be k.
+        """
+        self.size = k
+        self.cur_size = 0
+        
+        self.head = -1
+        self.tail = -1
+        
+        self.queue = [[] for _ in range(k)]
+
+    def enQueue(self, value: int) -&gt; bool:
+        """
+        Insert an element into the circular queue. Return true if the operation is successful.
+        """
+        if not self.isFull():
+            if self.isEmpty():
+                self.queue[0] = value
+                self.head, self.tail = 0, 0
+            else:
+                if self.tail &lt; self.size - 1:
+                    self.tail += 1
+                else:
+                    self.tail = 0
+                self.queue[self.tail] = value
+            self.cur_size += 1
+            return True
+        return False
+        
+        
+
+    def deQueue(self) -&gt; bool:
+        """
+        Delete an element from the circular queue. Return true if the operation is successful.
+        """
+        if not self.isEmpty():
+            self.queue[self.head] = []
+            if self.head &lt; self.size - 1:
+                self.head += 1
+            else:
+                self.head = 0
+            self.cur_size -= 1
+            return True
+        return False
+                
+        
+
+    def Front(self) -&gt; int:
+        """
+        Get the front item from the queue.
+        """
+        return self.queue[self.head] if not self.isEmpty() else -1
+        
+
+    def Rear(self) -&gt; int:
+        """
+        Get the last item from the queue.
+        """
+        return self.queue[self.tail] if not self.isEmpty() else -1
+        
+
+    def isEmpty(self) -&gt; bool:
+        """
+        Checks whether the circular queue is empty or not.
+        """
+        return self.cur_size == 0
+        
+
+    def isFull(self) -&gt; bool:
+        """
+        Checks whether the circular queue is full or not.
+        """
+        return self.cur_size == self.size
+        
+
+
+# Your MyCircularQueue object will be instantiated and called as such:
+# obj = MyCircularQueue(k)
+# param_1 = obj.enQueue(value)
+# param_2 = obj.deQueue()
+# param_3 = obj.Front()
+# param_4 = obj.Rear()
+# param_5 = obj.isEmpty()
+# param_6 = obj.isFull()
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 官方给出的 c++ 实现
+
+class MyCircularQueue {
+private:
+    vector&lt;int&gt; data;
+    int head;
+    int tail;
+    int size;
+public:
+    /** Initialize your data structure here. Set the size of the queue to be k. */
+    MyCircularQueue(int k) {
+        data.resize(k);
+        head = -1;
+        tail = -1;
+        size = k;
+    }
+    
+    /** Insert an element into the circular queue. Return true if the operation is successful. */
+    bool enQueue(int value) {
+        if (isFull()) {
+            return false;
+        }
+        if (isEmpty()) {
+            head = 0;
+        }
+        tail = (tail + 1) % size;
+        data[tail] = value;
+        return true;
+    }
+    
+    /** Delete an element from the circular queue. Return true if the operation is successful. */
+    bool deQueue() {
+        if (isEmpty()) {
+            return false;
+        }
+        if (head == tail) {
+            head = -1;
+            tail = -1;
+            return true;
+        }
+        head = (head + 1) % size;
+        return true;
+    }
+    
+    /** Get the front item from the queue. */
+    int Front() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return data[head];
+    }
+    
+    /** Get the last item from the queue. */
+    int Rear() {
+        if (isEmpty()) {
+            return -1;
+        }
+        return data[tail];
+    }
+    
+    /** Checks whether the circular queue is empty or not. */
+    bool isEmpty() {
+        return head == -1;
+    }
+    
+    /** Checks whether the circular queue is full or not. */
+    bool isFull() {
+        return ((tail + 1) % size) == head;
+    }
+};
+
+/**
+ * Your MyCircularQueue object will be instantiated and called as such:
+ * MyCircularQueue obj = new MyCircularQueue(k);
+ * bool param_1 = obj.enQueue(value);
+ * bool param_2 = obj.deQueue();
+ * int param_3 = obj.Front();
+ * int param_4 = obj.Rear();
+ * bool param_5 = obj.isEmpty();
+ * bool param_6 = obj.isFull();
+ */
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 官方 c++ 代码的 Python 实现
+
+class MyCircularQueue:
+
+    def __init__(self, k: int):
+        """
+        Initialize your data structure here. Set the size of the queue to be k.
+        """
+        self.size = k
+        
+        self.head = -1
+        self.tail = -1
+        
+        self.queue = [[] for _ in range(k)]
+
+    def enQueue(self, value: int) -&gt; bool:
+        """
+        Insert an element into the circular queue. Return true if the operation is successful.
+        """
+        if self.isFull():
+            return False
+        
+        if self.isEmpty():
+            self.head = 0
+        
+        self.tail = (self.tail + 1) % self.size
+        self.queue[self.tail] = value
+        return True
+        
+        
+
+    def deQueue(self) -&gt; bool:
+        """
+        Delete an element from the circular queue. Return true if the operation is successful.
+        """
+        if self.isEmpty():
+            return False
+        
+        if self.head == self.tail:
+            self.head = -1
+            self.tail = -1
+            return True
+        self.head = (self.head + 1) % self.size
+        return True
+                
+        
+
+    def Front(self) -&gt; int:
+        """
+        Get the front item from the queue.
+        """
+        return self.queue[self.head] if not self.isEmpty() else -1
+        
+
+    def Rear(self) -&gt; int:
+        """
+        Get the last item from the queue.
+        """
+        return self.queue[self.tail] if not self.isEmpty() else -1
+        
+
+    def isEmpty(self) -&gt; bool:
+        """
+        Checks whether the circular queue is empty or not.
+        """
+        return self.head == -1
+        
+
+    def isFull(self) -&gt; bool:
+        """
+        Checks whether the circular queue is full or not.
+        """
+        return (self.tail + 1) % self.size == self.head
+        
+
+
+# Your MyCircularQueue object will be instantiated and called as such:
+# obj = MyCircularQueue(k)
+# param_1 = obj.enQueue(value)
+# param_2 = obj.deQueue()
+# param_3 = obj.Front()
+# param_4 = obj.Rear()
+# param_5 = obj.isEmpty()
+# param_6 = obj.isFull()
+</code></pre></div></div>
+:ET
