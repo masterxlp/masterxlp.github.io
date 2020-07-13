@@ -1,4 +1,4 @@
-I"��<ul id="markdown-toc">
+I"��<ul id="markdown-toc">
   <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
   <li><a href="#01-特征归一化" id="markdown-toc-01-特征归一化">01. 特征归一化</a>    <ul>
       <li><a href="#为什么需要对数值类型的特征做归一化" id="markdown-toc-为什么需要对数值类型的特征做归一化">为什么需要对数值类型的特征做归一化？</a></li>
@@ -781,9 +781,11 @@ net_t = Ux_t + Wh_{t-1} = Ux_t + Wf(Ux_{t-1} + Wh_{t-2}) \tag{9.3}
 
 <p>再回到循环神经网络的梯度计算公式</p>
 
-\[\frac{\partial net_t}{\partial net_{t-1}} &amp;= \frac{\partial net_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial net_{t-1}} \\
+\[\begin{align}
+\frac{\partial net_t}{\partial net_{t-1}} &amp;= \frac{\partial net_t}{\partial h_{t-1}} \frac{\partial h_{t-1}}{\partial net_{t-1}} \\
 &amp;= W \cdot diag[f'(net_{t-1})] \\
-&amp;= \left\lgroup\begin{matrix} w_{11} f'(net_{t-1}^1) &amp; \cdots &amp; w_{1n} f'(net_{t-1}^n) \cr \vdots &amp; \ddots &amp; \vdots \cr w_{n1} f'(net_{t-1}^1) &amp; \cdots &amp; w_{nn} f'(net_{t-1}^n) \end{matrix}\right\rgroup\]
+&amp;= \left\lgroup\begin{matrix} w_{11} f'(net_{t-1}^1) &amp; \cdots &amp; w_{1n} f'(net_{t-1}^n) \cr \vdots &amp; \ddots &amp; \vdots \cr w_{n1} f'(net_{t-1}^1) &amp; \cdots &amp; w_{nn} f'(net_{t-1}^n) \end{matrix}\right\rgroup
+\end{align}\]
 
 <p>假设采用 ReLU 激活函数，且一开始所有的神经元都处于激活中（即输入大于 0），则 $diag[f’(net_{t-1})]$ 为单位矩阵，有 $\frac{\partial net_t}{\partial net_{t-1}} = W$。
 在梯度传递经历了 n 层之后， $\frac{\partial net_t}{\partial net_{t-1}} = W^n$。
