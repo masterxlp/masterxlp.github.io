@@ -16,7 +16,6 @@ author: Xlp
 
 
 
-
 ## 队列
 
 > 当你想要 **按顺序处理元素** 时，使用队列是一个很好的选择。
@@ -34,7 +33,7 @@ author: Xlp
 
 示例：
 
-<div align="center"><img src="../../../../image/队列/队列.jpeg" width="70%" height="70%"></div>
+<div align="center"><img src="../../../../image/队列/queue.jpeg" width="70%" height="70%"></div>
 <div align="center">图1. 队列的入队和出队示意图</div>
 
 ### 循环队列
