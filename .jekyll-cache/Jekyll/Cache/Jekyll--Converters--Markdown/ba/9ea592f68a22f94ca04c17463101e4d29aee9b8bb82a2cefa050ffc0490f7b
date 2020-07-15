@@ -1,4 +1,4 @@
-I"T<ul id="markdown-toc">
+I"�<ul id="markdown-toc">
   <li><a href="#寻找两个正序数组的中位数" id="markdown-toc-寻找两个正序数组的中位数">寻找两个正序数组的中位数</a>    <ul>
       <li><a href="#题目描述" id="markdown-toc-题目描述">题目描述</a></li>
       <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
@@ -18,7 +18,7 @@
               <li><a href="#引言" id="markdown-toc-引言">引言</a></li>
               <li><a href="#思想" id="markdown-toc-思想">思想</a></li>
               <li><a href="#过程" id="markdown-toc-过程">过程</a></li>
-              <li><a href="#代码展示" id="markdown-toc-代码展示">代码展示</a></li>
+              <li><a href="#python-代码" id="markdown-toc-python-代码">Python 代码</a></li>
               <li><a href="#复杂度分析-1" id="markdown-toc-复杂度分析-1">复杂度分析</a></li>
               <li><a href="#总结" id="markdown-toc-总结">总结</a></li>
             </ul>
@@ -26,18 +26,18 @@
           <li><a href="#中心扩散法" id="markdown-toc-中心扩散法">中心扩散法</a>            <ul>
               <li><a href="#思想-1" id="markdown-toc-思想-1">思想</a></li>
               <li><a href="#讨论" id="markdown-toc-讨论">讨论</a></li>
-              <li><a href="#代码展示-1" id="markdown-toc-代码展示-1">代码展示</a></li>
+              <li><a href="#python-代码-1" id="markdown-toc-python-代码-1">Python 代码</a></li>
               <li><a href="#复杂度分析-2" id="markdown-toc-复杂度分析-2">复杂度分析</a></li>
             </ul>
           </li>
           <li><a href="#manacher算法" id="markdown-toc-manacher算法">Manacher算法</a>            <ul>
               <li><a href="#预处理" id="markdown-toc-预处理">预处理</a></li>
               <li><a href="#辅助数组" id="markdown-toc-辅助数组">辅助数组</a></li>
-              <li><a href="#代码展示1" id="markdown-toc-代码展示1">代码展示1</a></li>
+              <li><a href="#python-代码1" id="markdown-toc-python-代码1">Python 代码1</a></li>
               <li><a href="#复杂度分析-3" id="markdown-toc-复杂度分析-3">复杂度分析</a></li>
               <li><a href="#manacher" id="markdown-toc-manacher">Manacher</a></li>
               <li><a href="#manacher算法原理演示" id="markdown-toc-manacher算法原理演示">Manacher算法原理演示</a></li>
-              <li><a href="#代码展示2" id="markdown-toc-代码展示2">代码展示2</a></li>
+              <li><a href="#python-代码2" id="markdown-toc-python-代码2">Python 代码2</a></li>
               <li><a href="#复杂度分析-4" id="markdown-toc-复杂度分析-4">复杂度分析</a></li>
             </ul>
           </li>
@@ -49,7 +49,7 @@
       <li><a href="#题目描述-2" id="markdown-toc-题目描述-2">题目描述</a></li>
       <li><a href="#示例-2" id="markdown-toc-示例-2">示例</a></li>
       <li><a href="#思路" id="markdown-toc-思路">思路</a></li>
-      <li><a href="#代码展示-2" id="markdown-toc-代码展示-2">代码展示</a>        <ul>
+      <li><a href="#python-代码-2" id="markdown-toc-python-代码-2">Python 代码</a>        <ul>
           <li><a href="#复杂度分析-5" id="markdown-toc-复杂度分析-5">复杂度分析</a></li>
         </ul>
       </li>
@@ -58,19 +58,19 @@
   <li><a href="#整数反转" id="markdown-toc-整数反转">整数反转</a>    <ul>
       <li><a href="#题目描述-3" id="markdown-toc-题目描述-3">题目描述</a></li>
       <li><a href="#示例-3" id="markdown-toc-示例-3">示例</a></li>
-      <li><a href="#代码展示-3" id="markdown-toc-代码展示-3">代码展示</a></li>
+      <li><a href="#python-代码-3" id="markdown-toc-python-代码-3">Python 代码</a></li>
     </ul>
   </li>
   <li><a href="#字符串转换整数-atoi" id="markdown-toc-字符串转换整数-atoi">字符串转换整数 (atoi)</a>    <ul>
       <li><a href="#题目描述-4" id="markdown-toc-题目描述-4">题目描述</a></li>
-      <li><a href="#代码展示1-1" id="markdown-toc-代码展示1-1">代码展示1</a></li>
-      <li><a href="#代码展示2-1" id="markdown-toc-代码展示2-1">代码展示2</a></li>
+      <li><a href="#python-代码1-1" id="markdown-toc-python-代码1-1">Python 代码1</a></li>
+      <li><a href="#python-代码2-1" id="markdown-toc-python-代码2-1">Python 代码2</a></li>
     </ul>
   </li>
   <li><a href="#回文数判断" id="markdown-toc-回文数判断">回文数判断</a>    <ul>
       <li><a href="#题目描述-5" id="markdown-toc-题目描述-5">题目描述</a></li>
       <li><a href="#示例-4" id="markdown-toc-示例-4">示例</a></li>
-      <li><a href="#代码展示-4" id="markdown-toc-代码展示-4">代码展示</a></li>
+      <li><a href="#python-代码-4" id="markdown-toc-python-代码-4">Python 代码</a></li>
       <li><a href="#复杂度分析-6" id="markdown-toc-复杂度分析-6">复杂度分析</a></li>
     </ul>
   </li>
@@ -78,7 +78,7 @@
       <li><a href="#题目描述-6" id="markdown-toc-题目描述-6">题目描述</a></li>
       <li><a href="#示例-5" id="markdown-toc-示例-5">示例</a></li>
       <li><a href="#题解思路" id="markdown-toc-题解思路">题解思路</a></li>
-      <li><a href="#代码展示-5" id="markdown-toc-代码展示-5">代码展示</a></li>
+      <li><a href="#python-代码-5" id="markdown-toc-python-代码-5">Python 代码</a></li>
       <li><a href="#复杂度分析-7" id="markdown-toc-复杂度分析-7">复杂度分析</a></li>
     </ul>
   </li>
@@ -87,6 +87,7 @@
       <li><a href="#示例-6" id="markdown-toc-示例-6">示例</a></li>
       <li><a href="#解题思路" id="markdown-toc-解题思路">解题思路</a></li>
       <li><a href="#题解-1" id="markdown-toc-题解-1">题解</a></li>
+      <li><a href="#python-代码-6" id="markdown-toc-python-代码-6">Python 代码</a></li>
       <li><a href="#复杂度分析-8" id="markdown-toc-复杂度分析-8">复杂度分析</a></li>
     </ul>
   </li>
@@ -386,7 +387,7 @@ def validPalindromic(string, left, right):
 
 <div align="center">图1. 最长回文子串动态规划填表顺序</div>
 
-<h5 id="代码展示">代码展示</h5>
+<h5 id="python-代码">Python 代码</h5>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
     if len(s) &lt; 2:
         return s
@@ -454,7 +455,7 @@ def validPalindromic(string, left, right):
   <li>如果传入相邻的索引编码，那么扩散得到的回文子串的长度为偶数；</li>
 </ul>
 
-<h5 id="代码展示-1">代码展示</h5>
+<h5 id="python-代码-1">Python 代码</h5>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
     if len(s) &lt; 2:
@@ -778,7 +779,7 @@ def _center_spread(string, left, right):
   <li>辅助数组 <code class="highlighter-rouge">p</code> 的最大值就是最长回文子串的长度</li>
 </ul>
 
-<h5 id="代码展示1">代码展示1</h5>
+<h5 id="python-代码1">Python 代码1</h5>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
     if len(s) &lt; 2:
@@ -894,7 +895,7 @@ def _center_spread(s, center):
 
 <div align="center"><img src="../../../../image/Manacher算法示例/Manacher算法示例-015.jpeg" width="80%" height="80%" /></div>
 
-<h5 id="代码展示2">代码展示2</h5>
+<h5 id="python-代码2">Python 代码2</h5>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def longestPalindrome(s):
     if len(s) &lt; 2:
@@ -1008,7 +1009,7 @@ T     S     G
 <p>这样我们就可以填完整张表格了。
 最后只需按行进行字符串的合并即可。</p>
 
-<h3 id="代码展示-2">代码展示</h3>
+<h3 id="python-代码-2">Python 代码</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def convert(s, numRows):
     lens = len(s)
@@ -1083,7 +1084,7 @@ T     S     G
 输出: 21
 </code></pre></div></div>
 
-<h3 id="代码展示-3">代码展示</h3>
+<h3 id="python-代码-3">Python 代码</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def reverse(x):
     string = str(x)
@@ -1116,7 +1117,7 @@ T     S     G
   <li>假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 $[-2^{31}, 2^{31} - 1]$。如果数值超过这个范围，请返回  $INT_MAX (2^{31} − 1)$ 或 $INT_MIN (−2^{31})$ 。</li>
 </ul>
 
-<h3 id="代码展示1-1">代码展示1</h3>
+<h3 id="python-代码1-1">Python 代码1</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def myAtoi(s):
     string = s.strip()
@@ -1147,7 +1148,7 @@ T     S     G
         return 0
 </code></pre></div></div>
 
-<h3 id="代码展示2-1">代码展示2</h3>
+<h3 id="python-代码2-1">Python 代码2</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># 使用正则表达式
 
@@ -1177,7 +1178,7 @@ def myAtoi(s):
 解释: 从右向左读, 为 01 。因此它不是一个回文数。
 </code></pre></div></div>
 
-<h3 id="代码展示-4">代码展示</h3>
+<h3 id="python-代码-4">Python 代码</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def isPalindrome(x):
     strX = str(x)
@@ -1281,7 +1282,7 @@ p = "mis*is*p*."
   <li>最后，特别要注意的是，在索引中，一旦出现 <code class="highlighter-rouge">index -1</code> 或者 <code class="highlighter-rouge">index + 1</code> 时，一定要考虑越界的情况；</li>
 </ul>
 
-<h3 id="代码展示-5">代码展示</h3>
+<h3 id="python-代码-5">Python 代码</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def isMatch(s, p):
     m, n = len(s), len(p)
@@ -1360,6 +1361,47 @@ def mathces(s, p, i, j):
 如果依然不行，则继续回溯。</p>
 
 <h3 id="题解-1">题解</h3>
+
+<p><strong>回溯 (DFS)</strong> <br />
+回溯函数 <code class="highlighter-rouge">backtrack(prev_pos = -1, dots = 3)</code> 的逻辑：</p>
+<ul>
+  <li>遍历三个有效位置：curr_pos -&gt; [prev_pos + 1 : prev_pos + 4]
+    <ul>
+      <li>检查从 <code class="highlighter-rouge">上一个点</code> 到 <code class="highlighter-rouge">现在这个点</code> 中间的那一部分是否符合IP的有效性：这里的点指的是 IP 中的分隔符，即 <code class="highlighter-rouge">.</code>
+        <ul>
+          <li>是，即满足：
+            <ul>
+              <li>放置该点
+                <ul>
+                  <li>检查 <code class="highlighter-rouge">3</code> 个点是否全部放置好
+                    <ul>
+                      <li>是：
+                        <ul>
+                          <li>根据分割结果判断是否需要放置到结果集中</li>
+                        </ul>
+                      </li>
+                      <li>否：
+                        <ul>
+                          <li>继续放置下一个点 <code class="highlighter-rouge">backtrack(curr_pos, dots - 1)</code></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>具体示例回溯法过程演示</strong></p>
+
+<p><img src="../../../../image/队列/复原IP.gif" alt="回溯法" /></p>
+
+<h3 id="python-代码-6">Python 代码</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Solution:
     def restoreIpAddresses(self, s):
