@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[D] Neural Network"
-date:   2020-06-08 11:00:00 +0800
+date:   2020-07-17 15:00:00 +0800
 categories: ML DL NN
 tags: 神经网络类总结 D
 author: Xlp
