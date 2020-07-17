@@ -1,4 +1,4 @@
-I"��<ul id="markdown-toc">
+I"x�<ul id="markdown-toc">
   <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
   <li><a href="#01-特征归一化" id="markdown-toc-01-特征归一化">01. 特征归一化</a>    <ul>
       <li><a href="#为什么需要对数值类型的特征做归一化" id="markdown-toc-为什么需要对数值类型的特征做归一化">为什么需要对数值类型的特征做归一化？</a></li>
@@ -53,6 +53,7 @@
       <li><a href="#什么是seq2seq模型" id="markdown-toc-什么是seq2seq模型">什么是Seq2Seq模型？</a></li>
     </ul>
   </li>
+  <li><a href="#深度卷积神经网络" id="markdown-toc-深度卷积神经网络">深度卷积神经网络</a></li>
 </ul>
 
 <h2 id="简介">简介</h2>
@@ -886,5 +887,7 @@ i_t = \sigma (W_i x_t + U_i h_{t-1} + V_i c_{t-1} + b_i) \tag{10.7}
 
 <div align="center"><img src="../../../../image/机器翻译模型结构图.jpg" width="70%" height="70%" /></div>
 <div align="center">图2. 机器翻译模型结构示意图</div>
+
+<h2 id="深度卷积神经网络">深度卷积神经网络</h2>
 
 :ET
