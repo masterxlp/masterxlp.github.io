@@ -1,0 +1,167 @@
+I"�!<ul id="markdown-toc">
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+  <li><a href="#卷积神经网络" id="markdown-toc-卷积神经网络">卷积神经网络</a>    <ul>
+      <li><a href="#背景" id="markdown-toc-背景">背景</a></li>
+      <li><a href="#原理" id="markdown-toc-原理">原理</a>        <ul>
+          <li><a href="#卷积层" id="markdown-toc-卷积层">卷积层</a></li>
+          <li><a href="#功能层" id="markdown-toc-功能层">功能层</a></li>
+        </ul>
+      </li>
+      <li><a href="#特性" id="markdown-toc-特性">特性</a>        <ul>
+          <li><a href="#局部连接" id="markdown-toc-局部连接">局部连接</a></li>
+          <li><a href="#参数共享" id="markdown-toc-参数共享">参数共享</a></li>
+          <li><a href="#下采样" id="markdown-toc-下采样">下采样</a></li>
+        </ul>
+      </li>
+      <li><a href="#差异" id="markdown-toc-差异">差异</a></li>
+      <li><a href="#变种" id="markdown-toc-变种">变种</a></li>
+      <li><a href="#发展" id="markdown-toc-发展">发展</a></li>
+      <li><a href="#text-cnn" id="markdown-toc-text-cnn">Text CNN</a></li>
+    </ul>
+  </li>
+  <li><a href="#循环神经网络" id="markdown-toc-循环神经网络">循环神经网络</a></li>
+  <li><a href="#前馈神经网络" id="markdown-toc-前馈神经网络">前馈神经网络</a></li>
+</ul>
+
+<h2 id="简介">简介</h2>
+
+<blockquote>
+  <p>本部分包含对各类神经网络中各类问题的总结，包括但不限于背景、原理、特性、差异等。</p>
+</blockquote>
+
+<h2 id="卷积神经网络">卷积神经网络</h2>
+
+<blockquote>
+  <p>卷积神经网络（Convolutional Neural Networks, CNN）是一种前馈神经网络，其特点是每层的神经元只响应前一层局部区域内的神经元。</p>
+</blockquote>
+
+<h3 id="背景">背景</h3>
+
+<blockquote>
+  <p>参考自：</p>
+  <blockquote>
+    <p>[1] <a href="https://easyai.tech/ai-definition/cnn/">easyai</a></p>
+  </blockquote>
+</blockquote>
+
+<p>在 CNN 被提出之前，类似于图像这种的网格结构的数据对于 AI 来说是一个难题，这主要是因为：</p>
+<ul>
+  <li>图像需要处理的数据量太大，导致成本很高，效率很低；</li>
+  <li>图像在数字化的过程中很难保留原有的特征，难以处理图像不变性，导致图像处理的准确率不高；</li>
+</ul>
+
+<p>由于图像是由像素构成的，每个像素又是由颜色（RGB）构成的。
+因此，对于一张 $1000 \times 1000$ 像素的图片，需要处理（MLP网络）的参数达到三百万个：$1,000 \times 1,000 \times 3 = 3,000,000$。
+这么大的参数量处理起来是非常消耗资源的，而且这还是只是一张不算太大的图片。</p>
+
+<p>卷积神经网络，解决的第一个问题就是：<strong>将复杂问题简化</strong>，即将大量参数降维成少量参数，再做处理。
+重要的是：在大部分场景下，降维并不会影结果。
+例如，1000像素的图片缩小成200像素并不影响肉眼识别出图片中的是一只猫还是一只狗，机器也是如此</p>
+
+<p>图像数字化的传统方式，简化版如下：</p>
+
+<div align="center"><img src="../../../../image/图像数字化经典方式.png" width="70%" height="70%" /></div>
+
+<p>假设有圆形是1，没有圆形是0，那么圆形的位置不同就会产生完全不同的数据表达（这是由于在普通的前馈神经网络中，只能处理线性的数据，所以需要将网格数据拉平后才能进行进一步的处理）。
+但是从视觉的角度来看，图像的内容（本质）并没有发生变化（从空间结构上看，相对位置的信息并没有发生改变），改变的只是位置（像素或者球的位置发生了变化）。
+所以，当我们移动图像中的物体（即平移、旋转等）时，用传统的方式得到的参数会有很大差异（因为它破坏了图像的结构信息），这不符合图像处理的要求。</p>
+
+<p>卷积神经网络，解决的第二个问题是：用类似视觉的方式保留图像的特征，即当图像做旋转、平移（变换位置）时，它依然可以有效的识别出类似的图像。</p>
+
+<h3 id="原理">原理</h3>
+<h4 id="卷积层">卷积层</h4>
+<p>卷积层时卷积神经网络的基本结构，它是由多个卷积核组合形成的，每个卷积核痛输入数据卷积运算，形成新的特征“图”。</p>
+<ul>
+  <li>卷积核（Convilutional kernel），也被称为滤波器（filter）；</li>
+  <li>卷积核的“矩阵”值，表示为卷积层的参数，其初始值是随机生成的，可通过反向传播更新；</li>
+  <li>卷积核的数量决定了输出的通道数（该层的输出通道数 = 下一层的输入通道数）；
+    <ul>
+      <li>卷积核的数目为超参数，需要用户设定；</li>
+      <li>一般为 64、128、256；</li>
+    </ul>
+  </li>
+  <li>卷积核的形状：[kernel weight, kernel height, input channel]；</li>
+  <li>卷积核的大小是由用户定义的：
+    <ul>
+      <li>奇偶选择：一般奇数，满足中心对称；</li>
+      <li>大小选择：根据输入数据、图像的特征来决定，一般为 $3 \times 3$、$5 \times 5$、$7 \times 7$；</li>
+      <li>厚度选择：与输入数据一致，即卷积核的通道数 = 输入通道数；</li>
+      <li>步长（stride）：对输入特征图的扫描间隔；</li>
+      <li>边界扩充（padding）：在卷积计算过程中，为了允许边界上的数据也能作为中心参与卷积运算，将边界进行零扩充；
+        <ul>
+          <li>目的：确保卷积后特征图尺度一致；</li>
+          <li>方法：卷积核的宽度 $2i + 1$，则添加pad宽度为 $i$；</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>每一个卷积核都会与整个输入图像做卷积生成一张特定的特征图，表达了对某一个特征的提取；</li>
+</ul>
+
+<p>卷积层的参数计算：$param\ number = input\ channels \times kernel\ weight \times kernel\ height \times output\ channels (e.g.\ kernel\ number)$。</p>
+
+<p>卷积层的作用：卷积层就是通过卷积核来提取特征的。</p>
+
+<p>反向传播的意义：因为初始的卷积核的值（卷积层的参数）是随机设定的，我们可以根据前向传播的预测结果，进行误差分析，不断的修改卷积核的值，使得卷积核可以更好的提取特征，这就是反向传播的意义。</p>
+
+<h4 id="功能层">功能层</h4>
+<p>卷积神经网络需要哪些额外的输入？</p>
+<ul>
+  <li>非线性激励：卷积是线性运算，增加非线性激励可以增加网络的非线性描述能力；
+    <ul>
+      <li>非线性激励层，一般使用Relu激活函数，它的作用是将特征图中的小于0的值变为0，大于0的值保持不变；</li>
+    </ul>
+  </li>
+  <li>降维：特征图稀疏，减少数据运算量，防止过拟合，保持精度；
+    <ul>
+      <li>池化层，pooling layer；</li>
+      <li>一般使用 max pooling、average pooling，目的是进行数据降维，方便计算，存储；</li>
+      <li>在池化过程中，每张特征图单独进行降维；</li>
+    </ul>
+  </li>
+  <li>归一化：特征的scale保存一致；
+    <ul>
+      <li>归一化层，主要是进行批归一化，Batch Normalization（BN）；</li>
+      <li>原因：特征的 scale 不一致；</li>
+      <li>目的：加速训练，提高精度；</li>
+      <li>算法过程：见图1；</li>
+    </ul>
+  </li>
+  <li>区域分割：不同区域进行独立学习；</li>
+  <li>区域融合：对分开的区域进行合并，方便信息融合；</li>
+  <li>增维：增加图片生成或探测任务中的空间信息；</li>
+</ul>
+
+<div align="center"><img src="../../../../image/批归一化过程.png" width="60%" height="60%" /></div>
+<div align="center">图1. 批归一化算法过程</div>
+
+<h3 id="特性">特性</h3>
+
+<blockquote>
+  <p>局部连接、参数共享、下采样三大结构特性保障了对图像进行平移、缩放、扭曲后的不变性。</p>
+</blockquote>
+
+<h4 id="局部连接">局部连接</h4>
+<blockquote>
+  <p>局部连接，也被称为稀疏交互、局部感受野（Locally Receptive Area）</p>
+</blockquote>
+
+<h4 id="参数共享">参数共享</h4>
+<blockquote>
+  <p>参数共享，也被称为权值共享（Shared Weights）</p>
+</blockquote>
+
+<h4 id="下采样">下采样</h4>
+
+<h3 id="差异">差异</h3>
+
+<h3 id="变种">变种</h3>
+
+<h3 id="发展">发展</h3>
+
+<h3 id="text-cnn">Text CNN</h3>
+
+<h2 id="循环神经网络">循环神经网络</h2>
+
+<h2 id="前馈神经网络">前馈神经网络</h2>
+:ET
