@@ -152,6 +152,51 @@ author: Xlp
   - 而在卷积神经网络中，卷积核中的每一个元素将作用于每一次局部输入的特定位置上；
   - 卷积神经网络的参数共享使得卷积神经网络的参数量和计算量远小于传统的神经网络；
 
+### CNN中的计算
+#### 感受野
+
+#### 参数量和计算量的计算
+卷积层中的参数量主要取决于每个卷积核的大小以及卷积核的个数：假设卷积核的大小为 $k_w, k_h$，$卷积核的通道数 = 卷积层的输入通道数 = c^{i}$，$卷积核的数量 = 卷积层的输出通道数 = c^{o}$ ，
+因此，卷积层的参数量为 $c^{i}  k_w  k_h  c^{o}$。
+
+而卷积层的计算量是由卷积核在每个滑动窗口内的计算量以及整体的滑动次数决定的：卷积核在每个滑动窗口的计算量为每个通道的卷积操作量与通道数的乘积，即 $c^{i} \times k_w \times k_h$；而整体的滑动次数是由输出的特征图的尺度以及通道数
+决定的，即 $c^{o} \times l^{o}_{w} \times l^{o}_{h}$；因此，卷积层的计算量为 $c^{i}  k_w  k_h \times c^{o}  l^{o}_{w}  l^{o}_{h}$
+
+#### 输出尺寸的计算
+若我们对输入特征图的左右两侧分别进行了 $p_w$ 列填充，上下两侧分别进行了 $p_h$ 行的填充，则填充后的尺寸为 $(l_w^{i} + 2 p_w) \times (l_h^{i} + 2 p_h)$，则输出特征图的尺寸为 
+
+$$
+\begin{align}
+l_e^{o} = \frac{l_e^{i} + 2 p_e - k_e}{s_e} + 1, \ \ e \in {w, h} \tag{1}
+\end{align}
+$$
+
+其中，$s_e$ 表示步长。
+
+当步长 $s_e > 1$ 时，会出现非整数的情况，此时会向下取整，即
+
+$$
+\begin{align}
+l_e^{o} = \lfloor \frac{l_e^{i} + 2 p_e - k_e}{s_e} \rfloor + 1, \ \ e \in {w, h} \tag{2}
+\end{align}
+$$
+
+在 TensorFlow 中，当指定 `padding = 'same'` 时，会在动在特征图的左右两侧 **一共** 填充 $p_w = k_w - 1$ 列，上下两侧 **一共** 填充 $p_h = k_h - 1$ 行，最终输出的特征图的尺寸为
+
+$$
+\begin{align}
+l_e^{o} = \lfloor \frac{l_e^{i} - 1}{s_e} \rfloor + 1, \ \ e \in {w, h} \tag{3}
+\end{align}
+$$
+
+当指定 `padding = 'valid'` 时，不进行填充，而是直接放弃右侧和下侧卷积核无法滑动到的区域，此时输出特征图的尺寸为
+
+$$
+\begin{align}
+l_e^{o} = \lfloor \frac{l_e^{i} - k_e}{s_e} \rfloor + 1, \ \ e \in {w, h} \tag{4}
+\end{align}
+$$
+
 ### 变种
 卷积的变种有：分组卷积（Group Convolution）、转置卷积（Transposed Convolution）、空洞卷积（Dilated / Atrous Convolution）、可变形卷积（Deformable Convolution）。
 
@@ -199,7 +244,7 @@ author: Xlp
 
 $$
 \begin{align}
-c_i = f(w \cdot x_{i:i+h-1} + b) \tag{1}
+c_i = f(w \cdot x_{i:i+h-1} + b) \tag{5}
 \end{align}
 $$
 
@@ -248,6 +293,12 @@ Note：
 
 
 ## 前馈神经网络
+
+
+## 神经学习中的基础模块
+### 批归一化
+
+### DropOut
 
 
 
