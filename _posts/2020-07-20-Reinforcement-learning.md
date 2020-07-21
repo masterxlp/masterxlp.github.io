@@ -97,7 +97,7 @@ DQN中使用的技巧有：
 
 ### 网络结构图
 
-<div align="center"><img src="../../../../image/DQN/DQN.jpeg"></div>
+<div align="center"><img src="../../../../image/DQN/DQN网络结构图.jpeg"></div>
 
 ### 算法
 
