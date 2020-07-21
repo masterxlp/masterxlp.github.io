@@ -95,6 +95,10 @@ DQN中使用的技巧有：
 - Target Network：在一段时间内固定目标值，减轻模型的波动性；
 - 值网络的架构：模型的架构很灵活，原论文中模型的输入为 `(s,a)` 输出单个 `Q(s,a)`，而 deepmind 在 DQN 的实现中，则是使用 `(s)` 作为模型输入，输出 $Q(s,a_1), Q(s, a_2), \cdots, Q(s, a_n)$；
 
+### 网络结构图
+
+<div align="center"><img src="../../../../image/DQN/DQN.jpeg" width="70%" height="70%"></div>
+
 ### 算法
 
 ```
