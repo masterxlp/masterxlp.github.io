@@ -110,7 +110,7 @@ Input
 03. 初始化 Target Network Q' 和参数 theta' = theta
 Satrt
 04. for episode = 1, M do
-05.     初始化环境，得到初始状态 s_1，并预处理得到 \psi_1 = \psi_1(s_1)
+05.     初始化环境，得到初始状态 s_1，并预处理得到 \psi_1 = \psi_1(s_1) // 预处理指的是对图像大小的处理，论文中是将 210 x 160 的图像转换为了 84 x 84 的图像
 06.     fot t = 1, T do
 07.         以 epsilon 的概率随机选择一个动作 a_t，或者以 1 - epsilon 的概率根据模型选择当前最优的动作 a_t = max_a Q^{*}(\psi(s_t), a; theta)
 08.         执行动作 a_t，得到新一轮的状态 s_{t+1} 和 回报 r_{t+1}
