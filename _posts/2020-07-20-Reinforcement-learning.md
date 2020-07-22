@@ -218,7 +218,7 @@ $$
 
 $$
 \begin{align}
-Q(s,a) = V(s) + (A(s,a) - \frac{1}{|A|} \sum_{a'} A(s, a')) \tag{5}
+Q(s,a) = V(s) + (A(s,a) - \frac{1}{\vert A \vert} \sum_{a'} A(s, a')) \tag{5}
 \end{align}
 $$
 
@@ -396,7 +396,7 @@ $$
 RadinBow 模型其实是集合了以上所有模型的特点：
 - Double DQN 的关于目标值估计和最优动作选择解藕的优势：$L(\theta) = (r_t + \gamma Q(s_{t+1}, argmax_{a'} Q(s_{t+1}, a'; \theta); \theta^{-}) - Q(s_t, a_t; \theta))^2$；
 - Priority Replay Buffer
-- Dueling DQN 的关于值函数网络分解的优势：$Q(s_t, a_t) = V(s_t) + (A(s_t, a_t) - \frac{1}{|A|} \sum_{a'} A(s_t, a'))$；
+- Dueling DQN 的关于值函数网络分解的优势：$Q(s_t, a_t) = V(s_t) + (A(s_t, a_t) - \frac{1}{\vert A \vert} \sum_{a'} A(s_t, a'))$；
 - 关于DQN的冷启动：利用优质的数据通过监督学习的方式在前期对模型进行预训练，加速模型的收敛；
 - Multi-step Learning 的 n 步回报，来加速模型提前进入稳定期，加快模型收敛：$Q(s_t, a_t) = r_{t+1} + \gamma r_{t+2} + \cdots + \gamma^{n-1} r_{t+n} + \gamma^{n} max_a Q(s_{t+1}, a)$；
 - Distributional DQN 的值分布形式，提升模型的表现力：${z_i = V_{MIN} + i \Delta z \:\ 0 <= i < N}$, $p_i(s, a) = \frac{e^{\theta_i(s,a)}}{\sum_j e^{\theta_j(s,a)}}$；
