@@ -400,7 +400,7 @@ RadinBow 模型其实是集合了以上所有模型的特点：
 - 关于DQN的冷启动：利用优质的数据通过监督学习的方式在前期对模型进行预训练，加速模型的收敛；
 - Multi-step Learning 的 n 步回报，来加速模型提前进入稳定期，加快模型收敛：$Q(s_t, a_t) = r_{t+1} + \gamma r_{t+2} + \cdots + \gamma^{n-1} r_{t+n} + \gamma^{n} max_a Q(s_{t+1}, a)$；
 - Distributional DQN 的值分布形式，提升模型的表现力：${z_i = V_{MIN} + i \Delta z \:\ 0 <= i < N}$, $p_i(s, a) = \frac{e^{\theta_i(s,a)}}{\sum_j e^{\theta_j(s,a)}}$；
-- Noisy Network 的平滑、灵活的探索能力：$L(\theta) = E_{\epsilon^{-}, \epsilon}[E_{(s_t, a_t, r_t, s_{t+1}) \sim D} [r_t + \gamma max_{a^{*} \in A} Q(s_{t+1}, a^{*}, \epsilon^{-}; \theta^{-}, \sigma^{-}) - Q(s_t, a_t, \epsilon; \theta, \sigma)]^2]$；
+- Noisy Network 的平滑、灵活的探索能力：$L(\theta) = E_{\epsilon^{-}, \epsilon}[E_{(s_t, a_t, r_t, s_{t+1}) \sim D} [r_t + \gamma max_{a^{\ast} \in A} Q(s_{t+1}, a^{\ast}, \epsilon^{-}; \theta^{-}, \sigma^{-}) - Q(s_t, a_t, \epsilon; \theta, \sigma)]^2]$；
 
 
 
