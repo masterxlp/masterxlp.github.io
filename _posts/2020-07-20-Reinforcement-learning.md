@@ -437,7 +437,7 @@ $$
 具体的，就是把 $r + \gamma z_0$ 分摊到 $z_0$ 和 $z_1$ 上，把 $r + \gamma z_1$ 分摊到 $z_1$ 和 $z_2$ 上，以此类推。
 分摊的方式是：按照 $r + \gamma z_0$ 到 $z_0$ 和 $z_1$ 的距离的反比就可以。
 
-<div align="center"><img src="../../../../image/DQN/DDQN模型更新图.jpg"></div>
+<div align="center"><img src="../../../../image/DQN/DDQN模型更新图.jpg" width="60%" height="60%"></div>
 
 
 #### Noisy Network
