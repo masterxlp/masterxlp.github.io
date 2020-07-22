@@ -388,7 +388,108 @@ $$
 
 
 #### Noisy Network
+> 之前使用到的 $\epsilon - greedy$ 其实就是一种增加模型探索能力的方法，在这个算法中，以 $\epsilon$ 的概率随机执行动作，以 $1 - \epsilon$ 的概率执行最优动作，这就相当于在执行策略的环节增加一定的噪音，使模型
+> 具备一定的探索能力。
 
+Noisy Network 是另一种增加模型探索能力的方法。
+
+那么算法是如何实现这种效果的呢？
+我们以一个简单的函数为例，
+
+$$
+\begin{align}
+y = w x + b
+\end{align}
+$$
+
+这是一个简单的线性函数，$w, b$ 为参数，$x$ 为输入，$y$ 为输出。
+显然，当输入一个 $x$ 时，会唯一确定一个输出 $y$。
+
+增强模型的探索能力就是要打破这种确定性，为函数的输出添加不确定性，即当输入一个 $x$ 时，会有多种 $y$ 来选择。
+
+于是，我们在函数的最后添加一个噪音 $\epsilon \sim N(0, \sigma^2)$：
+
+$$
+\begin{align}
+y = w x + b + \epsilon \tag{14}
+\end{align}
+$$
+
+其中，$\sigma$ 是一个固定值，表示噪音带来的方差。
+
+这样，我们就可以认为 $y$ 服从均值为 $wx + b$，方差为 $\sigma^2$ 的高斯分布：
+
+$$
+\begin{align}
+y \sim N(wx+b, \sigma^2) \tag{15}
+\end{align}
+$$
+
+可以看出，由于噪音 $\epsilon$ 的存在，我们可以从同一个 $x$ 映射到多个 $y$，这就相当于增加了输出的不确定性。
+
+不确定性对于探索来说十分重要，由于不确定性的存在，我们可以选择确定行动之外的其他行动，这与模型的探索不谋而合。
+
+另一种添加噪音的方法是在参数上添加噪音。
+对于上面提到的线性函数，我们可以定义参数来自均值 $\mu_w$，方差 $\sigma_w$ 的高斯分布，同样，参数 $b$ 服从均值 $\mu_b$，方差 $\sigma_b$ 的高斯分布，
+于是有函数：
+
+$$
+\begin{align}
+\tilde{w} &\sim N(\mu_w, \sigma_w) \\
+\tilde{b} &\sim N(\mu_b, \sigma-b) \\
+y &= \tilde{w} x + \tilde{b} \tag{16}
+\end{align}
+$$
+
+但是式（16）存在一个问题，那就是反向传播梯度更新高斯分布的参数时怎么办？
+这种形式的参数在网络中无法反向传播更新，因此，我们需要对式（16）做恒等变换：
+
+$$
+\begin{align}
+\tilde{w} &= \mu_w + \sigma_w \epsilon \\
+\tilde{b} &= \mu_b + \sigma_b \epsilon \tag{17}
+\end{align}
+$$
+
+其中，$\epsilon$ 表示参数中的随机部分，不是参数，一般服从标准高斯分布。
+
+上面这种方法在增加探索性时，参数的数量也增加了一倍，这对于较大型网络来说，会造成不小的负担。
+
+另一种为模型添加噪音的方法，就是为了减少噪音参数的数量，它是从函数参数的结构上入手的。
+参数 $w$ 一般是一个二维的矩阵，假设它的维度为 $p \times q$，那么我们可以只生成 $p + q$ 个噪音参数：
+
+$$
+\begin{align}
+w_{i,j} &= \mu_w[i,j] + f(\sigma_p[i]) f(\sigma_q[j]) \epsilon \\
+b_j &= \mu_b[j] + f(\sigma_q [j]) \tag{18}
+\end{align}
+$$
+
+其中参数数值的第一项保持不变（与式（17）一致），后面一项有些变化：将添加的 $p + q$ 个参数分成两部分，一部分的维度为 $p$，$\sigma_p [i]$ 表示其中的第 $i$ 个噪音参数；
+另一部分的维度为 $q$，$\sigma_q[j]$，表示其中的第 $j$ 个噪音参数，$f(x) = sgn(x) \sqrt(x)$。
+通过这样的设定，我们在噪音效果和噪音参数数量两方面得到了很好的平衡。
+
+基于 target network 的 DQN 算法的目标函数为：
+
+$$
+\begin{align}
+L(\theta) = E_{(s_t, a_t, r_{t+1}, s_{t+1}) \sim D} [r_{t+1} + \gamma max_{a^{\ast} \in A} Q(s_{t+1}, a^{\ast}; \theta^{-}) - Q(s_t, a_t; \theta)]^2 \tag{14}
+\end{align}
+$$
+
+我们可以在值函数中加入一定的噪音，噪音的大小会影响模型的探索性，噪音越小，探索性越小，噪音越大，探索性越大。
+我们可以在两个模型参数分别加入噪音随机变量 $\epsilon$ 和 $\epsilon^{-}$：
+
+$$
+\begin{align}
+L(\theta) = E_{\epsilon^{-}, \epsilon}[E_{(s_t, a_t, r_t, s_{t+1}) \sim D} [r_t + \gamma max_{a^{\ast} \in A} Q(s_{t+1}, a^{\ast}, \epsilon^{-}; \theta^{-}, \sigma^{-}) - Q(s_t, a_t, \epsilon; \theta, \sigma)]^2]
+\end{align}
+$$
+
+由于在原本的目标函数中噪音性并不存在，因此此时噪音的加入使得目标函数产生了偏差，为了消除这个偏差，可以对噪音求期望，由于噪音的期望值为0，求解期望后的目标函数不再有偏，但是模型依然拥有一定的探索能力。
+
+最后，我们需要考虑噪音的初始化，论文中：噪音参数个数为 $p + q$ 时，令 $N = p \times q$，参数 $\mu$ 按照范围为 $[- \frac{\sqrt(N)}{\sqrt(N)}, + \frac{\sqrt(N)}{\sqrt(N)}]$ 的均匀分布进行初始化，参数 $\sigma$ 将初始化
+为常量 $\frac{0.4}{\sqrt(N)}$。
 
 
 #### RainBow
@@ -403,6 +504,13 @@ RadinBow 模型其实是集合了以上所有模型的特点：
 - Noisy Network 的平滑、灵活的探索能力：$L(\theta) = E_{\epsilon^{-}, \epsilon}[E_{(s_t, a_t, r_t, s_{t+1}) \sim D} [r_t + \gamma max_{a^{\ast} \in A} Q(s_{t+1}, a^{\ast}, \epsilon^{-}; \theta^{-}, \sigma^{-}) - Q(s_t, a_t, \epsilon; \theta, \sigma)]^2]$；
 
 
+
+### 总结
+- Priority Replay Buffer 可以高效地使用其中的样本，让模型更多地选择能让模型提高的样本；
+- Dueling DQN 将值函数拆解为两个部分，使模型更容易训练的同时，也可以表达更多有价值的信息；
+- DQN from Demonstration 解决了 Q-learning 的冷启动问题，也平衡了监督学习和强化学习两部分对模型的影响力；
+- Distributional DQN 将模型的输出从计算价值期望改为计算价值分布，使模型可以学习更多有价值的信息；
+- Noisy DQN 通过参数给参数增加噪音的方式为模型增加一定的探索能力，这种方式具有可控性；
 
 
 
