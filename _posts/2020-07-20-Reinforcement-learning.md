@@ -184,6 +184,59 @@ $$
 
 #### Priority Replay Buffer
 > 通过优化经验回放池按权重采样来优化算法：
+>> 它主要是给样本进行权重的赋值，提高对模型更有用的样本的采样概率，以达到加速模型收敛的目的。
+
+带有优先级的经验回放是一种针对经验回放的改进结构。
+
+**「权重的计算」**   
+**TD-Error** 可以作为样本重要性的衡量指标。
+TD-Error 越高，样本出现的概率就越高。
+
+虽然 TD-Error 是一很合理的指标，但是由于模型处于学习的过程中，可能在放入 Buffer 中时的 TD-Error 与训练时模型实际对样本的 TD-Error 不一致，尤其是旧样本在模型训练多次后，模型对旧样本的 TD-Error 已经变得很小，
+但是由于存入时 TD-Error 很大，依然拥有很高的采样概率，这是不合理的。
+最直接的方式就是在采样时对样本的 TD-Error 进行重新计算，但是这样做的代价实在太大了，所以我们只好使用样本放入 Buffer 时的 TD-Error 作为近似。
+
+但是这个指标确实不可靠，所以我们需要其他的方法来辅助采样，以确保 TD-Error 较高的样本出现的概率更高，同时也需要使那么 TD-Error 较小的样本以一定的概率出现。
+
+论文中定义了一个样本的出现概率的计算：
+
+$$
+\begin{align}
+P(i) = \frac{p_{i}^{\alpha}}{\sum_k p_{k}^{\alpha}} \tag{16}
+\end{align}
+$$
+
+其中，$p_i$ 表示每个样本在计算时的 TD-Error。
+
+$\alpha$ 可以调整样本 TD-Error 的重要性：当 $\alpha = 1$ 时，相当于直接使用 TD-Error 的值；当 $\alpha < 1$ 时，相当于削弱了高 TD-Error 样本的影响，增强低 TD-Error 样本的影响。
+
+事实上，当我们在使用优先级经验回放时，带入了一定的偏差，这样就使得模型的更新变得有偏；
+那么为了使模型的更新无偏，我们需要更改权重更新公式：
+
+$$
+\begin{align}
+w_i = (\frac{1}{N \cdot P_{PRB}(i)})^{\beta} \tag{17}
+\end{align}
+$$
+
+其中，$N$ 表示 Buffer 存放的样本量。
+
+当 $\beta = 1$ 时，更新效果实际上等同于 Replay Buffer；当 $\beta < 1$ 时，Priority Replay Buffer 就能够发挥作用了。
+
+**「基于权重的采样」**   
+在样本存储和采样这边，我们利用线段树结构来完成：
+- 线段树的叶子结点存放的时每一个元素的个体信息，例如它的权重；
+- 线段树的非叶子结点则存放着其叶子结点的权重汇总；
+- 如果时求和的线段树，那么非叶子结点存放其叶子结点的权重总和；
+- 如果时最小线段树，那么非叶子结点则存放着叶子结点的最小值；
+- 添加样本时，不仅要记录样本信息，还要沿着叶子出发，一次找到叶子结点的父结点，更新父结点的权值；
+- 采样时，根据 rand 的值，二分查找就可以快速定位被选到的样本；
+
+**「总结」**  
+- 在样本存入 Buffer 时，计算 $P(i) = \frac{p_{i}^{\alpha}}{\sum_j p_{j}^{\alpha}}$；
+- 在样本取出时，以 $P(i)$ 进行采样；
+- 在更新时，为每一个样本添加 $w_i = (\frac{1}{N \cdot P_{PRB}(i)})^{\beta}$ 的权值；
+- 随着训练的进行，让 $\beta$ 从某个小于 1 的值渐进地靠近 1；
 
 #### Dueling DQN
 > 通过优化神经网络结构来优化算法：
@@ -482,7 +535,7 @@ $$
 
 $$
 \begin{align}
-L(\theta) = E_{\epsilon^{-}, \epsilon}[E_{(s_t, a_t, r_t, s_{t+1}) \sim D} [r_t + \gamma max_{a^{\ast} \in A} Q(s_{t+1}, a^{\ast}, \epsilon^{-}; \theta^{-}, \sigma^{-}) - Q(s_t, a_t, \epsilon; \theta, \sigma)]^2]
+L(\theta) = E_{\epsilon^{-}, \epsilon}[E_{(s_t, a_t, r_t, s_{t+1}) \sim D} [r_t + \gamma max_{a^{\ast} \in A} Q(s_{t+1}, a^{\ast}, \epsilon^{-}; \theta^{-}, \sigma^{-}) - Q(s_t, a_t, \epsilon; \theta, \sigma)]^2] \tag{15}
 \end{align}
 $$
 
