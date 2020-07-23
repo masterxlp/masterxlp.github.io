@@ -100,8 +100,8 @@ $$
 
 $$
 \begin{align}
-w^T x' + b &= 0 \\
-w^T x' &= -b \tag{4}
+&w^T x' + b = 0 \\
+&w^T x' = -b \tag{4}
 \end{align}
 $$
 
@@ -120,7 +120,7 @@ $$
 可以看出，几何间隔就是函数间隔除以 $\Vert w \Vert$。
 事实上，函数间隔 $\hat{\gamma} = |f(x)|$，只是人为定义的一个间隔度量，几何间隔 $\frac{|f(x)|}{\Vert w \Vert}$ 才是直观上的点到超平面的距离。
 
-更重要的是，几何间隔不存在函数间隔的缺陷：当 $|f(x)|$ 成比例变化时，$\Vert w \Vert$ 也在成比例变化，两者相互抵消，导致几何间隔不发生改变。
+更重要的是，几何间隔不存在函数间隔的缺陷：当 $\vert f(x) \vert$ 成比例变化时，$\Vert w \Vert$ 也在成比例变化，两者相互抵消，导致几何间隔不发生改变。
 
 ### 目标函数
 我们的目标就是在众多的分类超平面中找到那个最优的分类超平面。
@@ -129,7 +129,7 @@ $$
 
 $$
 \begin{align}
-&max \tilde(\gamma) \\
+&max \tilde{\gamma} \\
 s.t.\ y_i(w^T x_i + b) &= \hat{\gamma_i} >= \hat{\gamma} (i = 1, \cdots, n) \tag{7}
 \end{align}
 $$
@@ -139,7 +139,7 @@ $$
 $$
 \begin{align}
 &max \frac{1}{\Vert w \Vert} \\
-s.t.\ y_i(w^T x_i + b) &>= 1 (i = 1, \cdots, n) \tag{8}
+s.t.\ y_i(w^T x_i &+ b) >= 1 (i = 1, \cdots, n) \tag{8}
 \end{align}
 $$
 
