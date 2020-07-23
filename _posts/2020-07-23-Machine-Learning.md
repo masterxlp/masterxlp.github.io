@@ -129,7 +129,7 @@ $$
 
 $$
 \begin{align}
-&max \tilde{\gamma} \\
+&max\ \tilde{\gamma} \\
 s.t.\ y_i(w^T x_i + b) &= \hat{\gamma_i} \geq \hat{\gamma} (i = 1, \cdots, n) \tag{7}
 \end{align}
 $$
@@ -138,13 +138,70 @@ $$
 
 $$
 \begin{align}
-&max \frac{1}{\Vert w \Vert} \\
+&max\ \frac{1}{\Vert w \Vert} \\
 s.t.\ y_i(w^T x_i &+ b) \geq 1 (i = 1, \cdots, n) \tag{8}
 \end{align}
 $$
 
+如图4所示，中间的绿色的线就是最优超平面，其到两个橙色线的距离相等，这个距离便是几何间隔 $\tilde{\gamma}$，橙线上的线则是支持向量，且满足 $y(w^T x + b) = 1$，而对于所有不是支持向量的点，有 $y(w^T x + b) > 1$。
 
+式（8）等价于：
 
+$$
+\begin{align}
+&min\ \frac{1}{2}\Vert w \Vert^2 \\
+s.t.\ y_i(w^T x_i &+ b) \geq 1 (i = 1, \cdots, n) \tag{9}
+\end{align}
+$$
+
+即，最大化 $\frac{1}{\Vert w \Vert}$ 就等价于 最小化 $\frac{1}{2}\Vert w \Vert^2$。
+
+### 对偶问题
+式（9）可以通过拉格朗日对偶性来进行求解。
+
+那么什么是拉格朗日对偶性呢？
+
+简单来讲，通过给每一个约束条件加上一个拉格朗日乘子 $\alpha$，定义拉格朗日函数（通过拉格朗日乘子将约束条件融合到目标函数中去）：
+
+$$
+\begin{align}
+L(w, b, \alpha) = \frac{1}{2} \Vert w \Vert^2 - \sum_{i=1}^{n} \alpha_i [y_i(w^T x_i + b) - 1] \tag{10}
+\end{align}
+$$
+
+然后令
+
+$$
+\begin{align}
+\theta(w) = max_{\alpha_i \geq 0}\ L(w, b, \alpha) \tag{11}
+\end{align}
+$$
+
+显然对于式（11）有：当约束条件不满足时，有 $y_i(w^T x_i + b) < 1$，显然有 $\theta(w) = \infty$（只要令 $\alpha = \infty$ 即可）；
+而当约束条件满足时，最优值为 $\theta(w) = \frac{1}{2}\Vert w \Vert^2$。
+
+因此，为了使式（11）等价于式（9），我们需要最小化式（11）：
+
+$$
+\begin{align}
+min\ \theta(w) = min_{w,b} max_{\alpha_i \geq 0}\ L(w, b, \alpha) = p^{\ast} \tag{12}
+\end{align}
+$$
+
+这里 $p^{\ast}$ 是式（12）的最优解，即为原始问题的最优解，且和最初问题的解是等价的。
+
+由于先求最小值再求最大值不好求解，因此交换最小最大为最大最小，有：
+$$
+\begin{align}
+min\ \theta(w) = max_{\alpha_i \geq 0}min_{w,b}\ L(w, b, \alpha) = d^{\ast} \tag{13}
+\end{align}
+$$
+
+交换之后的新问题是交换之前原始问题的对偶问题，这个新问题的最优解为 $d^{\ast}$ ，且满足 $d^{\ast} \leq p^{\ast}$，当且仅当满足 **「KKT条件」** 时，等号成立。
+
+之所以从极小极大（minmax）的原始问题转化为极大极小（maxmin）的对偶问题是因为：
+- $d^{\ast}$ 是 $p^{\ast}$ 的近似解；
+- 对偶问题更容易求解；
 
 
 
