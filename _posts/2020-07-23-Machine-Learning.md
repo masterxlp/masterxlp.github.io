@@ -130,7 +130,7 @@ $$
 $$
 \begin{align}
 &max \tilde{\gamma} \\
-s.t.\ y_i(w^T x_i + b) &= \hat{\gamma_i} >= \hat{\gamma} (i = 1, \cdots, n) \tag{7}
+s.t.\ y_i(w^T x_i + b) &= \hat{\gamma_i} \geq \hat{\gamma} (i = 1, \cdots, n) \tag{7}
 \end{align}
 $$
 
@@ -139,7 +139,7 @@ $$
 $$
 \begin{align}
 &max \frac{1}{\Vert w \Vert} \\
-s.t.\ y_i(w^T x_i &+ b) >= 1 (i = 1, \cdots, n) \tag{8}
+s.t.\ y_i(w^T x_i &+ b) \geq 1 (i = 1, \cdots, n) \tag{8}
 \end{align}
 $$
 
