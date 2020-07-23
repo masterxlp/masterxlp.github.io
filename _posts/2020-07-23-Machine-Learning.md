@@ -197,12 +197,93 @@ min\ \theta(w) = max_{\alpha_i \geq 0}min_{w,b}\ L(w, b, \alpha) = d^{\ast} \tag
 \end{align}
 $$
 
-交换之后的新问题是交换之前原始问题的对偶问题，这个新问题的最优解为 $d^{\ast}$ ，且满足 $d^{\ast} \leq p^{\ast}$，当且仅当满足 **「KKT条件」** 时，等号成立。
+交换之后的新问题是交换之前原始问题的对偶问题，这个新问题的最优解为 $d^{\ast}$ ，且满足 $d^{\ast} \leq p^{\ast}$，在 **「KKT条件」** 下，等号成立。
 
 之所以从极小极大（minmax）的原始问题转化为极大极小（maxmin）的对偶问题是因为：
 - $d^{\ast}$ 是 $p^{\ast}$ 的近似解；
 - 对偶问题更容易求解；
 
+### KKT条件
+#### 一般对偶问题的KKT条件
+对于含有不等式约束的优化问题，将其转化为对偶问题：
+
+$$
+\begin{align}
+&max_{a,b}\ min_{x} L(a, b, x) \\
+s.&t.\ a_i \geq 0 ;\ i = 1, \cdots, n \tag{14}
+\end{align}
+$$
+
+其中，$L(a, b, x)$ 为由所有不等式约束、等式约束和目标函数全部写成的一个式子：$L(a, b, x) = f(x) + a \cdot g(x) + b \cdot h(x)$，
+KKT条件是说原始问题最优值 $x^{\ast}$ 和对偶问题最优值 $a^{\ast}, b^{\ast}$ 必须满足一下条件：
+
+$$
+\begin{align}
+&1.\ \nabla_x L(a^{\ast}, b^{\ast}, x^{\ast}) = 0,\ \nabla_a L(a^{\ast}, b^{\ast}, x^{\ast}) = 0,\ \nabla_b L(a^{\ast}, b^{\ast}, x^{\ast}) = 0; \tag{15} \\
+&2.\ a^{\ast} \cdot g_i(x^{\ast}) = 0; \tag{16} \\
+&3.\ g_i(x^{\ast}) \le 0; \tag{17} \\
+&4.\ a_{i}^{\ast} \geq 0,\ h_j(x) = 0. \tag{18}
+\end{align}
+$$
+
+当原始问题的解和对偶问题的解满足KKT条件，并且 $f(x), g_i(x)$ 是凸函数时，原始问题的解和对偶问题的解相等。
+
+#### SVM目标函数的对偶函数的KKT条件
+由式（10）、（15）-（18）可知，KKT条件为：
+
+$$
+\begin{align}
+\nabla_w L(w^{\ast}, b^{\ast}, \alpha^{\ast}) = w^{\ast} - \sum_{i=1}^{n} \alpha_i x_i y_i = 0& \tag{19} \\
+\nabla_b L(w^{\ast}, b^{\ast}, \alpha^{\ast}) = - \sum_{i=1}^{n} \alpha_i y_i = 0& \tag{20} \\
+\alpha_{i}^{\ast} g_i(w^{\ast}) = 0,\ i = 1, \cdots, n& \tag{21} \\
+g_i(w^{\ast}) \le 0,\ i = 1, \cdots, n& \tag{22} \\
+\alpha_{i}^{\ast} \geq 0,\ i = 1, \cdots, n \tag{23}
+\end{align}
+$$
+
+### 求解对偶问题的三个步骤
+**「第一步」**   
+首先固定 $\alpha$，让 $L$ 对 $w, b$ 最小化；   
+由式（19）-（20）带入式（10）可得：
+
+$$
+\begin{align}
+L(w, b, \alpha) &= \frac{1}{2} \Vert w \Vert^2 - \sum_{i=1}^{n} \alpha_i [y_i(w^T x_i + b) - 1] \\
+&= \frac{1}{2} \sum_{i, j = 1}^{n} \alpha_i \alpha_j y_i y_j x_{i}^{T} x_j - \sum_{i=1}^{n} \alpha_i [y_i (\sum_{j=1}^{n} \alpha_j y_j x_{i}^{T}  x_j  + b) - 1] \\
+&= \frac{1}{2} \sum_{i, j = 1}^{n} \alpha_i \alpha_j y_i y_j x_{i}^{T} x_j - \sum_{i, j = 1}^{n} \alpha_i \alpha_j y_i y_j x_{i}^{T} x_j - \sum_{i=1}^{n}\alpha_i y_i b + \sum_{i=1}^{n}\alpha_i \\
+&= \sum_{i=1}^{n}\alpha_i - \frac{1}{2} \sum_{i, j = 1}^{n} \alpha_i \alpha_j y_i y_j x_{i}^{T} x_j \tag{24}
+\end{align}
+$$
+
+**「第二步」**  
+对 $\alpha$ 最大化  
+
+$$
+\begin{align}
+max_{\alpha}\ \sum_{i=1}^{n} &\alpha_i - \frac{1}{2} \sum_{i,j = 1}{n} \alpha_i \alpha_j y_i y_j x_{i}^{T} x_j \\
+s.t.\ &\alpha_i \geq 0,\ i = 1, \cdots, n \\
+&\sum_{i=1}^{n} \alpha_i y_i = 0 \tag{25}
+\end{align}
+$$
+
+式（24）只包含了变量 $\alpha_i$，因此只要得到式（24）的最优值 $\alpha^{\ast}$，就可以得到原问题的最优解 $w^{\ast} = \sum_{i=1}^{n} \alpha_i y_i x_i$，
+然后通过
+
+$$
+\begin{align}
+b^{\ast} = - \frac{max_{i:y_i = -1} w^{\ast T} x_i + min_{i:y_i = 1} w^{\ast T} x_i}{2} \tag{26}
+\end{align}
+$$
+
+**「第三步」**  
+利用SMO算法求解对偶因子 $\alpha$
+
+
+### SMO算法
+
+### 核函数
+
+### 松弛变量
 
 
 
