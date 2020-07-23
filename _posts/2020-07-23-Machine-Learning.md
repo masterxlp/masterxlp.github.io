@@ -13,3 +13,23 @@ author: Xlp
 ## 简介
 
 > 本部分包含对各种经典的机器算法的总结，包括但不限于SVM、Decision Tree、Naive Bayes、Logistic Regression、Boosting、Bagging等算法。
+
+
+
+
+## SVM
+
+
+## Decision Tree
+
+
+## Naive Bayes
+
+
+## Logistic Regression
+
+
+## Boosting
+
+
+## Bagging

@@ -1,0 +1,28 @@
+I"�<ul id="markdown-toc">
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+  <li><a href="#svm" id="markdown-toc-svm">SVM</a></li>
+  <li><a href="#decision-tree" id="markdown-toc-decision-tree">Decision Tree</a></li>
+  <li><a href="#naive-bayes" id="markdown-toc-naive-bayes">Naive Bayes</a></li>
+  <li><a href="#logistic-regression" id="markdown-toc-logistic-regression">Logistic Regression</a></li>
+  <li><a href="#boosting" id="markdown-toc-boosting">Boosting</a></li>
+  <li><a href="#bagging" id="markdown-toc-bagging">Bagging</a></li>
+</ul>
+
+<h2 id="简介">简介</h2>
+
+<blockquote>
+  <p>本部分包含对各种经典的机器算法的总结，包括但不限于SVM、Decision Tree、Naive Bayes、Logistic Regression、Boosting、Bagging等算法。</p>
+</blockquote>
+
+<h2 id="svm">SVM</h2>
+
+<h2 id="decision-tree">Decision Tree</h2>
+
+<h2 id="naive-bayes">Naive Bayes</h2>
+
+<h2 id="logistic-regression">Logistic Regression</h2>
+
+<h2 id="boosting">Boosting</h2>
+
+<h2 id="bagging">Bagging</h2>
+:ET
