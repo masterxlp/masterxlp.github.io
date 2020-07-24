@@ -138,7 +138,7 @@ $$
 
 $$
 \begin{align}
-&max\ \frac{1}{\Vert w \Vert} \\
+&max_{w,b}\ \frac{1}{\Vert w \Vert} \\
 s.t.\ y_i(w^T x_i &+ b) \geq 1 (i = 1, \cdots, n) \tag{8}
 \end{align}
 $$
@@ -149,7 +149,7 @@ $$
 
 $$
 \begin{align}
-&min\ \frac{1}{2}\Vert w \Vert^2 \\
+&min_{w,b}\ \frac{1}{2}\Vert w \Vert^2 \\
 s.t.\ y_i(w^T x_i &+ b) \geq 1 (i = 1, \cdots, n) \tag{9}
 \end{align}
 $$
@@ -179,12 +179,13 @@ $$
 
 显然对于式（11）有：当约束条件不满足时，有 $y_i(w^T x_i + b) < 1$，显然有 $\theta(w) = \infty$（只要令 $\alpha = \infty$ 即可）；
 而当约束条件满足时，最优值为 $\theta(w) = \frac{1}{2}\Vert w \Vert^2$。
+简单来讲就是说，当满足约束时约束，第二项为正值，
 
 因此，为了使式（11）等价于式（9），我们需要最小化式（11）：
 
 $$
 \begin{align}
-min\ \theta(w) = min_{w,b} max_{\alpha_i \geq 0}\ L(w, b, \alpha) = p^{\ast} \tag{12}
+min_{w,b}\ \theta(w) = min_{w,b} max_{\alpha_i \geq 0}\ L(w, b, \alpha) = p^{\ast} \tag{12}
 \end{align}
 $$
 
@@ -193,7 +194,7 @@ $$
 由于先求最小值再求最大值不好求解，因此交换最小最大为最大最小，有：
 $$
 \begin{align}
-min\ \theta(w) = max_{\alpha_i \geq 0}min_{w,b}\ L(w, b, \alpha) = d^{\ast} \tag{13}
+max_{\alpha_i \geq 0}min_{w,b}\ L(w, b, \alpha) = d^{\ast} \tag{13}
 \end{align}
 $$
 
@@ -282,6 +283,18 @@ $$
 ### SMO算法
 
 ### 核函数
+在实际应用中，大部分任务都是线性不可分的，那么该怎么做呢？
+
+对于线性不可分的数据，若是将特征空间通过高维映射，那么映射后的特征在高位特征空间是线性可分的。
+假设映射函数为 $\phi$，那么根据经典SVM有：
+
+$$
+&1.\ f(\phi(x)) = w^T \phi(x) + b \\
+&2.\ min_{w,b}\ \frac{1}{2} \phi(x)^T \phi(x)\ \ s.t.\ y_i (w^T \phi(x) + b) \geq 1 \\
+&3.\ L(w, b, \alpha) = \frac{1}{2} \phi(x)^T \phi(x) - \sum_i \alpha_i [y_i(w^T \phi(x) + b) - 1] \\
+&4.\ \theta(\phi(x)) = max_{\alpha_i \geq 0} L(w, b, \alpha) \\
+
+$$
 
 ### 松弛变量
 
