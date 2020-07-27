@@ -846,7 +846,42 @@ Output: 实例 x 的分类
 ## Logistic Regression
 
 
-## Boosting
+## Boosting  
+> 参考自 [CSDN](https://blog.csdn.net/weixin_42933718/java/article/details/88421574)   
+> 参考自[知乎](https://zhuanlan.zhihu.com/p/57689719)
 
+Boosting是一种模型的组合方式，我们熟悉的AdaBoost就是一种Boosting的组合方式。
+和随机森林并行训练不同的决策树最后组合所有树的bagging方式不同，Boosting是一种递进的组合方式，每一个新的分类器都在前一个分类器的预测结果上改进，所以说boosting是减少bias而bagging是减少variance的模型组合方式。
+
+### GDBT
+模型表示为
+
+$$
+\begin{align}
+F(x) = \sum_{m=1}^{M} \gamma_m h_m(x) \tag{1}
+\end{align}
+$$
+
+GDBT是一个加性模型，是通过不断迭代拟合样本真实值与当前分类器的残差 $y - \hat{y}_{h_{m-1}}$ 来逼近真实值的。
+因此，第 m 个分类器的预测结果为：
+
+$$
+\begin{align}
+F_m(x) = F_{m-1}(x) + \gamma_m h_m(x) \tag{2}
+\end{align}
+$$
+
+而 $h_m(x)$ 的优化目标就是最小化当前预测结果 $F_{m-1}(x_i) + h(x_i)$ 和 $y_i$ 之间的差距：
+
+$$
+\begin{align}
+h_m = argmin_h \sum_{i=1}^{n} L(y_i, F_{m-1}(x_i) + h(x_i))
+\end{align}
+$$
+
+### AdaBoost
+> 参考自[知乎](https://zhuanlan.zhihu.com/p/57689719)
+
+### XGBoost
 
 ## Bagging
